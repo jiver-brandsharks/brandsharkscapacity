@@ -1,0 +1,4 @@
+[build]
+command = ""
+# If configuring via wrangler, use a null/noop or let it handle via your setup, 
+# but for wrangler config files setting an empty or dummy command works:
