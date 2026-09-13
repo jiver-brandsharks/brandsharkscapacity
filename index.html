@@ -54,8 +54,6 @@
   .top{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:26px;}
   .brand{display:flex;align-items:center;gap:14px;}
   .brand svg{width:34px;height:34px;}
-  .brand h1{font-size:22px;margin:0;}
-  .stamp{font-size:13px;color:var(--text-2);}
 
   /* segmented control */
   .seg{
@@ -201,7 +199,6 @@
       <button data-view="clients" role="tab">Clients</button>
       <button data-view="team" role="tab">Team</button>
     </div>
-    <div class="stamp" id="stamp"></div>
   </div>
 
   <!-- ===================== NOW ===================== -->
@@ -354,7 +351,6 @@
    Workload is tier-weighted: A = 2.0, B = 1.0, C = 0.5
    =================================================================== */
 const DATA = {
-  updated: "Sep 13",
   leadTime: { editor: 4, cd: 8 },
   avgClientUnits: 30,
 
@@ -456,8 +452,6 @@ Chart.defaults.plugins.tooltip.padding = 10;
 
 const charts = {};
 const state = { range:13, flyouts:true, tiers:new Set(["A","B","C"]) };
-
-$("stamp").textContent = DATA.updated;
 
 /* ===================================================================
    NOW
