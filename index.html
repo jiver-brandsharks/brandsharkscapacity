@@ -23,14 +23,9 @@
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
-    background:var(--bg);
-    color:var(--text);
+    background:var(--bg);color:var(--text);
     font-family:'Proxima Nova','Montserrat',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
-    -webkit-font-smoothing:antialiased;
-    line-height:1.45;
-    min-height:100vh;
-    position:relative;
-    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;line-height:1.45;min-height:100vh;position:relative;overflow-x:hidden;
   }
   body::before{
     content:"";position:fixed;inset:0;z-index:-1;
@@ -39,52 +34,59 @@
       radial-gradient(700px 500px at 85% 75%, rgba(60,184,250,.10) 0%, rgba(0,0,0,0) 60%),
       #000;
   }
-
-  .wrap{max-width:1180px;margin:0 auto;padding:28px 28px 48px;}
+  .wrap{max-width:1220px;margin:0 auto;padding:28px 28px 48px;}
 
   /* masthead */
-  .top{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:28px;}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:24px;}
   .brand svg{width:32px;height:32px;display:block;}
-
-  /* segmented control */
-  .seg{
-    display:inline-flex;background:rgba(255,255,255,.07);
-    border-radius:999px;padding:4px;gap:2px;
-    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  }
-  .seg button{
-    appearance:none;border:0;background:transparent;color:var(--text-2);
-    font:inherit;font-weight:600;font-size:14px;padding:9px 18px;border-radius:999px;
-    cursor:pointer;transition:background .2s,color .2s;
-  }
+  .seg{display:inline-flex;background:rgba(255,255,255,.07);border-radius:999px;padding:4px;gap:2px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);}
+  .seg button{appearance:none;border:0;background:transparent;color:var(--text-2);font:inherit;font-weight:600;font-size:14px;padding:9px 18px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s;}
   .seg button:hover{color:var(--text);}
   .seg button.on{background:rgba(255,255,255,.15);color:var(--text);box-shadow:0 1px 6px rgba(0,0,0,.35);}
   .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
-  .seg.small button{font-size:12.5px;padding:6px 12px;}
+
+  /* KPI strip */
+  .kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-bottom:16px;}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;min-width:0;}
+  .kpi .k{font-size:11px;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .kpi .v{display:flex;align-items:center;gap:8px;font-size:24px;font-weight:600;letter-spacing:-.02em;margin-top:6px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .kpi .v i{width:8px;height:8px;border-radius:50%;flex:none;}
+  .kpi .s{font-size:12px;color:var(--text-3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
   /* cards */
   .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;}
-  .card{
-    background:var(--card);border:1px solid var(--line);border-radius:var(--r);
-    padding:26px 28px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-    min-width:0;
-  }
-  .span-12{grid-column:span 12;}
-  .span-8{grid-column:span 8;}
-  .span-6{grid-column:span 6;}
-  .span-4{grid-column:span 4;}
-  .ch{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin-bottom:22px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);min-width:0;}
+  .span-12{grid-column:span 12;} .span-8{grid-column:span 8;} .span-7{grid-column:span 7;} .span-6{grid-column:span 6;} .span-5{grid-column:span 5;} .span-4{grid-column:span 4;}
+  .ch{display:flex;align-items:flex-start;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin-bottom:20px;}
   .ch h2{font-size:15px;font-weight:600;letter-spacing:-.01em;margin:0;}
   .ch .sub{font-size:12.5px;color:var(--text-3);margin-top:2px;}
-  .controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
   .chartbox{position:relative;width:100%;}
   .tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .empty{padding:28px 0;text-align:center;color:var(--text-3);font-size:13px;}
+
+  /* dropdowns + toggles */
+  .field{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;color:var(--text-3);}
+  .sel{
+    appearance:none;-webkit-appearance:none;font:inherit;font-size:12.5px;font-weight:600;color:var(--text);
+    background:rgba(255,255,255,.07) url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23F5F7FA' stroke-opacity='.6' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 11px center;
+    border:1px solid var(--line);border-radius:10px;padding:7px 30px 7px 12px;cursor:pointer;max-width:180px;
+  }
+  .sel:hover{background-color:rgba(255,255,255,.1);}
+  .sel:focus-visible{outline:2px solid var(--accent);outline-offset:1px;}
+  .sel option{background:#15171c;color:#fff;}
+  .toggle{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-2);cursor:pointer;user-select:none;}
+  .toggle .sw{width:34px;height:20px;border-radius:999px;background:rgba(255,255,255,.14);position:relative;transition:background .2s;}
+  .toggle .sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.4);}
+  .toggle.on .sw{background:var(--accent);}
+  .toggle.on .sw::after{transform:translateX(14px);}
 
   /* legend */
   .lg{display:flex;align-items:center;gap:6px 14px;flex-wrap:wrap;font-size:12px;color:var(--text-3);}
   .lg span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
   .lg i{width:8px;height:8px;border-radius:50%;display:inline-block;}
   .lg i.dash{width:14px;height:0;border-radius:0;border-top:1.5px dashed rgba(255,255,255,.8);}
+  .lg i.dot2{width:14px;height:0;border-radius:0;border-top:1.5px dotted var(--accent);}
 
   /* gauges + summary */
   .gauges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
@@ -93,7 +95,7 @@
   .gauge .val{position:absolute;left:0;right:0;bottom:6px;font-size:38px;font-weight:600;letter-spacing:-.03em;font-variant-numeric:tabular-nums;}
   .gauge .lab{font-size:14px;font-weight:600;margin-top:6px;}
   .gauge .meta{font-size:12px;color:var(--text-3);font-variant-numeric:tabular-nums;}
-  .summary{display:flex;align-items:center;justify-content:space-between;gap:16px 32px;flex-wrap:wrap;margin-top:26px;padding-top:22px;border-top:1px solid var(--line);}
+  .summary{display:flex;align-items:center;justify-content:space-between;gap:16px 32px;flex-wrap:wrap;margin-top:24px;padding-top:22px;border-top:1px solid var(--line);}
   .verdict{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:600;letter-spacing:-.015em;margin:0;}
   .verdict i{width:10px;height:10px;border-radius:50%;flex:none;}
   .verdict-sub{font-size:13.5px;color:var(--text-2);margin:4px 0 0 20px;}
@@ -102,30 +104,27 @@
   .action b{color:var(--text);font-weight:600;}
   .action svg{width:16px;height:16px;flex:none;}
 
-  /* chips */
-  .chips{display:flex;gap:6px;flex-wrap:wrap;}
-  .chip{
-    font:inherit;font-size:12px;font-weight:600;color:var(--text-3);
-    background:transparent;border:1px solid var(--line);border-radius:999px;
-    padding:5px 11px;cursor:pointer;
-  }
-  .chip.on{color:var(--text);background:rgba(255,255,255,.08);}
-  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
-
-  /* toggle */
-  .toggle{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-2);cursor:pointer;user-select:none;}
-  .toggle .sw{width:34px;height:20px;border-radius:999px;background:rgba(255,255,255,.14);position:relative;transition:background .2s;}
-  .toggle .sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.4);}
-  .toggle.on .sw{background:var(--accent);}
-  .toggle.on .sw::after{transform:translateX(14px);}
-
-  /* stat tiles */
-  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:24px;}
-  .stat{padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);}
-  .stat .k{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--text-3);}
+  /* stat tiles inside cards */
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:22px;}
+  .stat{padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);min-width:0;}
+  .stat .k{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--text-3);white-space:nowrap;overflow:hidden;}
   .stat .k i{width:7px;height:7px;border-radius:50%;flex:none;}
-  .stat .v{font-size:24px;font-weight:600;letter-spacing:-.02em;margin-top:4px;font-variant-numeric:tabular-nums;}
-  .stat .v small{font-size:13px;font-weight:500;color:var(--text-3);letter-spacing:0;}
+  .stat .v{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-top:4px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .stat .v small{font-size:12.5px;font-weight:500;color:var(--text-3);letter-spacing:0;}
+
+  /* tables */
+  table.t{width:100%;border-collapse:collapse;font-size:13px;}
+  .t th{color:var(--text-3);font-size:11.5px;font-weight:500;text-align:left;vertical-align:bottom;padding:0 12px 10px 0;line-height:1.3;white-space:nowrap;}
+  .t td{padding:10px 12px 10px 0;border-top:1px solid var(--line);white-space:nowrap;color:var(--text-2);}
+  .t td.name{color:var(--text);font-weight:600;}
+  .t .num{text-align:right;font-variant-numeric:tabular-nums;}
+  .t .muted{color:var(--text-3);}
+  .t .miss{color:var(--text);font-weight:600;}
+  .t .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle;}
+  .t .pill{display:inline-block;min-width:44px;text-align:center;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums;}
+  .t .bar{display:inline-block;width:70px;height:6px;border-radius:999px;background:rgba(255,255,255,.08);vertical-align:middle;margin-right:8px;overflow:hidden;}
+  .t .bar i{display:block;height:100%;border-radius:999px;}
+  .cov{min-width:1040px;} .roster{min-width:820px;}
 
   /* runway heatmap */
   .heat{display:grid;grid-template-columns:minmax(84px,150px) repeat(8,minmax(0,1fr));gap:4px;}
@@ -133,22 +132,11 @@
   .heat .hl{font-size:12.5px;color:var(--text-2);display:flex;align-items:center;padding-right:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .heat .hc{height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums;}
 
-  /* ownership table */
-  .cov{width:100%;min-width:960px;border-collapse:collapse;font-size:13px;}
-  .cov th{color:var(--text-3);font-size:11.5px;font-weight:500;text-align:left;vertical-align:bottom;padding:0 12px 10px 0;line-height:1.3;}
-  .cov td{padding:10px 12px 10px 0;border-top:1px solid var(--line);white-space:nowrap;color:var(--text-2);}
-  .cov td.client{color:var(--text);font-weight:600;}
-  .cov .num{text-align:right;font-variant-numeric:tabular-nums;}
-  .cov .muted{color:var(--text-3);}
-  .cov .miss{color:var(--text);font-weight:600;}
-  .cov .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle;}
-  .cov .pill{display:inline-block;min-width:36px;text-align:center;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums;}
-
   /* readiness */
-  .kpi + .kpi{margin-top:26px;}
-  .kpi-row{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:var(--text-2);margin-bottom:10px;}
-  .kpi-row b{color:var(--text);font-size:20px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
-  .kpi-row b small{font-size:12.5px;font-weight:500;color:var(--text-3);letter-spacing:0;}
+  .kpirow + .kpirow{margin-top:24px;}
+  .kpirow .r{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:var(--text-2);margin-bottom:10px;}
+  .kpirow b{color:var(--text);font-size:20px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+  .kpirow b small{font-size:12.5px;font-weight:500;color:var(--text-3);letter-spacing:0;}
   .prog{height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;}
   .prog i{display:block;height:100%;width:0;background:var(--accent);border-radius:999px;transition:width .9s cubic-bezier(.2,.8,.2,1);}
 
@@ -158,35 +146,27 @@
   .fmap .fn{color:var(--text-2);padding-right:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;}
   .fmap .fc{height:20px;border-radius:5px;background:rgba(255,255,255,.04);}
 
-  .view{display:none;}
-  .view.on{display:block;}
+  .view{display:none;} .view.on{display:block;}
 
-  /* footer */
   .foot{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:8px 32px;flex-wrap:wrap;font-size:11.5px;line-height:1.6;color:var(--text-3);}
   .foot b{color:var(--text-2);font-weight:600;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;margin-right:8px;}
 
-  @media (max-width:900px){
-    .span-8,.span-6,.span-4{grid-column:span 12;}
-  }
+  @media (max-width:1000px){ .kpis{grid-template-columns:repeat(3,minmax(0,1fr));} }
+  @media (max-width:900px){ .span-8,.span-7,.span-6,.span-5,.span-4{grid-column:span 12;} .stats{grid-template-columns:repeat(2,minmax(0,1fr));} }
   @media (max-width:640px){
     .wrap{padding:18px 16px 40px;}
     .top{flex-direction:column;align-items:flex-start;gap:16px;}
     .seg button{padding:8px 13px;font-size:13px;}
     .card{padding:20px 18px;}
-    .gauges{gap:8px;}
-    .gauge .g{height:96px;}
-    .gauge .val{font-size:22px;bottom:2px;}
-    .gauge .lab{font-size:12px;}
-    .gauge .meta{display:none;}
+    .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+    .kpi{padding:12px;} .kpi .v{font-size:20px;}
+    .gauges{gap:8px;} .gauge .g{height:96px;} .gauge .val{font-size:22px;bottom:2px;} .gauge .lab{font-size:12px;} .gauge .meta{display:none;}
     .verdict{font-size:17px;}
-    .stat{padding:10px 12px;}
-    .stat .v{font-size:18px;}
-    .stat .v small{display:block;font-size:11px;}
+    .stat{padding:10px 12px;} .stat .v{font-size:18px;} .stat .v small{display:block;font-size:11px;}
     .heat .hh{font-size:9.5px;}
+    .sel{max-width:140px;}
   }
-  @media (prefers-reduced-motion:reduce){
-    .prog i,.seg button,.toggle .sw,.toggle .sw::after{transition:none;}
-  }
+  @media (prefers-reduced-motion:reduce){ .prog i,.seg button,.toggle .sw,.toggle .sw::after{transition:none;} }
 </style>
 </head>
 <body>
@@ -201,74 +181,86 @@
       </svg>
     </div>
     <div class="seg" id="views" role="tablist">
-      <button class="on" data-view="now" role="tab">Now</button>
-      <button data-view="proj" role="tab">Projection</button>
+      <button class="on" data-view="now" role="tab">Overview</button>
+      <button data-view="proj" role="tab">Forecast</button>
       <button data-view="clients" role="tab">Clients</button>
       <button data-view="team" role="tab">Team</button>
     </div>
   </div>
 
-  <!-- ===================== NOW ===================== -->
+  <div class="kpis" id="kpis"></div>
+
+  <!-- ===================== OVERVIEW ===================== -->
   <div class="view on" id="view-now">
     <div class="grid">
 
       <section class="card span-12">
         <div class="ch">
-          <h2>How full each function is</h2>
+          <div><h2>Capacity utilization</h2><div class="sub">Assigned vs available, tier-weighted units per week</div></div>
           <div class="lg" data-scale="util"></div>
         </div>
         <div class="gauges" id="gauges"></div>
         <div class="summary">
-          <div>
-            <p class="verdict" id="call"></p>
-            <p class="verdict-sub" id="callSub"></p>
-          </div>
+          <div><p class="verdict" id="call"></p><p class="verdict-sub" id="callSub"></p></div>
           <div class="action" id="action"></div>
         </div>
       </section>
 
       <section class="card span-8">
         <div class="ch">
-          <h2>Workload by person</h2>
-          <div class="chips" id="tierChips">
-            <button class="chip on" data-tier="all">All</button>
-            <button class="chip on" data-tier="A">Tier A</button>
-            <button class="chip on" data-tier="B">Tier B</button>
-            <button class="chip on" data-tier="C">Tier C</button>
+          <div><h2>Editor workload</h2><div class="sub">Assigned load against each editor's capacity</div></div>
+          <div class="controls">
+            <label class="field">Tier <select class="sel" id="selTier"><option value="all">All tiers</option><option value="A">Tier A</option><option value="B">Tier B</option><option value="C">Tier C</option></select></label>
+            <label class="field">Sort <select class="sel" id="selSort"><option value="util">Utilization</option><option value="headroom">Headroom</option><option value="name">Name</option></select></label>
           </div>
         </div>
-        <div class="chartbox" style="height:360px"><canvas id="cPeople"></canvas></div>
+        <div class="chartbox" style="height:380px"><canvas id="cPeople"></canvas></div>
+        <div class="lg" data-scale="util" data-extra="cap85" style="margin-top:14px"></div>
       </section>
 
       <section class="card span-4">
         <div class="ch">
-          <div><h2>Load by tier</h2><div class="sub">Editor utilization per tier</div></div>
+          <div><h2>Demand mix</h2><div class="sub">Assigned units by complexity tier</div></div>
         </div>
         <div class="chartbox" style="height:300px"><canvas id="cMix"></canvas></div>
+        <div class="lg" data-scale="util" style="margin-top:10px;justify-content:center"></div>
       </section>
 
     </div>
   </div>
 
-  <!-- ===================== PROJECTION ===================== -->
+  <!-- ===================== FORECAST ===================== -->
   <div class="view" id="view-proj">
     <div class="grid">
 
       <section class="card span-12">
         <div class="ch">
-          <div><h2>Weekly workload vs capacity</h2><div class="sub">Editing · tier-weighted units</div></div>
+          <div><h2>Demand forecast</h2><div class="sub">Weekly workload against capacity</div></div>
           <div class="controls">
-            <div class="seg small" id="rangeSeg">
-              <button data-n="4">4 wks</button>
-              <button data-n="8">8 wks</button>
-              <button class="on" data-n="13">13 wks</button>
-            </div>
+            <label class="field">Function <select class="sel" id="selFn"><option value="edit">Editing</option><option value="cd">Creative director</option><option value="smm">Social media</option></select></label>
+            <label class="field">Horizon <select class="sel" id="selRange"><option value="4">4 weeks</option><option value="8">8 weeks</option><option value="13" selected>13 weeks</option></select></label>
             <label class="toggle on" id="flyToggle"><span class="sw"></span>Fly-outs</label>
+            <label class="toggle" id="hireToggle"><span class="sw"></span>Planned hires</label>
           </div>
         </div>
         <div class="stats" id="wkStats"></div>
         <div class="chartbox" style="height:340px"><canvas id="cWeekly"></canvas></div>
-        <div class="lg" data-scale="util" data-extra="capacity" style="margin-top:16px"></div>
+        <div class="lg" data-scale="util" data-extra="forecast" style="margin-top:16px"></div>
+      </section>
+
+      <section class="card span-6">
+        <div class="ch">
+          <div><h2>Backlog accumulation</h2><div class="sub">Work carried over when demand exceeds capacity</div></div>
+        </div>
+        <div class="chartbox" style="height:260px"><canvas id="cBacklog"></canvas></div>
+      </section>
+
+      <section class="card span-6">
+        <div class="ch">
+          <div><h2>Utilization trend</h2><div class="sub">All functions, fly-outs included</div></div>
+          <div class="lg" id="trendLg"></div>
+        </div>
+        <div class="chartbox" style="height:260px"><canvas id="cTrend"></canvas></div>
       </section>
 
     </div>
@@ -280,18 +272,31 @@
 
       <section class="card span-12">
         <div class="ch">
-          <div><h2>Client ownership</h2><div class="sub">Roles, content runway and next fly-out</div></div>
-          <div class="lg" data-scale="days"></div>
+          <div><h2>Client portfolio</h2><div class="sub" id="clientCount"></div></div>
+          <div class="controls">
+            <label class="field">Type <select class="sel" id="fType"><option value="all">All types</option></select></label>
+            <label class="field">Creative director <select class="sel" id="fCd"><option value="all">All</option></select></label>
+            <label class="field">Editor <select class="sel" id="fEditor"><option value="all">All</option></select></label>
+            <label class="field">Show <select class="sel" id="fRisk"><option value="all">Everything</option><option value="runway">Runway under 7 days</option><option value="gap">Missing a role</option><option value="flyout">Fly-out in next 4 weeks</option></select></label>
+          </div>
         </div>
-        <div class="tblwrap"><table class="cov" id="cov"></table></div>
+        <div class="tblwrap"><table class="t cov" id="cov"></table></div>
+        <div class="lg" data-scale="days" style="margin-top:14px"></div>
       </section>
 
-      <section class="card span-12">
+      <section class="card span-7">
         <div class="ch">
-          <div><h2>Content runway</h2><div class="sub">Days of content left, next 8 weeks</div></div>
+          <div><h2>Content runway</h2><div class="sub">Days of scheduled content, next 8 weeks</div></div>
           <div class="lg" data-scale="days"></div>
         </div>
-        <div class="heat" id="heat"></div>
+        <div id="heatWrap"></div>
+      </section>
+
+      <section class="card span-5">
+        <div class="ch">
+          <div><h2>Workload by client</h2><div class="sub">Tier-weighted units per month · colored by editor load</div></div>
+        </div>
+        <div class="chartbox" style="height:520px"><canvas id="cClientLoad"></canvas></div>
       </section>
 
     </div>
@@ -301,34 +306,46 @@
   <div class="view" id="view-team">
     <div class="grid">
 
+      <section class="card span-12">
+        <div class="ch">
+          <div><h2>Editor roster</h2><div class="sub" id="rosterCount"></div></div>
+          <div class="controls">
+            <label class="field">Tier <select class="sel" id="tTier"><option value="all">All tiers</option><option value="A">Tier A</option><option value="B">Tier B</option><option value="C">Tier C</option></select></label>
+            <label class="field">Software <select class="sel" id="tSoft"><option value="all">All</option><option value="Premiere">Premiere</option><option value="CapCut">CapCut</option></select></label>
+          </div>
+        </div>
+        <div class="tblwrap"><table class="t roster" id="roster"></table></div>
+      </section>
+
       <section class="card span-6">
         <div class="ch">
-          <div><h2>Single points of failure</h2><div class="sub">Clients with no backup editor</div></div>
+          <div><h2>Single points of failure</h2><div class="sub">Clients that lose their only editor</div></div>
           <div class="lg" data-scale="bus"></div>
         </div>
-        <div class="chartbox" style="height:320px"><canvas id="cBus"></canvas></div>
+        <div class="chartbox" style="height:300px"><canvas id="cBus"></canvas></div>
       </section>
 
       <section class="card span-6">
         <div class="ch">
-          <div><h2>Team readiness</h2><div class="sub">Premiere deadline Jan 1</div></div>
+          <div><h2>Format depth</h2><div class="sub">Editors qualified per format</div></div>
         </div>
-        <div class="kpi">
-          <div class="kpi-row"><span>On Premiere</span><b id="premV"></b></div>
-          <div class="prog"><i id="progFill"></i></div>
-        </div>
-        <div class="kpi">
-          <div class="kpi-row"><span>Apex course completed</span><b id="apexV"></b></div>
-          <div class="prog"><i id="progApex"></i></div>
-        </div>
+        <div class="chartbox" style="height:300px"><canvas id="cRadar"></canvas></div>
       </section>
 
-      <section class="card span-12">
+      <section class="card span-8">
         <div class="ch">
           <div><h2>Format coverage</h2><div class="sub">Who can edit each format</div></div>
           <div class="lg" data-scale="fmt"></div>
         </div>
         <div class="tblwrap"><div class="fmap" id="fmap"></div></div>
+      </section>
+
+      <section class="card span-4">
+        <div class="ch">
+          <div><h2>Tooling readiness</h2><div class="sub">Premiere deadline Jan 1</div></div>
+        </div>
+        <div class="kpirow"><div class="r"><span>On Premiere</span><b id="premV"></b></div><div class="prog"><i id="progFill"></i></div></div>
+        <div class="kpirow"><div class="r"><span>Apex course completed</span><b id="apexV"></b></div><div class="prog"><i id="progApex"></i></div></div>
       </section>
 
     </div>
@@ -343,18 +360,22 @@
 <script>
 /* ===================================================================
    DATA — everything on the page comes from here.
-   These are SAMPLE numbers so you can see the layout. Replace with
-   real ones, then point this at the Google Sheet endpoint.
-   Workload is tier-weighted: A = 2.0, B = 1.0, C = 0.5
+   SAMPLE numbers. Replace with real ones, then point at the Sheet endpoint.
+   Units are tier-weighted: A = 2.0, B = 1.0, C = 0.5
    =================================================================== */
 const DATA = {
-  leadTime: { editor: 4, cd: 8 },
+  leadTime: { edit: 4, cd: 8, smm: 4 },   // weeks: sourcing + hiring + ramp
   avgClientUnits: 30,
 
   functions: [
     { key:"edit", name:"Editing",           capacity:152, assigned:128, people:13, hire:"editor" },
     { key:"cd",   name:"Creative director", capacity:180, assigned:172, people:4,  hire:"creative director" },
     { key:"smm",  name:"Social media",      capacity:120, assigned:88,  people:3,  hire:"social media manager" }
+  ],
+
+  // Hires already approved. Capacity ramps linearly over `ramp` weeks from `start`.
+  plannedHires: [
+    { role:"edit", label:"Editor (tier B)", start:"Oct 26", units:12, ramp:4 }
   ],
 
   people: [
@@ -373,44 +394,45 @@ const DATA = {
     { name:"Shahid",   tier:"C", capacity:6,  assigned:4,    software:"CapCut",   apex:false, formats:["THUMB"] }
   ],
 
+  // Weekly demand per function (units). Fly-outs add editing units and CD scripts that week.
   weeks: [
-    { start:"Sep 14", base:118, flyouts:[] },
-    { start:"Sep 21", base:118, flyouts:[] },
-    { start:"Sep 28", base:118, flyouts:[{client:"Laban",units:100}] },
-    { start:"Oct 5",  base:118, flyouts:[{client:"Root",units:100}] },
-    { start:"Oct 12", base:118, flyouts:[] },
-    { start:"Oct 19", base:118, flyouts:[{client:"LatchLink",units:100}] },
-    { start:"Oct 26", base:118, flyouts:[] },
-    { start:"Nov 2",  base:126, flyouts:[] },
-    { start:"Nov 9",  base:126, flyouts:[] },
-    { start:"Nov 16", base:126, flyouts:[] },
-    { start:"Nov 23", base:126, flyouts:[] },
-    { start:"Nov 30", base:134, flyouts:[] },
-    { start:"Dec 7",  base:134, flyouts:[] }
+    { start:"Sep 14", edit:118, cd:150, smm:80, flyouts:[] },
+    { start:"Sep 21", edit:118, cd:150, smm:80, flyouts:[] },
+    { start:"Sep 28", edit:118, cd:150, smm:80, flyouts:[{client:"Laban",edit:100,cd:40}] },
+    { start:"Oct 5",  edit:118, cd:150, smm:80, flyouts:[{client:"Root",edit:100,cd:40}] },
+    { start:"Oct 12", edit:118, cd:150, smm:80, flyouts:[] },
+    { start:"Oct 19", edit:118, cd:150, smm:80, flyouts:[{client:"LatchLink",edit:100,cd:40}] },
+    { start:"Oct 26", edit:118, cd:150, smm:80, flyouts:[] },
+    { start:"Nov 2",  edit:126, cd:158, smm:84, flyouts:[] },
+    { start:"Nov 9",  edit:126, cd:158, smm:84, flyouts:[] },
+    { start:"Nov 16", edit:126, cd:158, smm:84, flyouts:[] },
+    { start:"Nov 23", edit:126, cd:158, smm:84, flyouts:[] },
+    { start:"Nov 30", edit:134, cd:166, smm:88, flyouts:[] },
+    { start:"Dec 7",  edit:134, cd:166, smm:88, flyouts:[] }
   ],
 
   clients: [
-    { name:"CPA Dude",         volume:90,  type:"Virtual",  cd:"Kiki",   editor:"Raz",      backup:"Samanix", smm:"Lina",   days:[9,6,4,12,14,16,18,20] },
-    { name:"Abir",             volume:100, type:"Flyout",   cd:"Danny",  editor:"Sandro",   backup:"",        smm:"Baran",  days:[18,22,26,28,30,30,30,30] },
-    { name:"Brian Edwards",    volume:100, type:"Flyout",   cd:"Danny",  editor:"Vitaliia", backup:"",        smm:"Baran",  days:[16,20,24,26,28,30,30,30] },
-    { name:"LatchLink",        volume:100, type:"Flyout",   cd:"Tahlia", editor:"Katya",    backup:"Erik",    smm:"Lina",   days:[21,18,15,12,9,6,30,30] },
-    { name:"Root Financial",   volume:100, type:"Flyout",   cd:"Tahlia", editor:"Madhav",   backup:"Katya",   smm:"David",  days:[12,9,6,4,30,30,30,30] },
-    { name:"RecoverPro",       volume:100, type:"Flyout",   cd:"Tahlia", editor:"Erik",     backup:"",        smm:"Lina",   days:[24,26,28,30,30,30,30,30] },
-    { name:"Laban Ditchburn",  volume:100, type:"Flyout",   cd:"Danny",  editor:"",         backup:"",        smm:"Baran",  days:[5,3,30,30,30,30,30,30] },
-    { name:"Camille Agency",   volume:30,  type:"Virtual",  cd:"Vani",   editor:"Raz",      backup:"",        smm:"Lina",   days:[14,14,12,12,10,10,8,8] },
-    { name:"Danny Goler",      volume:30,  type:"Clipping", cd:"",       editor:"Mihai",    backup:"",        smm:"Lina",   days:[30,30,30,30,30,30,30,30] },
-    { name:"Flood Nerd",       volume:30,  type:"Virtual",  cd:"Kiki",   editor:"Prakash",  backup:"",        smm:"Baran",  days:[8,6,5,4,4,4,4,4] },
-    { name:"Focused SketchUp", volume:30,  type:"Virtual",  cd:"Vani",   editor:"Bikash",   backup:"",        smm:"Baran",  days:[10,8,6,5,4,4,4,4] },
-    { name:"Jade Ingleby",     volume:30,  type:"Virtual",  cd:"Tahlia", editor:"Katya",    backup:"",        smm:"Lina",   days:[11,9,7,6,5,4,4,4] },
-    { name:"James Helm",       volume:30,  type:"Virtual",  cd:"Danny",  editor:"Samanix",  backup:"",        smm:"Baran",  days:[2,1,0,0,0,0,0,0] },
-    { name:"Lucas Messer",     volume:30,  type:"Virtual",  cd:"Kiki",   editor:"Samanix",  backup:"",        smm:"Lina",   days:[12,10,9,8,7,6,6,6] },
-    { name:"Matt Reynolds",    volume:30,  type:"Virtual",  cd:"Vani",   editor:"Erik",     backup:"",        smm:"Baran",  days:[9,7,6,5,4,4,4,4] },
-    { name:"Seth Brink",       volume:30,  type:"Virtual",  cd:"Kiki",   editor:"Tony",     backup:"",        smm:"Lina",   days:[13,12,11,10,9,8,8,8] },
-    { name:"Tessany Layher",   volume:30,  type:"Virtual",  cd:"Vani",   editor:"Tony",     backup:"",        smm:"Baran",  days:[15,14,13,12,11,10,10,10] },
-    { name:"Ariel",            volume:15,  type:"Virtual",  cd:"Kiki",   editor:"Prakash",  backup:"",        smm:"Lina",   days:[16,15,14,13,12,11,10,10] },
-    { name:"Victoria",         volume:15,  type:"Virtual",  cd:"Vani",   editor:"Prakash",  backup:"",        smm:"Baran",  days:[14,13,12,11,10,9,8,8] },
-    { name:"Waldo Waldman",    volume:15,  type:"Clipping", cd:"",       editor:"Tony",     backup:"",        smm:"Lina",   days:[20,20,20,20,20,20,20,20] },
-    { name:"Speech Time Fun",  volume:10,  type:"Clipping", cd:"",       editor:"Tony",     backup:"",        smm:"Lina",   days:[30,30,30,30,30,30,30,30] }
+    { name:"CPA Dude",         volume:90,  tier:"A", type:"Virtual",  start:"", cd:"Kiki",   editor:"Raz",      backup:"Samanix", smm:"Lina",   days:[9,6,4,12,14,16,18,20] },
+    { name:"Abir",             volume:100, tier:"A", type:"Flyout",   start:"", cd:"Danny",  editor:"Sandro",   backup:"",        smm:"Baran",  days:[18,22,26,28,30,30,30,30] },
+    { name:"Brian Edwards",    volume:100, tier:"B", type:"Flyout",   start:"", cd:"Danny",  editor:"Vitaliia", backup:"",        smm:"Baran",  days:[16,20,24,26,28,30,30,30] },
+    { name:"LatchLink",        volume:100, tier:"B", type:"Flyout",   start:"", cd:"Tahlia", editor:"Katya",    backup:"Erik",    smm:"Lina",   days:[21,18,15,12,9,6,30,30] },
+    { name:"Root Financial",   volume:100, tier:"A", type:"Flyout",   start:"", cd:"Tahlia", editor:"Madhav",   backup:"Katya",   smm:"David",  days:[12,9,6,4,30,30,30,30] },
+    { name:"RecoverPro",       volume:100, tier:"B", type:"Flyout",   start:"", cd:"Tahlia", editor:"Erik",     backup:"",        smm:"Lina",   days:[24,26,28,30,30,30,30,30] },
+    { name:"Laban Ditchburn",  volume:100, tier:"A", type:"Flyout",   start:"", cd:"Danny",  editor:"",         backup:"",        smm:"Baran",  days:[5,3,30,30,30,30,30,30] },
+    { name:"Camille Agency",   volume:30,  tier:"A", type:"Virtual",  start:"", cd:"Vani",   editor:"Raz",      backup:"",        smm:"Lina",   days:[14,14,12,12,10,10,8,8] },
+    { name:"Danny Goler",      volume:30,  tier:"C", type:"Clipping", start:"", cd:"",       editor:"Mihai",    backup:"",        smm:"Lina",   days:[30,30,30,30,30,30,30,30] },
+    { name:"Flood Nerd",       volume:30,  tier:"C", type:"Virtual",  start:"", cd:"Kiki",   editor:"Prakash",  backup:"",        smm:"Baran",  days:[8,6,5,4,4,4,4,4] },
+    { name:"Focused SketchUp", volume:30,  tier:"B", type:"Virtual",  start:"", cd:"Vani",   editor:"Bikash",   backup:"",        smm:"Baran",  days:[10,8,6,5,4,4,4,4] },
+    { name:"Jade Ingleby",     volume:30,  tier:"B", type:"Virtual",  start:"", cd:"Tahlia", editor:"Katya",    backup:"",        smm:"Lina",   days:[11,9,7,6,5,4,4,4] },
+    { name:"James Helm",       volume:30,  tier:"A", type:"Virtual",  start:"", cd:"Danny",  editor:"Samanix",  backup:"",        smm:"Baran",  days:[2,1,0,0,0,0,0,0] },
+    { name:"Lucas Messer",     volume:30,  tier:"A", type:"Virtual",  start:"", cd:"Kiki",   editor:"Samanix",  backup:"",        smm:"Lina",   days:[12,10,9,8,7,6,6,6] },
+    { name:"Matt Reynolds",    volume:30,  tier:"B", type:"Virtual",  start:"", cd:"Vani",   editor:"Erik",     backup:"",        smm:"Baran",  days:[9,7,6,5,4,4,4,4] },
+    { name:"Seth Brink",       volume:30,  tier:"C", type:"Virtual",  start:"", cd:"Kiki",   editor:"Tony",     backup:"",        smm:"Lina",   days:[13,12,11,10,9,8,8,8] },
+    { name:"Tessany Layher",   volume:30,  tier:"C", type:"Virtual",  start:"", cd:"Vani",   editor:"Tony",     backup:"",        smm:"Baran",  days:[15,14,13,12,11,10,10,10] },
+    { name:"Ariel",            volume:15,  tier:"C", type:"Virtual",  start:"", cd:"Kiki",   editor:"Prakash",  backup:"",        smm:"Lina",   days:[16,15,14,13,12,11,10,10] },
+    { name:"Victoria",         volume:15,  tier:"C", type:"Virtual",  start:"", cd:"Vani",   editor:"Prakash",  backup:"",        smm:"Baran",  days:[14,13,12,11,10,9,8,8] },
+    { name:"Waldo Waldman",    volume:15,  tier:"C", type:"Clipping", start:"", cd:"",       editor:"Tony",     backup:"",        smm:"Lina",   days:[20,20,20,20,20,20,20,20] },
+    { name:"Speech Time Fun",  volume:10,  tier:"C", type:"Clipping", start:"", cd:"",       editor:"Tony",     backup:"",        smm:"Lina",   days:[30,30,30,30,30,30,30,30] }
   ],
 
   formats: ["TH","FT","BGG","RPF","OVC","TCL","CL","BCL","TIR","RTE","TOT","RXN","BRL","L2S","VO"]
@@ -422,9 +444,11 @@ const DATA = {
 const $ = id => document.getElementById(id);
 const r0 = n => Math.round(n);
 const esc = v => String(v).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+const WEIGHT = { A:2, B:1, C:.5 };
+const FN = key => DATA.functions.find(f=>f.key===key);
+const util = f => f.assigned/f.capacity;
 
-/* Workload colors: green = room, yellow = tight (85–100%), red = over capacity.
-   Color is never the only cue: every chart also has a labeled legend and a value. */
+/* Workload colors: green = room, yellow = tight (85–100%), red = over capacity. */
 const LOAD = { green:"#2FBF55", yellow:"#FFD60A", red:"#D92D27" };
 const loadBand = u => u > 1 ? "red" : u >= .85 ? "yellow" : "green";
 const loadColor = (u, alpha=1) => {
@@ -433,11 +457,17 @@ const loadColor = (u, alpha=1) => {
   const [r,g,b] = [1,3,5].map(i=>parseInt(hex.slice(i,i+2),16));
   return `rgba(${r},${g},${b},${alpha})`;
 };
-// Measures that aren't utilization, mapped onto the same three bands
 const busLoad = n => n>=3 ? 1.25 : n>=1 ? .9 : .5;
 const fmtLoad = k => k<=2 ? 1.25 : k===3 ? .9 : .5;
 const dayLoad = d => d>=14 ? .5 : d>=7 ? .9 : 1.25;
 const personLoad = name => { const p = DATA.people.find(p=>p.name===name); return p ? p.assigned/p.capacity : null; };
+const clientUnits = c => c.volume * WEIGHT[c.tier];
+
+// weekly demand and capacity per function
+const demand = (w, key, fly) => w[key] + (fly ? w.flyouts.reduce((s,f)=>s+(f[key]||0),0) : 0);
+const capacityAt = (key, i, hires) => FN(key).capacity + (hires ? DATA.plannedHires.filter(h=>h.role===key).reduce((s,h)=>{
+  const si = DATA.weeks.findIndex(w=>w.start===h.start);
+  return si>=0 && i>=si ? s + h.units*Math.min(1,(i-si+1)/h.ramp) : s; },0) : 0);
 
 const SCALES = {
   util: ["Under 85%", "85–100%", "Over 100%"],
@@ -445,24 +475,24 @@ const SCALES = {
   bus:  ["None", "1–2", "3+ clients"],
   fmt:  ["4+ people", "3", "1–2"]
 };
+const EXTRA = {
+  cap85:    `<span><i style="background:rgba(255,255,255,.18);width:14px;height:8px;border-radius:3px"></i>Capacity</span><span><i class="dash"></i>85%</span>`,
+  forecast: `<span><i style="background:rgba(255,255,255,.35);width:14px;height:8px;border-radius:3px"></i>Fly-out share</span><span><i class="dash"></i>Capacity</span><span><i class="dot2"></i>With planned hires</span>`
+};
 function renderScales(){
   const colors = [LOAD.green, LOAD.yellow, LOAD.red];
   document.querySelectorAll("[data-scale]").forEach(el=>{
-    el.innerHTML = SCALES[el.dataset.scale].map((label,i)=>`<span><i style="background:${colors[i]}"></i>${label}</span>`).join("")
-      + (el.dataset.extra==="capacity" ? `<span><i class="dash"></i>Capacity</span>` : "");
+    el.innerHTML = SCALES[el.dataset.scale].map((label,i)=>`<span><i style="background:${colors[i]}"></i>${label}</span>`).join("") + (EXTRA[el.dataset.extra]||"");
   });
 }
 
-const weekTotal = (w, fly) => w.base + (fly ? w.flyouts.reduce((s,f)=>s+f.units,0) : 0);
 const GRID = "rgba(255,255,255,.05)";
-
+const noBorder = { border:{display:false} };
 Chart.defaults.font.family = "'Proxima Nova','Montserrat',-apple-system,sans-serif";
 Chart.defaults.font.size = 11.5;
 Chart.defaults.color = "rgba(245,247,250,.45)";
 Chart.defaults.borderColor = GRID;
-Chart.defaults.plugins.legend.labels.boxWidth = 8;
-Chart.defaults.plugins.legend.labels.boxHeight = 8;
-Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.display = false;
 Chart.defaults.plugins.tooltip.backgroundColor = "rgba(20,22,28,.94)";
 Chart.defaults.plugins.tooltip.titleColor = "#fff";
 Chart.defaults.plugins.tooltip.bodyColor = "rgba(245,247,250,.85)";
@@ -470,36 +500,56 @@ Chart.defaults.plugins.tooltip.cornerRadius = 10;
 Chart.defaults.plugins.tooltip.padding = 10;
 
 const charts = {};
-const state = { range:13, flyouts:true, tiers:new Set(["A","B","C"]) };
+const upsert = (key, canvasId, cfg) => {
+  if (charts[key]){ charts[key].data = cfg.data; if (cfg.options?.plugins?.tooltip) charts[key].options.plugins.tooltip = cfg.options.plugins.tooltip; charts[key].update(); }
+  else charts[key] = new Chart($(canvasId), cfg);
+};
+const state = { fn:"edit", range:13, flyouts:true, hires:false };
 
 /* ===================================================================
-   NOW
+   KPI STRIP + OVERVIEW
    =================================================================== */
-function renderSummary(){
-  const edit = DATA.functions.find(f=>f.key==="edit");
-  const worst = DATA.functions.reduce((a,b)=>(b.assigned/b.capacity)>(a.assigned/a.capacity)?b:a);
-  const u = worst.assigned/worst.capacity, band = loadBand(u);
-  const room = Math.max(0, Math.floor((edit.capacity-edit.assigned)/DATA.avgClientUnits));
+function constraint(){
+  const worst = DATA.functions.reduce((a,b)=>util(b)>util(a)?b:a);
+  const breach = DATA.weeks.findIndex((w,i)=>demand(w,worst.key,true)>capacityAt(worst.key,i,false));
+  const hireIdx = breach===-1 ? null : breach - DATA.leadTime[worst.key];
+  return { worst, u:util(worst), breach, hireIdx };
+}
 
+function renderKpis(){
+  const { worst, u, breach, hireIdx } = constraint();
+  const edit = FN("edit"), head = edit.capacity - edit.assigned;
+  const risk = DATA.clients.filter(c=>c.days[0]<7).length;
+  const gaps = DATA.clients.reduce((s,c)=>s+[c.cd,c.editor,c.backup,c.smm].filter(v=>!v).length,0);
+  const tiles = [
+    ["Constraint", `${r0(u*100)}%`, worst.name, loadColor(u)],
+    ["Editing headroom", `${head}`, "units / week", loadColor(util(edit))],
+    ["Saturation", breach===-1 ? "None" : DATA.weeks[breach].start, breach===-1 ? "next 13 weeks" : `in ${breach} week${breach===1?"":"s"} · ${worst.name.toLowerCase()}`, breach===-1 ? LOAD.green : breach<=4 ? LOAD.red : LOAD.yellow],
+    ["Hire by", breach===-1 ? "—" : hireIdx<0 ? "Now" : DATA.weeks[hireIdx].start, breach===-1 ? "no hire needed" : worst.hire, breach===-1 ? LOAD.green : hireIdx<0 ? LOAD.red : LOAD.yellow],
+    ["Clients at risk", `${risk}`, "under 7 days of content", risk ? LOAD.red : LOAD.green],
+    ["Coverage gaps", `${gaps}`, "unfilled roles", gaps>10 ? LOAD.red : gaps ? LOAD.yellow : LOAD.green]
+  ];
+  $("kpis").innerHTML = tiles.map(([k,v,s,c])=>`<div class="kpi"><div class="k">${k}</div><div class="v"><i style="background:${c}"></i>${v}</div><div class="s">${s}</div></div>`).join("");
+}
+
+function renderSummary(){
+  const { worst, u, breach, hireIdx } = constraint();
+  const band = loadBand(u), edit = FN("edit");
+  const room = Math.max(0, Math.floor((edit.capacity-edit.assigned)/DATA.avgClientUnits));
   const call = { red:"Over capacity", yellow:"Tight — hire before you sign", green:"Room to take a client" }[band];
   $("call").innerHTML = `<i style="background:${LOAD[band]}"></i>${call}`;
   $("callSub").innerHTML = `${worst.name} at <b>${r0(u*100)}%</b> · room for <b>${room}</b> more client${room===1?"":"s"}`;
-
-  const breach = DATA.weeks.findIndex(w=>weekTotal(w,true)>edit.capacity);
-  const lead = DATA.leadTime[worst.key==="cd"?"cd":"editor"];
   const icon = `<svg viewBox="0 0 20 20" fill="none" stroke="#3CB8FA" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg>`;
   let msg;
   if (breach===-1) msg = `<b>No hire needed</b> in the next 13 weeks`;
   else {
-    const bw = DATA.weeks[breach].start, hi = breach-lead;
-    msg = hi>=0
-      ? `<b>Start hiring a ${worst.hire} by ${DATA.weeks[hi].start}</b> · capacity runs out ${bw}`
-      : `<b>Hire a ${worst.hire} now</b> · capacity runs out ${bw}`;
+    const bw = DATA.weeks[breach].start;
+    msg = hireIdx>=0 ? `<b>Start hiring a ${worst.hire} by ${DATA.weeks[hireIdx].start}</b> · ${worst.name.toLowerCase()} saturates ${bw}`
+                     : `<b>Hire a ${worst.hire} now</b> · ${worst.name.toLowerCase()} saturates ${bw} · ${DATA.leadTime[worst.key]}-week lead time`;
   }
   $("action").innerHTML = icon + `<span>${msg}</span>`;
 }
 
-// Display order on the Now view, left to right
 const GAUGE_ORDER = ["cd","edit","smm"];
 function renderGauges(){
   const fns = [...DATA.functions].sort((a,b)=>GAUGE_ORDER.indexOf(a.key)-GAUGE_ORDER.indexOf(b.key));
@@ -510,101 +560,127 @@ function renderGauges(){
       <div class="meta">${f.assigned} / ${f.capacity} units · ${f.people} people</div>
     </div>`).join("");
   fns.forEach(f=>{
-    const u = f.assigned/f.capacity, pct = Math.min(u,1.2);
+    const u = util(f), pct = Math.min(u,1.2);
     $("gv-"+f.key).textContent = r0(u*100)+"%";
-    charts["g-"+f.key] = new Chart($("g-"+f.key),{
-      type:"doughnut",
-      data:{ datasets:[{ data:[pct, Math.max(0,1.2-pct)],
-        backgroundColor:[loadColor(u),"rgba(255,255,255,.07)"], borderWidth:0, borderRadius:8 }]},
-      options:{ rotation:-90, circumference:180, cutout:"80%", responsive:true, maintainAspectRatio:false,
-        plugins:{ legend:{display:false}, tooltip:{enabled:false} } }
-    });
+    charts["g-"+f.key] = new Chart($("g-"+f.key),{ type:"doughnut",
+      data:{ datasets:[{ data:[pct, Math.max(0,1.2-pct)], backgroundColor:[loadColor(u),"rgba(255,255,255,.07)"], borderWidth:0, borderRadius:8 }]},
+      options:{ rotation:-90, circumference:180, cutout:"80%", responsive:true, maintainAspectRatio:false, plugins:{ tooltip:{enabled:false} } } });
   });
 }
 
 function renderPeople(){
-  const rows = DATA.people
-    .filter(p=>state.tiers.has(p.tier))
-    .map(p=>({...p, u:p.assigned/p.capacity}))
-    .sort((a,b)=>b.u-a.u);
-  const cfg = {
-    type:"bar",
+  const tier = $("selTier").value, sort = $("selSort").value;
+  const rows = DATA.people.filter(p=>tier==="all"||p.tier===tier).map(p=>({...p, u:p.assigned/p.capacity, head:p.capacity-p.assigned}));
+  rows.sort(sort==="name" ? (a,b)=>a.name.localeCompare(b.name) : sort==="headroom" ? (a,b)=>b.head-a.head : (a,b)=>b.u-a.u);
+  const clientsOf = n => DATA.clients.filter(c=>c.editor===n).map(c=>c.name);
+  const cfg = { type:"bar",
     data:{ labels:rows.map(p=>`${p.name} · ${p.tier}`),
-      datasets:[{ data:rows.map(p=>r0(p.u*100)),
-        backgroundColor:rows.map(p=>loadColor(p.u)), borderRadius:4, barThickness:14 }]},
+      datasets:[
+        { label:"Assigned", data:rows.map(p=>p.assigned), backgroundColor:rows.map(p=>loadColor(p.u)), borderRadius:4, barThickness:12, grouped:false },
+        { label:"Capacity", data:rows.map(p=>p.capacity), backgroundColor:"rgba(255,255,255,.07)", borderRadius:6, barThickness:24, grouped:false }
+      ]},
     options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false,
-      scales:{ x:{ min:0, max:130, border:{display:false}, ticks:{ callback:v=>v+"%" }, grid:{ color:GRID } },
-               y:{ border:{display:false}, grid:{ display:false } } },
-      plugins:{ legend:{display:false},
-        tooltip:{ callbacks:{ label:c=>{ const p=rows[c.dataIndex]; return ` ${c.raw}% · ${p.assigned} of ${p.capacity} units · Tier ${p.tier} · ${p.software}`; } } } },
+      scales:{ x:{ min:0, suggestedMax:14, ...noBorder, ticks:{ callback:v=>v+" u" }, grid:{ color:GRID } }, y:{ ...noBorder, grid:{ display:false } } },
+      plugins:{ tooltip:{ filter:i=>i.datasetIndex===0, callbacks:{
+        label:c=>{ const p=rows[c.dataIndex]; return ` ${p.assigned} of ${p.capacity} units · ${r0(p.u*100)}% · ${p.head>0?p.head+" free":"over by "+(-p.head)}`; },
+        afterBody:c=>{ const p=rows[c[0].dataIndex], cl=clientsOf(p.name); return [`${p.software}${p.apex?" · Apex":""}`, cl.length ? "Clients: "+cl.join(", ") : "No clients assigned"]; } } } }
     },
-    plugins:[{ id:"thresholds", afterDraw(ch){ const {ctx,chartArea:{top,bottom},scales:{x}}=ch;
-      [85,100].forEach((v,i)=>{ const px=x.getPixelForValue(v); ctx.save(); ctx.strokeStyle=loadColor(i ? 1.01 : .85, .7);
-        ctx.setLineDash([3,4]); ctx.beginPath(); ctx.moveTo(px,top); ctx.lineTo(px,bottom); ctx.stroke(); ctx.restore(); }); } }]
+    plugins:[{ id:"mark85", afterDatasetsDraw(ch){ const {ctx,scales:{x}}=ch, bars=ch.getDatasetMeta(1).data;
+      bars.forEach((b,i)=>{ const px=x.getPixelForValue(rows[i].capacity*.85); ctx.save(); ctx.strokeStyle="rgba(255,255,255,.7)"; ctx.setLineDash([2,3]); ctx.lineWidth=1.5;
+        ctx.beginPath(); ctx.moveTo(px,b.y-b.height/2); ctx.lineTo(px,b.y+b.height/2); ctx.stroke(); ctx.restore(); }); } }]
   };
-  if (charts.people){ charts.people.data=cfg.data; charts.people.options.plugins.tooltip.callbacks=cfg.options.plugins.tooltip.callbacks; charts.people.update(); }
-  else charts.people = new Chart($("cPeople"), cfg);
+  upsert("people","cPeople",cfg);
 }
 
 function renderMix(){
   const tiers = ["A","B","C"], names = {A:"complex",B:"standard",C:"simple"};
   const tot = {A:0,B:0,C:0}, cap = {A:0,B:0,C:0};
   DATA.people.forEach(p=>{ tot[p.tier]+=p.assigned; cap[p.tier]+=p.capacity; });
-  const util = t => cap[t] ? tot[t]/cap[t] : 0;
-  charts.mix = new Chart($("cMix"),{
-    type:"doughnut",
-    data:{ labels:tiers.map(t=>`Tier ${t} · ${r0(util(t)*100)}%`),
-      datasets:[{ data:tiers.map(t=>tot[t]), backgroundColor:tiers.map(t=>loadColor(util(t))), borderWidth:0, borderRadius:6, spacing:4 }]},
-    options:{ cutout:"76%", responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ position:"bottom", labels:{ padding:14, color:"rgba(245,247,250,.64)" } },
-        tooltip:{ callbacks:{ label:c=>{ const t=tiers[c.dataIndex]; return ` Tier ${t} (${names[t]}): ${c.raw} units · ${r0(util(t)*100)}% full`; } } } } }
+  const tu = t => cap[t] ? tot[t]/cap[t] : 0, total = tot.A+tot.B+tot.C;
+  charts.mix = new Chart($("cMix"),{ type:"doughnut",
+    data:{ labels:tiers.map(t=>`Tier ${t}`), datasets:[{ data:tiers.map(t=>tot[t]), backgroundColor:tiers.map(t=>loadColor(tu(t))), borderWidth:0, borderRadius:6, spacing:4 }]},
+    options:{ cutout:"74%", responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:true, position:"bottom", labels:{ usePointStyle:true, boxWidth:8, boxHeight:8, padding:14, color:"rgba(245,247,250,.64)", generateLabels:ch=>tiers.map((t,i)=>({ text:`Tier ${t} · ${r0(tot[t]/total*100)}%`, fillStyle:ch.data.datasets[0].backgroundColor[i], strokeStyle:"transparent", pointStyle:"circle", index:i })) } },
+        tooltip:{ callbacks:{ label:c=>{ const t=tiers[c.dataIndex]; return ` Tier ${t} (${names[t]}): ${c.raw} units · editors ${r0(tu(t)*100)}% full`; } } } } },
+    plugins:[{ id:"center", afterDraw(ch){ const {ctx,chartArea:a}=ch, cx=(a.left+a.right)/2, cy=(a.top+a.bottom)/2; ctx.save(); ctx.textAlign="center"; ctx.fillStyle="#F5F7FA";
+      ctx.font="600 26px 'Proxima Nova','Montserrat',sans-serif"; ctx.fillText(total, cx, cy+4); ctx.fillStyle="rgba(245,247,250,.4)"; ctx.font="11.5px 'Proxima Nova','Montserrat',sans-serif"; ctx.fillText("units / week", cx, cy+22); ctx.restore(); } }]
   });
 }
 
 /* ===================================================================
-   PROJECTION
+   FORECAST
    =================================================================== */
-function renderWeekly(){
-  const edit = DATA.functions.find(f=>f.key==="edit");
-  const wk = DATA.weeks.slice(0,state.range);
-  const totals = wk.map(w=>weekTotal(w,state.flyouts));
+function renderForecast(){
+  const key = state.fn, fn = FN(key), wk = DATA.weeks.slice(0,state.range);
+  const base = wk.map(w=>w[key]), fly = wk.map(w=>state.flyouts ? demand(w,key,true)-w[key] : 0);
+  const tot = base.map((b,i)=>b+fly[i]);
+  const cap = wk.map((w,i)=>capacityAt(key,i,state.hires)), cap0 = wk.map(()=>fn.capacity);
+  const u = tot.map((t,i)=>t/cap[i]);
 
-  // headline numbers
-  const over = totals.filter(t=>t>edit.capacity).length;
-  const peak = totals.indexOf(Math.max(...totals)), peakU = totals[peak]/edit.capacity;
-  const first = totals.findIndex(t=>t>edit.capacity);
+  // backlog carried week to week
+  let carry=0; const backlog = tot.map((t,i)=>{ carry=Math.max(0, carry+t-cap[i]); return carry; });
+  const over = u.filter(x=>x>1).length, peak = u.indexOf(Math.max(...u)), first = u.findIndex(x=>x>1);
   $("wkStats").innerHTML = [
     ["Weeks over capacity", `${over}<small> / ${wk.length}</small>`, over ? LOAD.red : LOAD.green],
-    ["Peak week", `${r0(peakU*100)}%<small> · ${wk[peak].start}</small>`, loadColor(peakU)],
-    ["First overload", first===-1 ? "None" : wk[first].start, first===-1 ? LOAD.green : LOAD.red]
+    ["Peak week", `${r0(u[peak]*100)}%<small> · ${wk[peak].start}</small>`, loadColor(u[peak])],
+    ["First overload", first===-1 ? "None" : wk[first].start, first===-1 ? LOAD.green : LOAD.red],
+    ["Peak backlog", `${r0(Math.max(...backlog))}<small> units</small>`, Math.max(...backlog)>0 ? LOAD.red : LOAD.green]
   ].map(([k,v,c])=>`<div class="stat"><div class="k"><i style="background:${c}"></i>${k}</div><div class="v">${v}</div></div>`).join("");
 
-  const cfg = {
-    data:{ labels:wk.map(w=>w.start),
-      datasets:[
-        { type:"bar", label:"Workload", data:totals, borderRadius:6, maxBarThickness:34, barPercentage:.6,
-          backgroundColor:totals.map(t=>loadColor(t/edit.capacity)) },
-        { type:"line", label:"Capacity", data:wk.map(()=>edit.capacity), borderColor:"rgba(255,255,255,.8)", borderDash:[5,5],
-          borderWidth:1.5, pointRadius:0, tension:0 }
-      ]},
-    options:{ responsive:true, maintainAspectRatio:false,
-      scales:{ x:{ border:{display:false}, grid:{display:false} }, y:{ beginAtZero:true, border:{display:false}, grid:{ color:GRID } } },
-      plugins:{ legend:{ display:false },
-        tooltip:{ callbacks:{ label:c=>c.dataset.type==="bar" ? ` Workload: ${c.raw} units · ${r0(c.raw/edit.capacity*100)}% of capacity` : ` Capacity: ${c.raw} units`, afterBody:c=>{ const w=wk[c[0].dataIndex]; return state.flyouts && w.flyouts.length ? "Fly-out: "+w.flyouts.map(f=>`${f.client} (${f.units})`).join(", ") : ""; } } } } }
-  };
-  if (charts.weekly){ charts.weekly.data=cfg.data; charts.weekly.options.plugins.tooltip.callbacks=cfg.options.plugins.tooltip.callbacks; charts.weekly.update(); }
-  else charts.weekly = new Chart($("cWeekly"), cfg);
+  const labels = wk.map(w=>w.start);
+  upsert("weekly","cWeekly",{
+    data:{ labels, datasets:[
+      { type:"bar", label:"Recurring", data:base, backgroundColor:base.map((b,i)=>loadColor(u[i])), borderRadius:{topLeft:0,topRight:0,bottomLeft:6,bottomRight:6}, borderSkipped:false, maxBarThickness:34, barPercentage:.6, stack:"d" },
+      { type:"bar", label:"Fly-out", data:fly, backgroundColor:fly.map((f,i)=>loadColor(u[i],.45)), borderRadius:{topLeft:6,topRight:6,bottomLeft:0,bottomRight:0}, borderSkipped:false, maxBarThickness:34, barPercentage:.6, stack:"d" },
+      { type:"line", label:"Capacity", data:cap0, borderColor:"rgba(255,255,255,.8)", borderDash:[5,5], borderWidth:1.5, pointRadius:0, tension:0 },
+      { type:"line", label:"With planned hires", data:cap, borderColor:"#3CB8FA", borderDash:[2,4], borderWidth:1.5, pointRadius:0, tension:0, hidden:!state.hires }
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false, interaction:{ mode:"index", intersect:false },
+      scales:{ x:{ stacked:true, ...noBorder, grid:{display:false} }, y:{ stacked:true, beginAtZero:true, ...noBorder, grid:{ color:GRID }, ticks:{ callback:v=>v+" u" } } },
+      plugins:{ tooltip:{ filter:i=>i.dataset.type==="bar" ? i.raw>0 : true, callbacks:{
+        label:c=>` ${c.dataset.label}: ${r0(c.raw)} units`,
+        footer:it=>{ const i=it[0].dataIndex; return `${r0(u[i]*100)}% of capacity${backlog[i]?` · backlog ${r0(backlog[i])} units`:""}`; } } } } }
+  });
+
+  upsert("backlog","cBacklog",{ type:"line",
+    data:{ labels, datasets:[{ label:"Backlog", data:backlog, borderWidth:2, tension:.35, pointRadius:0, fill:"origin", backgroundColor:"rgba(217,45,39,.14)",
+      borderColor:LOAD.red, segment:{ borderColor:s=>backlog[s.p1DataIndex]>0||backlog[s.p0DataIndex]>0 ? LOAD.red : LOAD.green } }]},
+    options:{ responsive:true, maintainAspectRatio:false, interaction:{ mode:"index", intersect:false },
+      scales:{ x:{ ...noBorder, grid:{display:false} }, y:{ beginAtZero:true, ...noBorder, grid:{ color:GRID }, ticks:{ callback:v=>v+" u" } } },
+      plugins:{ tooltip:{ callbacks:{ label:c=>` ${r0(c.raw)} units carried over` } } } }
+  });
+}
+
+const TREND = { edit:["Editing","#3CB8FA"], cd:["Creative director","#FFFFFF"], smm:["Social media","#A78BFA"] };
+function renderTrend(){
+  const wk = DATA.weeks, labels = wk.map(w=>w.start);
+  $("trendLg").innerHTML = Object.values(TREND).map(([n,c])=>`<span><i style="background:${c}"></i>${n}</span>`).join("");
+  charts.trend = new Chart($("cTrend"),{ type:"line",
+    data:{ labels, datasets:Object.entries(TREND).map(([k,[n,c]])=>({ label:n, data:wk.map((w,i)=>r0(demand(w,k,true)/capacityAt(k,i,false)*100)), borderColor:c, borderWidth:k==="cd"?1.5:2, pointRadius:0, pointHoverRadius:4, tension:.3 })) },
+    options:{ responsive:true, maintainAspectRatio:false, interaction:{ mode:"index", intersect:false },
+      scales:{ x:{ ...noBorder, grid:{display:false} }, y:{ min:40, suggestedMax:130, ...noBorder, grid:{ color:GRID }, ticks:{ callback:v=>v+"%" } } },
+      plugins:{ tooltip:{ callbacks:{ label:c=>` ${c.dataset.label}: ${c.raw}%` } } } },
+    plugins:[{ id:"bands", beforeDatasetsDraw(ch){ const {ctx,chartArea:a,scales:{y}}=ch; const y85=y.getPixelForValue(85), y100=y.getPixelForValue(100);
+      ctx.save(); ctx.fillStyle="rgba(255,214,10,.07)"; ctx.fillRect(a.left,y100,a.right-a.left,y85-y100); ctx.fillStyle="rgba(217,45,39,.08)"; ctx.fillRect(a.left,a.top,a.right-a.left,Math.max(0,y100-a.top)); ctx.restore(); } }]
+  });
 }
 
 /* ===================================================================
    CLIENTS
    =================================================================== */
-function renderCoverage(){
-  const missing = c => [c.cd, c.editor, c.backup, c.smm].filter(v=>!v).length;
-  const nextFlyout = c => {
-    for (const w of DATA.weeks){ const f = w.flyouts.find(f=>c.name.startsWith(f.client)); if (f) return `${w.start} · ${f.units}`; }
-    return "";
-  };
+function fillSelect(id, values){ const s=$(id); values.forEach(v=>{ const o=document.createElement("option"); o.value=v; o.textContent=v; s.appendChild(o); }); }
+const nextFlyout = c => { for (let i=0;i<DATA.weeks.length;i++){ const f=DATA.weeks[i].flyouts.find(f=>c.name.startsWith(f.client)); if (f) return { i, start:DATA.weeks[i].start, units:f.edit }; } return null; };
+const missingRoles = c => [c.cd,c.editor,c.backup,c.smm].filter(v=>!v).length;
+
+function filteredClients(){
+  const t=$("fType").value, cd=$("fCd").value, ed=$("fEditor").value, risk=$("fRisk").value;
+  return DATA.clients.filter(c=>(t==="all"||c.type===t)&&(cd==="all"||c.cd===cd)&&(ed==="all"||c.editor===ed||c.backup===ed)&&
+    (risk==="all" || (risk==="runway"&&c.days[0]<7) || (risk==="gap"&&missingRoles(c)>0) || (risk==="flyout"&&(nextFlyout(c)?.i??99)<4)));
+}
+
+function renderClients(){
+  const rows = filteredClients();
+  $("clientCount").textContent = `${rows.length} of ${DATA.clients.length} clients · ${r0(rows.reduce((s,c)=>s+clientUnits(c),0))} weighted units / month`;
   const dash = `<span class="muted">—</span>`;
   const person = (name, withLoad) => {
     if (!name) return `<span class="miss"><i class="dot" style="background:${LOAD.red}"></i>Missing</span>`;
@@ -612,73 +688,82 @@ function renderCoverage(){
     return u==null ? esc(name) : `<i class="dot" style="background:${loadColor(u)}"></i>${esc(name)} <span class="muted">${r0(u*100)}%</span>`;
   };
   const days = d => `<span class="pill" style="background:${loadColor(dayLoad(d),.28)}" title="${d} days of content">${d}d</span>`;
-  const rows = [...DATA.clients].sort((a,b)=>missing(b)-missing(a) || a.days[0]-b.days[0]);
+  const sorted = [...rows].sort((a,b)=>missingRoles(b)-missingRoles(a) || a.days[0]-b.days[0]);
   $("cov").innerHTML = `<thead><tr>
-      <th>Client</th><th>Type</th><th class="num">Videos / mo</th><th>Start date</th>
-      <th>Creative director</th><th>Editor</th><th>Backup editor</th><th>Social media</th>
-      <th>Runway<br>now → 4 wks</th><th>Next fly-out</th>
-    </tr></thead><tbody>` +
-    rows.map(c=>`<tr>
-      <td class="client">${esc(c.name)}</td>
-      <td>${esc(c.type)}</td>
-      <td class="num">${c.volume}</td>
-      <td>${c.start ? esc(c.start) : dash}</td>
-      <td>${person(c.cd)}</td>
-      <td>${person(c.editor, true)}</td>
-      <td>${person(c.backup, true)}</td>
-      <td>${person(c.smm)}</td>
+      <th>Client</th><th>Type</th><th>Tier</th><th class="num">Videos / mo</th><th class="num">Load (units)</th><th>Start</th>
+      <th>Creative director</th><th>Editor</th><th>Backup editor</th><th>Social media</th><th>Runway<br>now → 4 wks</th><th>Next fly-out</th>
+    </tr></thead><tbody>` + (sorted.length ? sorted.map(c=>{ const f=nextFlyout(c); return `<tr>
+      <td class="name">${esc(c.name)}</td><td>${esc(c.type)}</td><td>${c.tier}</td>
+      <td class="num">${c.volume}</td><td class="num">${clientUnits(c)}</td><td>${c.start ? esc(c.start) : dash}</td>
+      <td>${person(c.cd)}</td><td>${person(c.editor,true)}</td><td>${person(c.backup,true)}</td><td>${person(c.smm)}</td>
       <td>${days(c.days[0])} <span class="muted">→</span> ${days(c.days[4])}</td>
-      <td>${nextFlyout(c) || dash}</td>
-    </tr>`).join("") + `</tbody>`;
-}
+      <td>${f ? `${f.start} · ${f.units} units` : dash}</td></tr>`; }).join("") : `<tr><td colspan="12" class="empty">No clients match these filters</td></tr>`) + `</tbody>`;
 
-function renderHeat(){
+  // runway heatmap
   const weeks = DATA.weeks.slice(0,8).map(w=>w.start);
-  const sorted = [...DATA.clients].sort((a,b)=>a.days[0]-b.days[0]);
-  let html = `<div></div>` + weeks.map(w=>`<div class="hh">${w}</div>`).join("");
-  sorted.forEach(c=>{
-    html += `<div class="hl" title="${esc(c.name)}">${esc(c.name)}</div>` +
-      c.days.map(d=>`<div class="hc" style="background:${loadColor(dayLoad(d),.28)}" title="${esc(c.name)}: ${d} days">${d}</div>`).join("");
+  const byRunway = [...rows].sort((a,b)=>a.days[0]-b.days[0]);
+  $("heatWrap").innerHTML = byRunway.length ? `<div class="heat"><div></div>${weeks.map(w=>`<div class="hh">${w}</div>`).join("")}` +
+    byRunway.map(c=>`<div class="hl" title="${esc(c.name)}">${esc(c.name)}</div>`+c.days.map(d=>`<div class="hc" style="background:${loadColor(dayLoad(d),.28)}" title="${esc(c.name)}: ${d} days">${d}</div>`).join("")).join("") + `</div>`
+    : `<div class="empty">No clients match these filters</div>`;
+
+  // workload by client
+  const byLoad = [...rows].sort((a,b)=>clientUnits(b)-clientUnits(a));
+  upsert("clientLoad","cClientLoad",{ type:"bar",
+    data:{ labels:byLoad.map(c=>c.name), datasets:[{ data:byLoad.map(clientUnits), borderRadius:4, barThickness:12,
+      backgroundColor:byLoad.map(c=>{ const u=personLoad(c.editor); return u==null ? "rgba(255,255,255,.22)" : loadColor(u); }) }]},
+    options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false,
+      scales:{ x:{ beginAtZero:true, ...noBorder, grid:{ color:GRID }, ticks:{ callback:v=>v+" u" } }, y:{ ...noBorder, grid:{display:false}, ticks:{ font:{size:11} } } },
+      plugins:{ tooltip:{ callbacks:{ label:c=>{ const r=byLoad[c.dataIndex], u=personLoad(r.editor); return ` ${c.raw} units · ${r.volume} videos · tier ${r.tier} · ${u==null ? "no editor assigned" : `${r.editor} at ${r0(u*100)}%`}`; } } } } }
   });
-  $("heat").innerHTML = html;
 }
 
 /* ===================================================================
    TEAM
    =================================================================== */
-function renderBus(){
-  const count = {};
-  DATA.clients.forEach(c=>{ if (c.editor && !c.backup) count[c.editor]=(count[c.editor]||0)+1; });
-  const rows = Object.entries(count).sort((a,b)=>b[1]-a[1]);
-  charts.bus = new Chart($("cBus"),{ type:"bar",
-    data:{ labels:rows.map(r=>r[0]), datasets:[{ data:rows.map(r=>r[1]), borderRadius:4, barThickness:14,
-      backgroundColor:rows.map(r=>loadColor(busLoad(r[1]))) }]},
+function filteredPeople(){ const t=$("tTier").value, s=$("tSoft").value; return DATA.people.filter(p=>(t==="all"||p.tier===t)&&(s==="all"||p.software===s)); }
+
+function renderTeam(){
+  const people = filteredPeople(), names = new Set(people.map(p=>p.name));
+  $("rosterCount").textContent = `${people.length} of ${DATA.people.length} editors · ${people.reduce((s,p)=>s+p.capacity,0)} units / week capacity`;
+
+  // roster
+  const rows = [...people].map(p=>({...p, u:p.assigned/p.capacity, primary:DATA.clients.filter(c=>c.editor===p.name).length, backup:DATA.clients.filter(c=>c.backup===p.name).length})).sort((a,b)=>b.u-a.u);
+  $("roster").innerHTML = `<thead><tr><th>Editor</th><th>Tier</th><th class="num">Capacity / wk</th><th class="num">Assigned</th><th class="num">Headroom</th><th>Utilization</th><th class="num">Primary clients</th><th class="num">Backup for</th><th>Software</th><th>Apex</th></tr></thead><tbody>` +
+    (rows.length ? rows.map(p=>`<tr><td class="name">${esc(p.name)}</td><td>${p.tier}</td><td class="num">${p.capacity}</td><td class="num">${p.assigned}</td>
+      <td class="num" style="color:${p.capacity-p.assigned<0?LOAD.red:"inherit"}">${p.capacity-p.assigned>0?"+":""}${p.capacity-p.assigned}</td>
+      <td><span class="bar"><i style="width:${Math.min(100,p.u*100)}%;background:${loadColor(p.u)}"></i></span>${r0(p.u*100)}%</td>
+      <td class="num">${p.primary}</td><td class="num">${p.backup||`<span class="muted">0</span>`}</td><td>${p.software}</td><td>${p.apex?"Done":`<span class="muted">Pending</span>`}</td></tr>`).join("")
+    : `<tr><td colspan="10" class="empty">No editors match these filters</td></tr>`) + `</tbody>`;
+
+  // bus factor
+  const count = {}; DATA.clients.forEach(c=>{ if (c.editor && !c.backup && names.has(c.editor)) count[c.editor]=(count[c.editor]||0)+1; });
+  const bus = Object.entries(count).sort((a,b)=>b[1]-a[1]);
+  upsert("bus","cBus",{ type:"bar",
+    data:{ labels:bus.map(r=>r[0]), datasets:[{ data:bus.map(r=>r[1]), borderRadius:4, barThickness:12, backgroundColor:bus.map(r=>loadColor(busLoad(r[1]))) }]},
     options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false,
-      scales:{ x:{ beginAtZero:true, border:{display:false}, ticks:{ stepSize:1 }, grid:{ color:GRID } }, y:{ border:{display:false}, grid:{display:false} } },
-      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>` ${c.raw} client${c.raw===1?"":"s"} with no backup` } } } }
+      scales:{ x:{ beginAtZero:true, ...noBorder, ticks:{ stepSize:1 }, grid:{ color:GRID } }, y:{ ...noBorder, grid:{display:false} } },
+      plugins:{ tooltip:{ callbacks:{ label:c=>` ${c.raw} client${c.raw===1?"":"s"} with no backup` } } } }
   });
-}
 
-function renderProgress(){
-  const n = DATA.people.length;
-  const prem = DATA.people.filter(p=>p.software==="Premiere").length;
-  const apex = DATA.people.filter(p=>p.apex).length;
-  $("premV").innerHTML = `${prem}<small> / ${n}</small>`;
-  $("apexV").innerHTML = `${apex}<small> / ${n}</small>`;
-  requestAnimationFrame(()=>{ $("progFill").style.width=(prem/n*100)+"%"; $("progApex").style.width=(apex/n*100)+"%"; });
-}
-
-function renderFormatMap(){
-  const fm = DATA.formats, editors = DATA.people.filter(p=>p.name!=="Shahid");
+  // format depth radar + matrix
+  const fm = DATA.formats, editors = people.filter(p=>p.name!=="Shahid");
   const who = Object.fromEntries(fm.map(f=>[f, editors.filter(p=>p.formats.includes(f)).length]));
-  let html = `<div></div>` + fm.map(f=>`<div class="fh">${f}</div>`).join("");
-  editors.forEach(p=>{
-    html += `<div class="fn">${esc(p.name)}</div>` + fm.map(f=>p.formats.includes(f)
-      ? `<div class="fc" style="background:${loadColor(fmtLoad(who[f]))}" title="${esc(p.name)} · ${f} · ${who[f]} ${who[f]===1?"person":"people"} can edit it"></div>`
-      : `<div class="fc" title="${esc(p.name)} · ${f}"></div>`).join("");
+  upsert("radar","cRadar",{ type:"radar",
+    data:{ labels:fm, datasets:[{ data:fm.map(f=>who[f]), borderColor:"#3CB8FA", backgroundColor:"rgba(60,184,250,.16)", borderWidth:1.5, pointRadius:3, pointBackgroundColor:fm.map(f=>loadColor(fmtLoad(who[f]))), pointBorderWidth:0 }]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      scales:{ r:{ beginAtZero:true, suggestedMax:8, grid:{ color:"rgba(255,255,255,.07)" }, angleLines:{ color:"rgba(255,255,255,.07)" }, ticks:{ display:false }, pointLabels:{ color:"rgba(245,247,250,.55)", font:{size:10.5} } } },
+      plugins:{ tooltip:{ callbacks:{ label:c=>` ${c.raw} editor${c.raw===1?"":"s"} qualified` } } } }
   });
+  let html = `<div></div>` + fm.map(f=>`<div class="fh">${f}</div>`).join("");
+  editors.forEach(p=>{ html += `<div class="fn">${esc(p.name)}</div>` + fm.map(f=>p.formats.includes(f)
+    ? `<div class="fc" style="background:${loadColor(fmtLoad(who[f]))}" title="${esc(p.name)} · ${f} · ${who[f]} qualified"></div>` : `<div class="fc"></div>`).join(""); });
   $("fmap").style.gridTemplateColumns = `110px repeat(${fm.length},1fr)`;
-  $("fmap").innerHTML = html;
+  $("fmap").innerHTML = editors.length ? html : `<div class="empty" style="grid-column:1/-1">No editors match these filters</div>`;
+
+  // readiness
+  const n = people.length||1, prem = people.filter(p=>p.software==="Premiere").length, apex = people.filter(p=>p.apex).length;
+  $("premV").innerHTML = `${prem}<small> / ${people.length}</small>`; $("apexV").innerHTML = `${apex}<small> / ${people.length}</small>`;
+  requestAnimationFrame(()=>{ $("progFill").style.width=(prem/n*100)+"%"; $("progApex").style.width=(apex/n*100)+"%"; });
 }
 
 /* ===================================================================
@@ -691,36 +776,28 @@ function show(view){
   if (!inited[view]){
     inited[view]=true;
     if (view==="now"){ renderGauges(); renderSummary(); renderPeople(); renderMix(); }
-    if (view==="proj"){ renderWeekly(); }
-    if (view==="clients"){ renderCoverage(); renderHeat(); }
-    if (view==="team"){ renderBus(); renderProgress(); renderFormatMap(); }
+    if (view==="proj"){ renderForecast(); renderTrend(); }
+    if (view==="clients"){ renderClients(); }
+    if (view==="team"){ renderTeam(); }
   }
   Object.values(charts).forEach(c=>c.resize());
 }
 document.querySelectorAll("#views button").forEach(b=>b.addEventListener("click",()=>show(b.dataset.view)));
 
-document.querySelectorAll("#tierChips .chip").forEach(ch=>ch.addEventListener("click",()=>{
-  const t = ch.dataset.tier;
-  if (t==="all"){ state.tiers = new Set(["A","B","C"]); }
-  else { state.tiers.has(t) ? state.tiers.delete(t) : state.tiers.add(t); }
-  document.querySelectorAll("#tierChips .chip").forEach(c=>{
-    c.classList.toggle("on", c.dataset.tier==="all" ? state.tiers.size===3 : state.tiers.has(c.dataset.tier));
-  });
-  renderPeople();
-}));
-
-document.querySelectorAll("#rangeSeg button").forEach(b=>b.addEventListener("click",()=>{
-  state.range=+b.dataset.n;
-  document.querySelectorAll("#rangeSeg button").forEach(x=>x.classList.toggle("on",x===b));
-  renderWeekly();
-}));
-
-$("flyToggle").addEventListener("click",()=>{
-  state.flyouts=!state.flyouts; $("flyToggle").classList.toggle("on",state.flyouts); renderWeekly();
-});
+["selTier","selSort"].forEach(id=>$(id).addEventListener("change",renderPeople));
+$("selFn").addEventListener("change",e=>{ state.fn=e.target.value; renderForecast(); });
+$("selRange").addEventListener("change",e=>{ state.range=+e.target.value; renderForecast(); });
+$("flyToggle").addEventListener("click",()=>{ state.flyouts=!state.flyouts; $("flyToggle").classList.toggle("on",state.flyouts); renderForecast(); });
+$("hireToggle").addEventListener("click",()=>{ state.hires=!state.hires; $("hireToggle").classList.toggle("on",state.hires); renderForecast(); });
+fillSelect("fType",[...new Set(DATA.clients.map(c=>c.type))]);
+fillSelect("fCd",[...new Set(DATA.clients.map(c=>c.cd).filter(Boolean))].sort());
+fillSelect("fEditor",DATA.people.map(p=>p.name).sort());
+["fType","fCd","fEditor","fRisk"].forEach(id=>$(id).addEventListener("change",renderClients));
+["tTier","tSoft"].forEach(id=>$(id).addEventListener("change",renderTeam));
 
 $("confYear").textContent = new Date().getFullYear();
 renderScales();
+renderKpis();
 show("now");
 </script>
 </body>
