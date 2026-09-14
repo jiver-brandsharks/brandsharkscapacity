@@ -130,6 +130,26 @@
   .stats3{grid-template-columns:repeat(3,minmax(0,1fr));}
   .stat .v small{font-size:12px;font-weight:500;color:var(--text-3);font-family:'Montserrat',sans-serif;}
 
+  /* overview: rings, ring list, capacity heatmap */
+  .rings{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center;}
+  .ringlist{display:flex;flex-direction:column;}
+  .ringlist .rl{display:grid;grid-template-columns:10px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--line);cursor:pointer;}
+  .ringlist .rl:first-child{border-top:0;}
+  .ringlist .rl:hover .n{color:var(--accent);}
+  .ringlist .rl i{width:10px;height:10px;border-radius:50%;}
+  .ringlist .rl .n{font-size:14px;font-weight:600;}
+  .ringlist .rl small{display:block;font-size:11.5px;color:var(--text-3);font-weight:500;margin-top:2px;}
+  .ringlist .rl b{font-size:20px;font-weight:600;}
+  .hmap{display:grid;grid-template-columns:150px repeat(13,minmax(0,1fr));gap:4px;min-width:820px;}
+  .hmap .hh{font:500 10px var(--mono);color:var(--text-3);text-align:center;padding-bottom:4px;white-space:nowrap;overflow:hidden;}
+  .hmap .hl{font-size:13px;font-weight:600;display:flex;align-items:center;cursor:pointer;}
+  .hmap .hl:hover{color:var(--accent);}
+  .hmap .hc{height:36px;border-radius:7px;display:flex;align-items:center;justify-content:center;font:600 11.5px var(--mono);color:var(--text);cursor:pointer;transition:transform .15s;}
+  .hmap .hc:hover{transform:scale(1.06);}
+  .mode[hidden]{display:none;}
+  .rings .chartbox{min-width:0;}
+  @media (max-width:900px){ .rings{grid-template-columns:minmax(0,1fr);} .rings .chartbox{height:240px!important;} }
+
   /* department tiles */
   .depts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px;}
   .dept{padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.03);cursor:pointer;transition:border-color .2s,background .2s,transform .2s;min-width:0;}
@@ -364,10 +384,12 @@
     <div class="grid">
       <section class="card span-12">
         <div class="ch">
-          <div><h2>Capacity Utilization <span class="i" data-tip="Share of each team's weekly capacity already committed. Past 85% a new client starts pushing delivery dates. Click a gauge for the breakdown.">i</span></h2></div>
-          <div class="lg" data-scale="util"></div>
+          <div><h2>Capacity Utilization <span class="i" data-tip="Share of each department's weekly capacity already committed. Past 85% a new client starts pushing delivery dates. Rings and gauges show today; the heatmap shows every week of the forecast. Click a department for the breakdown.">i</span></h2></div>
+          <div class="controls"><div class="seg small" data-pick="cap"><button data-v="rings">Rings</button><button data-v="gauges">Gauges</button><button data-v="heat">13-Week Heatmap</button></div><div class="lg" data-scale="util"></div></div>
         </div>
-        <div class="gauges" id="gauges"></div>
+        <div class="mode" data-mode="cap:rings"><div class="rings"><div class="chartbox" style="height:300px"><canvas id="cRings"></canvas></div><div class="ringlist" id="ringList"></div></div></div>
+        <div class="mode" data-mode="cap:gauges" hidden><div class="gauges" id="gauges"></div></div>
+        <div class="mode" data-mode="cap:heat" hidden><div class="tblwrap"><div class="hmap" id="capHeat"></div></div></div>
         <div class="summary">
           <div><p class="verdict" id="call"></p><p class="verdict-sub" id="callSub"></p></div>
           <div class="next"><div class="eyebrow">Next action</div><p id="action"></p><span class="more" data-go="hiring">Hiring plan</span></div>
@@ -376,20 +398,26 @@
 
       <section class="card span-8">
         <div class="ch">
-          <div><h2>Editor Workload <span class="i" data-tip="Colored bar = assigned units. Gray track = that editor's capacity. Dotted mark = 85%. Click a bar to open the editor.">i</span></h2></div>
+          <div><h2>Editor Workload <span class="i" data-tip="Load: assigned units on a capacity track with the 85% mark. By Client: the same load split by the clients each editor carries. Capacity Map: every editor placed by capacity and load — above the white line is over capacity. Click anything to open the editor.">i</span></h2></div>
           <div class="controls">
+            <div class="seg small" data-pick="people"><button data-v="bullet">Load</button><button data-v="stack">By Client</button><button data-v="scatter">Capacity Map</button></div>
             <label class="field">Tier <select class="sel" id="selTier"><option value="all">All Tiers</option><option value="A">Tier A</option><option value="B">Tier B</option><option value="C">Tier C</option></select></label>
             <label class="field">Sort <select class="sel" id="selSort"><option value="util">Utilization</option><option value="headroom">Headroom</option><option value="name">Name</option></select></label>
           </div>
         </div>
-        <div class="chartbox" style="height:380px"><canvas id="cPeople"></canvas></div>
-        <div class="ch" style="margin:14px 0 0"><div class="lg" data-scale="util" data-extra="cap85"></div><span class="more" data-go="team">Editor roster</span></div>
+        <div class="mode" data-mode="people:bullet"><div class="chartbox" style="height:380px"><canvas id="cPeople"></canvas></div><div class="lg" data-scale="util" data-extra="cap85" style="margin-top:14px"></div></div>
+        <div class="mode" data-mode="people:stack" hidden><div class="chartbox" style="height:380px"><canvas id="cStack"></canvas></div><div class="lg" id="stackLg" style="margin-top:14px"></div></div>
+        <div class="mode" data-mode="people:scatter" hidden><div class="chartbox" style="height:380px"><canvas id="cScatter"></canvas></div><div class="lg" data-scale="util" data-extra="scatter" style="margin-top:14px"></div></div>
       </section>
 
       <section class="card span-4">
-        <div class="ch"><div><h2>Demand Mix <span class="i" data-tip="Share of total workload by complexity. Each segment is colored by how full the editors of that tier are.">i</span></h2></div></div>
-        <div class="chartbox" style="height:300px"><canvas id="cMix"></canvas></div>
-        <div class="lg" data-scale="util" style="margin-top:10px;justify-content:center"></div>
+        <div class="ch">
+          <div><h2>Demand Mix <span class="i" data-tip="Where the workload comes from. Tier: by complexity, colored by how full the editors of that tier are. Type: by engagement model. Tier × Type: both at once.">i</span></h2></div>
+          <div class="controls"><div class="seg small" data-pick="mix"><button data-v="tier">Tier</button><button data-v="type">Type</button><button data-v="matrix">Tier × Type</button></div></div>
+        </div>
+        <div class="mode" data-mode="mix:tier"><div class="chartbox" style="height:300px"><canvas id="cMix"></canvas></div><div class="lg" data-scale="util" style="margin-top:10px;justify-content:center"></div></div>
+        <div class="mode" data-mode="mix:type" hidden><div class="chartbox" style="height:300px"><canvas id="cMixType"></canvas></div><div class="lg" id="typeLg" style="margin-top:10px;justify-content:center"></div></div>
+        <div class="mode" data-mode="mix:matrix" hidden><div class="chartbox" style="height:300px"><canvas id="cMatrix"></canvas></div><div class="lg" id="matrixLg" style="margin-top:10px;justify-content:center"></div></div>
       </section>
     </div>
   </div>
@@ -750,6 +778,7 @@ const hireColor = t => t.breach===-1 ? LOAD.green : t.hireIdx<0 ? LOAD.red : LOA
 const SCALES = { util:["Under 85%","85–100%","Over 100%"], days:["14+ days","7–13","Under 7"], bus:["None","1–2","3+ clients"], fmt:["4+ people","3","1–2"] };
 const EXTRA = {
   cap85:    `<span><i class="blk" style="background:rgba(255,255,255,.18)"></i>Capacity</span><span><i class="dash"></i>85% Mark</span>`,
+  scatter:  `<span><i class="dash" style="border-color:rgba(255,214,10,.8)"></i>85% line</span><span><i class="dash" style="border-color:rgba(217,45,39,.8)"></i>100% line</span><span>Bubble size = clients</span>`,
   forecast: `<span><i class="blk" style="background:rgba(255,255,255,.35)"></i>Fly-out Share</span><span><i class="sim"></i>Simulated Client</span><span><i class="dash"></i>Capacity</span><span><i class="dot2"></i>With Planned Hires</span>`
 };
 function renderScales(){
@@ -822,8 +851,43 @@ function renderSummary(){
       : `Open ${an(worst.hire)} search <b>now</b>. ${worst.name} saturates <span class="lnk" data-go="proj">${bw}</span>; with ${an(lt)}-week lead time the search is already ${-hireIdx} week${-hireIdx===1?"":"s"} late.`; }
 }
 const GAUGE_ORDER = ["cd","edit","ppm","smm"];
+const orderedFns = () => [...DATA.functions].sort((a,b)=>GAUGE_ORDER.indexOf(a.key)-GAUGE_ORDER.indexOf(b.key));
+const TYPEC = { Flyout:"#3CB8FA", Virtual:"#FFFFFF", Clipping:"#A78BFA" };
+
+// ── chart-type pickers: choice persists across sessions ──
+const OV = Object.assign({ cap:"rings", people:"bullet", mix:"tier" }, (()=>{ try { return JSON.parse(localStorage.getItem("bs-ov")||"{}"); } catch { return {}; } })());
+function pick(group, v){
+  OV[group] = v; try { localStorage.setItem("bs-ov", JSON.stringify(OV)); } catch {}
+  document.querySelectorAll(`[data-pick="${group}"] button`).forEach(b=>b.classList.toggle("on", b.dataset.v===v));
+  document.querySelectorAll(`.mode[data-mode^="${group}:"]`).forEach(m=>m.hidden = m.dataset.mode!==`${group}:${v}`);
+  renderOverviewPart(group);
+  requestAnimationFrame(()=>Object.values(charts).forEach(c=>c.resize()));
+}
+function renderOverviewPart(group){
+  const v = OV[group];
+  if (group==="cap"){ if (v==="rings") renderRings(); else if (v==="gauges") renderGauges(); else renderCapHeat(); }
+  if (group==="people"){ if (v==="bullet") renderPeople(); else if (v==="stack") renderStack(); else renderScatter(); }
+  if (group==="mix"){ if (v==="tier") renderMix(); else if (v==="type") renderMixType(); else renderMatrix(); }
+}
+document.querySelectorAll("[data-pick] button").forEach(b=>b.addEventListener("click",()=>pick(b.closest("[data-pick]").dataset.pick, b.dataset.v)));
+
+// ── capacity: rings ──
+function renderRings(){
+  const fns = orderedFns(), worst = DATA.functions.reduce((a,b)=>util(b)>util(a)?b:a);
+  upsert("rings","cRings",{ type:"doughnut",
+    data:{ labels:fns.map(f=>f.name), datasets:fns.map(f=>{ const u=Math.min(util(f),1.25); return { label:f.name, data:[u, 1.25-u], backgroundColor:[loadColor(util(f)),"rgba(255,255,255,.06)"], borderWidth:3, borderColor:"rgba(10,11,14,1)", borderRadius:6, spacing:0 }; }) },
+    options:{ cutout:"46%", rotation:-125, circumference:250, responsive:true, maintainAspectRatio:false, events:[], plugins:{ tooltip:{ enabled:false } } },
+    plugins:[{ id:"ringCenter", afterDraw(ch){ const {ctx,chartArea:a}=ch, cx=(a.left+a.right)/2, cy=(a.top+a.bottom)/2; ctx.save(); ctx.textAlign="center"; ctx.fillStyle=loadColor(util(worst));
+      ctx.font="600 22px 'JetBrains Mono','Montserrat',sans-serif"; ctx.fillText(r0(util(worst)*100)+"%", cx, cy+4); ctx.fillStyle="rgba(245,247,250,.45)"; ctx.font="500 9.5px 'Montserrat',sans-serif"; ctx.fillText(worst.short.toUpperCase(), cx, cy+20); ctx.restore(); } }]
+  });
+  $("ringList").innerHTML = fns.map(f=>{ const t = trigger(f.key), u = util(f);
+    return `<div class="rl" data-fn="${f.key}"><i style="background:${loadColor(u)}"></i><div><div class="n">${f.name}</div><small class="num">${f.assigned} / ${f.capacity} ${f.unit} · ${t.breach===-1 ? "holds 13 weeks" : "saturates "+DATA.weeks[t.breach].start}</small></div><b class="num" style="color:${loadColor(u)}">${r0(u*100)}%</b></div>`; }).join("");
+}
+
+// ── capacity: gauges ──
 function renderGauges(){
-  const fns = [...DATA.functions].sort((a,b)=>GAUGE_ORDER.indexOf(a.key)-GAUGE_ORDER.indexOf(b.key));
+  if ($("gauges").children.length) return;
+  const fns = orderedFns();
   $("gauges").innerHTML = fns.map(f=>`<div class="gauge" data-fn="${f.key}" data-tip="Open ${f.name}: who carries the load and when it saturates."><div class="g"><canvas id="g-${f.key}"></canvas><div class="val num" id="gv-${f.key}"></div></div><div class="lab">${f.name}</div><div class="meta num">${f.assigned} / ${f.capacity} ${f.unit} · ${f.people} ${f.people===1?"person":"people"}</div></div>`).join("");
   fns.forEach(f=>{
     const u = util(f), pct = Math.min(u,1.2);
@@ -833,38 +897,114 @@ function renderGauges(){
       options:{ rotation:-90, circumference:180, cutout:"80%", responsive:true, maintainAspectRatio:false, events:[], plugins:{ tooltip:{enabled:false} } } });
   });
 }
+
+// ── capacity: 13-week heatmap, every department ──
+function renderCapHeat(){
+  const fns = orderedFns();
+  $("capHeat").innerHTML = `<div></div>` + DATA.weeks.map(w=>`<div class="hh">${w.start}</div>`).join("") +
+    fns.map(f=>`<div class="hl" data-fn="${f.key}">${f.name}</div>` + DATA.weeks.map((w,i)=>{ const u = demand(w,f.key,true)/capacityAt(f.key,i,false), band = loadBand(u);
+      return `<div class="hc" data-go="proj" data-setfn="${f.key}" data-tip="${f.name} · ${w.start}: ${r0(demand(w,f.key,true))} of ${r0(capacityAt(f.key,i,false))} ${f.unit}${w.flyouts.length?" · fly-out week":""}" style="background:${loadColor(u, band==="green"?.22:band==="yellow"?.4:.75)}">${r0(u*100)}%</div>`; }).join("")).join("");
+}
+
+// ── editors: shared rows ──
 let peopleRows = [];
-function renderPeople(){
+function editorRows(){
   const tier = $("selTier").value, sort = $("selSort").value;
-  const rows = peopleRows = DATA.people.filter(p=>tier==="all"||p.tier===tier).map(p=>({...p, u:p.assigned/p.capacity, head:p.capacity-p.assigned}));
+  const rows = DATA.people.filter(p=>tier==="all"||p.tier===tier).map(p=>({...p, u:p.assigned/p.capacity, head:p.capacity-p.assigned, clients:DATA.clients.filter(c=>c.editor===p.name)}));
   rows.sort(sort==="name" ? (a,b)=>a.name.localeCompare(b.name) : sort==="headroom" ? (a,b)=>b.head-a.head : (a,b)=>b.u-a.u);
-  const clientsOf = n => DATA.clients.filter(c=>c.editor===n).map(c=>c.name);
+  return peopleRows = rows;
+}
+const trackDataset = rows => ({ label:"Capacity", data:rows.map(p=>p.capacity), backgroundColor:"rgba(255,255,255,.07)", borderRadius:6, barThickness:24, grouped:false, stack:"cap" });
+const mark85 = { id:"mark85", afterDatasetsDraw(ch){ const {ctx,scales:{x}}=ch, meta=ch.getDatasetMeta(ch.data.datasets.length-1); if (!meta) return;
+  meta.data.forEach((b,i)=>{ const row=peopleRows[i]; if (!row) return; const px=x.getPixelForValue(row.capacity*.85); ctx.save(); ctx.strokeStyle="rgba(255,255,255,.7)"; ctx.setLineDash([2,3]); ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(px,b.y-b.height/2); ctx.lineTo(px,b.y+b.height/2); ctx.stroke(); ctx.restore(); }); } };
+
+// ── editors: load vs capacity ──
+function renderPeople(){
+  const rows = editorRows();
   upsert("people","cPeople",{ type:"bar",
     data:{ labels:rows.map(p=>`${p.name} · ${p.tier}`), datasets:[
       { label:"Assigned", data:rows.map(p=>p.assigned), backgroundColor:rows.map(p=>loadColor(p.u)), borderRadius:4, barThickness:12, grouped:false },
-      { label:"Capacity", data:rows.map(p=>p.capacity), backgroundColor:"rgba(255,255,255,.07)", borderRadius:6, barThickness:24, grouped:false } ]},
+      trackDataset(rows) ]},
     options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false, onClick:(e,els)=>{ if (els.length) openEditor(peopleRows[els[0].index].name); },
       scales:{ x:{ min:0, suggestedMax:14, ...noBorder, ticks:{ callback:v=>v+" u" }, grid:{ color:GRID } }, y:{ ...noBorder, grid:{ display:false } } },
       plugins:{ tooltip:{ filter:i=>i.datasetIndex===0, callbacks:{
         label:c=>{ const p=peopleRows[c.dataIndex]; return ` ${p.assigned} of ${p.capacity} units · ${r0(p.u*100)}% · ${p.head>0?p.head+" free":"over by "+(-p.head)}`; },
-        afterBody:c=>{ const p=peopleRows[c[0].dataIndex], cl=clientsOf(p.name); return [`${p.software}${p.apex?" · Apex":""}`, cl.length ? "Clients: "+cl.join(", ") : "No clients assigned"]; } } } } },
-    plugins:[{ id:"mark85", afterDatasetsDraw(ch){ const {ctx,scales:{x}}=ch, bars=ch.getDatasetMeta(1).data;
-      bars.forEach((b,i)=>{ const row=peopleRows[i]; if (!row) return; const px=x.getPixelForValue(row.capacity*.85); ctx.save(); ctx.strokeStyle="rgba(255,255,255,.7)"; ctx.setLineDash([2,3]); ctx.lineWidth=1.5;
-        ctx.beginPath(); ctx.moveTo(px,b.y-b.height/2); ctx.lineTo(px,b.y+b.height/2); ctx.stroke(); ctx.restore(); }); } }]
+        afterBody:c=>{ const p=peopleRows[c[0].dataIndex]; return [`${p.software}${p.apex?" · Apex":""}`, p.clients.length ? "Clients: "+p.clients.map(c=>c.name).join(", ") : "No clients assigned"]; } } } } },
+    plugins:[mark85]
   });
 }
+
+// ── editors: load split by client ──
+function renderStack(){
+  const rows = editorRows(), SLOTS = 4;
+  const segs = rows.map(p=>{ const cl=[...p.clients].sort((a,b)=>clientWeekly(b)-clientWeekly(a)); const top=cl.slice(0,SLOTS-1), rest=cl.slice(SLOTS-1);
+    const s = top.map(c=>({ name:c.name, v:clientWeekly(c) })); if (rest.length) s.push({ name:`${rest.length} more`, v:rest.reduce((t,c)=>t+clientWeekly(c),0) }); return s; });
+  const shades = [.9,.7,.5,.32];
+  $("stackLg").innerHTML = shades.slice(0,SLOTS).map((a,i)=>`<span><i class="blk" style="background:rgba(60,184,250,${a})"></i>${i===0?"Largest client":i===SLOTS-1?"Rest":`Client ${i+1}`}</span>`).join("") + `<span><i class="blk" style="background:rgba(255,255,255,.18)"></i>Capacity</span><span><i class="dash"></i>85% Mark</span>`;
+  upsert("stack","cStack",{ type:"bar",
+    data:{ labels:rows.map(p=>`${p.name} · ${p.tier}`), datasets:[...Array(SLOTS)].map((_,k)=>({ label:`slot${k}`, data:segs.map(s=>s[k]?.v||0), backgroundColor:rows.map(p=>loadColor(p.u, shades[k])), borderRadius:3, barThickness:12, grouped:false, stack:"load", borderWidth:1, borderColor:"rgba(0,0,0,.35)" })).concat([trackDataset(rows)]) },
+    options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false, onClick:(e,els)=>{ if (els.length) openEditor(peopleRows[els[0].index].name); },
+      scales:{ x:{ stacked:true, min:0, suggestedMax:14, ...noBorder, ticks:{ callback:v=>v+" u" }, grid:{ color:GRID } }, y:{ stacked:true, ...noBorder, grid:{ display:false } } },
+      plugins:{ tooltip:{ filter:i=>i.dataset.stack==="load" && i.raw>0, callbacks:{ label:c=>{ const s=segs[c.dataIndex][c.datasetIndex]; return s ? ` ${s.name}: ${r1(s.v)} u/wk` : ""; },
+        footer:it=>{ const p=peopleRows[it[0].dataIndex]; return `${p.assigned} of ${p.capacity} units · ${r0(p.u*100)}%`; } } } } },
+    plugins:[mark85]
+  });
+}
+
+// ── editors: capacity map (bubble) ──
+function renderScatter(){
+  const rows = editorRows();
+  upsert("scatter","cScatter",{ type:"bubble",
+    data:{ datasets:[{ data:rows.map(p=>({ x:p.capacity, y:p.assigned, r:7+p.clients.length*3, name:p.name, tier:p.tier, u:p.u, n:p.clients.length })), backgroundColor:rows.map(p=>loadColor(p.u,.8)), borderColor:rows.map(p=>loadColor(p.u)), borderWidth:1.5, hoverBorderWidth:2 }]},
+    options:{ responsive:true, maintainAspectRatio:false, onClick:(e,els)=>{ if (els.length) openEditor(peopleRows[els[0].index].name); },
+      scales:{ x:{ min:4, max:14, title:{ display:true, text:"Capacity · units / week", color:"rgba(245,247,250,.45)", font:{ size:11 } }, ...noBorder, grid:{ color:GRID } },
+               y:{ min:0, max:14, title:{ display:true, text:"Assigned · units / week", color:"rgba(245,247,250,.45)", font:{ size:11 } }, ...noBorder, grid:{ color:GRID } } },
+      plugins:{ tooltip:{ callbacks:{ title:it=>it[0].raw.name, label:c=>` ${c.raw.y} of ${c.raw.x} units · ${r0(c.raw.u*100)}% · tier ${c.raw.tier} · ${c.raw.n} client${c.raw.n===1?"":"s"}` } } } },
+    plugins:[{ id:"diag", beforeDatasetsDraw(ch){ const {ctx,chartArea:a,scales:{x,y}}=ch; ctx.save();
+        [[1,"rgba(217,45,39,.6)"],[.85,"rgba(255,214,10,.55)"]].forEach(([k,col])=>{ ctx.strokeStyle=col; ctx.setLineDash([5,5]); ctx.lineWidth=1.2; ctx.beginPath();
+          const x0=Math.max(x.min, y.min/k), x1=Math.min(x.max, y.max/k); ctx.moveTo(x.getPixelForValue(x0), y.getPixelForValue(x0*k)); ctx.lineTo(x.getPixelForValue(x1), y.getPixelForValue(x1*k)); ctx.stroke(); });
+        ctx.fillStyle="rgba(217,45,39,.05)"; ctx.beginPath(); ctx.moveTo(x.getPixelForValue(x.min), y.getPixelForValue(Math.min(y.max,x.min))); ctx.lineTo(x.getPixelForValue(Math.min(x.max,y.max)), y.getPixelForValue(Math.min(x.max,y.max))); ctx.lineTo(x.getPixelForValue(x.min), y.getPixelForValue(y.max)); ctx.closePath(); ctx.fill(); ctx.restore(); },
+      afterDatasetsDraw(ch){ const {ctx}=ch, meta=ch.getDatasetMeta(0); ctx.save(); ctx.font="500 10.5px 'Montserrat',sans-serif"; ctx.fillStyle="rgba(245,247,250,.8)"; ctx.textBaseline="middle";
+        const placed=[]; [...meta.data.keys()].sort((a,b)=>meta.data[a].y-meta.data[b].y).forEach(i=>{ const pt=meta.data[i], d=ch.data.datasets[0].data[i]; let y=pt.y, x=pt.x+pt.options.radius+5;
+          for (const p of placed) if (Math.abs(p.x-x)<70 && Math.abs(p.y-y)<12) y = p.y+12; placed.push({x,y}); ctx.fillText(d.name, x, y); }); ctx.restore(); } }]
+  });
+}
+
+// ── demand mix: tier ──
 function renderMix(){
   const tiers = ["A","B","C"], names = {A:"complex",B:"standard",C:"simple"};
   const tot = {A:0,B:0,C:0}, cap = {A:0,B:0,C:0};
   DATA.people.forEach(p=>{ tot[p.tier]+=p.assigned; cap[p.tier]+=p.capacity; });
   const tu = t => cap[t] ? tot[t]/cap[t] : 0, total = tot.A+tot.B+tot.C;
-  charts.mix = new Chart($("cMix"),{ type:"doughnut",
+  upsert("mix","cMix",{ type:"doughnut",
     data:{ labels:tiers.map(t=>`Tier ${t}`), datasets:[{ data:tiers.map(t=>tot[t]), backgroundColor:tiers.map(t=>loadColor(tu(t))), borderWidth:0, borderRadius:6, spacing:4 }]},
-    options:{ cutout:"74%", responsive:true, maintainAspectRatio:false, onClick:(e,els)=>{ if (els.length){ $("selTier").value=tiers[els[0].index]; renderPeople(); toast(`Editor workload filtered to tier ${tiers[els[0].index]}`); } },
-      plugins:{ legend:{ display:true, position:"bottom", labels:{ usePointStyle:true, boxWidth:8, boxHeight:8, padding:14, color:"rgba(245,247,250,.64)", generateLabels:ch=>tiers.map((t,i)=>({ text:`Tier ${t} · ${r0(tot[t]/total*100)}%`, fillStyle:ch.data.datasets[0].backgroundColor[i], strokeStyle:"transparent", fontColor:"#F5F7FA", pointStyle:"circle", index:i })) } },
+    options:{ cutout:"74%", responsive:true, maintainAspectRatio:false, onClick:(e,els)=>{ if (els.length){ $("selTier").value=tiers[els[0].index]; renderOverviewPart("people"); toast(`Editor workload filtered to tier ${tiers[els[0].index]}`); } },
+      plugins:{ legend:{ display:true, position:"bottom", labels:{ usePointStyle:true, boxWidth:8, boxHeight:8, padding:14, color:"#F5F7FA", generateLabels:ch=>tiers.map((t,i)=>({ text:`Tier ${t} · ${r0(tot[t]/total*100)}%`, fillStyle:ch.data.datasets[0].backgroundColor[i], strokeStyle:"transparent", fontColor:"#F5F7FA", pointStyle:"circle", index:i })) } },
         tooltip:{ callbacks:{ label:c=>{ const t=tiers[c.dataIndex]; return ` Tier ${t} (${names[t]}): ${c.raw} units · editors ${r0(tu(t)*100)}% full`; } } } } },
     plugins:[{ id:"center", afterDraw(ch){ const {ctx,chartArea:a}=ch, cx=(a.left+a.right)/2, cy=(a.top+a.bottom)/2; ctx.save(); ctx.textAlign="center"; ctx.fillStyle="#F5F7FA";
       ctx.font="600 26px 'JetBrains Mono','Montserrat',sans-serif"; ctx.fillText(total, cx, cy+4); ctx.fillStyle="rgba(245,247,250,.4)"; ctx.font="11.5px 'Montserrat',sans-serif"; ctx.fillText("units / week", cx, cy+22); ctx.restore(); } }]
+  });
+}
+
+// ── demand mix: engagement type ──
+function renderMixType(){
+  const types = Object.keys(TYPEC), v = types.map(t=>DATA.clients.filter(c=>c.type===t).reduce((s,c)=>s+clientUnits(c),0)), tot = v.reduce((s,x)=>s+x,0);
+  $("typeLg").innerHTML = types.map((t,i)=>`<span><i style="background:${TYPEC[t]}"></i>${typeLabel(t)} · ${r0(v[i]/tot*100)}%</span>`).join("");
+  upsert("mixType","cMixType",{ type:"polarArea",
+    data:{ labels:types.map(typeLabel), datasets:[{ data:v, backgroundColor:types.map(t=>TYPEC[t]+"99"), borderColor:types.map(t=>TYPEC[t]), borderWidth:1.5 }]},
+    options:{ responsive:true, maintainAspectRatio:false, scales:{ r:{ grid:{ color:"rgba(255,255,255,.07)" }, angleLines:{ color:"rgba(255,255,255,.07)" }, ticks:{ display:false } } },
+      plugins:{ tooltip:{ callbacks:{ label:c=>` ${c.raw} units / month · ${DATA.clients.filter(x=>x.type===types[c.dataIndex]).length} clients` } } } }
+  });
+}
+
+// ── demand mix: tier × type ──
+function renderMatrix(){
+  const tiers = ["A","B","C"], types = Object.keys(TYPEC);
+  $("matrixLg").innerHTML = types.map(t=>`<span><i style="background:${TYPEC[t]}"></i>${typeLabel(t)}</span>`).join("");
+  upsert("matrix","cMatrix",{ type:"bar",
+    data:{ labels:tiers.map(t=>`Tier ${t}`), datasets:types.map(t=>({ label:typeLabel(t), data:tiers.map(tr=>DATA.clients.filter(c=>c.type===t&&c.tier===tr).reduce((s,c)=>s+clientUnits(c),0)), backgroundColor:TYPEC[t]+"CC", borderRadius:4, barThickness:22, borderWidth:1, borderColor:"rgba(0,0,0,.35)" })) },
+    options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false, scales:{ x:{ stacked:true, ...noBorder, grid:{ color:GRID }, ticks:{ callback:v=>v+" u" } }, y:{ stacked:true, ...noBorder, grid:{ display:false } } },
+      plugins:{ tooltip:{ callbacks:{ label:c=>` ${c.dataset.label}: ${c.raw} units / month` } } } }
   });
 }
 
@@ -1324,7 +1464,7 @@ function show(view, push=true){
   document.querySelectorAll("#view-"+view+" .card").forEach((c,i)=>{ c.style.setProperty("--i", i); c.style.animation="none"; void c.offsetWidth; c.style.animation=""; });
   if (!inited[view]){
     inited[view]=true;
-    if (view==="now"){ renderGauges(); renderSummary(); renderPeople(); renderMix(); }
+    if (view==="now"){ renderSummary(); ["cap","people","mix"].forEach(g=>pick(g, OV[g])); }
     if (view==="proj"){ renderForecast(); renderTrend(); }
     if (view==="hiring"){ renderHiring(); }
     if (view==="fly"){ renderFlyouts(); }
@@ -1354,7 +1494,7 @@ document.addEventListener("click", e=>{
 });
 
 // filters
-["selTier","selSort"].forEach(id=>$(id).addEventListener("change",renderPeople));
+["selTier","selSort"].forEach(id=>$(id).addEventListener("change",()=>renderOverviewPart("people")));
 document.querySelectorAll("#trendSeg button").forEach(b=>b.addEventListener("click",()=>{ state.trend=b.dataset.mode; document.querySelectorAll("#trendSeg button").forEach(x=>x.classList.toggle("on",x===b)); renderTrend(); }));
 $("simOpen").addEventListener("click",()=>{ const box=$("simBox"); box.hidden=!box.hidden; $("simOpen").textContent = box.hidden ? "What if we sign a client?" : "Hide simulator"; if (box.hidden && state.sim) $("simToggle").click(); });
 document.querySelectorAll("#sigSeg button").forEach(b=>b.addEventListener("click",()=>{ state.sig=b.dataset.sig; document.querySelectorAll("#sigSeg button").forEach(x=>x.classList.toggle("on",x===b)); document.querySelectorAll(".sig").forEach(s=>s.classList.toggle("on", s.id==="sig-"+state.sig)); if (state.sig==="approval" && charts.fta) charts.fta.resize(); }));
