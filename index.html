@@ -48,7 +48,8 @@
   .seg{position:relative;display:inline-flex;background:rgba(255,255,255,.07);border-radius:999px;padding:4px;gap:2px;max-width:100%;overflow-x:auto;scrollbar-width:none;}
   .seg::-webkit-scrollbar{display:none;}
   .seg .ind{position:absolute;top:4px;left:0;height:calc(100% - 8px);border-radius:999px;background:rgba(255,255,255,.15);box-shadow:0 1px 6px rgba(0,0,0,.35);transition:transform .35s cubic-bezier(.2,.8,.2,1),width .35s cubic-bezier(.2,.8,.2,1);}
-  .seg button{position:relative;z-index:1;appearance:none;border:0;background:transparent;color:var(--text-2);font-weight:400;font-size:13.5px;padding:8px 16px;border-radius:999px;cursor:pointer;transition:color .2s;white-space:nowrap;}
+  .seg button{position:relative;z-index:1;appearance:none;border:0;background:transparent;color:var(--text-2);font-weight:400;font-size:13.5px;line-height:1;padding:0 16px;height:34px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;cursor:pointer;transition:color .2s;white-space:nowrap;}
+  .seg.small button{height:30px;padding:0 12px;font-size:12.5px;}
   .seg button:hover,.seg button.on{color:var(--text);} .seg button.on{font-weight:700;}
   .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
   .right{display:flex;align-items:center;justify-content:flex-end;gap:10px;min-width:0;}
@@ -85,7 +86,7 @@
 
   /* inputs */
   .field{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;color:var(--text-3);}
-  .sel,.inp{appearance:none;-webkit-appearance:none;font:inherit;font-size:12.5px;font-weight:400;color:var(--text);background-color:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:10px;padding:7px 12px;cursor:pointer;max-width:180px;transition:background-color .2s,border-color .2s;}
+  .sel,.inp{appearance:none;-webkit-appearance:none;font:inherit;font-size:12.5px;font-weight:400;line-height:1;color:var(--text);background-color:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:10px;height:34px;padding:0 12px;cursor:pointer;max-width:200px;transition:background-color .2s,border-color .2s;}
   .sel{padding-right:30px;background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23F5F7FA' stroke-opacity='.6' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;}
   .inp{width:86px;cursor:text;font-family:var(--mono);}
   .sel:hover,.inp:hover{background-color:rgba(255,255,255,.1);}
@@ -417,7 +418,7 @@
     .mast{margin:0 -16px 18px;padding:12px 16px;grid-template-columns:1fr auto;gap:12px;}
     .mast .seg{grid-column:1/-1;justify-self:stretch;}
     .mast .right{grid-row:1;grid-column:2;}
-    .seg button{padding:8px 12px;font-size:13px;}
+    .seg button{padding:0 12px;font-size:13px;}
     .card{padding:20px 18px;}
     .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;} .kpi{padding:12px;} .kpi .v{font-size:20px;} .depts{grid-template-columns:1fr;}
     .gauges{gap:8px;} .gauge .g{height:96px;} .gauge .val{font-size:22px;bottom:2px;} .gauge .lab{font-size:12px;} .gauge .meta{display:none;}
@@ -504,9 +505,8 @@
         <div class="sim" id="simBox" hidden>
           <div class="t">New Client</div>
           <div class="row">
-            <label class="field">Tier <select class="sel" id="simTier"><option value="A">A · complex</option><option value="B" selected>B · standard</option><option value="C">C · simple</option></select></label>
-            <label class="field">Videos / month <input class="inp" id="simVol" type="number" min="1" max="400" value="30"></label>
-            <label class="field">Engagement <select class="sel" id="simType"><option value="rec">Recurring</option><option value="fly">Fly-out batch</option></select></label>
+            <label class="field">Type <select class="sel" id="simType"><option value="Virtual">Self-Record</option><option value="Flyout">Fly-out</option><option value="Clipping">Clipping</option></select></label>
+            <label class="field">Cadence <select class="sel" id="simCad"></select></label>
             <label class="field">Starts <select class="sel" id="simStart"></select></label>
             <label class="toggle" id="simToggle"><span class="sw"></span>Apply</label>
           </div>
@@ -672,7 +672,15 @@ const DATA = {
   asOf: "2026-09-13",
   env: "Sample data",
   avgClientUnits: 30,
-  sim: { cdPerVideo: 1, smmPerVideo: .5, ppmPerVideo: 1, flyCdShare: .4 },
+  // New-client simulator: every new client is edited at the advanced level (tier A). Load factors per engagement type.
+  sim: {
+    tier: "A",
+    types: {
+      Virtual:  { label:"Self-Record", cd:1,  smm:.5, ppm:1, cadences:[["1 / Day",30],["3 / Day",90],["1 Every 2 Days",15],["2 / Week",8],["30 / Month",30],["15 / Month",15]] },
+      Flyout:   { label:"Fly-out",     cd:.4, smm:0,  ppm:1, cadences:[["100 per Fly-out",100],["60 per Fly-out",60],["40 per Fly-out",40]] },
+      Clipping: { label:"Clipping",    cd:0,  smm:.5, ppm:1, cadences:[["1 Clip / Day",30],["1 Every 2 Days",15],["10 / Month",10]] }
+    }
+  },
   targets: { fta: 80, renewalWindow: 90 },   // first-time approval target (%), renewal look-ahead (days)
 
   // Utilization over the last 12 weeks, per function (%). Sample.
@@ -800,6 +808,7 @@ const editorMonthly = name => DATA.clients.filter(c=>c.editor===name).reduce((s,
 const clientWeekly = c => { const p = person(c.editor); if (!p) return clientUnits(c)/WEEKS_PER_MONTH; const tot = editorMonthly(p.name); return tot ? p.assigned*clientUnits(c)/tot : 0; };
 const missingRoles = c => [c.cd,c.editor,c.backup,c.smm].filter(v=>!v).length;
 const typeLabel = t => ({ Flyout:"Fly-out", Virtual:"Self-Record", Clipping:"Clipping" })[t] || t;
+const cadLabel = s => String(s).replace(/\b([a-z])(?=[a-z]*)/g, (m, ch, off, str) => str.slice(off).startsWith("per ") ? m : ch.toUpperCase()).replace(/\bFly-Out\b/g,"Fly-out");
 const ftaLoad = f => f==null ? .5 : f>=DATA.targets.fta ? .5 : f>=65 ? .9 : 1.25;
 const ftaColor = f => f==null ? "rgba(255,255,255,.22)" : loadColor(ftaLoad(f));
 const monthFrac = (asOfD => asOfD.getDate() / new Date(asOfD.getFullYear(), asOfD.getMonth()+1, 0).getDate())(new Date(DATA.asOf+"T00:00:00"));
@@ -829,10 +838,10 @@ const HORIZON = 12; // weeks shown = 90 days
 const state = { fn:"edit", range:HORIZON, flyouts:true, hires:false, sim:false, rwAll:false, trend:"next", sig:"runway", present:false };
 function simDemand(key, i){
   if (!state.sim) return 0;
-  const vol = Math.max(0, +$("simVol").value||0), w = WEIGHT[$("simTier").value], start = +$("simStart").value, fly = $("simType").value==="fly";
-  const perFn = { edit: vol*w, cd: vol*DATA.sim.cdPerVideo, ppm: vol*DATA.sim.ppmPerVideo, smm: vol*DATA.sim.smmPerVideo }[key];
-  if (fly) return i===start ? (key==="cd" ? perFn*DATA.sim.flyCdShare : key==="smm" ? 0 : perFn) : 0;
-  return i>=start ? perFn/WEEKS_PER_MONTH : 0;
+  const type = $("simType").value, T = DATA.sim.types[type], vol = +$("simCad").value||0, start = +$("simStart").value;
+  const perFn = { edit: vol*WEIGHT[DATA.sim.tier], cd: vol*T.cd, ppm: vol*T.ppm, smm: vol*T.smm }[key];
+  if (type==="Flyout") return i===start ? perFn : 0;          // a batch lands in one week
+  return i>=start ? perFn/WEEKS_PER_MONTH : 0;               // recurring work spreads across the month
 }
 // Saturation and hire-by for a function, over the full horizon
 function trigger(key, opts={ flyouts:true, hires:false }){
@@ -979,7 +988,7 @@ function renderPeople(){
     plugins:[{ id:"marks", afterDatasetsDraw(ch){ const {ctx,scales:{x}}=ch, bars=ch.getDatasetMeta(1).data;
       bars.forEach((b,i)=>{ const p=peopleRows[i]; if (!p) return; const px=x.getPixelForValue(p.capacity*.85); ctx.save();
         ctx.strokeStyle="rgba(255,255,255,.7)"; ctx.setLineDash([2,3]); ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(px,b.y-b.height/2); ctx.lineTo(px,b.y+b.height/2); ctx.stroke();
-        ctx.setLineDash([]); ctx.font="500 10.5px 'JetBrains Mono',monospace"; ctx.fillStyle=loadColor(p.u); ctx.textBaseline="middle"; ctx.fillText(`${r0(p.u*100)}%`, x.getPixelForValue(p.capacity)+10, b.y); ctx.restore(); }); } }]
+        ctx.setLineDash([]); ctx.font="500 10.5px 'JetBrains Mono',monospace"; ctx.fillStyle=loadColor(p.u); ctx.textBaseline="middle"; ctx.fillText(`${r0(p.u*100)}%`, x.getPixelForValue(Math.max(p.capacity, p.assigned))+10, b.y); ctx.restore(); }); } }]
   });
 }
 function renderMix(){
@@ -1029,15 +1038,15 @@ function renderForecast(){
 
   const chip = $("simChip");
   if (state.sim){
-    const vol = +$("simVol").value||0, tier = $("simTier").value, isFly = $("simType").value==="fly";
-    chip.hidden = false; chip.textContent = `Simulating +${vol} videos · tier ${tier}${isFly?" · fly-out":""}`;
+    const T = DATA.sim.types[$("simType").value], cad = $("simCad").selectedOptions[0]?.textContent || "";
+    chip.hidden = false; chip.textContent = `Simulating ${T.label} · ${cad}`;
     const lines = DATA.functions.map(f=>{ const s = forecastSeries(f.key, HORIZON, { flyouts:true, hires:false }); return { f, b:s.u.findIndex(x=>x>1), peak:Math.max(...s.u) }; });
     const worst = lines.reduce((a,b)=>b.peak>a.peak?b:a);
     const hire = worst.b===-1 ? null : worst.b - leadWeeks(worst.f.key);
     $("simOut").innerHTML = `<i style="background:${loadColor(worst.peak)}"></i>` + (worst.b===-1
       ? `<span>Fits. No department exceeds capacity in the next 90 days; peak is <b>${worst.f.name} at ${r0(worst.peak*100)}%</b>.</span>`
       : `<span><span class="lnk" data-fn="${worst.f.key}">${worst.f.name}</span> saturates <b>${DATA.weeks[worst.b].start}</b> (${r0(worst.peak*100)}% peak) → open ${an(worst.f.hire)} search <b>${hire<0?"now":"by "+DATA.weeks[hire].start}</b>.</span>`);
-  } else { chip.hidden = true; $("simOut").innerHTML = `<span style="color:var(--text-3)">Set the client and switch on Apply to see when each team saturates and when to open the search.</span>`; }
+  } else { chip.hidden = true; $("simOut").innerHTML = `<span style="color:var(--text-3)">Pick the type and cadence, then switch on Apply to see when each department saturates and when to open the search. New clients are assumed at the advanced editing level.</span>`; }
 
   const labels = wk.map(w=>w.start);
   upsert("weekly","cWeekly",{
@@ -1164,7 +1173,7 @@ const COLS = {
   status:  { l:"Status", cls:"", s:c=>-STATUS[clientStatus(c)][2], r:c=>`<td>${statusPill(c)}</td>` },
   type:    { l:"Type", cls:"", s:c=>c.type, r:c=>`<td>${typeLabel(c.type)}</td>` },
   tier:    { l:"Tier", cls:"num", s:c=>TIER_RANK[c.tier], r:c=>`<td class="num">${c.tier}</td>` },
-  cadence: { l:"Cadence", cls:"", s:c=>c.volume, r:c=>`<td>${esc(c.cadence)}</td>` },
+  cadence: { l:"Cadence", cls:"", s:c=>c.volume, r:c=>`<td>${esc(cadLabel(c.cadence))}</td>` },
   volume:  { l:"Videos / Month", cls:"num", s:c=>c.volume, r:c=>`<td class="num">${c.volume}</td>` },
   units:   { l:"Load (Units)", cls:"num", s:clientUnits, r:c=>`<td class="num">${clientUnits(c)}</td>` },
   cd:      { l:"Creative Director", cls:"", s:c=>c.cd||"~", r:c=>`<td>${roleCell(c.cd,"cd")}</td>` },
@@ -1363,7 +1372,7 @@ function openClient(name){
   else if (!c.backup) note = `<b>Single point of failure.</b> If ${esc(c.editor)} is out, nobody else knows this account.`;
   else note = `<b>Covered.</b> ${d} days of content and a backup in place.`;
   openDrawer(`
-    <div class="eyebrow">${typeLabel(c.type)} · Tier ${c.tier} · ${esc(c.cadence)}</div><h3>${esc(c.name)} ${statusPill(c)}</h3>
+    <div class="eyebrow">${typeLabel(c.type)} · Tier ${c.tier} · ${esc(cadLabel(c.cadence))}</div><h3>${esc(c.name)} ${statusPill(c)}</h3>
     <div class="meta">Since ${c.start ? fmtDate(new Date(c.start+"T00:00:00"), true) : "—"}${c.cd ? ` · <span class="lnk" data-owner="cd:${esc(c.cd)}">${esc(c.cd)}</span>` : ""} · renews ${fmtDate(new Date(c.renewal+"T00:00:00"), true)} <span class="num" style="color:${daysTo(c.renewal)<=30?LOAD.red:daysTo(c.renewal)<=90?LOAD.yellow:"var(--text-3)"}">(${daysTo(c.renewal)}d)</span></div>
     <div class="sec"><div class="note">${note}</div></div>
     <div class="sec"><div class="kv">${kv("Videos / month", c.volume)}${kv("Load", `${clientUnits(c)}<small> u / mo</small>`)}
@@ -1419,7 +1428,7 @@ function openOwner(role, name){
       <div><div class="k">Avg first-time approval</div><div class="v num" style="color:${ftaColor(fta)}">${fta==null?"—":r0(fta)+"%"}</div></div>
       ${kv("Clients under 7 days", low)}${kv("Behind delivery pace", lag)}${kv("Renewing in 90 days", ren.length)}</div></div>
     ${flys.length ? `<div class="sec"><h4>${role==="cd"?"Script Batches Coming":"Batches Landing"}</h4><div class="list">${flys.map(x=>listRow("client", x.c.name, `${x.f.start} · ${role==="cd"?x.f.cd+" scripts":x.f.edit+" u"}`)).join("")}</div></div>` : ""}
-    <div class="sec"><h4>Clients</h4><div class="list">${cl.map(c=>listRow("client", c.name, `${c.fta==null?"new":c.fta+"%"} · <span style="color:${loadColor(dayLoad(c.days[0]))}">${c.days[0]}d</span> · ${c.delivered}/${c.committed}`, `${esc(c.name)} <span style="color:var(--text-3)">· ${esc(c.cadence)}</span>`)).join("")}</div></div>
+    <div class="sec"><h4>Clients</h4><div class="list">${cl.map(c=>listRow("client", c.name, `${c.fta==null?"new":c.fta+"%"} · <span style="color:${loadColor(dayLoad(c.days[0]))}">${c.days[0]}d</span> · ${c.delivered}/${c.committed}`, `${esc(c.name)} <span style="color:var(--text-3)">· ${esc(cadLabel(c.cadence))}</span>`)).join("")}</div></div>
     <div class="sec"><span class="more" data-fn="${role}">${f.name} Team</span></div>`);
 }
 function openFunction(key){
@@ -1492,7 +1501,10 @@ $("flyToggle").addEventListener("click",()=>{ state.flyouts=!state.flyouts; $("f
 $("hireToggle").addEventListener("click",()=>{ state.hires=!state.hires; $("hireToggle").classList.toggle("on",state.hires); renderForecast(); renderTrend(); });
 fillSelect("simStart", DATA.weeks.map(w=>w.start), s=>s);
 $("simToggle").addEventListener("click",()=>{ state.sim=!state.sim; $("simToggle").classList.toggle("on",state.sim); renderForecast(); renderTrend(); });
-["simTier","simVol","simType","simStart"].forEach(id=>$(id).addEventListener("input",()=>{ if (state.sim){ renderForecast(); renderTrend(); } }));
+function fillCadence(){ const T = DATA.sim.types[$("simType").value]; $("simCad").innerHTML = T.cadences.map(([l,v])=>`<option value="${v}">${l}</option>`).join(""); }
+fillCadence();
+$("simType").addEventListener("change", fillCadence);
+["simType","simCad","simStart"].forEach(id=>$(id).addEventListener("change",()=>{ if (state.sim){ renderForecast(); renderTrend(); } }));
 fillSelect("fType",[...new Set(DATA.clients.map(c=>c.type))]);
 ["fType","fRisk","fCols","fGroup"].forEach(id=>$(id).addEventListener("change",renderClients));
 $("csvBtn").addEventListener("click", exportCsv);
