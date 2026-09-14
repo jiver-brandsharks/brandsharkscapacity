@@ -41,7 +41,7 @@
     background:rgba(0,0,0,.55);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--line);}
   .brand{display:flex;align-items:center;gap:12px;}
   .brand svg{width:30px;height:30px;display:block;}
-  .brand .env{font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--line);border-radius:999px;}
+  .brand .env{font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;padding:4px 9px 3px;border:1px solid var(--line);border-radius:999px;line-height:1.4;}
   .seg{position:relative;display:inline-flex;background:rgba(255,255,255,.07);border-radius:999px;padding:4px;gap:2px;max-width:100%;overflow-x:auto;scrollbar-width:none;}
   .seg::-webkit-scrollbar{display:none;}
   .seg .ind{position:absolute;top:4px;left:0;height:calc(100% - 8px);border-radius:999px;background:rgba(255,255,255,.15);box-shadow:0 1px 6px rgba(0,0,0,.35);transition:transform .35s cubic-bezier(.2,.8,.2,1),width .35s cubic-bezier(.2,.8,.2,1);}
@@ -60,7 +60,7 @@
   .kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-bottom:16px;}
   .kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;min-width:0;}
   .kpi .k{font-size:10.5px;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .kpi .v{display:flex;align-items:center;gap:8px;font-size:24px;font-weight:600;margin-top:6px;white-space:nowrap;}
+  .kpi .v{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:600;margin-top:6px;white-space:nowrap;line-height:1.2;}
   .kpi .v i{width:8px;height:8px;border-radius:50%;flex:none;box-shadow:0 0 0 3px color-mix(in srgb, currentColor 18%, transparent);}
   .kpi .s{font-size:12px;color:var(--text-3);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
@@ -69,7 +69,7 @@
   .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);min-width:0;}
   .span-12{grid-column:span 12;} .span-8{grid-column:span 8;} .span-7{grid-column:span 7;} .span-6{grid-column:span 6;} .span-5{grid-column:span 5;} .span-4{grid-column:span 4;}
   .ch{display:flex;align-items:flex-start;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin-bottom:20px;}
-  .ch h2{font-size:15px;font-weight:600;letter-spacing:-.01em;margin:0;display:inline-flex;align-items:center;gap:8px;}
+  .ch h2{font-size:15px;font-weight:600;letter-spacing:-.01em;margin:0;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;}
   .ch h2 .i{width:15px;height:15px;border-radius:50%;border:1px solid var(--line-2);color:var(--text-3);font:600 10px var(--mono);display:inline-flex;align-items:center;justify-content:center;cursor:help;}
   .ch .sub{font-size:12.5px;color:var(--text-3);margin-top:2px;}
   .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
@@ -98,7 +98,7 @@
 
   /* legend */
   .lg{display:flex;align-items:center;gap:6px 14px;flex-wrap:wrap;font-size:12px;color:var(--text-3);}
-  .lg span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+  .lg span{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;line-height:1;}
   .lg i{width:8px;height:8px;border-radius:50%;display:inline-block;}
   .lg i.blk{width:14px;height:8px;border-radius:3px;}
   .lg i.dash{width:14px;height:0;border-radius:0;border-top:1.5px dashed rgba(255,255,255,.8);}
@@ -114,9 +114,9 @@
   .gauge .lab{font-size:13.5px;font-weight:600;margin-top:6px;}
   .gauge .meta{font-size:11.5px;color:var(--text-3);}
   .summary{display:grid;grid-template-columns:1fr 1fr;gap:24px 40px;margin-top:24px;padding-top:22px;border-top:1px solid var(--line);}
-  .verdict{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:600;letter-spacing:-.015em;margin:0;}
+  .verdict{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:600;letter-spacing:-.015em;margin:0;line-height:1.25;}
   .verdict i{width:10px;height:10px;border-radius:50%;flex:none;}
-  .verdict-sub{font-size:13.5px;color:var(--text-2);margin:6px 0 0 20px;}
+  .verdict-sub{font-size:13.5px;color:var(--text-2);margin:6px 0 0 22px;}
   .verdict-sub b{color:var(--text);font-weight:600;}
   .next p{font-size:14px;color:var(--text-2);margin:6px 0 0;max-width:52ch;line-height:1.55;}
   .next p b{color:var(--text);font-weight:600;}
@@ -126,7 +126,8 @@
   .stat{padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);min-width:0;}
   .stat .k{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--text-3);white-space:nowrap;overflow:hidden;}
   .stat .k i{width:7px;height:7px;border-radius:50%;flex:none;}
-  .stat .v{font-size:22px;font-weight:600;margin-top:4px;white-space:nowrap;}
+  .stat .v{font-size:22px;font-weight:600;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .stats3{grid-template-columns:repeat(3,minmax(0,1fr));}
   .stat .v small{font-size:12px;font-weight:500;color:var(--text-3);font-family:'Montserrat',sans-serif;}
 
   /* simulator */
@@ -151,6 +152,40 @@
   .t .bar{display:inline-block;width:70px;height:6px;border-radius:999px;background:rgba(255,255,255,.08);vertical-align:middle;margin-right:8px;overflow:hidden;}
   .t .bar i{display:block;height:100%;border-radius:999px;}
   .cov{min-width:1060px;} .roster{min-width:820px;}
+
+  /* sortable + grouped tables */
+  .t th[data-sort]{cursor:pointer;user-select:none;}
+  .t th[data-sort]:hover{color:var(--text-2);}
+  .t th.on{color:var(--text);}
+  .t th.on::after{content:" ↓";font-family:var(--mono);font-size:10px;} .t th.on.asc::after{content:" ↑";}
+  .t tr.grp td{padding:14px 12px 8px 0;border-top:0;color:var(--text);font-weight:600;font-size:12.5px;}
+  .t tr.grp td .gm{color:var(--text-3);font-weight:500;margin-left:10px;font-family:var(--mono);font-size:11px;}
+  .t .pill .dot{margin-right:6px;}
+  .t .prog{display:inline-block;width:80px;height:6px;vertical-align:middle;margin-right:8px;position:relative;overflow:visible;}
+  .t .prog i{transition:none;}
+  .t .prog::after{content:"";position:absolute;top:-3px;bottom:-3px;width:1px;background:rgba(255,255,255,.55);left:var(--pace,0%);}
+  .t .plat{font:600 10.5px var(--mono);padding:2px 6px;border:1px solid var(--line);border-radius:6px;color:var(--text-3);margin-right:4px;}
+
+  /* delivery list */
+  .dl{display:grid;grid-template-columns:minmax(120px,1.2fr) 3fr auto auto;gap:6px 16px;align-items:center;font-size:13px;}
+  .dl .h{font-size:11px;color:var(--text-3);padding-bottom:6px;border-bottom:1px solid var(--line);}
+  .dl .n{color:var(--text);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .dl .n:hover{color:var(--accent);}
+  .dl .track{height:8px;border-radius:999px;background:rgba(255,255,255,.06);position:relative;}
+  .dl .track i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;transition:width .8s cubic-bezier(.2,.8,.2,1);}
+  .dl .track::after{content:"";position:absolute;top:-3px;bottom:-3px;width:1px;background:rgba(255,255,255,.55);left:var(--pace,0%);}
+  .dl .d{font-family:var(--mono);font-weight:600;text-align:right;white-space:nowrap;}
+  .dl .out{color:var(--text-3);white-space:nowrap;min-width:96px;}
+
+  /* history small multiples */
+  .hist{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
+  .hist .hm{padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);cursor:pointer;transition:border-color .2s;}
+  .hist .hm:hover{border-color:var(--line-2);}
+  .hist .hm .k{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--text-3);}
+  .hist .hm .k b{font-size:20px;font-weight:600;color:var(--text);}
+  .hist .hm .k small{font-family:var(--mono);font-size:11px;}
+  .hist .hm .c{height:64px;position:relative;margin-top:8px;}
+  @media (max-width:900px){ .hist{grid-template-columns:repeat(2,minmax(0,1fr));} }
 
   /* runway list */
   .rw{display:grid;grid-template-columns:minmax(120px,1.2fr) 3fr auto auto;gap:6px 16px;align-items:center;font-size:13px;}
@@ -215,7 +250,9 @@
   .drawer.on{transform:none;}
   .drawer .x{position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.05);cursor:pointer;color:var(--text-2);display:flex;align-items:center;justify-content:center;}
   .drawer .x:hover{background:rgba(255,255,255,.1);color:var(--text);}
-  .drawer h3{font-size:22px;font-weight:600;letter-spacing:-.02em;margin:4px 0 2px;}
+  .drawer h3{font-size:22px;font-weight:600;letter-spacing:-.02em;margin:4px 0 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .drawer h3 .pill{font-size:11px;}
+  .drawer .pill .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px;vertical-align:middle;}
   .drawer .meta{font-size:13px;color:var(--text-2);}
   .drawer .sec{margin-top:24px;}
   .drawer .sec h4{font-size:11px;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px;font-weight:600;}
@@ -281,7 +318,7 @@
     .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;} .kpi{padding:12px;} .kpi .v{font-size:20px;}
     .gauges{gap:8px;} .gauge .g{height:96px;} .gauge .val{font-size:22px;bottom:2px;} .gauge .lab{font-size:12px;} .gauge .meta{display:none;}
     .verdict{font-size:17px;} .stat{padding:10px 12px;} .stat .v{font-size:18px;}
-    .rw{grid-template-columns:1fr 2fr auto;} .rw .out{display:none;}
+    .rw,.dl{grid-template-columns:1fr 2fr auto;} .rw .out,.dl .out{display:none;} .stats3{grid-template-columns:1fr;}
     .sel{max-width:140px;} .user .who{display:none;}
   }
   @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important;} }
@@ -380,6 +417,11 @@
         <div class="chartbox" style="height:260px"><canvas id="cBacklog"></canvas></div>
       </section>
 
+      <section class="card span-12">
+        <div class="ch"><div><h2>Last 12 Weeks <span class="i" data-tip="Actual utilization per function over the past 12 weeks. The spike in late July is the last fly-out cluster — the same pattern the forecast shows for October.">i</span></h2><div class="sub">Actual utilization, week by week</div></div></div>
+        <div class="hist" id="hist"></div>
+      </section>
+
       <section class="card span-6">
         <div class="ch"><div><h2>Utilization Trend <span class="i" data-tip="Projected utilization of each function over 13 weeks. Yellow band = 85–100%, red band = over capacity. Click a name to focus the forecast on it.">i</span></h2><div class="sub">All functions, fly-outs included</div></div><div class="lg" id="trendLg"></div></div>
         <div class="chartbox" style="height:260px"><canvas id="cTrend"></canvas></div>
@@ -428,18 +470,19 @@
     <div class="grid">
       <section class="card span-12">
         <div class="ch">
-          <div><h2>Client Portfolio <span class="i" data-tip="One row per client. Sorted by missing roles, then lowest runway. Click a client for details, or a person to see everything they own.">i</span></h2><div class="sub" id="clientCount"></div></div>
+          <div><h2>Client Portfolio <span class="i" data-tip="One row per client. Click a column header to sort, group by owner for subtotals, switch column sets, or export the current view as CSV. Click a client or a person for details.">i</span></h2><div class="sub" id="clientCount"></div></div>
           <div class="controls">
+            <label class="field">Columns <select class="sel" id="fCols"><option value="ownership">Ownership</option><option value="delivery">Delivery &amp; Quality</option></select></label>
+            <label class="field">Group <select class="sel" id="fGroup"><option value="none">None</option><option value="cd">Creative Director</option><option value="smm">Social Media</option><option value="editor">Editor</option></select></label>
             <label class="field">Type <select class="sel" id="fType"><option value="all">All Types</option></select></label>
-            <label class="field">Creative Director <select class="sel" id="fCd"><option value="all">All</option></select></label>
-            <label class="field">Editor <select class="sel" id="fEditor"><option value="all">All</option></select></label>
-            <label class="field">Show <select class="sel" id="fRisk"><option value="all">Everything</option><option value="runway">Runway Under 7 Days</option><option value="gap">Missing a Role</option><option value="flyout">Fly-out in Next 4 Weeks</option></select></label>
+            <label class="field">Show <select class="sel" id="fRisk"><option value="all">Everything</option><option value="critical">Critical Only</option><option value="attention">Needs Attention</option><option value="runway">Runway Under 7 Days</option><option value="gap">Missing a Role</option><option value="fta">Approval Under Target</option><option value="pace">Behind Delivery Pace</option><option value="renewal">Renewing in 90 Days</option><option value="flyout">Fly-out in Next 4 Weeks</option></select></label>
+            <button class="lbtn" id="csvBtn">Export CSV</button>
           </div>
         </div>
         <div class="tblwrap"><table class="t cov" id="cov"></table></div>
       </section>
 
-      <section class="card span-7">
+      <section class="card span-6">
         <div class="ch">
           <div><h2>Content Runway <span class="i" data-tip="Days of scheduled content each client has left, and the date it runs out. The thin line marks 7 days.">i</span></h2><div class="sub" id="rwSub"></div></div>
           <button class="lbtn" id="rwAll">Show all</button>
@@ -447,9 +490,33 @@
         <div id="rwList"></div>
       </section>
 
-      <section class="card span-5">
-        <div class="ch"><div><h2>Workload by Client <span class="i" data-tip="Monthly load each client puts on the team (videos × tier weight). Color = how full that client's editor is. Gray = no editor.">i</span></h2><div class="sub">Tier-weighted units per month</div></div></div>
-        <div class="chartbox" style="height:520px"><canvas id="cClientLoad"></canvas></div>
+      <section class="card span-6">
+        <div class="ch">
+          <div><h2>Delivery This Month <span class="i" data-tip="Videos delivered against the monthly commitment. The tick is where delivery should be today; red is more than 15% behind that pace. Fly-out batches show batch progress only.">i</span></h2><div class="sub" id="dlSub"></div></div>
+          <div class="lg"><span><i style="background:#2FBF55"></i>On pace</span><span><i style="background:#FFD60A"></i>Slightly behind</span><span><i style="background:#D92D27"></i>Behind</span></div>
+        </div>
+        <div id="dlList"></div>
+      </section>
+
+      <section class="card span-6">
+        <div class="ch">
+          <div><h2>First-Time Approval <span class="i" data-tip="Share of videos approved by the client without a revision round, last 90 days. Target 80%. Low approval usually points at the brief or the format, not the editor.">i</span></h2><div class="sub" id="ftaSub"></div></div>
+          <div class="lg"><span><i style="background:#2FBF55"></i>80%+</span><span><i style="background:#FFD60A"></i>65–79%</span><span><i style="background:#D92D27"></i>Under 65%</span><span><i class="dash"></i>Target</span></div>
+        </div>
+        <div class="stats stats3" id="ftaStats"></div>
+        <div class="chartbox" style="height:420px"><canvas id="cFta"></canvas></div>
+      </section>
+
+      <section class="card span-6">
+        <div class="ch">
+          <div><h2>Renewals <span class="i" data-tip="Contracts renewing in the next 90 days, with the two signals that decide the conversation: approval rate and content runway.">i</span></h2><div class="sub" id="renSub"></div></div>
+        </div>
+        <div class="tblwrap"><table class="t" id="renTbl"></table></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="ch"><div><h2>Workload by Client <span class="i" data-tip="Monthly load each client puts on the team (videos × tier weight). Color = how full that client's editor is. Gray = no editor.">i</span></h2><div class="sub">Tier-weighted units per month</div></div><div class="lg" data-scale="util"></div></div>
+        <div class="chartbox" style="height:460px"><canvas id="cClientLoad"></canvas></div>
       </section>
     </div>
   </div>
@@ -517,6 +584,16 @@ const DATA = {
   env: "Sample data",
   avgClientUnits: 30,
   sim: { cdPerVideo: 1, smmPerVideo: .5, ppmPerVideo: 1, flyCdShare: .4 },
+  targets: { fta: 80, renewalWindow: 90 },   // first-time approval target (%), renewal look-ahead (days)
+
+  // Utilization over the last 12 weeks, per function (%). Sample.
+  history: {
+    labels: ["Jun 22","Jun 29","Jul 6","Jul 13","Jul 20","Jul 27","Aug 3","Aug 10","Aug 17","Aug 24","Aug 31","Sep 7"],
+    edit: [74,76,79,80,83,101,86,84,85,88,83,84],
+    cd:   [80,83,86,89,90,108,94,93,95,97,96,96],
+    ppm:  [70,72,75,78,80,140,82,80,83,85,82,82],
+    smm:  [60,62,65,68,70,72,70,71,72,74,73,73]
+  },
 
   functions: [
     { key:"edit", name:"Editing",           short:"Editing", unit:"units",   capacity:152, assigned:128, people:13, hire:"editor" },
@@ -571,27 +648,27 @@ const DATA = {
   ],
 
   clients: [
-    { name:"CPA Dude",         volume:90,  tier:"A", type:"Virtual",  start:"2025-02-03", cd:"Kiki",   editor:"Raz",      backup:"Samanix", smm:"Lina",  days:[9,6,4,12,14,16,18,20] },
-    { name:"Abir",             volume:100, tier:"A", type:"Flyout",   start:"2025-06-16", cd:"Danny",  editor:"Sandro",   backup:"",        smm:"Baran", days:[18,22,26,28,30,30,30,30] },
-    { name:"Brian Edwards",    volume:100, tier:"B", type:"Flyout",   start:"2025-09-01", cd:"Danny",  editor:"Vitaliia", backup:"",        smm:"Baran", days:[16,20,24,26,28,30,30,30] },
-    { name:"LatchLink",        volume:100, tier:"B", type:"Flyout",   start:"2025-01-13", cd:"Tahlia", editor:"Katya",    backup:"Erik",    smm:"Lina",  days:[21,18,15,12,9,6,30,30] },
-    { name:"Root Financial",   volume:100, tier:"A", type:"Flyout",   start:"2024-11-04", cd:"Tahlia", editor:"Madhav",   backup:"Katya",   smm:"David", days:[12,9,6,4,30,30,30,30] },
-    { name:"RecoverPro",       volume:100, tier:"B", type:"Flyout",   start:"2025-04-07", cd:"Tahlia", editor:"Erik",     backup:"",        smm:"Lina",  days:[24,26,28,30,30,30,30,30] },
-    { name:"Laban Ditchburn",  volume:100, tier:"A", type:"Flyout",   start:"2026-08-24", cd:"Danny",  editor:"",         backup:"",        smm:"Baran", days:[5,3,30,30,30,30,30,30] },
-    { name:"Camille Agency",   volume:30,  tier:"A", type:"Virtual",  start:"2025-10-20", cd:"Vani",   editor:"Raz",      backup:"",        smm:"Lina",  days:[14,14,12,12,10,10,8,8] },
-    { name:"Danny Goler",      volume:30,  tier:"C", type:"Clipping", start:"2025-03-17", cd:"",       editor:"Mihai",    backup:"",        smm:"Lina",  days:[30,30,30,30,30,30,30,30] },
-    { name:"Flood Nerd",       volume:30,  tier:"C", type:"Virtual",  start:"2025-07-14", cd:"Kiki",   editor:"Prakash",  backup:"",        smm:"Baran", days:[8,6,5,4,4,4,4,4] },
-    { name:"Focused SketchUp", volume:30,  tier:"B", type:"Virtual",  start:"2025-05-05", cd:"Vani",   editor:"Bikash",   backup:"",        smm:"Baran", days:[10,8,6,5,4,4,4,4] },
-    { name:"Jade Ingleby",     volume:30,  tier:"B", type:"Virtual",  start:"2026-01-12", cd:"Tahlia", editor:"Katya",    backup:"",        smm:"Lina",  days:[11,9,7,6,5,4,4,4] },
-    { name:"James Helm",       volume:30,  tier:"A", type:"Virtual",  start:"2026-03-02", cd:"Danny",  editor:"Samanix",  backup:"",        smm:"Baran", days:[2,1,0,0,0,0,0,0] },
-    { name:"Lucas Messer",     volume:30,  tier:"A", type:"Virtual",  start:"2025-08-18", cd:"Kiki",   editor:"Samanix",  backup:"",        smm:"Lina",  days:[12,10,9,8,7,6,6,6] },
-    { name:"Matt Reynolds",    volume:30,  tier:"B", type:"Virtual",  start:"2025-11-10", cd:"Vani",   editor:"Erik",     backup:"",        smm:"Baran", days:[9,7,6,5,4,4,4,4] },
-    { name:"Seth Brink",       volume:30,  tier:"C", type:"Virtual",  start:"2026-02-09", cd:"Kiki",   editor:"Tony",     backup:"",        smm:"Lina",  days:[13,12,11,10,9,8,8,8] },
-    { name:"Tessany Layher",   volume:30,  tier:"C", type:"Virtual",  start:"2026-04-06", cd:"Vani",   editor:"Tony",     backup:"",        smm:"Baran", days:[15,14,13,12,11,10,10,10] },
-    { name:"Ariel",            volume:15,  tier:"C", type:"Virtual",  start:"2026-05-18", cd:"Kiki",   editor:"Prakash",  backup:"",        smm:"Lina",  days:[16,15,14,13,12,11,10,10] },
-    { name:"Victoria",         volume:15,  tier:"C", type:"Virtual",  start:"2026-06-01", cd:"Vani",   editor:"Prakash",  backup:"",        smm:"Baran", days:[14,13,12,11,10,9,8,8] },
-    { name:"Waldo Waldman",    volume:15,  tier:"C", type:"Clipping", start:"2025-12-01", cd:"",       editor:"Tony",     backup:"",        smm:"Lina",  days:[20,20,20,20,20,20,20,20] },
-    { name:"Speech Time Fun",  volume:10,  tier:"C", type:"Clipping", start:"2026-07-13", cd:"",       editor:"Tony",     backup:"",        smm:"Lina",  days:[30,30,30,30,30,30,30,30] }
+    { name:"CPA Dude",         volume:90,  tier:"A", type:"Virtual",  start:"2025-02-03", cd:"Kiki",   editor:"Raz",      backup:"Samanix", smm:"Lina",  days:[9,6,4,12,14,16,18,20], cadence:"3 / day", fta:78, committed:90, delivered:34, renewal:"2027-02-03", platforms:["TikTok","IG","YT"] },
+    { name:"Abir",             volume:100, tier:"A", type:"Flyout",   start:"2025-06-16", cd:"Danny",  editor:"Sandro",   backup:"",        smm:"Baran", days:[18,22,26,28,30,30,30,30], cadence:"100 per fly-out", fta:85, committed:100, delivered:62, renewal:"2026-12-16", platforms:["IG","YT"] },
+    { name:"Brian Edwards",    volume:100, tier:"B", type:"Flyout",   start:"2025-09-01", cd:"Danny",  editor:"Vitaliia", backup:"",        smm:"Baran", days:[16,20,24,26,28,30,30,30], cadence:"100 per fly-out", fta:71, committed:100, delivered:80, renewal:"2027-03-01", platforms:["TikTok","IG"] },
+    { name:"LatchLink",        volume:100, tier:"B", type:"Flyout",   start:"2025-01-13", cd:"Tahlia", editor:"Katya",    backup:"Erik",    smm:"Lina",  days:[21,18,15,12,9,6,30,30], cadence:"100 per quarter", fta:88, committed:100, delivered:100, renewal:"2026-10-13", platforms:["LinkedIn","YT"] },
+    { name:"Root Financial",   volume:100, tier:"A", type:"Flyout",   start:"2024-11-04", cd:"Tahlia", editor:"Madhav",   backup:"Katya",   smm:"David", days:[12,9,6,4,30,30,30,30], cadence:"100 per quarter", fta:82, committed:100, delivered:95, renewal:"2026-11-04", platforms:["YT","LinkedIn"] },
+    { name:"RecoverPro",       volume:100, tier:"B", type:"Flyout",   start:"2025-04-07", cd:"Tahlia", editor:"Erik",     backup:"",        smm:"Lina",  days:[24,26,28,30,30,30,30,30], cadence:"100 per quarter", fta:90, committed:100, delivered:100, renewal:"2027-04-07", platforms:["IG","TikTok"] },
+    { name:"Laban Ditchburn",  volume:100, tier:"A", type:"Flyout",   start:"2026-08-24", cd:"Danny",  editor:"",         backup:"",        smm:"Baran", days:[5,3,30,30,30,30,30,30], cadence:"100 per fly-out", fta:null, committed:100, delivered:0, renewal:"2027-08-24", platforms:["IG","TikTok","YT"] },
+    { name:"Camille Agency",   volume:30,  tier:"A", type:"Virtual",  start:"2025-10-20", cd:"Vani",   editor:"Raz",      backup:"",        smm:"Lina",  days:[14,14,12,12,10,10,8,8], cadence:"30 / month", fta:64, committed:30, delivered:11, renewal:"2026-10-20", platforms:["IG"] },
+    { name:"Danny Goler",      volume:30,  tier:"C", type:"Clipping", start:"2025-03-17", cd:"",       editor:"Mihai",    backup:"",        smm:"Lina",  days:[30,30,30,30,30,30,30,30], cadence:"1 clip / day", fta:95, committed:30, delivered:13, renewal:"2027-03-17", platforms:["TikTok","IG"] },
+    { name:"Flood Nerd",       volume:30,  tier:"C", type:"Virtual",  start:"2025-07-14", cd:"Kiki",   editor:"Prakash",  backup:"",        smm:"Baran", days:[8,6,5,4,4,4,4,4], cadence:"1 / day", fta:74, committed:30, delivered:9, renewal:"2026-10-14", platforms:["TikTok"] },
+    { name:"Focused SketchUp", volume:30,  tier:"B", type:"Virtual",  start:"2025-05-05", cd:"Vani",   editor:"Bikash",   backup:"",        smm:"Baran", days:[10,8,6,5,4,4,4,4], cadence:"1 / day", fta:81, committed:30, delivered:12, renewal:"2026-11-05", platforms:["YT","TikTok"] },
+    { name:"Jade Ingleby",     volume:30,  tier:"B", type:"Virtual",  start:"2026-01-12", cd:"Tahlia", editor:"Katya",    backup:"",        smm:"Lina",  days:[11,9,7,6,5,4,4,4], cadence:"1 / day", fta:69, committed:30, delivered:10, renewal:"2027-01-12", platforms:["IG","TikTok"] },
+    { name:"James Helm",       volume:30,  tier:"A", type:"Virtual",  start:"2026-03-02", cd:"Danny",  editor:"Samanix",  backup:"",        smm:"Baran", days:[2,1,0,0,0,0,0,0], cadence:"1 / day, sporadic", fta:58, committed:30, delivered:4, renewal:"2026-09-30", platforms:["IG"] },
+    { name:"Lucas Messer",     volume:30,  tier:"A", type:"Virtual",  start:"2025-08-18", cd:"Kiki",   editor:"Samanix",  backup:"",        smm:"Lina",  days:[12,10,9,8,7,6,6,6], cadence:"1 / day", fta:77, committed:30, delivered:12, renewal:"2026-11-18", platforms:["TikTok","YT"] },
+    { name:"Matt Reynolds",    volume:30,  tier:"B", type:"Virtual",  start:"2025-11-10", cd:"Vani",   editor:"Erik",     backup:"",        smm:"Baran", days:[9,7,6,5,4,4,4,4], cadence:"1 / day", fta:83, committed:30, delivered:11, renewal:"2026-12-10", platforms:["LinkedIn","IG"] },
+    { name:"Seth Brink",       volume:30,  tier:"C", type:"Virtual",  start:"2026-02-09", cd:"Kiki",   editor:"Tony",     backup:"",        smm:"Lina",  days:[13,12,11,10,9,8,8,8], cadence:"1 / day", fta:86, committed:30, delivered:13, renewal:"2027-02-09", platforms:["TikTok"] },
+    { name:"Tessany Layher",   volume:30,  tier:"C", type:"Virtual",  start:"2026-04-06", cd:"Vani",   editor:"Tony",     backup:"",        smm:"Baran", days:[15,14,13,12,11,10,10,10], cadence:"1 / day", fta:91, committed:30, delivered:14, renewal:"2027-04-06", platforms:["IG","TikTok"] },
+    { name:"Ariel",            volume:15,  tier:"C", type:"Virtual",  start:"2026-05-18", cd:"Kiki",   editor:"Prakash",  backup:"",        smm:"Lina",  days:[16,15,14,13,12,11,10,10], cadence:"1 every 2 days", fta:80, committed:15, delivered:6, renewal:"2026-11-18", platforms:["IG"] },
+    { name:"Victoria",         volume:15,  tier:"C", type:"Virtual",  start:"2026-06-01", cd:"Vani",   editor:"Prakash",  backup:"",        smm:"Baran", days:[14,13,12,11,10,9,8,8], cadence:"1 every 2 days", fta:76, committed:15, delivered:6, renewal:"2026-12-01", platforms:["TikTok","IG"] },
+    { name:"Waldo Waldman",    volume:15,  tier:"C", type:"Clipping", start:"2025-12-01", cd:"",       editor:"Tony",     backup:"",        smm:"Lina",  days:[20,20,20,20,20,20,20,20], cadence:"1 clip every 2 days", fta:93, committed:15, delivered:7, renewal:"2026-10-01", platforms:["LinkedIn"] },
+    { name:"Speech Time Fun",  volume:10,  tier:"C", type:"Clipping", start:"2026-07-13", cd:"",       editor:"Tony",     backup:"",        smm:"Lina",  days:[30,30,30,30,30,30,30,30], cadence:"10 / month", fta:89, committed:10, delivered:4, renewal:"2027-01-13", platforms:["YT"] }
   ],
 
   formats: ["TH","FT","BGG","RPF","OVC","TCL","CL","BCL","TIR","RTE","TOT","RXN","BRL","L2S","VO"]
@@ -634,6 +711,20 @@ const editorMonthly = name => DATA.clients.filter(c=>c.editor===name).reduce((s,
 // Weekly load a client puts on its editor: the editor's assigned units, split by each client's share of that editor's monthly units.
 const clientWeekly = c => { const p = person(c.editor); if (!p) return clientUnits(c)/WEEKS_PER_MONTH; const tot = editorMonthly(p.name); return tot ? p.assigned*clientUnits(c)/tot : 0; };
 const missingRoles = c => [c.cd,c.editor,c.backup,c.smm].filter(v=>!v).length;
+const typeLabel = t => t==="Flyout" ? "Fly-out" : t;
+const ftaLoad = f => f==null ? .5 : f>=DATA.targets.fta ? .5 : f>=65 ? .9 : 1.25;
+const ftaColor = f => f==null ? "rgba(255,255,255,.22)" : loadColor(ftaLoad(f));
+const monthFrac = (asOfD => asOfD.getDate() / new Date(asOfD.getFullYear(), asOfD.getMonth()+1, 0).getDate())(new Date(DATA.asOf+"T00:00:00"));
+const pace = c => c.type==="Flyout" ? null : c.delivered / Math.max(1, c.committed*monthFrac);   // 1 = exactly on pace
+const behind = c => { const p = pace(c); return p!=null && p < .85; };
+const daysTo = iso => Math.round((new Date(iso+"T00:00:00") - new Date(DATA.asOf+"T00:00:00")) / 86400000);
+// Status: a missing backup alone is tracked under single points of failure, not here; clipping clients have no CD by design.
+const roleGap = c => !c.editor || !c.smm || (!c.cd && c.type!=="Clipping");
+const clientStatus = c => (!c.editor || c.days[0] < 7) ? "critical" : (roleGap(c) || c.days[0] < 14 || (c.fta!=null && c.fta < 65) || behind(c)) ? "risk" : "healthy";
+const STATUS = { healthy:["Healthy",LOAD.green,0], risk:["At Risk",LOAD.yellow,1], critical:["Critical",LOAD.red,2] };
+const statusPill = c => { const [l,col] = STATUS[clientStatus(c)]; return `<span class="pill" style="background:${col}30"><i class="dot" style="background:${col}"></i>${l}</span>`; };
+const avg = a => a.length ? a.reduce((s,x)=>s+x,0)/a.length : null;
+const avgFta = cl => avg(cl.filter(c=>c.fta!=null).map(c=>c.fta));
 const flyClient = f => DATA.clients.find(c=>c.name.startsWith(f.client));
 const nextFlyout = c => { for (let i=0;i<DATA.weeks.length;i++){ const f=DATA.weeks[i].flyouts.find(f=>c.name.startsWith(f.client)); if (f) return { i, start:DATA.weeks[i].start, ...f }; } return null; };
 const ROLE = { cd:{ field:"cd", label:"Creative Director" }, smm:{ field:"smm", label:"Social Media" } };
@@ -844,6 +935,15 @@ function renderForecast(){
       plugins:{ tooltip:{ callbacks:{ label:c=>` ${r0(c.raw)} ${fn.unit} carried over` } } } }
   });
 }
+function renderHistory(){
+  const H = DATA.history;
+  $("hist").innerHTML = DATA.functions.map(f=>{ const v = H[f.key], last = v[v.length-1], d = last - v[0], peak = Math.max(...v);
+    return `<div class="hm" data-fn="${f.key}" data-tip="${f.name}: ${last}% last week, peak ${peak}% on ${H.labels[v.indexOf(peak)]}."><div class="k"><span>${f.name}</span><span><b class="num">${last}%</b> <small style="color:${d>0?LOAD.yellow:LOAD.green}">${d>0?"+":""}${d} pts</small></span></div><div class="c"><canvas id="h-${f.key}"></canvas></div></div>`; }).join("");
+  DATA.functions.forEach(f=>{ const v = H[f.key];
+    charts["h-"+f.key] = new Chart($("h-"+f.key),{ type:"line", data:{ labels:H.labels, datasets:[{ data:v, borderColor:TREND[f.key], borderWidth:1.5, pointRadius:0, tension:.35, fill:"origin", backgroundColor:TREND[f.key]+"22" }]},
+      options:{ responsive:true, maintainAspectRatio:false, events:[], scales:{ x:{ display:false }, y:{ display:false, min:40, max:150 } }, plugins:{ tooltip:{ enabled:false } } },
+      plugins:[{ id:"h100", beforeDatasetsDraw(ch){ const {ctx,chartArea:a,scales:{y}}=ch, py=y.getPixelForValue(100); if (py<a.top||py>a.bottom) return; ctx.save(); ctx.strokeStyle="rgba(217,45,39,.5)"; ctx.setLineDash([3,3]); ctx.beginPath(); ctx.moveTo(a.left,py); ctx.lineTo(a.right,py); ctx.stroke(); ctx.restore(); } }] }); });
+}
 const TREND = { edit:"#3CB8FA", cd:"#FFFFFF", ppm:"#F472B6", smm:"#A78BFA" };
 function renderTrend(){
   const wk = DATA.weeks, labels = wk.map(w=>w.start);
@@ -897,8 +997,8 @@ function renderFlyouts(){
   $("flyStats").innerHTML = [
     ["Batches Scheduled", `${batches.length}<small> / 13 wks</small>`, batches.length ? LOAD.yellow : LOAD.green],
     ["Editing Units Landing", `${batches.reduce((s,b)=>s+b.edit,0)}<small> units</small>`, LOAD.yellow],
-    ["Weeks Pushed Over", `${overWith-overWithout}<small> by fly-outs</small>`, overWith-overWithout ? LOAD.red : LOAD.green],
-    ["No Shoot on Calendar", `${unscheduled.length}<small> clients</small>`, unscheduled.length ? LOAD.red : LOAD.green]
+    ["Weeks Pushed Over Capacity", `${overWith-overWithout}<small> by fly-outs</small>`, overWith-overWithout ? LOAD.red : LOAD.green],
+    ["No Shoot Scheduled", `${unscheduled.length}<small> clients</small>`, unscheduled.length ? LOAD.red : LOAD.green]
   ].map(statTile).join("");
   countUp($("flyStats"));
 
@@ -917,13 +1017,15 @@ function renderFlyouts(){
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   CLIENTS
+   CLIENTS — portfolio table (column sets, sort, group, CSV), runway, delivery, approval, renewals
    ═══════════════════════════════════════════════════════════════════ */
-function fillSelect(id, values, labeler){ const s=$(id); values.forEach((v,i)=>{ const o=document.createElement("option"); o.value=labeler?i:v; o.textContent=labeler?labeler(v):v; s.appendChild(o); }); }
+function fillSelect(id, values, labeler){ const s=$(id); values.forEach((v,i)=>{ const o=document.createElement("option"); o.value=labeler?i:v; o.textContent=labeler?labeler(v):typeLabel(v); s.appendChild(o); }); }
 function filteredClients(){
-  const t=$("fType").value, cd=$("fCd").value, ed=$("fEditor").value, risk=$("fRisk").value;
-  return DATA.clients.filter(c=>(t==="all"||c.type===t)&&(cd==="all"||c.cd===cd)&&(ed==="all"||c.editor===ed||c.backup===ed)&&
-    (risk==="all" || (risk==="runway"&&c.days[0]<7) || (risk==="gap"&&missingRoles(c)>0) || (risk==="flyout"&&(nextFlyout(c)?.i??99)<4)));
+  const t=$("fType").value, risk=$("fRisk").value, R=DATA.targets;
+  return DATA.clients.filter(c=>(t==="all"||c.type===t) && (
+    risk==="all" || (risk==="critical"&&clientStatus(c)==="critical") || (risk==="attention"&&clientStatus(c)!=="healthy") ||
+    (risk==="runway"&&c.days[0]<7) || (risk==="gap"&&roleGap(c)) || (risk==="fta"&&c.fta!=null&&c.fta<R.fta) ||
+    (risk==="pace"&&behind(c)) || (risk==="renewal"&&daysTo(c.renewal)<=R.renewalWindow) || (risk==="flyout"&&(nextFlyout(c)?.i??99)<4)));
 }
 const roleCell = (name, kind) => {
   if (!name) return `<span class="miss"><i class="dot" style="background:${LOAD.red}"></i>Missing</span>`;
@@ -932,31 +1034,105 @@ const roleCell = (name, kind) => {
 };
 const dayPill = d => `<span class="dpill num" style="background:${loadColor(dayLoad(d),.28)}">${d}d</span>`;
 const startLabel = s => s ? fmtDate(new Date(s+"T00:00:00"), true) : `<span class="muted">—</span>`;
+const deliveryCell = c => { const p = pace(c), pct = Math.min(100, c.delivered/Math.max(1,c.committed)*100), col = p==null ? "rgba(60,184,250,.8)" : loadColor(p>=.95?.5:p>=.85?.9:1.25);
+  return `<span class="prog" style="--pace:${p==null?100:r0(monthFrac*100)}%"><i style="width:${pct}%;background:${col}"></i></span><span class="num">${c.delivered} / ${c.committed}</span>`; };
+const ftaCell = c => c.fta==null ? `<span class="muted">new</span>` : `<i class="dot" style="background:${ftaColor(c.fta)}"></i><span class="num">${c.fta}%</span>`;
+const renewalCell = c => { const d = daysTo(c.renewal); return `<span class="num" style="color:${d<=30?LOAD.red:d<=90?LOAD.yellow:"inherit"}">${fmtDate(new Date(c.renewal+"T00:00:00"))}</span> <span class="muted num">${d}d</span>`; };
+
+// Column registry: label, header class, sort accessor, cell renderer
+const COLS = {
+  client:  { l:"Client", cls:"", s:c=>c.name.toLowerCase(), r:c=>`<td class="name">${esc(c.name)}</td>` },
+  status:  { l:"Status", cls:"", s:c=>-STATUS[clientStatus(c)][2], r:c=>`<td>${statusPill(c)}</td>` },
+  type:    { l:"Type", cls:"", s:c=>c.type, r:c=>`<td>${typeLabel(c.type)}</td>` },
+  tier:    { l:"Tier", cls:"num", s:c=>TIER_RANK[c.tier], r:c=>`<td class="num">${c.tier}</td>` },
+  cadence: { l:"Cadence", cls:"", s:c=>c.volume, r:c=>`<td>${esc(c.cadence)}</td>` },
+  volume:  { l:"Videos / Month", cls:"num", s:c=>c.volume, r:c=>`<td class="num">${c.volume}</td>` },
+  units:   { l:"Load (Units)", cls:"num", s:clientUnits, r:c=>`<td class="num">${clientUnits(c)}</td>` },
+  cd:      { l:"Creative Director", cls:"", s:c=>c.cd||"~", r:c=>`<td>${roleCell(c.cd,"cd")}</td>` },
+  editor:  { l:"Editor", cls:"", s:c=>c.editor||"~", r:c=>`<td>${roleCell(c.editor,"editor")}</td>` },
+  backup:  { l:"Backup Editor", cls:"", s:c=>c.backup||"~", r:c=>`<td>${roleCell(c.backup,"editor")}</td>` },
+  smm:     { l:"Social Media", cls:"", s:c=>c.smm||"~", r:c=>`<td>${roleCell(c.smm,"smm")}</td>` },
+  runway:  { l:"Runway<br>Now → 4 Weeks", cls:"", s:c=>c.days[0], r:c=>`<td>${dayPill(c.days[0])} <span class="muted">→</span> ${dayPill(c.days[4])}</td>` },
+  fta:     { l:"First-Time Approval", cls:"", s:c=>c.fta??-1, r:c=>`<td>${ftaCell(c)}</td>` },
+  deliv:   { l:"Delivered This Month", cls:"", s:c=>pace(c)??2, r:c=>`<td>${deliveryCell(c)}</td>` },
+  renewal: { l:"Renewal", cls:"", s:c=>daysTo(c.renewal), r:c=>`<td>${renewalCell(c)}</td>` },
+  plat:    { l:"Platforms", cls:"", s:c=>c.platforms.length, r:c=>`<td>${c.platforms.map(p=>`<span class="plat">${p}</span>`).join("")}</td>` },
+  fly:     { l:"Next Fly-out", cls:"", s:c=>nextFlyout(c)?.i??99, r:c=>{ const f=nextFlyout(c); return `<td>${f ? `<span class="num">${f.start} · ${f.edit} u</span>` : `<span class="muted">—</span>`}</td>`; } }
+};
+const PRESETS = { ownership:["client","status","cadence","cd","editor","backup","smm","runway","fly"], delivery:["client","status","type","tier","cadence","volume","units","fta","deliv","renewal","plat"] };
+const sortState = { cov:{ key:null, dir:1 }, roster:{ key:null, dir:1 } };
+function sortable(tableId, key){ const s = sortState[tableId]; if (s.key===key) s.dir = -s.dir; else { s.key = key; s.dir = 1; } }
+
 let clientRows = [];
 function renderClients(){
-  const rows = filteredClients();
-  $("clientCount").textContent = `${rows.length} of ${DATA.clients.length} clients · ${r0(rows.reduce((s,c)=>s+clientUnits(c),0))} weighted units / month`;
-  const sorted = [...rows].sort((a,b)=>missingRoles(b)-missingRoles(a) || a.days[0]-b.days[0]);
-  $("cov").innerHTML = `<thead><tr><th>Client</th><th>Type</th><th>Tier</th><th class="num">Videos / Month</th><th class="num">Load (Units)</th><th>Start Date</th>
-      <th>Creative Director</th><th>Editor</th><th>Backup Editor</th><th>Social Media</th><th>Runway<br>Now → 4 Weeks</th><th>Next Fly-out</th></tr></thead><tbody>` +
-    (sorted.length ? sorted.map(c=>{ const f=nextFlyout(c); return `<tr class="row" data-client="${esc(c.name)}">
-      <td class="name">${esc(c.name)}</td><td>${esc(c.type)}</td><td class="num">${c.tier}</td><td class="num">${c.volume}</td><td class="num">${clientUnits(c)}</td><td>${startLabel(c.start)}</td>
-      <td>${roleCell(c.cd,"cd")}</td><td>${roleCell(c.editor,"editor")}</td><td>${roleCell(c.backup,"editor")}</td><td>${roleCell(c.smm,"smm")}</td>
-      <td>${dayPill(c.days[0])} <span class="muted">→</span> ${dayPill(c.days[4])}</td><td>${f ? `<span class="num">${f.start} · ${f.edit} u</span>` : `<span class="muted">—</span>`}</td></tr>`; }).join("")
-    : `<tr><td colspan="12" class="empty">No clients match these filters</td></tr>`) + `</tbody>`;
+  const rows = filteredClients(), cols = PRESETS[$("fCols").value].map(k=>({ k, ...COLS[k] })), group = $("fGroup").value;
+  $("clientCount").textContent = `${rows.length} of ${DATA.clients.length} clients · ${r0(rows.reduce((s,c)=>s+clientUnits(c),0))} weighted units / month · ${rows.filter(c=>clientStatus(c)!=="healthy").length} need attention`;
 
+  const s = sortState.cov, dflt = (a,b)=>STATUS[clientStatus(b)][2]-STATUS[clientStatus(a)][2] || a.days[0]-b.days[0];
+  let sorted = [...rows].sort(s.key ? (a,b)=>{ const x=COLS[s.key].s(a), y=COLS[s.key].s(b); return (x<y?-1:x>y?1:0)*s.dir || dflt(a,b); } : dflt);
+  const head = `<thead><tr>${cols.map(c=>`<th class="${c.cls} ${s.key===c.k?"on":""} ${s.dir<0?"asc":""}" data-sort="${c.k}">${c.l}</th>`).join("")}</tr></thead>`;
+  const row = c => `<tr class="row" data-client="${esc(c.name)}">${cols.map(col=>col.r(c)).join("")}</tr>`;
+  let body;
+  if (group==="none") body = sorted.map(row).join("");
+  else {
+    const key = group==="cd" ? "cd" : group==="smm" ? "smm" : "editor";
+    const groups = new Map(); sorted.forEach(c=>{ const g = c[key] || "Unassigned"; if (!groups.has(g)) groups.set(g, []); groups.get(g).push(c); });
+    body = [...groups.entries()].sort((a,b)=>a[0]==="Unassigned"?1:b[0]==="Unassigned"?-1:a[0].localeCompare(b[0])).map(([g, cl])=>{
+      const fta = avgFta(cl), low = Math.min(...cl.map(c=>c.days[0]));
+      const link = g==="Unassigned" ? g : key==="editor" ? nameLink(g,"editor") : `<span class="lnk" data-owner="${key}:${esc(g)}">${esc(g)}</span>`;
+      return `<tr class="grp"><td colspan="${cols.length}">${link}<span class="gm">${cl.length} client${cl.length===1?"":"s"} · ${r0(cl.reduce((t,c)=>t+clientUnits(c),0))} u/mo · approval ${fta==null?"—":r0(fta)+"%"} · min runway ${low}d</span></td></tr>` + cl.map(row).join(""); }).join("");
+  }
+  $("cov").innerHTML = head + `<tbody>` + (sorted.length ? body : `<tr><td colspan="${cols.length}" class="empty">No clients match these filters</td></tr>`) + `</tbody>`;
+  $("cov").querySelectorAll("th[data-sort]").forEach(th=>th.addEventListener("click",()=>{ sortable("cov", th.dataset.sort); renderClients(); }));
+
+  // runway
   const byRunway = [...rows].sort((a,b)=>a.days[0]-b.days[0]);
-  const low = byRunway.filter(c=>c.days[0]<14);
-  const list = state.rwAll ? byRunway : low;
+  const low = byRunway.filter(c=>c.days[0]<14), list = state.rwAll ? byRunway : low;
   $("rwSub").textContent = `${low.length} client${low.length===1?"":"s"} under 14 days · ${byRunway.filter(c=>c.days[0]<7).length} under 7`;
   $("rwAll").textContent = state.rwAll ? "Show urgent only" : `Show all (${byRunway.length})`;
   $("rwList").innerHTML = list.length ? `<div class="rw"><div class="h">Client</div><div class="h">Days of content (0–30)</div><div class="h" style="text-align:right">Days</div><div class="h">Runs out</div>` +
     list.map(c=>{ const d=c.days[0], col=loadColor(dayLoad(d)); return `<div class="n" data-client="${esc(c.name)}">${esc(c.name)}</div>
-      <div class="track"><i style="width:${Math.min(100,d/30*100)}%;background:${col}"></i></div>
-      <div class="d" style="color:${col}">${d}</div>
+      <div class="track"><i style="width:${Math.min(100,d/30*100)}%;background:${col}"></i></div><div class="d" style="color:${col}">${d}</div>
       <div class="out">${d<=0 ? `<b>Out now</b>` : d>=30 ? `30+ days` : `<b>${fmtDate(addDays(asOf,d))}</b> · ${d<7?"this week":d<14?"next week":"later"}`}</div>`; }).join("") + `</div>`
     : `<div class="empty">Every client has 14+ days of content</div>`;
 
+  // delivery this month
+  const rec = rows.filter(c=>c.type!=="Flyout").sort((a,b)=>pace(a)-pace(b)), behindN = rec.filter(behind).length;
+  const com = rec.reduce((s,c)=>s+c.committed,0), del = rec.reduce((s,c)=>s+c.delivered,0);
+  $("dlSub").textContent = `${del} of ${com} recurring videos delivered · ${r0(monthFrac*100)}% of the month elapsed · ${behindN} behind pace`;
+  $("dlList").innerHTML = rec.length ? `<div class="dl"><div class="h">Client</div><div class="h">Delivered vs. committed</div><div class="h" style="text-align:right">Videos</div><div class="h">Pace</div>` +
+    rec.map(c=>{ const p = pace(c), pct = Math.min(100, c.delivered/Math.max(1,c.committed)*100), col = loadColor(p>=.95?.5:p>=.85?.9:1.25);
+      return `<div class="n" data-client="${esc(c.name)}">${esc(c.name)}</div><div class="track" style="--pace:${r0(monthFrac*100)}%"><i style="width:${pct}%;background:${col}"></i></div>
+      <div class="d">${c.delivered} / ${c.committed}</div><div class="out" style="color:${col}">${p>=1.05?"ahead":p>=.95?"on pace":p>=.85?"slightly behind":`${r0((1-p)*100)}% behind`}</div>`; }).join("") + `</div>`
+    : `<div class="empty">No recurring clients in this view</div>`;
+
+  // first-time approval
+  const withFta = rows.filter(c=>c.fta!=null).sort((a,b)=>a.fta-b.fta), pAvg = avgFta(withFta), under = withFta.filter(c=>c.fta<DATA.targets.fta).length;
+  const byCd = [...new Set(withFta.map(c=>c.cd).filter(Boolean))].map(n=>({ n, v:avgFta(withFta.filter(c=>c.cd===n)) })).sort((a,b)=>b.v-a.v);
+  $("ftaSub").textContent = `${withFta.length} clients with 90-day data · ${rows.length-withFta.length} too new to score`;
+  $("ftaStats").innerHTML = [
+    ["Portfolio Average", pAvg==null ? "—" : `${r0(pAvg)}%`, ftaColor(pAvg)],
+    ["Under Target", `${under}<small> of ${withFta.length}</small>`, under ? LOAD.yellow : LOAD.green],
+    ["Best / Worst CD", byCd.length ? `<small>${esc(byCd[0].n)} ${r0(byCd[0].v)}% · ${esc(byCd[byCd.length-1].n)} ${r0(byCd[byCd.length-1].v)}%</small>` : "—", LOAD.green]
+  ].map(statTile).join("");
+  countUp($("ftaStats"));
+  const ftaRows = withFta;
+  upsert("fta","cFta",{ type:"bar",
+    data:{ labels:ftaRows.map(c=>c.name), datasets:[{ data:ftaRows.map(c=>c.fta), backgroundColor:ftaRows.map(c=>ftaColor(c.fta)), borderRadius:4, barThickness:11 }]},
+    options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false, onClick:(e,els)=>{ if (els.length) openClient(ftaRows[els[0].index].name); },
+      scales:{ x:{ min:0, max:100, ...noBorder, grid:{ color:GRID }, ticks:{ callback:v=>v+"%" } }, y:{ ...noBorder, grid:{display:false}, ticks:{ font:{size:11} } } },
+      plugins:{ tooltip:{ callbacks:{ label:c=>{ const r=ftaRows[c.dataIndex]; return ` ${c.raw}% first-time approval · ${r.cd||"no CD"} · ${r.editor||"no editor"}`; } } } } },
+    plugins:[{ id:"target", afterDatasetsDraw(ch){ const {ctx,chartArea:a,scales:{x}}=ch, px=x.getPixelForValue(DATA.targets.fta); ctx.save(); ctx.strokeStyle="rgba(255,255,255,.7)"; ctx.setLineDash([4,4]); ctx.lineWidth=1.2; ctx.beginPath(); ctx.moveTo(px,a.top); ctx.lineTo(px,a.bottom); ctx.stroke(); ctx.restore(); } }]
+  });
+
+  // renewals
+  const ren = rows.filter(c=>daysTo(c.renewal)<=DATA.targets.renewalWindow && daysTo(c.renewal)>=0).sort((a,b)=>daysTo(a.renewal)-daysTo(b.renewal));
+  $("renSub").textContent = `${ren.length} contract${ren.length===1?"":"s"} in the next ${DATA.targets.renewalWindow} days · ${ren.filter(c=>c.fta!=null&&c.fta<DATA.targets.fta).length} under approval target`;
+  $("renTbl").innerHTML = `<thead><tr><th>Client</th><th>Renews</th><th class="num">Days</th><th>Approval</th><th>Runway</th><th>Status</th></tr></thead><tbody>` +
+    (ren.length ? ren.map(c=>{ const d=daysTo(c.renewal); return `<tr class="row" data-client="${esc(c.name)}"><td class="name">${esc(c.name)}</td><td class="num">${fmtDate(new Date(c.renewal+"T00:00:00"))}</td><td class="num" style="color:${d<=30?LOAD.red:d<=60?LOAD.yellow:"inherit"}">${d}</td><td>${ftaCell(c)}</td><td>${dayPill(c.days[0])}</td><td>${statusPill(c)}</td></tr>`; }).join("")
+    : `<tr><td colspan="6" class="empty">No renewals in the window</td></tr>`) + `</tbody>`;
+
+  // workload by client
   const byLoad = clientRows = [...rows].sort((a,b)=>clientUnits(b)-clientUnits(a));
   upsert("clientLoad","cClientLoad",{ type:"bar",
     data:{ labels:byLoad.map(c=>c.name), datasets:[{ data:byLoad.map(clientUnits), borderRadius:4, barThickness:12,
@@ -965,6 +1141,14 @@ function renderClients(){
       scales:{ x:{ beginAtZero:true, ...noBorder, grid:{ color:GRID }, ticks:{ callback:v=>v+" u" } }, y:{ ...noBorder, grid:{display:false}, ticks:{ font:{size:11} } } },
       plugins:{ tooltip:{ callbacks:{ label:c=>{ const r=clientRows[c.dataIndex], u=personLoad(r.editor); return ` ${c.raw} units · ${r.volume} videos · tier ${r.tier} · ${u==null ? "no editor assigned" : `${r.editor} at ${r0(u*100)}%`}`; } } } } }
   });
+}
+function exportCsv(){
+  const rows = filteredClients(), cols = ["name","status","type","tier","cadence","volume","units","cd","editor","backup","smm","runwayNow","runway4w","fta","committed","delivered","renewal","platforms","nextFlyout"];
+  const val = c => ({ name:c.name, status:STATUS[clientStatus(c)][0], type:typeLabel(c.type), tier:c.tier, cadence:c.cadence, volume:c.volume, units:clientUnits(c), cd:c.cd, editor:c.editor, backup:c.backup, smm:c.smm, runwayNow:c.days[0], runway4w:c.days[4], fta:c.fta??"", committed:c.committed, delivered:c.delivered, renewal:c.renewal, platforms:c.platforms.join("|"), nextFlyout:nextFlyout(c)?.start||"" });
+  const q = v => `"${String(v).replace(/"/g,'""')}"`;
+  const csv = [cols.join(","), ...rows.map(c=>{ const v=val(c); return cols.map(k=>q(v[k])).join(","); })].join("\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv],{type:"text/csv"})); a.download = `capacity-clients-${DATA.asOf}.csv`; a.click(); URL.revokeObjectURL(a.href);
+  toast(`${rows.length} clients exported`);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -1007,13 +1191,17 @@ function renderSuggestions(){
 function renderTeam(){
   const people = filteredPeople(), names = new Set(people.map(p=>p.name));
   $("rosterCount").textContent = `${people.length} of ${DATA.people.length} editors · ${people.reduce((s,p)=>s+p.capacity,0)} units / week capacity`;
-  const rows = people.map(p=>({...p, u:p.assigned/p.capacity, primary:DATA.clients.filter(c=>c.editor===p.name).length, backup:DATA.clients.filter(c=>c.backup===p.name).length})).sort((a,b)=>b.u-a.u);
-  $("roster").innerHTML = `<thead><tr><th>Editor</th><th>Tier</th><th class="num">Capacity / Week</th><th class="num">Assigned</th><th class="num">Headroom</th><th>Utilization</th><th class="num">Primary Clients</th><th class="num">Backup For</th><th>Software</th><th>Apex</th></tr></thead><tbody>` +
+  const RS = { name:p=>p.name.toLowerCase(), tier:p=>TIER_RANK[p.tier], capacity:p=>p.capacity, assigned:p=>p.assigned, head:p=>p.capacity-p.assigned, u:p=>p.u, primary:p=>p.primary, backup:p=>p.backup, software:p=>p.software, apex:p=>+p.apex };
+  const rs = sortState.roster, rows = people.map(p=>({...p, u:p.assigned/p.capacity, primary:DATA.clients.filter(c=>c.editor===p.name).length, backup:DATA.clients.filter(c=>c.backup===p.name).length}))
+    .sort(rs.key ? (a,b)=>{ const x=RS[rs.key](a), y=RS[rs.key](b); return (x<y?-1:x>y?1:0)*rs.dir || b.u-a.u; } : (a,b)=>b.u-a.u);
+  const th = (k,l,cls="") => `<th class="${cls} ${rs.key===k?"on":""} ${rs.dir<0?"asc":""}" data-sort="${k}">${l}</th>`;
+  $("roster").innerHTML = `<thead><tr>${th("name","Editor")}${th("tier","Tier")}${th("capacity","Capacity / Week","num")}${th("assigned","Assigned","num")}${th("head","Headroom","num")}${th("u","Utilization")}${th("primary","Primary Clients","num")}${th("backup","Backup For","num")}${th("software","Software")}${th("apex","Apex")}</tr></thead><tbody>` +
     (rows.length ? rows.map(p=>`<tr class="row" data-editor="${esc(p.name)}"><td class="name">${esc(p.name)}</td><td class="num">${p.tier}</td><td class="num">${p.capacity}</td><td class="num">${p.assigned}</td>
       <td class="num" style="color:${p.capacity-p.assigned<0?LOAD.red:"inherit"}">${p.capacity-p.assigned>0?"+":""}${p.capacity-p.assigned}</td>
       <td><span class="bar"><i style="width:${Math.min(100,p.u*100)}%;background:${loadColor(p.u)}"></i></span><span class="num">${r0(p.u*100)}%</span></td>
       <td class="num">${p.primary}</td><td class="num">${p.backup||`<span class="muted">0</span>`}</td><td>${p.software}</td><td>${p.apex?"Done":`<span class="muted">Pending</span>`}</td></tr>`).join("")
     : `<tr><td colspan="10" class="empty">No editors match these filters</td></tr>`) + `</tbody>`;
+  $("roster").querySelectorAll("th[data-sort]").forEach(t=>t.addEventListener("click",()=>{ sortable("roster", t.dataset.sort); renderTeam(); }));
 
   const count = {}; DATA.clients.forEach(c=>{ if (c.editor && !c.backup && names.has(c.editor)) count[c.editor]=(count[c.editor]||0)+1; });
   const bus = Object.entries(count).sort((a,b)=>b[1]-a[1]);
@@ -1070,12 +1258,15 @@ function openClient(name){
   else if (!c.backup) note = `<b>Single point of failure.</b> If ${esc(c.editor)} is out, nobody else knows this account.`;
   else note = `<b>Covered.</b> ${d} days of content and a backup in place.`;
   openDrawer(`
-    <div class="eyebrow">${esc(c.type)} · Tier ${c.tier}</div><h3>${esc(c.name)}</h3>
-    <div class="meta">Since ${c.start ? fmtDate(new Date(c.start+"T00:00:00"), true) : "—"}${c.cd ? ` · <span class="lnk" data-owner="cd:${esc(c.cd)}">${esc(c.cd)}</span>` : ""}</div>
+    <div class="eyebrow">${typeLabel(c.type)} · Tier ${c.tier} · ${esc(c.cadence)}</div><h3>${esc(c.name)} ${statusPill(c)}</h3>
+    <div class="meta">Since ${c.start ? fmtDate(new Date(c.start+"T00:00:00"), true) : "—"}${c.cd ? ` · <span class="lnk" data-owner="cd:${esc(c.cd)}">${esc(c.cd)}</span>` : ""} · renews ${fmtDate(new Date(c.renewal+"T00:00:00"), true)} <span class="num" style="color:${daysTo(c.renewal)<=30?LOAD.red:daysTo(c.renewal)<=90?LOAD.yellow:"var(--text-3)"}">(${daysTo(c.renewal)}d)</span></div>
     <div class="sec"><div class="note">${note}</div></div>
     <div class="sec"><div class="kv">${kv("Videos / month", c.volume)}${kv("Load", `${clientUnits(c)}<small> u / mo</small>`)}
       <div><div class="k">Runway now</div><div class="v num" style="color:${loadColor(dayLoad(d))}">${d}<small> days</small></div></div>
+      <div><div class="k">First-time approval</div><div class="v num" style="color:${ftaColor(c.fta)}">${c.fta==null?"—":c.fta+"%"}<small> · target ${DATA.targets.fta}%</small></div></div>
+      <div><div class="k">Delivered this month</div><div class="v num">${c.delivered}<small> / ${c.committed}${pace(c)==null?" · batch":pace(c)>=.95?" · on pace":pace(c)>=.85?" · slightly behind":" · behind"}</small></div></div>
       ${kv("Next fly-out", f ? `${f.start}<small> · ${f.edit} u</small>` : "—")}</div></div>
+    <div class="sec"><div class="fmts">${c.platforms.map(p=>`<span>${p}</span>`).join("")}</div></div>
     <div class="sec"><h4>Runway, next 8 weeks</h4><div style="height:110px;position:relative"><canvas id="dChart"></canvas></div></div>
     <div class="sec"><h4>Team</h4><div class="list">${role("Creative Director",c.cd,"cd")}${role("Editor",c.editor,"editor")}${role("Backup Editor",c.backup,"editor")}${role("Social Media",c.smm,"smm")}</div></div>
     <div class="sec"><span class="more" data-go="clients">All clients</span></div>`);
@@ -1100,7 +1291,8 @@ function openEditor(name){
     <div class="eyebrow">Editor · Tier ${p.tier} · ${esc(p.software)}${p.apex?" · Apex":""}</div><h3>${esc(p.name)}</h3>
     <div class="meta">${primary.length} primary client${primary.length===1?"":"s"} · backup for ${backup.length}${spof?` · <span style="color:${LOAD.red}">${spof} with no backup</span>`:""}</div>
     <div class="sec"><div class="note">${note}</div></div>
-    <div class="sec"><div class="kv"><div><div class="k">Utilization</div><div class="v num" style="color:${loadColor(u)}">${r0(u*100)}%</div></div>${kv("Assigned / capacity", `${p.assigned}<small> / ${p.capacity} u</small>`)}</div></div>
+    <div class="sec"><div class="kv"><div><div class="k">Utilization</div><div class="v num" style="color:${loadColor(u)}">${r0(u*100)}%</div></div>${kv("Assigned / capacity", `${p.assigned}<small> / ${p.capacity} u</small>`)}
+      <div><div class="k">Avg first-time approval</div><div class="v num" style="color:${ftaColor(avgFta(primary))}">${avgFta(primary)==null?"—":r0(avgFta(primary))+"%"}</div></div>${kv("Clients behind pace", primary.filter(behind).length)}</div></div>
     <div class="sec"><h4>Clients</h4><div class="list">${primary.length ? primary.map(c=>listRow("client", c.name, `${r1(clientWeekly(c))} u/wk${c.type==="Flyout"?" · fly-out":""}${c.backup?"":` · <span style="color:${LOAD.red}">no backup</span>`}`)).join("") : `<div><span>None assigned</span><span></span></div>`}</div></div>
     ${backup.length ? `<div class="sec"><h4>Backup for</h4><div class="list">${backup.map(c=>listRow("client", c.name, `primary ${esc(c.editor)}`)).join("")}</div></div>` : ""}
     <div class="sec"><h4>Formats</h4><div class="fmts">${p.formats.map(f=>`<span>${f}</span>`).join("")}</div></div>
@@ -1109,13 +1301,20 @@ function openEditor(name){
 function openOwner(role, name){
   const R = ROLE[role]; if (!R) return;
   const cl = ownerClients(role, name), units = cl.reduce((s,c)=>s+clientUnits(c),0), wk = ownerWeekly(role, name), f = FN(role);
-  const low = cl.filter(c=>c.days[0]<7).length;
+  const low = cl.filter(c=>c.days[0]<7).length, fta = avgFta(cl), lag = cl.filter(behind).length, ren = cl.filter(c=>daysTo(c.renewal)<=DATA.targets.renewalWindow), flys = cl.map(c=>({ c, f:nextFlyout(c) })).filter(x=>x.f).sort((a,b)=>a.f.i-b.f.i);
+  const worstFta = cl.filter(c=>c.fta!=null).sort((a,b)=>a.fta-b.fta)[0];
+  const focus = role==="cd"
+    ? (worstFta && worstFta.fta < DATA.targets.fta ? `Lowest approval is <b>${esc(worstFta.name)} at ${worstFta.fta}%</b> — the brief or format needs a look before the next batch.` : `Every scored client is above the ${DATA.targets.fta}% approval target.`)
+    : (low ? `<b>${low} client${low===1?"":"s"} under 7 days of content</b> — scheduling gaps first.` : lag ? `<b>${lag} client${lag===1?"":"s"} behind delivery pace</b> this month.` : `Runway and delivery pace are healthy across the book.`);
   openDrawer(`
     <div class="eyebrow">${R.label}</div><h3>${esc(name)}</h3>
-    <div class="meta">${cl.length} client${cl.length===1?"":"s"} · ${units} weighted units / month</div>
-    <div class="sec"><div class="note"><b>Carries ${r1(wk)} of the ${f.assigned} ${f.unit} / week</b> the ${f.name} team has assigned (${r0(wk/f.assigned*100)}%).${low?` ${low} of these clients ${low===1?"is":"are"} under 7 days of content.`:""}</div></div>
-    <div class="sec"><div class="kv">${kv("Share of team load", `${r0(wk/f.assigned*100)}%`)}${kv("Clients under 7 days", low)}</div></div>
-    <div class="sec"><h4>Clients</h4><div class="list">${cl.map(c=>listRow("client", c.name, `${clientUnits(c)} u/mo · <span style="color:${loadColor(dayLoad(c.days[0]))}">${c.days[0]}d</span>`)).join("")}</div></div>
+    <div class="meta">${cl.length} client${cl.length===1?"":"s"} · ${units} weighted units / month · ${r0(wk/f.assigned*100)}% of the ${f.name} load</div>
+    <div class="sec"><div class="note">${focus}</div></div>
+    <div class="sec"><div class="kv">
+      <div><div class="k">Avg first-time approval</div><div class="v num" style="color:${ftaColor(fta)}">${fta==null?"—":r0(fta)+"%"}</div></div>
+      ${kv("Clients under 7 days", low)}${kv("Behind delivery pace", lag)}${kv("Renewing in 90 days", ren.length)}</div></div>
+    ${flys.length ? `<div class="sec"><h4>${role==="cd"?"Script batches coming":"Batches landing"}</h4><div class="list">${flys.map(x=>listRow("client", x.c.name, `${x.f.start} · ${role==="cd"?x.f.cd+" scripts":x.f.edit+" u"}`)).join("")}</div></div>` : ""}
+    <div class="sec"><h4>Clients</h4><div class="list">${cl.map(c=>listRow("client", c.name, `${c.fta==null?"new":c.fta+"%"} · <span style="color:${loadColor(dayLoad(c.days[0]))}">${c.days[0]}d</span> · ${c.delivered}/${c.committed}`, `${esc(c.name)} <span style="color:var(--text-3)">· ${esc(c.cadence)}</span>`)).join("")}</div></div>
     <div class="sec"><span class="more" data-fn="${role}">${f.name} team</span></div>`);
 }
 function openFunction(key){
@@ -1150,7 +1349,7 @@ function show(view, push=true){
   if (!inited[view]){
     inited[view]=true;
     if (view==="now"){ renderGauges(); renderSummary(); renderPeople(); renderMix(); }
-    if (view==="proj"){ renderForecast(); renderTrend(); }
+    if (view==="proj"){ renderForecast(); renderHistory(); renderTrend(); }
     if (view==="hiring"){ renderHiring(); }
     if (view==="fly"){ renderFlyouts(); }
     if (view==="clients"){ renderClients(); }
@@ -1189,9 +1388,8 @@ fillSelect("simStart", DATA.weeks.map(w=>w.start), s=>s);
 $("simToggle").addEventListener("click",()=>{ state.sim=!state.sim; $("simToggle").classList.toggle("on",state.sim); renderForecast(); renderTrend(); });
 ["simTier","simVol","simType","simStart"].forEach(id=>$(id).addEventListener("input",()=>{ if (state.sim){ renderForecast(); renderTrend(); } }));
 fillSelect("fType",[...new Set(DATA.clients.map(c=>c.type))]);
-fillSelect("fCd",[...new Set(DATA.clients.map(c=>c.cd).filter(Boolean))].sort());
-fillSelect("fEditor",DATA.people.map(p=>p.name).sort());
-["fType","fCd","fEditor","fRisk"].forEach(id=>$(id).addEventListener("change",renderClients));
+["fType","fRisk","fCols","fGroup"].forEach(id=>$(id).addEventListener("change",renderClients));
+$("csvBtn").addEventListener("click", exportCsv);
 $("rwAll").addEventListener("click",()=>{ state.rwAll=!state.rwAll; renderClients(); });
 ["tTier","tSoft"].forEach(id=>$(id).addEventListener("change",renderTeam));
 
@@ -1237,7 +1435,7 @@ function palRender(){
     { g:"Action", t:"Copy capacity briefing", run:copyBriefing },
     { g:"Action", t:`${state.flyouts?"Hide":"Show"} fly-outs in forecast`, run:()=>{ $("flyToggle").click(); show("proj"); } },
     { g:"Action", t:`${state.hires?"Hide":"Show"} planned hires in forecast`, run:()=>{ $("hireToggle").click(); show("proj"); } },
-    ...DATA.clients.map(c=>({ g:"Client", t:c.name, s:`${c.type} · ${c.editor||"no editor"} · ${c.days[0]}d`, run:()=>openClient(c.name) })),
+    ...DATA.clients.map(c=>({ g:"Client", t:c.name, s:`${typeLabel(c.type)} · ${c.editor||"no editor"} · ${c.days[0]}d`, run:()=>openClient(c.name) })),
     ...DATA.people.map(p=>({ g:"Editor", t:p.name, s:`Tier ${p.tier} · ${r0(p.assigned/p.capacity*100)}%`, run:()=>openEditor(p.name) })),
     ...[...new Set(DATA.clients.map(c=>c.cd).filter(Boolean))].map(n=>({ g:"Creative Director", t:n, s:`${ownerClients("cd",n).length} clients`, run:()=>openOwner("cd",n) })),
     ...[...new Set(DATA.clients.map(c=>c.smm).filter(Boolean))].map(n=>({ g:"Social Media", t:n, s:`${ownerClients("smm",n).length} clients`, run:()=>openOwner("smm",n) }))
