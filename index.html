@@ -160,7 +160,14 @@
   .fmap .fh{color:var(--text-3);font-size:11px;text-align:center;}
   .fmap .fn{color:var(--text-2);padding-right:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;}
   .fmap .fc{height:24px;border-radius:6px;background:rgba(255,255,255,.05);}
-  .fmap .fc.y{background:var(--accent);opacity:.85;}
+
+  /* workload scale legend */
+  .scale{margin-top:14px;max-width:340px;font-size:11.5px;color:var(--text-2);}
+  .scale-bar{height:8px;border-radius:999px;}
+  .scale-ticks{position:relative;height:16px;margin-top:5px;}
+  .scale-ticks span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap;}
+  .scale-ticks span:first-child{transform:none;}
+  .scale-ticks span:last-child{transform:translateX(-100%);}
 
   .view{display:none;}
   .view.on{display:block;}
@@ -215,28 +222,31 @@
         <h2>How full each function is</h2>
         <p class="hint">Anything past 85% means a new client starts pushing delivery dates.</p>
         <div class="gauges" id="gauges"></div>
+        <div class="scale" data-scale="util"></div>
       </div>
 
       <div class="card span-8">
         <div class="toolbar">
           <div>
             <h2>Workload by person</h2>
-            <p class="hint" style="margin-bottom:8px">Who has room and who doesn't. Color is the highest complexity they can handle.</p>
+            <p class="hint" style="margin-bottom:8px">Who has room and who doesn't. Green has room, red is over capacity. The letter is the highest tier they can handle.</p>
           </div>
           <div class="chips" id="tierChips">
             <button class="chip on" data-tier="all">All</button>
-            <button class="chip on" data-tier="A"><i class="sw" style="background:var(--tierA)"></i>Tier A</button>
-            <button class="chip on" data-tier="B"><i class="sw" style="background:var(--tierB)"></i>Tier B</button>
-            <button class="chip on" data-tier="C"><i class="sw" style="background:var(--tierC)"></i>Tier C</button>
+            <button class="chip on" data-tier="A">Tier A</button>
+            <button class="chip on" data-tier="B">Tier B</button>
+            <button class="chip on" data-tier="C">Tier C</button>
           </div>
         </div>
         <div class="chartbox" style="height:380px"><canvas id="cPeople"></canvas></div>
+        <div class="scale" data-scale="util"></div>
       </div>
 
       <div class="card span-4">
         <h2>What the work is made of</h2>
-        <p class="hint">Share of total workload by complexity. Heavy on tier A means you need tier A editors, not just more editors.</p>
+        <p class="hint">Share of total workload by complexity. Color shows how full the editors of each tier are.</p>
         <div class="chartbox" style="height:260px"><canvas id="cMix"></canvas></div>
+        <div class="scale" data-scale="util"></div>
       </div>
 
     </div>
@@ -250,7 +260,7 @@
         <div class="toolbar">
           <div>
             <h2>Workload vs. capacity, week by week</h2>
-            <p class="hint" style="margin-bottom:8px">Red bars are weeks where more work comes in than the team can deliver.</p>
+            <p class="hint" style="margin-bottom:8px">Each week is colored by how full the team is. Red means more work comes in than the team can deliver.</p>
           </div>
           <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
             <div class="seg small" id="rangeSeg">
@@ -262,18 +272,21 @@
           </div>
         </div>
         <div class="chartbox" style="height:320px"><canvas id="cWeekly"></canvas></div>
+        <div class="scale" data-scale="util"></div>
       </div>
 
       <div class="card span-6">
         <h2>Running total</h2>
-        <p class="hint">Cumulative work coming in vs. what the team can deliver. The gap between the lines is the backlog you'll build.</p>
+        <p class="hint">Cumulative work coming in vs. what the team can deliver. The gap between the lines is the backlog you'll build; the line turns red as work outruns capacity.</p>
         <div class="chartbox" style="height:280px"><canvas id="cCum"></canvas></div>
+        <div class="scale" data-scale="util"></div>
       </div>
 
       <div class="card span-6">
         <h2>Where the gap comes from</h2>
-        <p class="hint">Starting from recurring work, what adds pressure and what relieves it.</p>
+        <p class="hint">Starting from recurring work, what adds pressure (red) and what relieves it (green). The gap is colored by overall load.</p>
         <div class="chartbox" style="height:280px"><canvas id="cWater"></canvas></div>
+        <div class="scale" data-scale="util"></div>
       </div>
 
     </div>
@@ -287,17 +300,14 @@
         <h2>Days of content left, per client</h2>
         <p class="hint">Each cell is one week ahead. Red means the client will have fewer than 7 days of scheduled content by then.</p>
         <div class="heat" id="heat"></div>
-        <div class="legend">
-          <span><i style="background:var(--green)"></i> 14+ days</span>
-          <span><i style="background:var(--amber)"></i> 7–13 days</span>
-          <span><i style="background:var(--red)"></i> Under 7 days</span>
-        </div>
+        <div class="scale" data-scale="days"></div>
       </div>
 
       <div class="card span-7" style="grid-column:span 7">
         <h2>Monthly volume by client</h2>
-        <p class="hint">Who generates the weight. Fly-out clients show their batch size.</p>
+        <p class="hint">Who generates the weight. Fly-out clients show their batch size. Color shows how full that client's editor is; gray means no editor assigned.</p>
         <div class="chartbox" style="height:520px"><canvas id="cVolume"></canvas></div>
+        <div class="scale" data-scale="util"></div>
       </div>
 
       <div class="card" style="grid-column:span 5">
@@ -317,6 +327,7 @@
         <h2>If one person is out</h2>
         <p class="hint">How many clients lose their only editor. Higher is riskier.</p>
         <div class="chartbox" style="height:360px"><canvas id="cBus"></canvas></div>
+        <div class="scale" data-scale="bus"></div>
       </div>
 
       <div class="card span-6">
@@ -333,8 +344,9 @@
 
       <div class="card span-12">
         <h2>Who can edit which format</h2>
-        <p class="hint">A format with only one or two people is a bottleneck waiting to happen.</p>
+        <p class="hint">A format with only one or two people is a bottleneck waiting to happen. Color shows how many people can edit each format.</p>
         <div class="fmap" id="fmap"></div>
+        <div class="scale" data-scale="fmt"></div>
       </div>
 
     </div>
@@ -433,8 +445,40 @@ const DATA = {
    =================================================================== */
 const $ = id => document.getElementById(id);
 const r0 = n => Math.round(n);
-const tierColor = { A:"#3CB8FA", B:"#7DD3FC", C:"#BAE6FD" };
-const statusColor = u => u > 1 ? "#FF453A" : u >= .85 ? "#FF9F0A" : "#34C759";
+/* Workload color scale: green (room) → red (over capacity).
+   Stops get darker as load rises, so the order still reads for red–green colorblind viewers.
+   Color is never the only cue: each chart also has a % in its tooltip and a scale legend. */
+const LOAD_STOPS = [[.50,"#57FE6A"],[.70,"#ADD315"],[.85,"#CAAA12"],[.92,"#D0860E"],[1.00,"#D05F0A"],[1.10,"#D21707"],[1.25,"#B20921"]];
+const hexRgb = h => [1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+function loadRgb(u){
+  const s = LOAD_STOPS;
+  if (!(u > s[0][0])) return hexRgb(s[0][1]);
+  for (let i=1;i<s.length;i++) if (u<=s[i][0]){
+    const t=(u-s[i-1][0])/(s[i][0]-s[i-1][0]), a=hexRgb(s[i-1][1]), b=hexRgb(s[i][1]);
+    return a.map((v,k)=>Math.round(v+(b[k]-v)*t));
+  }
+  return hexRgb(s[s.length-1][1]);
+}
+const loadColor = (u, alpha=1) => { const [r,g,b]=loadRgb(u); return alpha<1 ? `rgba(${r},${g},${b},${alpha})` : `rgb(${r},${g},${b})`; };
+const inkOn = u => { const [r,g,b]=loadRgb(u).map(v=>{ v/=255; return v<=.03928 ? v/12.92 : ((v+.055)/1.055)**2.4; }); return .2126*r+.7152*g+.0722*b > .18 ? "#0B0B0C" : "#FFFFFF"; };
+// Measures that aren't utilization, mapped onto the same scale
+const busLoad = n => n>=3 ? 1.25 : [.5,.85,1][n];
+const fmtLoad = k => Math.max(.5, 1.25-(k-1)*.15);
+const dayLoad = d => d>=14 ? .5 : d>=7 ? 1-(d-7)/7*.5 : 1.25-d/7*.25;
+
+const SCALES = {
+  util: [[.5,"50% or less"],[.85,"85%"],[1,"100%"],[1.25,"125%+"]],
+  days: [[.5,"14+ days of content"],[1,"7 days"],[1.25,"0"]],
+  bus:  [[.5,"0"],[.85,"1 client"],[1,"2"],[1.25,"3+"]],
+  fmt:  [[.5,"6+ people"],[.95,"3"],[1.1,"2"],[1.25,"1"]]
+};
+function renderScales(){
+  const lo=LOAD_STOPS[0][0], hi=LOAD_STOPS[LOAD_STOPS.length-1][0], pos=u=>(u-lo)/(hi-lo)*100;
+  const grad = `linear-gradient(to right, ${LOAD_STOPS.map(([u,c])=>`${c} ${pos(u)}%`).join(", ")})`;
+  document.querySelectorAll("[data-scale]").forEach(el=>{
+    el.innerHTML = `<div class="scale-bar" style="background:${grad}"></div><div class="scale-ticks">${SCALES[el.dataset.scale].map(([u,l])=>`<span style="left:${pos(u)}%">${l}</span>`).join("")}</div>`;
+  });
+}
 const weekTotal = (w, fly) => w.base + (fly ? w.flyouts.reduce((s,f)=>s+f.units,0) : 0);
 
 Chart.defaults.font.family = "'Proxima Nova','Montserrat',-apple-system,sans-serif";
@@ -495,11 +539,11 @@ function renderGauges(){
   DATA.functions.forEach(f=>{
     const u = f.assigned/f.capacity, pct = Math.min(u,1.2);
     $("gv-"+f.key).textContent = r0(u*100)+"%";
-    $("gv-"+f.key).style.color = statusColor(u);
+    $("gv-"+f.key).style.color = loadColor(u);
     charts["g-"+f.key] = new Chart($("g-"+f.key),{
       type:"doughnut",
       data:{ datasets:[{ data:[pct, Math.max(0,1.2-pct)],
-        backgroundColor:[statusColor(u),"rgba(255,255,255,.08)"], borderWidth:0, borderRadius:8 }]},
+        backgroundColor:[loadColor(u),"rgba(255,255,255,.08)"], borderWidth:0, borderRadius:8 }]},
       options:{ rotation:-90, circumference:180, cutout:"78%", responsive:true, maintainAspectRatio:false,
         plugins:{ legend:{display:false}, tooltip:{enabled:false} } }
     });
@@ -513,9 +557,9 @@ function renderPeople(){
     .sort((a,b)=>b.u-a.u);
   const cfg = {
     type:"bar",
-    data:{ labels:rows.map(p=>p.name),
+    data:{ labels:rows.map(p=>`${p.name} (${p.tier})`),
       datasets:[{ data:rows.map(p=>r0(p.u*100)),
-        backgroundColor:rows.map(p=>tierColor[p.tier]), borderRadius:6, barThickness:16 }]},
+        backgroundColor:rows.map(p=>loadColor(p.u)), borderRadius:6, barThickness:16 }]},
     options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false,
       scales:{ x:{ min:0, max:130, ticks:{ callback:v=>v+"%" }, grid:{ color:"rgba(255,255,255,.06)" } },
                y:{ grid:{ display:false } } },
@@ -524,22 +568,24 @@ function renderPeople(){
         annotation:undefined },
     },
     plugins:[{ id:"line85", afterDraw(ch){ const {ctx,chartArea:{top,bottom},scales:{x}}=ch;
-      [85,100].forEach((v,i)=>{ const px=x.getPixelForValue(v); ctx.save(); ctx.strokeStyle= i?"rgba(255,69,58,.7)":"rgba(255,159,10,.7)";
+      [85,100].forEach((v,i)=>{ const px=x.getPixelForValue(v); ctx.save(); ctx.strokeStyle=loadColor(v/100,.8);
         ctx.setLineDash([4,4]); ctx.beginPath(); ctx.moveTo(px,top); ctx.lineTo(px,bottom); ctx.stroke(); ctx.restore(); }); } }]
   };
-  if (charts.people){ charts.people.data=cfg.data; charts.people.update(); }
+  if (charts.people){ charts.people.data=cfg.data; charts.people.options.plugins.tooltip.callbacks=cfg.options.plugins.tooltip.callbacks; charts.people.update(); }
   else charts.people = new Chart($("cPeople"), cfg);
 }
 
 function renderMix(){
-  const w = {A:2,B:1,C:.5}, tot = {A:0,B:0,C:0};
-  DATA.people.forEach(p=>{ tot[p.tier]+=p.assigned; });
+  const tiers = ["A","B","C"], names = {A:"complex",B:"standard",C:"simple"};
+  const tot = {A:0,B:0,C:0}, cap = {A:0,B:0,C:0};
+  DATA.people.forEach(p=>{ tot[p.tier]+=p.assigned; cap[p.tier]+=p.capacity; });
+  const util = t => cap[t] ? tot[t]/cap[t] : 0;
   charts.mix = new Chart($("cMix"),{
     type:"doughnut",
-    data:{ labels:["Tier A (complex)","Tier B (standard)","Tier C (simple)"],
-      datasets:[{ data:[tot.A,tot.B,tot.C], backgroundColor:[tierColor.A,tierColor.B,tierColor.C], borderWidth:0, borderRadius:6, spacing:3 }]},
+    data:{ labels:tiers.map(t=>`Tier ${t} · ${r0(util(t)*100)}%`),
+      datasets:[{ data:tiers.map(t=>tot[t]), backgroundColor:tiers.map(t=>loadColor(util(t))), borderWidth:0, borderRadius:6, spacing:3 }]},
     options:{ cutout:"68%", responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ position:"bottom" }, tooltip:{ callbacks:{ label:c=>` ${c.label}: ${c.raw} units` } } } }
+      plugins:{ legend:{ position:"bottom" }, tooltip:{ callbacks:{ label:c=>{ const t=tiers[c.dataIndex]; return ` Tier ${t} (${names[t]}): ${c.raw} units · editors ${r0(util(t)*100)}% full`; } } } } }
   });
 }
 
@@ -554,14 +600,14 @@ function renderWeekly(){
     data:{ labels:wk.map(w=>w.start),
       datasets:[
         { type:"bar", label:"Workload", data:totals, borderRadius:7, barPercentage:.62,
-          backgroundColor:totals.map(t=>t>edit.capacity?"#FF453A":"rgba(60,184,250,.85)") },
+          backgroundColor:totals.map(t=>loadColor(t/edit.capacity)) },
         { type:"line", label:"Capacity", data:wk.map(()=>edit.capacity), borderColor:"#fff", borderDash:[6,5],
           borderWidth:1.5, pointRadius:0, tension:0 }
       ]},
     options:{ responsive:true, maintainAspectRatio:false,
       scales:{ x:{ grid:{display:false} }, y:{ beginAtZero:true, grid:{ color:"rgba(255,255,255,.06)" } } },
       plugins:{ legend:{ position:"top", align:"end" },
-        tooltip:{ callbacks:{ afterBody:c=>{ const w=wk[c[0].dataIndex]; return state.flyouts && w.flyouts.length ? "Fly-out: "+w.flyouts.map(f=>`${f.client} (${f.units})`).join(", ") : ""; } } } } }
+        tooltip:{ callbacks:{ label:c=>c.dataset.type==="bar" ? ` Workload: ${c.raw} units · ${r0(c.raw/edit.capacity*100)}% of capacity` : ` Capacity: ${c.raw} units`, afterBody:c=>{ const w=wk[c[0].dataIndex]; return state.flyouts && w.flyouts.length ? "Fly-out: "+w.flyouts.map(f=>`${f.client} (${f.units})`).join(", ") : ""; } } } } }
   };
   if (charts.weekly){ charts.weekly.data=cfg.data; charts.weekly.update(); }
   else charts.weekly = new Chart($("cWeekly"), cfg);
@@ -575,7 +621,8 @@ function renderCum(){
   const cfg = { type:"line",
     data:{ labels:wk.map(w=>w.start),
       datasets:[
-        { label:"Work coming in", data:dem, borderColor:"#3CB8FA", backgroundColor:"rgba(60,184,250,.14)", fill:"+1", tension:.35, pointRadius:0, borderWidth:2 },
+        { label:"Work coming in", data:dem, borderColor:loadColor(dem[dem.length-1]/cap[cap.length-1]), backgroundColor:"rgba(255,255,255,.06)", fill:"+1", tension:.35, pointRadius:0, borderWidth:2,
+          segment:{ borderColor:s=>loadColor(dem[s.p1DataIndex]/cap[s.p1DataIndex]) } },
         { label:"What we can deliver", data:cap, borderColor:"#fff", borderDash:[6,5], tension:0, pointRadius:0, borderWidth:1.5, fill:false }
       ]},
     options:{ responsive:true, maintainAspectRatio:false,
@@ -587,16 +634,19 @@ function renderCum(){
 
 function renderWater(){
   const steps = DATA.waterfall; let run=0; const bars=[], colors=[];
+  const demand = steps.filter(s=>s.kind==="start"||s.kind==="add").reduce((t,s)=>t+s.value,0);
+  const supply = -steps.filter(s=>s.kind==="sub").reduce((t,s)=>t+s.value,0);
+  const load = supply ? demand/supply : 1.25;
   steps.forEach(s=>{
-    if (s.kind==="start"){ bars.push([0,s.value]); run=s.value; colors.push("rgba(60,184,250,.85)"); }
-    else if (s.kind==="end"){ bars.push([0,run]); colors.push(run>0?"#FF453A":"#34C759"); }
-    else { const nxt=run+s.value; bars.push([Math.min(run,nxt),Math.max(run,nxt)]); colors.push(s.value>0?"#FF9F0A":"#34C759"); run=nxt; }
+    if (s.kind==="start"){ bars.push([0,s.value]); run=s.value; colors.push(loadColor(supply ? s.value/supply : 1.25)); }
+    else if (s.kind==="end"){ bars.push([0,run]); colors.push(loadColor(load)); }
+    else { const nxt=run+s.value; bars.push([Math.min(run,nxt),Math.max(run,nxt)]); colors.push(loadColor(s.value>0?1.1:.5)); run=nxt; }
   });
   charts.water = new Chart($("cWater"),{ type:"bar",
     data:{ labels:steps.map(s=>s.label), datasets:[{ data:bars, backgroundColor:colors, borderRadius:6, barPercentage:.6 }]},
     options:{ responsive:true, maintainAspectRatio:false,
       scales:{ x:{ grid:{display:false}, ticks:{ maxRotation:0, autoSkip:false, font:{size:11} } }, y:{ grid:{ color:"rgba(255,255,255,.06)" } } },
-      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>{ const s=steps[c.dataIndex]; return s.kind==="end"?` Gap: ${c.raw[1]} units/week`: s.kind==="start"?` ${c.raw[1]} units`:` ${s.value>0?"+":""}${s.value} units`; } } } } }
+      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>{ const s=steps[c.dataIndex]; return s.kind==="end"?` Gap: ${c.raw[1]} units/week · ${r0(load*100)}% load`: s.kind==="start"?` ${c.raw[1]} units`:` ${s.value>0?"+":""}${s.value} units`; } } } } }
   });
 }
 
@@ -605,12 +655,11 @@ function renderWater(){
    =================================================================== */
 function renderHeat(){
   const weeks = DATA.weeks.slice(0,8).map(w=>w.start);
-  const col = d => d<7?"#FF453A":d<14?"#FF9F0A":"#34C759";
   const sorted = [...DATA.clients].sort((a,b)=>a.days[0]-b.days[0]);
   let html = `<div class="hlabel"></div>` + weeks.map(w=>`<div class="hhead">${w}</div>`).join("");
   sorted.forEach(c=>{
     html += `<div class="hlabel" title="${c.name}">${c.name}</div>` +
-      c.days.map(d=>`<div class="hcell" style="background:${col(d)}22;color:${col(d)};border:1px solid ${col(d)}55" title="${c.name}: ${d} days">${d}</div>`).join("");
+      c.days.map(d=>`<div class="hcell" style="background:${loadColor(dayLoad(d))};color:${inkOn(dayLoad(d))}" title="${c.name}: ${d} days">${d}</div>`).join("");
   });
   $("heat").style.gridTemplateColumns = `150px repeat(${weeks.length},1fr)`;
   $("heat").innerHTML = html;
@@ -618,12 +667,13 @@ function renderHeat(){
 
 function renderVolume(){
   const rows=[...DATA.clients].sort((a,b)=>b.volume-a.volume);
+  const editorLoad = name => { const p=DATA.people.find(p=>p.name===name); return p ? p.assigned/p.capacity : null; };
   charts.volume = new Chart($("cVolume"),{ type:"bar",
     data:{ labels:rows.map(c=>c.name), datasets:[{ data:rows.map(c=>c.volume), borderRadius:5, barThickness:13,
-      backgroundColor:rows.map(c=>c.type==="Flyout"?"rgba(60,184,250,.85)":c.type==="Clipping"?"rgba(186,230,253,.7)":"rgba(125,211,252,.8)") }]},
+      backgroundColor:rows.map(c=>{ const u=editorLoad(c.editor); return u==null ? "rgba(255,255,255,.22)" : loadColor(u); }) }]},
     options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false,
       scales:{ x:{ grid:{ color:"rgba(255,255,255,.06)" } }, y:{ grid:{display:false}, ticks:{ font:{size:11.5} } } },
-      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>` ${c.raw} videos · ${rows[c.dataIndex].type}` } } } }
+      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>{ const r=rows[c.dataIndex], u=editorLoad(r.editor); return ` ${c.raw} videos · ${r.type} · ${u==null ? "no editor assigned" : `${r.editor} at ${r0(u*100)}%`}`; } } } } }
   });
 }
 
@@ -646,7 +696,7 @@ function renderBus(){
   const rows = Object.entries(count).sort((a,b)=>b[1]-a[1]);
   charts.bus = new Chart($("cBus"),{ type:"bar",
     data:{ labels:rows.map(r=>r[0]), datasets:[{ data:rows.map(r=>r[1]), borderRadius:6, barThickness:16,
-      backgroundColor:rows.map(r=>r[1]>=3?"#FF453A":r[1]===2?"#FF9F0A":"rgba(60,184,250,.85)") }]},
+      backgroundColor:rows.map(r=>loadColor(busLoad(r[1]))) }]},
     options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false,
       scales:{ x:{ beginAtZero:true, ticks:{ stepSize:1 }, grid:{ color:"rgba(255,255,255,.06)" } }, y:{ grid:{display:false} } },
       plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>` ${c.raw} client${c.raw===1?"":"s"} with no backup` } } } }
@@ -663,10 +713,13 @@ function renderProgress(){
 }
 
 function renderFormatMap(){
-  const fm = DATA.formats;
+  const fm = DATA.formats, editors = DATA.people.filter(p=>p.name!=="Shahid");
+  const who = Object.fromEntries(fm.map(f=>[f, editors.filter(p=>p.formats.includes(f)).length]));
   let html = `<div></div>` + fm.map(f=>`<div class="fh">${f}</div>`).join("");
-  DATA.people.filter(p=>p.name!=="Shahid").forEach(p=>{
-    html += `<div class="fn">${p.name}</div>` + fm.map(f=>`<div class="fc ${p.formats.includes(f)?"y":""}" title="${p.name} · ${f}"></div>`).join("");
+  editors.forEach(p=>{
+    html += `<div class="fn">${p.name}</div>` + fm.map(f=>p.formats.includes(f)
+      ? `<div class="fc" style="background:${loadColor(fmtLoad(who[f]))}" title="${p.name} · ${f} · ${who[f]} ${who[f]===1?"person":"people"} can edit it"></div>`
+      : `<div class="fc" title="${p.name} · ${f}"></div>`).join("");
   });
   $("fmap").style.gridTemplateColumns = `110px repeat(${fm.length},1fr)`;
   $("fmap").innerHTML = html;
@@ -712,6 +765,7 @@ $("flyToggle").addEventListener("click",()=>{
 
 $("foot").textContent = `Workload is tier-weighted so complex and simple videos aren't counted the same: tier A counts 2, tier B counts 1, tier C counts 0.5. Hiring lead time assumes ${DATA.leadTime.editor} weeks for an editor and ${DATA.leadTime.cd} for a creative director, from sourcing through ramp. All numbers on this page are sample data.`;
 
+renderScales();
 show("now");
 </script>
 </body>
