@@ -57,7 +57,7 @@
   .user .em{font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
   /* KPI strip */
-  .kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-bottom:16px;}
+  .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px;}
   .kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;min-width:0;}
   .kpi .k{font-size:10.5px;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .kpi .v{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:600;margin-top:6px;white-space:nowrap;line-height:1.2;}
@@ -130,6 +130,27 @@
   .stats3{grid-template-columns:repeat(3,minmax(0,1fr));}
   .stat .v small{font-size:12px;font-weight:500;color:var(--text-3);font-family:'Montserrat',sans-serif;}
 
+  /* department tiles */
+  .depts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px;}
+  .dept{padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.03);cursor:pointer;transition:border-color .2s,background .2s,transform .2s;min-width:0;}
+  .dept:hover{border-color:var(--line-2);}
+  .dept.on{background:rgba(60,184,250,.08);border-color:rgba(60,184,250,.45);}
+  .dept .n{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;}
+  .dept .n b{font-size:20px;font-weight:600;}
+  .dept .m{margin-top:6px;font-size:11.5px;color:var(--text-3);display:flex;justify-content:space-between;gap:8px;white-space:nowrap;overflow:hidden;}
+  .dept .m span{overflow:hidden;text-overflow:ellipsis;}
+  .dept .m i{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle;}
+  .sig{display:none;} .sig.on{display:block;}
+
+  /* presentation mode */
+  .present .wrap{max-width:1400px;}
+  .present .user,.present .env{display:none;}
+  .present .kpi .v{font-size:32px;} .present .kpi .k{font-size:11.5px;} .present .kpi .s{font-size:13px;}
+  .present .ch h2{font-size:17px;} .present .gauge .val{font-size:40px;} .present .verdict{font-size:24px;} .present .next p{font-size:15.5px;}
+  .present .foot{opacity:.5;}
+  .pbadge{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:35;font-size:11px;color:var(--text-3);padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(0,0,0,.6);backdrop-filter:blur(12px);display:none;}
+  .present .pbadge{display:block;}
+
   /* simulator */
   .sim{display:grid;grid-template-columns:auto 1fr;gap:14px 22px;align-items:center;padding:16px 18px;border:1px dashed rgba(167,139,250,.35);border-radius:14px;margin-bottom:22px;background:rgba(167,139,250,.05);}
   .sim .t{font-size:12.5px;font-weight:600;color:#C4B5FD;white-space:nowrap;}
@@ -176,16 +197,6 @@
   .dl .track::after{content:"";position:absolute;top:-3px;bottom:-3px;width:1px;background:rgba(255,255,255,.55);left:var(--pace,0%);}
   .dl .d{font-family:var(--mono);font-weight:600;text-align:right;white-space:nowrap;}
   .dl .out{color:var(--text-3);white-space:nowrap;min-width:96px;}
-
-  /* history small multiples */
-  .hist{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
-  .hist .hm{padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);cursor:pointer;transition:border-color .2s;}
-  .hist .hm:hover{border-color:var(--line-2);}
-  .hist .hm .k{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--text-3);}
-  .hist .hm .k b{font-size:20px;font-weight:600;color:var(--text);}
-  .hist .hm .k small{font-family:var(--mono);font-size:11px;}
-  .hist .hm .c{height:64px;position:relative;margin-top:8px;}
-  @media (max-width:900px){ .hist{grid-template-columns:repeat(2,minmax(0,1fr));} }
 
   /* runway list */
   .rw{display:grid;grid-template-columns:minmax(120px,1.2fr) 3fr auto auto;gap:6px 16px;align-items:center;font-size:13px;}
@@ -306,8 +317,8 @@
   .foot kbd{font:500 10.5px var(--mono);padding:1px 5px;border:1px solid var(--line);border-radius:4px;}
 
   @media (max-width:1100px){ .mast{grid-template-columns:auto 1fr auto;} .mast .seg{justify-self:center;} }
-  @media (max-width:1000px){ .kpis{grid-template-columns:repeat(3,minmax(0,1fr));} .brand .env{display:none;} }
-  @media (max-width:900px){ .span-8,.span-7,.span-6,.span-5,.span-4{grid-column:span 12;} .stats{grid-template-columns:repeat(2,minmax(0,1fr));} .sim{grid-template-columns:1fr;} .summary{grid-template-columns:1fr;} .gauges{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  @media (max-width:1000px){ .brand .env{display:none;} }
+  @media (max-width:900px){ .span-8,.span-7,.span-6,.span-5,.span-4{grid-column:span 12;} .stats,.depts{grid-template-columns:repeat(2,minmax(0,1fr));} .sim{grid-template-columns:1fr;} .summary{grid-template-columns:1fr;} .gauges{grid-template-columns:repeat(2,minmax(0,1fr));} }
   @media (max-width:640px){
     .wrap{padding:0 16px 40px;}
     .mast{margin:0 -16px 18px;padding:12px 16px;grid-template-columns:1fr auto;gap:12px;}
@@ -315,7 +326,7 @@
     .mast .right{grid-row:1;grid-column:2;}
     .seg button{padding:8px 12px;font-size:13px;}
     .card{padding:20px 18px;}
-    .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;} .kpi{padding:12px;} .kpi .v{font-size:20px;}
+    .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;} .kpi{padding:12px;} .kpi .v{font-size:20px;} .depts{grid-template-columns:1fr;}
     .gauges{gap:8px;} .gauge .g{height:96px;} .gauge .val{font-size:22px;bottom:2px;} .gauge .lab{font-size:12px;} .gauge .meta{display:none;}
     .verdict{font-size:17px;} .stat{padding:10px 12px;} .stat .v{font-size:18px;}
     .rw,.dl{grid-template-columns:1fr 2fr auto;} .rw .out,.dl .out{display:none;} .stats3{grid-template-columns:1fr;}
@@ -353,7 +364,7 @@
     <div class="grid">
       <section class="card span-12">
         <div class="ch">
-          <div><h2>Capacity Utilization <span class="i" data-tip="Share of each team's weekly capacity already committed. Past 85% a new client starts pushing delivery dates. Click a gauge for the breakdown.">i</span></h2><div class="sub">Assigned vs. available, tier-weighted units per week</div></div>
+          <div><h2>Capacity Utilization <span class="i" data-tip="Share of each team's weekly capacity already committed. Past 85% a new client starts pushing delivery dates. Click a gauge for the breakdown.">i</span></h2></div>
           <div class="lg" data-scale="util"></div>
         </div>
         <div class="gauges" id="gauges"></div>
@@ -365,7 +376,7 @@
 
       <section class="card span-8">
         <div class="ch">
-          <div><h2>Editor Workload <span class="i" data-tip="Colored bar = assigned units. Gray track = that editor's capacity. Dotted mark = 85%. Click a bar to open the editor.">i</span></h2><div class="sub">Assigned load against each editor's capacity</div></div>
+          <div><h2>Editor Workload <span class="i" data-tip="Colored bar = assigned units. Gray track = that editor's capacity. Dotted mark = 85%. Click a bar to open the editor.">i</span></h2></div>
           <div class="controls">
             <label class="field">Tier <select class="sel" id="selTier"><option value="all">All Tiers</option><option value="A">Tier A</option><option value="B">Tier B</option><option value="C">Tier C</option></select></label>
             <label class="field">Sort <select class="sel" id="selSort"><option value="util">Utilization</option><option value="headroom">Headroom</option><option value="name">Name</option></select></label>
@@ -376,7 +387,7 @@
       </section>
 
       <section class="card span-4">
-        <div class="ch"><div><h2>Demand Mix <span class="i" data-tip="Share of total workload by complexity. Each segment is colored by how full the editors of that tier are.">i</span></h2><div class="sub">Assigned units by complexity tier</div></div></div>
+        <div class="ch"><div><h2>Demand Mix <span class="i" data-tip="Share of total workload by complexity. Each segment is colored by how full the editors of that tier are.">i</span></h2></div></div>
         <div class="chartbox" style="height:300px"><canvas id="cMix"></canvas></div>
         <div class="lg" data-scale="util" style="margin-top:10px;justify-content:center"></div>
       </section>
@@ -388,16 +399,17 @@
     <div class="grid">
       <section class="card span-12">
         <div class="ch">
-          <div><h2>Demand Forecast <span class="i" data-tip="Expected workload per week for the selected function. Solid = recurring clients, lighter top = fly-out batches, purple = simulated client. Dashed line = capacity.">i</span> <span class="chip" id="simChip" hidden></span></h2><div class="sub">Weekly workload against capacity</div></div>
+          <div><h2>Demand Forecast <span class="i" data-tip="Pick a department. Solid bars = recurring work, lighter tops = fly-out batches, purple = a simulated client. Dashed line = capacity.">i</span> <span class="chip" id="simChip" hidden></span></h2></div>
           <div class="controls">
-            <label class="field">Function <select class="sel" id="selFn"></select></label>
             <label class="field">Horizon <select class="sel" id="selRange"><option value="4">4 Weeks</option><option value="8">8 Weeks</option><option value="13" selected>13 Weeks</option></select></label>
             <label class="toggle on" id="flyToggle"><span class="sw"></span>Fly-outs</label>
             <label class="toggle" id="hireToggle"><span class="sw"></span>Planned Hires</label>
+            <button class="lbtn" id="simOpen">What if we sign a client?</button>
           </div>
         </div>
-        <div class="sim">
-          <div class="t">What if we sign a new client?</div>
+        <div class="depts" id="depts"></div>
+        <div class="sim" id="simBox" hidden>
+          <div class="t">New client</div>
           <div class="row">
             <label class="field">Tier <select class="sel" id="simTier"><option value="A">A · complex</option><option value="B" selected>B · standard</option><option value="C">C · simple</option></select></label>
             <label class="field">Videos / month <input class="inp" id="simVol" type="number" min="1" max="400" value="30"></label>
@@ -412,19 +424,18 @@
         <div class="lg" data-scale="util" data-extra="forecast" style="margin-top:16px"></div>
       </section>
 
-      <section class="card span-6">
-        <div class="ch"><div><h2>Backlog Accumulation <span class="i" data-tip="Units that could not be delivered in the week they arrived and roll into the next one. Zero means the team keeps up.">i</span></h2><div class="sub">Work carried over when demand exceeds capacity</div></div></div>
-        <div class="chartbox" style="height:260px"><canvas id="cBacklog"></canvas></div>
+      <section class="card span-7">
+        <div class="ch">
+          <div><h2>All Departments <span class="i" data-tip="Utilization of every department on one chart. Switch between the next 13 weeks (projected) and the past 12 (actual). Yellow band = 85–100%, red = over capacity. Click a name to focus the forecast on it.">i</span></h2></div>
+          <div class="controls"><div class="seg small" id="trendSeg"><button class="on" data-mode="next">Next 13 Weeks</button><button data-mode="past">Past 12 Weeks</button></div></div>
+        </div>
+        <div class="chartbox" style="height:280px"><canvas id="cTrend"></canvas></div>
+        <div class="lg" id="trendLg" style="margin-top:12px"></div>
       </section>
 
-      <section class="card span-12">
-        <div class="ch"><div><h2>Last 12 Weeks <span class="i" data-tip="Actual utilization per function over the past 12 weeks. The spike in late July is the last fly-out cluster — the same pattern the forecast shows for October.">i</span></h2><div class="sub">Actual utilization, week by week</div></div></div>
-        <div class="hist" id="hist"></div>
-      </section>
-
-      <section class="card span-6">
-        <div class="ch"><div><h2>Utilization Trend <span class="i" data-tip="Projected utilization of each function over 13 weeks. Yellow band = 85–100%, red band = over capacity. Click a name to focus the forecast on it.">i</span></h2><div class="sub">All functions, fly-outs included</div></div><div class="lg" id="trendLg"></div></div>
-        <div class="chartbox" style="height:260px"><canvas id="cTrend"></canvas></div>
+      <section class="card span-5">
+        <div class="ch"><div><h2>Backlog <span class="i" data-tip="Work that could not be delivered in the week it arrived and rolls into the next one, for the selected department. Zero means the team keeps up.">i</span></h2></div></div>
+        <div class="chartbox" style="height:280px"><canvas id="cBacklog"></canvas></div>
       </section>
     </div>
   </div>
@@ -433,17 +444,17 @@
   <div class="view" id="view-hiring">
     <div class="grid">
       <section class="card span-12">
-        <div class="ch"><div><h2>Hiring Triggers <span class="i" data-tip="For each function: when projected demand crosses capacity, how long that role takes to source, hire and ramp, and therefore the latest week to open the search.">i</span></h2><div class="sub">Saturation week minus lead time = the week to open the role</div></div></div>
+        <div class="ch"><div><h2>Hiring Triggers <span class="i" data-tip="For each function: when projected demand crosses capacity, how long that role takes to source, hire and ramp, and therefore the latest week to open the search.">i</span></h2></div></div>
         <div class="tblwrap"><table class="t" id="hireTbl"></table></div>
       </section>
 
       <section class="card span-8">
-        <div class="ch"><div><h2>Hiring Windows <span class="i" data-tip="Colored bars: the window between when a search must open and when the team saturates. Blue bars: approved hires ramping to full capacity.">i</span></h2><div class="sub">Next 13 weeks · today at the left edge</div></div><div class="lg" id="hireLg"></div></div>
+        <div class="ch"><div><h2>Hiring Windows <span class="i" data-tip="Colored bars: the window between when a search must open and when the team saturates. Blue bars: approved hires ramping to full capacity.">i</span></h2></div><div class="lg" id="hireLg"></div></div>
         <div class="tblwrap"><div class="tl" id="hireTl"></div></div>
       </section>
 
       <section class="card span-4">
-        <div class="ch"><div><h2>Lead Time Assumptions <span class="i" data-tip="Weeks from opening a role to that person delivering at full capacity. Unconfirmed rows are placeholders until leadership validates them.">i</span></h2><div class="sub">Sourcing + hiring + ramp, in weeks</div></div></div>
+        <div class="ch"><div><h2>Lead Time Assumptions <span class="i" data-tip="Weeks from opening a role to that person delivering at full capacity. Unconfirmed rows are placeholders until leadership validates them.">i</span></h2></div></div>
         <div class="tblwrap"><table class="t lt" id="leadTbl"></table></div>
       </section>
     </div>
@@ -459,7 +470,7 @@
       </section>
 
       <section class="card span-12">
-        <div class="ch"><div><h2>Upcoming Batches <span class="i" data-tip="What each batch adds to editing, creative direction and PM review, and how full the editing team is that week.">i</span></h2><div class="sub">Next 13 weeks</div></div></div>
+        <div class="ch"><div><h2>Upcoming Batches <span class="i" data-tip="What each batch adds to editing, creative direction and PM review, and how full the editing team is that week.">i</span></h2></div></div>
         <div class="tblwrap"><table class="t" id="flyTbl"></table></div>
       </section>
     </div>
@@ -470,7 +481,7 @@
     <div class="grid">
       <section class="card span-12">
         <div class="ch">
-          <div><h2>Client Portfolio <span class="i" data-tip="One row per client. Click a column header to sort, group by owner for subtotals, switch column sets, or export the current view as CSV. Click a client or a person for details.">i</span></h2><div class="sub" id="clientCount"></div></div>
+          <div><h2>Client Portfolio <span class="i" data-tip="One row per client. Click a header to sort, group by owner for subtotals, switch column sets, or export the view as CSV. Click a client or a person for details.">i</span></h2><div class="sub" id="clientCount"></div></div>
           <div class="controls">
             <label class="field">Columns <select class="sel" id="fCols"><option value="ownership">Ownership</option><option value="delivery">Delivery &amp; Quality</option></select></label>
             <label class="field">Group <select class="sel" id="fGroup"><option value="none">None</option><option value="cd">Creative Director</option><option value="smm">Social Media</option><option value="editor">Editor</option></select></label>
@@ -482,41 +493,28 @@
         <div class="tblwrap"><table class="t cov" id="cov"></table></div>
       </section>
 
-      <section class="card span-6">
-        <div class="ch">
-          <div><h2>Content Runway <span class="i" data-tip="Days of scheduled content each client has left, and the date it runs out. The thin line marks 7 days.">i</span></h2><div class="sub" id="rwSub"></div></div>
-          <button class="lbtn" id="rwAll">Show all</button>
-        </div>
-        <div id="rwList"></div>
-      </section>
-
-      <section class="card span-6">
-        <div class="ch">
-          <div><h2>Delivery This Month <span class="i" data-tip="Videos delivered against the monthly commitment. The tick is where delivery should be today; red is more than 15% behind that pace. Fly-out batches show batch progress only.">i</span></h2><div class="sub" id="dlSub"></div></div>
-          <div class="lg"><span><i style="background:#2FBF55"></i>On pace</span><span><i style="background:#FFD60A"></i>Slightly behind</span><span><i style="background:#D92D27"></i>Behind</span></div>
-        </div>
-        <div id="dlList"></div>
-      </section>
-
-      <section class="card span-6">
-        <div class="ch">
-          <div><h2>First-Time Approval <span class="i" data-tip="Share of videos approved by the client without a revision round, last 90 days. Target 80%. Low approval usually points at the brief or the format, not the editor.">i</span></h2><div class="sub" id="ftaSub"></div></div>
-          <div class="lg"><span><i style="background:#2FBF55"></i>80%+</span><span><i style="background:#FFD60A"></i>65–79%</span><span><i style="background:#D92D27"></i>Under 65%</span><span><i class="dash"></i>Target</span></div>
-        </div>
-        <div class="stats stats3" id="ftaStats"></div>
-        <div class="chartbox" style="height:420px"><canvas id="cFta"></canvas></div>
-      </section>
-
-      <section class="card span-6">
-        <div class="ch">
-          <div><h2>Renewals <span class="i" data-tip="Contracts renewing in the next 90 days, with the two signals that decide the conversation: approval rate and content runway.">i</span></h2><div class="sub" id="renSub"></div></div>
-        </div>
-        <div class="tblwrap"><table class="t" id="renTbl"></table></div>
-      </section>
-
       <section class="card span-12">
-        <div class="ch"><div><h2>Workload by Client <span class="i" data-tip="Monthly load each client puts on the team (videos × tier weight). Color = how full that client's editor is. Gray = no editor.">i</span></h2><div class="sub">Tier-weighted units per month</div></div><div class="lg" data-scale="util"></div></div>
-        <div class="chartbox" style="height:460px"><canvas id="cClientLoad"></canvas></div>
+        <div class="ch">
+          <div class="seg small" id="sigSeg"><button class="on" data-sig="runway">Runway</button><button data-sig="delivery">Delivery</button><button data-sig="approval">Approval</button><button data-sig="renewals">Renewals</button></div>
+          <div class="controls" id="sigCtl"></div>
+        </div>
+        <div class="sig on" id="sig-runway">
+          <div class="ch" style="margin-bottom:12px"><div class="sub" id="rwSub"></div><div class="controls"><div class="lg" data-scale="days"></div><button class="lbtn" id="rwAll">Show all</button></div></div>
+          <div id="rwList"></div>
+        </div>
+        <div class="sig" id="sig-delivery">
+          <div class="ch" style="margin-bottom:12px"><div class="sub" id="dlSub"></div><div class="lg"><span><i style="background:#2FBF55"></i>On pace</span><span><i style="background:#FFD60A"></i>Slightly behind</span><span><i style="background:#D92D27"></i>Behind</span></div></div>
+          <div id="dlList"></div>
+        </div>
+        <div class="sig" id="sig-approval">
+          <div class="ch" style="margin-bottom:12px"><div class="sub" id="ftaSub"></div><div class="lg"><span><i style="background:#2FBF55"></i>80%+</span><span><i style="background:#FFD60A"></i>65–79%</span><span><i style="background:#D92D27"></i>Under 65%</span><span><i class="dash"></i>Target</span></div></div>
+          <div class="stats stats3" id="ftaStats"></div>
+          <div class="chartbox" style="height:440px"><canvas id="cFta"></canvas></div>
+        </div>
+        <div class="sig" id="sig-renewals">
+          <div class="ch" style="margin-bottom:12px"><div class="sub" id="renSub"></div></div>
+          <div class="tblwrap"><table class="t" id="renTbl"></table></div>
+        </div>
       </section>
     </div>
   </div>
@@ -545,25 +543,20 @@
       </section>
 
       <section class="card span-5">
-        <div class="ch"><div><h2>Single Points of Failure <span class="i" data-tip="Clients that would have nobody to edit if this person is out, because they have no backup editor.">i</span></h2><div class="sub">Clients with no backup editor</div></div><div class="lg" data-scale="bus"></div></div>
+        <div class="ch"><div><h2>Single Points of Failure <span class="i" data-tip="Clients that would have nobody to edit if this person is out, because they have no backup editor.">i</span></h2></div><div class="lg" data-scale="bus"></div></div>
         <div class="chartbox" style="height:300px"><canvas id="cBus"></canvas></div>
       </section>
 
-      <section class="card span-8">
-        <div class="ch"><div><h2>Format Coverage <span class="i" data-tip="Editor × format matrix. Cell color shows how many people cover that format. Click a cell to open the editor.">i</span></h2><div class="sub">Who can edit each format</div></div><div class="lg" data-scale="fmt"></div></div>
+      <section class="card span-12">
+        <div class="ch"><div><h2>Format Coverage <span class="i" data-tip="Editor × format matrix. Cell color shows how many people cover that format. Click a cell to open the editor.">i</span></h2></div><div class="lg" data-scale="fmt"></div></div>
         <div class="tblwrap"><div class="fmap" id="fmap"></div></div>
-      </section>
-
-      <section class="card span-4">
-        <div class="ch"><div><h2>Format Depth <span class="i" data-tip="How many editors can produce each format. One or two people is a bottleneck waiting to happen.">i</span></h2><div class="sub">Editors qualified per format</div></div></div>
-        <div class="chartbox" style="height:300px"><canvas id="cRadar"></canvas></div>
       </section>
     </div>
   </div>
 
   <footer class="foot">
     <div><b>Confidential</b>For internal use by authorized Brand Sharks personnel only. Do not copy, share, or distribute without written approval from leadership.</div>
-    <div>© <span id="confYear"></span> Brand Sharks · Data as of <span id="asOf"></span> · <kbd>⌘K</kbd> search · <kbd>1–6</kbd> views · <kbd>⇧C</kbd> copy briefing</div>
+    <div>© <span id="confYear"></span> Brand Sharks</div>
   </footer>
 </div>
 
@@ -571,6 +564,7 @@
 <aside class="drawer" id="drawer" aria-hidden="true"></aside>
 <div class="pal" id="pal"><div class="box"><input id="palIn" placeholder="Jump to a view, client, editor or function…" autocomplete="off"><ul id="palList"></ul><div class="hint"><span><kbd>↑↓</kbd>navigate</span><span><kbd>↵</kbd>open</span><span><kbd>esc</kbd>close</span></div></div></div>
 <div class="tip" id="tip" role="tooltip"></div>
+<div class="pbadge">Presentation · ← → views · Esc to exit</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -596,10 +590,10 @@ const DATA = {
   },
 
   functions: [
-    { key:"edit", name:"Editing",           short:"Editing", unit:"units",   capacity:152, assigned:128, people:13, hire:"editor" },
-    { key:"cd",   name:"Creative Director", short:"CD",      unit:"scripts", capacity:180, assigned:172, people:4,  hire:"creative director" },
-    { key:"ppm",  name:"PPM",               short:"PPM",     unit:"reviews", capacity:125, assigned:103, people:1,  hire:"project manager" },
-    { key:"smm",  name:"Social Media",      short:"Social",  unit:"units",   capacity:120, assigned:88,  people:3,  hire:"social media manager" }
+    { key:"edit", name:"Editing",           short:"Editing", unit:"units",   capacity:152, assigned:128, people:13, hire:"editor",                hireUnits:12 },
+    { key:"cd",   name:"Creative Director", short:"CD",      unit:"scripts", capacity:180, assigned:172, people:4,  hire:"creative director",     hireUnits:45 },
+    { key:"ppm",  name:"PPM",               short:"PPM",     unit:"reviews", capacity:125, assigned:103, people:1,  hire:"project manager",       hireUnits:125 },
+    { key:"smm",  name:"Social Media",      short:"Social",  unit:"units",   capacity:120, assigned:88,  people:3,  hire:"social media manager",  hireUnits:40 }
   ],
 
   // weeks from opening the role to full productivity. confirmed:false = placeholder until leadership validates it.
@@ -737,7 +731,7 @@ const capacityAt = (key, i, hires) => FN(key).capacity + (hires ? DATA.plannedHi
   const si = DATA.weeks.findIndex(w=>w.start===h.start);
   return si>=0 && i>=si ? s + h.units*Math.min(1,(i-si+1)/h.ramp) : s; },0) : 0);
 
-const state = { fn:"edit", range:13, flyouts:true, hires:false, sim:false, rwAll:false };
+const state = { fn:"edit", range:13, flyouts:true, hires:false, sim:false, rwAll:false, trend:"next", sig:"runway", present:false };
 function simDemand(key, i){
   if (!state.sim) return 0;
   const vol = Math.max(0, +$("simVol").value||0), w = WEIGHT[$("simTier").value], start = +$("simStart").value, fly = $("simType").value==="fly";
@@ -769,6 +763,7 @@ Chart.defaults.font.size = 11.5;
 Chart.defaults.color = "rgba(245,247,250,.45)";
 Chart.defaults.borderColor = GRID;
 Chart.defaults.plugins.legend.display = false;
+Chart.defaults.plugins.legend.labels.color = "#F5F7FA";
 Object.assign(Chart.defaults.plugins.tooltip, { backgroundColor:"rgba(20,22,28,.96)", titleColor:"#fff", bodyColor:"rgba(245,247,250,.85)", footerColor:"rgba(245,247,250,.6)", cornerRadius:10, padding:10, titleFont:{ weight:"600" } });
 if (reduced) Chart.defaults.animation = false;
 else Object.assign(Chart.defaults.animation, { duration:800, easing:"easeOutQuart", delay: ctx => ctx.type==="data" && ctx.mode==="default" ? ctx.dataIndex*30 : 0 });
@@ -806,11 +801,9 @@ function renderKpis(){
   const gaps = DATA.clients.reduce((s,c)=>s+missingRoles(c),0);
   const tiles = [
     ["Bottleneck", `${r0(u*100)}%`, worst.name, loadColor(u), "The team closest to its limit. This is what decides whether you can take another client.", `data-fn="${worst.key}"`],
-    ["Free Editing Capacity", `${head}`, "units / week", loadColor(util(edit)), `Editing units still available each week. One average client uses about ${DATA.avgClientUnits}.`, `data-fn="edit"`],
     ["Capacity Runs Out", breach===-1 ? "None" : DATA.weeks[breach].start, breach===-1 ? "next 13 weeks" : `in ${breach} week${breach===1?"":"s"}`, breach===-1 ? LOAD.green : breach<=4 ? LOAD.red : LOAD.yellow, "First week where projected workload exceeds what the bottleneck team can deliver.", `data-go="proj"`],
     ["Start Hiring By", breach===-1 ? "—" : hireIdx<0 ? "Now" : DATA.weeks[hireIdx].start, breach===-1 ? "no hire needed" : worst.name, breach===-1 ? LOAD.green : hireIdx<0 ? LOAD.red : LOAD.yellow, `Saturation week minus the ${leadWeeks(worst.key)} weeks it takes to source, hire and ramp that role.`, `data-go="hiring"`],
-    ["Clients Running Low", `${risk}`, "under 7 days of content", risk ? LOAD.red : LOAD.green, "Clients with fewer than 7 days of scheduled content right now.", `data-filter="fRisk=runway"`],
-    ["Unassigned Roles", `${gaps}`, `across ${DATA.clients.length} clients`, gaps>10 ? LOAD.red : gaps ? LOAD.yellow : LOAD.green, "Empty creative director, editor, backup or social media slots across all clients.", `data-filter="fRisk=gap"`]
+    ["Clients Running Low", `${risk}`, "under 7 days of content", risk ? LOAD.red : LOAD.green, "Clients with fewer than 7 days of scheduled content right now.", `data-filter="fRisk=runway"`]
   ];
   $("kpis").innerHTML = tiles.map(([k,v,s,c,t,link],i)=>`<div class="kpi" style="--i:${i}" data-tip="${esc(t)}" ${link} tabindex="0"><div class="k">${k}</div><div class="v"><i style="background:${c};color:${c}"></i><span class="cnt num">${v}</span></div><div class="s">${s}</div></div>`).join("");
   countUp($("kpis"));
@@ -868,7 +861,7 @@ function renderMix(){
   charts.mix = new Chart($("cMix"),{ type:"doughnut",
     data:{ labels:tiers.map(t=>`Tier ${t}`), datasets:[{ data:tiers.map(t=>tot[t]), backgroundColor:tiers.map(t=>loadColor(tu(t))), borderWidth:0, borderRadius:6, spacing:4 }]},
     options:{ cutout:"74%", responsive:true, maintainAspectRatio:false, onClick:(e,els)=>{ if (els.length){ $("selTier").value=tiers[els[0].index]; renderPeople(); toast(`Editor workload filtered to tier ${tiers[els[0].index]}`); } },
-      plugins:{ legend:{ display:true, position:"bottom", labels:{ usePointStyle:true, boxWidth:8, boxHeight:8, padding:14, color:"rgba(245,247,250,.64)", generateLabels:ch=>tiers.map((t,i)=>({ text:`Tier ${t} · ${r0(tot[t]/total*100)}%`, fillStyle:ch.data.datasets[0].backgroundColor[i], strokeStyle:"transparent", pointStyle:"circle", index:i })) } },
+      plugins:{ legend:{ display:true, position:"bottom", labels:{ usePointStyle:true, boxWidth:8, boxHeight:8, padding:14, color:"rgba(245,247,250,.64)", generateLabels:ch=>tiers.map((t,i)=>({ text:`Tier ${t} · ${r0(tot[t]/total*100)}%`, fillStyle:ch.data.datasets[0].backgroundColor[i], strokeStyle:"transparent", fontColor:"#F5F7FA", pointStyle:"circle", index:i })) } },
         tooltip:{ callbacks:{ label:c=>{ const t=tiers[c.dataIndex]; return ` Tier ${t} (${names[t]}): ${c.raw} units · editors ${r0(tu(t)*100)}% full`; } } } } },
     plugins:[{ id:"center", afterDraw(ch){ const {ctx,chartArea:a}=ch, cx=(a.left+a.right)/2, cy=(a.top+a.bottom)/2; ctx.save(); ctx.textAlign="center"; ctx.fillStyle="#F5F7FA";
       ctx.font="600 26px 'JetBrains Mono','Montserrat',sans-serif"; ctx.fillText(total, cx, cy+4); ctx.fillStyle="rgba(245,247,250,.4)"; ctx.font="11.5px 'Montserrat',sans-serif"; ctx.fillText("units / week", cx, cy+22); ctx.restore(); } }]
@@ -894,13 +887,15 @@ function renderForecast(){
   const { wk, base, fly, sim, cap, u, backlog } = forecastSeries(key, state.range, { flyouts:state.flyouts, hires:state.hires });
   const cap0 = wk.map(()=>fn.capacity);
   const over = u.filter(x=>x>1).length, peak = u.indexOf(Math.max(...u)), first = u.findIndex(x=>x>1), peakB = Math.max(...backlog);
+  const gap = Math.max(0, ...wk.map((w,i)=>base[i]+fly[i]+sim[i]-cap[i])), hires = gap>0 ? Math.ceil(gap/fn.hireUnits) : 0;
   $("wkStats").innerHTML = [
     ["Weeks Over Capacity", `${over}<small> / ${wk.length}</small>`, over ? LOAD.red : LOAD.green],
     ["Peak Week", `${r0(u[peak]*100)}%<small> · ${wk[peak].start}</small>`, loadColor(u[peak])],
     ["First Overload", first===-1 ? "None" : wk[first].start, first===-1 ? LOAD.green : LOAD.red],
-    ["Peak Backlog", `${r0(peakB)}<small> ${fn.unit}</small>`, peakB>0 ? LOAD.red : LOAD.green]
+    ["Gap at Peak", gap>0 ? `${r0(gap)}<small> ${fn.unit} ≈ ${hires} ${hires===1?fn.hire:fn.hire+"s"}</small>` : `0<small> ${fn.unit}</small>`, gap>0 ? LOAD.red : LOAD.green]
   ].map(statTile).join("");
   countUp($("wkStats"));
+  renderDepts();
 
   const chip = $("simChip");
   if (state.sim){
@@ -935,21 +930,17 @@ function renderForecast(){
       plugins:{ tooltip:{ callbacks:{ label:c=>` ${r0(c.raw)} ${fn.unit} carried over` } } } }
   });
 }
-function renderHistory(){
-  const H = DATA.history;
-  $("hist").innerHTML = DATA.functions.map(f=>{ const v = H[f.key], last = v[v.length-1], d = last - v[0], peak = Math.max(...v);
-    return `<div class="hm" data-fn="${f.key}" data-tip="${f.name}: ${last}% last week, peak ${peak}% on ${H.labels[v.indexOf(peak)]}."><div class="k"><span>${f.name}</span><span><b class="num">${last}%</b> <small style="color:${d>0?LOAD.yellow:LOAD.green}">${d>0?"+":""}${d} pts</small></span></div><div class="c"><canvas id="h-${f.key}"></canvas></div></div>`; }).join("");
-  DATA.functions.forEach(f=>{ const v = H[f.key];
-    charts["h-"+f.key] = new Chart($("h-"+f.key),{ type:"line", data:{ labels:H.labels, datasets:[{ data:v, borderColor:TREND[f.key], borderWidth:1.5, pointRadius:0, tension:.35, fill:"origin", backgroundColor:TREND[f.key]+"22" }]},
-      options:{ responsive:true, maintainAspectRatio:false, events:[], scales:{ x:{ display:false }, y:{ display:false, min:40, max:150 } }, plugins:{ tooltip:{ enabled:false } } },
-      plugins:[{ id:"h100", beforeDatasetsDraw(ch){ const {ctx,chartArea:a,scales:{y}}=ch, py=y.getPixelForValue(100); if (py<a.top||py>a.bottom) return; ctx.save(); ctx.strokeStyle="rgba(217,45,39,.5)"; ctx.setLineDash([3,3]); ctx.beginPath(); ctx.moveTo(a.left,py); ctx.lineTo(a.right,py); ctx.stroke(); ctx.restore(); } }] }); });
+function renderDepts(){
+  $("depts").innerHTML = DATA.functions.map(f=>{ const s = forecastSeries(f.key, 13, { flyouts:state.flyouts, hires:state.hires }), peak = Math.max(...s.u), t = trigger(f.key, { flyouts:state.flyouts, hires:state.hires });
+    return `<div class="dept ${state.fn===f.key?"on":""}" data-setfn="${f.key}"><div class="n"><span>${f.name}</span><b class="num" style="color:${loadColor(peak)}">${r0(peak*100)}%</b></div>
+      <div class="m"><span><i style="background:${t.breach===-1?LOAD.green:LOAD.red}"></i>${t.breach===-1 ? "holds 13 wks" : "saturates "+DATA.weeks[t.breach].start}</span><span class="num" style="color:${hireColor(t)}">${t.breach===-1 ? "" : "hire "+(t.hireIdx<0?"now":"by "+DATA.weeks[t.hireIdx].start)}</span></div></div>`; }).join("");
 }
 const TREND = { edit:"#3CB8FA", cd:"#FFFFFF", ppm:"#F472B6", smm:"#A78BFA" };
 function renderTrend(){
-  const wk = DATA.weeks, labels = wk.map(w=>w.start);
-  $("trendLg").innerHTML = DATA.functions.map(f=>`<span data-setfn="${f.key}" class="lnk" style="text-decoration:none"><i style="background:${TREND[f.key]}"></i>${f.name}</span>`).join("");
+  const past = state.trend==="past", H = DATA.history, wk = DATA.weeks, labels = past ? H.labels : wk.map(w=>w.start);
+  $("trendLg").innerHTML = DATA.functions.map(f=>`<span data-setfn="${f.key}" class="lnk" style="text-decoration:none;${state.fn===f.key?"color:var(--text)":""}"><i style="background:${TREND[f.key]}"></i>${f.name}</span>`).join("");
   upsert("trend","cTrend",{ type:"line",
-    data:{ labels, datasets:DATA.functions.map(f=>({ label:f.name, data:wk.map((w,i)=>r0((demand(w,f.key,true)+simDemand(f.key,i))/capacityAt(f.key,i,false)*100)), borderColor:TREND[f.key], borderWidth:f.key==="cd"?1.5:2, pointRadius:0, pointHoverRadius:4, tension:.3 })) },
+    data:{ labels, datasets:DATA.functions.map(f=>({ label:f.name, data:past ? H[f.key] : wk.map((w,i)=>r0((demand(w,f.key,true)+simDemand(f.key,i))/capacityAt(f.key,i,false)*100)), borderColor:TREND[f.key], borderWidth:state.fn===f.key?2.5:1.25, pointRadius:0, pointHoverRadius:4, tension:.3 })) },
     options:{ responsive:true, maintainAspectRatio:false, interaction:{ mode:"index", intersect:false },
       scales:{ x:{ ...noBorder, grid:{display:false} }, y:{ min:40, suggestedMax:130, ...noBorder, grid:{ color:GRID }, ticks:{ callback:v=>v+"%" } } },
       plugins:{ tooltip:{ callbacks:{ label:c=>` ${c.dataset.label}: ${c.raw}%` } } } },
@@ -1132,15 +1123,6 @@ function renderClients(){
     (ren.length ? ren.map(c=>{ const d=daysTo(c.renewal); return `<tr class="row" data-client="${esc(c.name)}"><td class="name">${esc(c.name)}</td><td class="num">${fmtDate(new Date(c.renewal+"T00:00:00"))}</td><td class="num" style="color:${d<=30?LOAD.red:d<=60?LOAD.yellow:"inherit"}">${d}</td><td>${ftaCell(c)}</td><td>${dayPill(c.days[0])}</td><td>${statusPill(c)}</td></tr>`; }).join("")
     : `<tr><td colspan="6" class="empty">No renewals in the window</td></tr>`) + `</tbody>`;
 
-  // workload by client
-  const byLoad = clientRows = [...rows].sort((a,b)=>clientUnits(b)-clientUnits(a));
-  upsert("clientLoad","cClientLoad",{ type:"bar",
-    data:{ labels:byLoad.map(c=>c.name), datasets:[{ data:byLoad.map(clientUnits), borderRadius:4, barThickness:12,
-      backgroundColor:byLoad.map(c=>{ const u=personLoad(c.editor); return u==null ? "rgba(255,255,255,.22)" : loadColor(u); }) }]},
-    options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false, onClick:(e,els)=>{ if (els.length) openClient(clientRows[els[0].index].name); },
-      scales:{ x:{ beginAtZero:true, ...noBorder, grid:{ color:GRID }, ticks:{ callback:v=>v+" u" } }, y:{ ...noBorder, grid:{display:false}, ticks:{ font:{size:11} } } },
-      plugins:{ tooltip:{ callbacks:{ label:c=>{ const r=clientRows[c.dataIndex], u=personLoad(r.editor); return ` ${c.raw} units · ${r.volume} videos · tier ${r.tier} · ${u==null ? "no editor assigned" : `${r.editor} at ${r0(u*100)}%`}`; } } } } }
-  });
 }
 function exportCsv(){
   const rows = filteredClients(), cols = ["name","status","type","tier","cadence","volume","units","cd","editor","backup","smm","runwayNow","runway4w","fta","committed","delivered","renewal","platforms","nextFlyout"];
@@ -1214,12 +1196,6 @@ function renderTeam(){
 
   const fm = DATA.formats, editors = people.filter(p=>p.name!=="Shahid");
   const who = Object.fromEntries(fm.map(f=>[f, editors.filter(p=>p.formats.includes(f)).length]));
-  upsert("radar","cRadar",{ type:"radar",
-    data:{ labels:fm, datasets:[{ data:fm.map(f=>who[f]), borderColor:"#3CB8FA", backgroundColor:"rgba(60,184,250,.16)", borderWidth:1.5, pointRadius:3, pointBackgroundColor:fm.map(f=>loadColor(fmtLoad(who[f]))), pointBorderWidth:0 }]},
-    options:{ responsive:true, maintainAspectRatio:false,
-      scales:{ r:{ beginAtZero:true, suggestedMax:8, grid:{ color:"rgba(255,255,255,.07)" }, angleLines:{ color:"rgba(255,255,255,.07)" }, ticks:{ display:false }, pointLabels:{ color:"rgba(245,247,250,.55)", font:{ size:10.5, family:"'JetBrains Mono',monospace" } } } },
-      plugins:{ tooltip:{ callbacks:{ label:c=>` ${c.raw} editor${c.raw===1?"":"s"} qualified` } } } }
-  });
   let html = `<div></div>` + fm.map(f=>`<div class="fh">${f}</div>`).join("");
   editors.forEach(p=>{ html += `<div class="fn" data-editor="${esc(p.name)}">${esc(p.name)}</div>` + fm.map(f=>p.formats.includes(f)
     ? `<div class="fc" data-editor="${esc(p.name)}" style="background:${loadColor(fmtLoad(who[f]))}" data-tip="${esc(p.name)} · ${f} · ${who[f]} qualified"></div>` : `<div class="fc"></div>`).join(""); });
@@ -1349,7 +1325,7 @@ function show(view, push=true){
   if (!inited[view]){
     inited[view]=true;
     if (view==="now"){ renderGauges(); renderSummary(); renderPeople(); renderMix(); }
-    if (view==="proj"){ renderForecast(); renderHistory(); renderTrend(); }
+    if (view==="proj"){ renderForecast(); renderTrend(); }
     if (view==="hiring"){ renderHiring(); }
     if (view==="fly"){ renderFlyouts(); }
     if (view==="clients"){ renderClients(); }
@@ -1369,8 +1345,8 @@ document.addEventListener("click", e=>{
   e.stopPropagation();
   const d = t.dataset;
   if (d.filter){ const [id,val]=d.filter.split("="); show("clients"); $(id).value=val; renderClients(); return; }
-  if (d.go){ show(d.go); if (d.setfn){ state.fn=d.setfn; $("selFn").value=d.setfn; renderForecast(); } return; }
-  if (d.setfn){ state.fn=d.setfn; $("selFn").value=d.setfn; renderForecast(); toast(`Forecast: ${FN(d.setfn).name}`); return; }
+  if (d.go){ show(d.go); if (d.setfn){ state.fn=d.setfn; renderForecast(); renderTrend(); } return; }
+  if (d.setfn){ state.fn=d.setfn; renderForecast(); renderTrend(); return; }
   if (d.fn) openFunction(d.fn);
   else if (d.editor) openEditor(d.editor);
   else if (d.client) openClient(d.client);
@@ -1379,11 +1355,12 @@ document.addEventListener("click", e=>{
 
 // filters
 ["selTier","selSort"].forEach(id=>$(id).addEventListener("change",renderPeople));
-DATA.functions.forEach(f=>{ const o=document.createElement("option"); o.value=f.key; o.textContent=f.name; $("selFn").appendChild(o); });
-$("selFn").addEventListener("change",e=>{ state.fn=e.target.value; renderForecast(); });
+document.querySelectorAll("#trendSeg button").forEach(b=>b.addEventListener("click",()=>{ state.trend=b.dataset.mode; document.querySelectorAll("#trendSeg button").forEach(x=>x.classList.toggle("on",x===b)); renderTrend(); }));
+$("simOpen").addEventListener("click",()=>{ const box=$("simBox"); box.hidden=!box.hidden; $("simOpen").textContent = box.hidden ? "What if we sign a client?" : "Hide simulator"; if (box.hidden && state.sim) $("simToggle").click(); });
+document.querySelectorAll("#sigSeg button").forEach(b=>b.addEventListener("click",()=>{ state.sig=b.dataset.sig; document.querySelectorAll("#sigSeg button").forEach(x=>x.classList.toggle("on",x===b)); document.querySelectorAll(".sig").forEach(s=>s.classList.toggle("on", s.id==="sig-"+state.sig)); if (state.sig==="approval" && charts.fta) charts.fta.resize(); }));
 $("selRange").addEventListener("change",e=>{ state.range=+e.target.value; renderForecast(); });
-$("flyToggle").addEventListener("click",()=>{ state.flyouts=!state.flyouts; $("flyToggle").classList.toggle("on",state.flyouts); renderForecast(); });
-$("hireToggle").addEventListener("click",()=>{ state.hires=!state.hires; $("hireToggle").classList.toggle("on",state.hires); renderForecast(); });
+$("flyToggle").addEventListener("click",()=>{ state.flyouts=!state.flyouts; $("flyToggle").classList.toggle("on",state.flyouts); renderForecast(); renderTrend(); });
+$("hireToggle").addEventListener("click",()=>{ state.hires=!state.hires; $("hireToggle").classList.toggle("on",state.hires); renderForecast(); renderTrend(); });
 fillSelect("simStart", DATA.weeks.map(w=>w.start), s=>s);
 $("simToggle").addEventListener("click",()=>{ state.sim=!state.sim; $("simToggle").classList.toggle("on",state.sim); renderForecast(); renderTrend(); });
 ["simTier","simVol","simType","simStart"].forEach(id=>$(id).addEventListener("input",()=>{ if (state.sim){ renderForecast(); renderTrend(); } }));
@@ -1433,6 +1410,7 @@ function palRender(){
     ...Object.entries(VIEWS).map(([k,n])=>({ g:"View", t:`Go to ${n}`, run:()=>show(k) })),
     ...DATA.functions.map(f=>({ g:"Function", t:f.name, s:`${r0(util(f)*100)}% · ${f.people} ${f.people===1?"person":"people"}`, run:()=>openFunction(f.key) })),
     { g:"Action", t:"Copy capacity briefing", run:copyBriefing },
+    { g:"Action", t:`${state.present?"Exit":"Start"} presentation mode`, s:"P", run:()=>setPresent(!state.present) },
     { g:"Action", t:`${state.flyouts?"Hide":"Show"} fly-outs in forecast`, run:()=>{ $("flyToggle").click(); show("proj"); } },
     { g:"Action", t:`${state.hires?"Hide":"Show"} planned hires in forecast`, run:()=>{ $("hireToggle").click(); show("proj"); } },
     ...DATA.clients.map(c=>({ g:"Client", t:c.name, s:`${typeLabel(c.type)} · ${c.editor||"no editor"} · ${c.days[0]}d`, run:()=>openClient(c.name) })),
@@ -1456,13 +1434,21 @@ document.addEventListener("keydown", e=>{
     else if (e.key==="Enter") palRun(palIdx);
     return;
   }
-  if (e.key==="Escape"){ closeDrawer(); return; }
+  if (e.key==="Escape"){ if (state.present) return setPresent(false); closeDrawer(); return; }
   if (typing) return;
+  if (e.key.toLowerCase()==="p"){ setPresent(!state.present); return; }
+  if (state.present && (e.key==="ArrowRight"||e.key==="ArrowLeft")){ const keys=Object.keys(VIEWS), i=keys.indexOf(document.querySelector("#views button.on").dataset.view); show(keys[(i+(e.key==="ArrowRight"?1:-1)+keys.length)%keys.length]); return; }
   if (e.key==="/"){ e.preventDefault(); palOpen(); }
   else if (/^[1-6]$/.test(e.key)) show(Object.keys(VIEWS)[+e.key-1]);
   else if (e.key.toLowerCase()==="c" && e.shiftKey) copyBriefing();
 });
 
+function setPresent(on){
+  state.present = on; document.body.classList.toggle("present", on);
+  if (on){ document.documentElement.requestFullscreen?.().catch(()=>{}); toast("Presentation mode · ← → to move, Esc to exit"); }
+  else if (document.fullscreenElement) document.exitFullscreen?.();
+  requestAnimationFrame(()=>Object.values(charts).forEach(c=>c.resize()));
+}
 // signed-in user (Cloudflare Access identity)
 async function renderUser(){
   const el = $("user");
@@ -1484,8 +1470,7 @@ async function renderUser(){
    BOOT
    ═══════════════════════════════════════════════════════════════════ */
 $("confYear").textContent = new Date().getFullYear();
-$("asOf").textContent = fmtDate(asOf, true);
-$("env").textContent = DATA.env;
+$("env").textContent = `${DATA.env} · ${fmtDate(asOf, true)}`;
 renderScales();
 renderKpis();
 renderUser();
