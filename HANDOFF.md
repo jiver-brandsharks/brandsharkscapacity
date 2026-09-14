@@ -10,7 +10,7 @@ A capacity-planning tool for Brand Sharks (short-form video agency). It answers 
 
 ## Files
 
-- `index.html` — the whole app: CSS, markup, `DATA` object (sample data), all logic. Chart.js 4.4.1 from cdnjs, Montserrat + JetBrains Mono from Google Fonts, `@font-face` for Proxima Nova pointing at `fonts/ProximaNova-Regular.woff2` / `-Bold.woff2` (files not in repo; drop them in and the brand font loads). No build step.
+- `index.html` — the whole app: CSS, markup, `DATA` object (sample data), all logic. Chart.js 4.4.1 from cdnjs, Montserrat from Google Fonts (fallback only), `@font-face` for Proxima Nova pointing at `fonts/ProximaNova-Regular.woff2` / `-Bold.woff2` (files not in repo; drop them in and the brand font loads). No build step.
 - `functions/api/ask.js` — Cloudflare Pages Function. Proxies the copilot chat to the Claude API (`claude-opus-5`, streaming SSE, `fallbacks: "default"` with beta `server-side-fallback-2026-07-01`, `output_config.effort: "medium"`). Needs `ANTHROPIC_API_KEY` (optional `ANTHROPIC_MODEL`) as a Pages environment variable. The dashboard state is sent as the `context` and injected into the system prompt.
 - `README.md` — deploy and env-var notes. `wrangler.toml` — placeholder.
 - Outside the repo: `Documents/Capacity/master-capacity-sheet.xlsx` (manual data source; has a `Hiring Lead Time` tab), `capacity-handoff.md` (original brief), `Capacity-Team-Guide.pdf` (team presentation, 14 slides; owner said no more PDFs).
@@ -29,13 +29,13 @@ A capacity-planning tool for Brand Sharks (short-form video agency). It answers 
 
 ## Views
 
-Overview (4 KPIs, Capacity Utilization with a Gauges / Rings / 90-Day Heatmap dropdown, verdict + next action, Editor Workload, Demand Mix) · Forecast (department tiles, simulator, stats incl. Gap at Peak in hires, stacked weekly chart, All Departments next/past 90 days) · Hiring (triggers table, lead-time table, hiring windows timeline) · Fly-outs (calendar, upcoming batches) · Clients (portfolio with column sets, sort, group-by, filters, CSV; Signals card with Runway / Delivery / Approval / Renewals tabs) · Team (roster, rebalancing moves, single points of failure, format coverage).
+Overview (4 KPIs, Capacity Utilization with a Gauges / Bars / Runway to Saturation / 90-Day Heatmap dropdown, verdict + next action, Editor Workload, Demand Mix) · Forecast (department tiles, simulator, stats incl. Gap at Peak in hires, stacked weekly chart, All Departments next/past 90 days) · Hiring (triggers table, lead-time table, hiring windows timeline) · Fly-outs (calendar, upcoming batches) · Clients (portfolio with sort, group-by, filters, CSV; Signals card with Runway / Delivery / Approval / Renewals tabs) · Team (roster, rebalancing moves, single points of failure, format coverage).
 
 Everything is a link: KPIs, gauges, names and dates open drawers (client, editor, department, owner). Command palette ⌘K or `/` (only shortcut kept; Esc closes). Presentation mode and copilot are reachable from the palette; copilot also via the floating **Ask Copilot** button. Deep links: `#forecast`, `?client=Name`, `?editor=Name`, `?fn=cd`, `?owner=cd:Name`, `?copilot=1`, `?present=1`.
 
 ## Design rules the owner cares about
 
-Black background, brand blue `#3CB8FA`, three status colours only (`#2FBF55`, `#FFD60A`, `#D92D27`), Proxima Nova Bold for titles / Regular for text (Montserrat fallback, weights 700/400), JetBrains Mono for numerals, thin status line on tiles (no interior glow), minimal copy (tooltips on the "i" instead of subtitles), no native black text (`color-scheme: dark`), no purple anywhere, no PDFs.
+Black background, brand blue `#3CB8FA`, three status colours only (`#2FBF55`, `#FFD60A`, `#D92D27`), Proxima Nova Bold for titles / Regular for text (Montserrat fallback, weights 700/400), thin status line on tiles (no interior glow), minimal copy (tooltips on the "i" instead of subtitles), no native black text (`color-scheme: dark`), no purple anywhere, no PDFs.
 
 ## Open items
 

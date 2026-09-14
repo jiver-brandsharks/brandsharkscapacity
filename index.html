@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark">
 <title>Capacity - Brand Sharks</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23000'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M30 60c6-24 6-38 2-46 30 1 50 22 54 46'/%3E%3Cpath d='M14 70c8 0 8-5 16-5s8 5 16 5 8-5 16-5 8 5 16 5 8-5 10-5'/%3E%3Cpath d='M14 82c8 0 8-5 16-5s8 5 16 5 8-5 16-5 8 5 16 5 8-5 10-5'/%3E%3C/g%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   /* Brand font. Drop the licensed files into /fonts and Proxima Nova loads automatically; Montserrat is the fallback. */
@@ -18,7 +18,7 @@
     --text:#F5F7FA; --text-2:rgba(245,247,250,.64); --text-3:rgba(245,247,250,.42);
     --card:rgba(255,255,255,.045); --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.14);
     --green:#2FBF55; --amber:#FFD60A; --red:#D92D27;
-    --r:22px; --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --r:22px; --mono:'Proxima Nova','Montserrat',sans-serif;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -28,7 +28,7 @@
     radial-gradient(700px 500px at 85% 75%, rgba(60,184,250,.10) 0%, rgba(0,0,0,0) 60%), #000;}
   button{font:inherit;color:inherit;}
   select,input{color-scheme:dark;}
-  .num,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em;}
+  .num,.mono{font-variant-numeric:tabular-nums;}
   .wrap{max-width:1240px;margin:0 auto;padding:0 28px 48px;}
 
   /* links: any element with a data-* target is navigable */
@@ -61,7 +61,7 @@
   .user .em{font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
   /* KPI strip */
-  .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px;}
+  .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-bottom:18px;}
   .kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;min-width:0;}
   .kpi .k{font-size:10.5px;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .kpi .v{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:700;margin-top:6px;white-space:nowrap;line-height:1.2;}
@@ -69,14 +69,14 @@
   .kpi .s{font-size:12px;color:var(--text-3);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
   /* cards */
-  .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);min-width:0;}
+  .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px 30px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);min-width:0;}
   .span-12{grid-column:span 12;} .span-8{grid-column:span 8;} .span-7{grid-column:span 7;} .span-6{grid-column:span 6;} .span-5{grid-column:span 5;} .span-4{grid-column:span 4;}
-  .ch{display:flex;align-items:flex-start;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin-bottom:20px;}
+  .ch{display:flex;align-items:flex-start;justify-content:space-between;gap:14px 24px;flex-wrap:wrap;margin-bottom:24px;}
   .ch h2{font-size:15px;font-weight:700;letter-spacing:-.01em;margin:0;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;}
-  .ch h2 .i{width:15px;height:15px;border-radius:50%;border:1px solid var(--line-2);color:var(--text-3);font:600 10px var(--mono);display:inline-flex;align-items:center;justify-content:center;cursor:help;}
+  .ch h2 .i{width:15px;height:15px;border-radius:50%;border:1px solid var(--line-2);color:var(--text-3);font:400 10px var(--mono);display:inline-flex;align-items:center;justify-content:center;cursor:help;}
   .ch .sub{font-size:12.5px;color:var(--text-3);margin-top:2px;}
-  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
   .chartbox{position:relative;width:100%;}
   .tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .empty{padding:28px 0;text-align:center;color:var(--text-3);font-size:13px;}
@@ -126,7 +126,7 @@
   .next p b{color:var(--text);font-weight:700;}
   .next .more{margin-top:10px;}
 
-  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:22px;}
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:24px;}
   .stat{position:relative;overflow:hidden;padding:12px 14px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));border:1px solid var(--line);min-width:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);}
   .stat::before{content:"";position:absolute;left:14px;right:45%;top:0;height:2px;border-radius:2px;background:linear-gradient(90deg, var(--c, transparent), transparent);}
   .stat > *{position:relative;}
@@ -134,7 +134,7 @@
   .stat .k i{width:7px;height:7px;border-radius:50%;flex:none;}
   .stat .v{font-size:22px;font-weight:700;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .stats3{grid-template-columns:repeat(3,minmax(0,1fr));}
-  .stat .v small{font-size:12px;font-weight:500;color:var(--text-3);font-family:'Montserrat',sans-serif;}
+  .stat .v small{font-size:12px;font-weight:400;color:var(--text-3);font-family:'Montserrat',sans-serif;}
 
   /* premium surfaces */
   .card{background:linear-gradient(180deg, rgba(255,255,255,.065) 0%, rgba(255,255,255,.035) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 30px 60px -40px rgba(0,0,0,.9);}
@@ -145,28 +145,17 @@
   /* gauges */
   .gauge{position:relative;padding:10px 8px 8px;border-radius:18px;border:1px solid transparent;transition:border-color .2s,background .2s;}
   .gauge:hover{background:rgba(255,255,255,.03);border-color:var(--line);}
-  .gauge .val small{display:block;font:500 10.5px 'Montserrat',sans-serif;color:var(--text-3);letter-spacing:.08em;margin-top:2px;}
+  .gauge .val small{display:block;font:400 10.5px 'Montserrat',sans-serif;color:var(--text-3);letter-spacing:.08em;margin-top:2px;}
   .capv[hidden]{display:none;}
-  .rings{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center;}
-  .rings .chartbox{min-width:0;}
-  .ringlist{display:flex;flex-direction:column;}
-  .ringlist .rl{display:grid;grid-template-columns:10px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--line);cursor:pointer;}
-  .ringlist .rl:first-child{border-top:0;}
-  .ringlist .rl:hover .n{color:var(--accent);}
-  .ringlist .rl i{width:10px;height:10px;border-radius:50%;}
-  .ringlist .rl .n{font-size:14px;font-weight:700;}
-  .ringlist .rl small{display:block;font-size:11.5px;color:var(--text-3);margin-top:2px;}
-  .ringlist .rl b{font-size:20px;font-weight:700;}
   .hmap{display:grid;grid-template-columns:150px repeat(12,minmax(0,1fr));gap:4px;min-width:820px;}
-  .hmap .hh{font:500 10px var(--mono);color:var(--text-3);text-align:center;padding-bottom:4px;white-space:nowrap;overflow:hidden;}
+  .hmap .hh{font:400 10px var(--mono);color:var(--text-3);text-align:center;padding-bottom:4px;white-space:nowrap;overflow:hidden;}
   .hmap .hl{font-size:13px;font-weight:700;display:flex;align-items:center;cursor:pointer;}
   .hmap .hl:hover{color:var(--accent);}
-  .hmap .hc{height:36px;border-radius:7px;display:flex;align-items:center;justify-content:center;font:600 11.5px var(--mono);color:var(--text);cursor:pointer;transition:transform .15s;}
+  .hmap .hc{height:36px;border-radius:7px;display:flex;align-items:center;justify-content:center;font:400 11.5px var(--mono);color:var(--text);cursor:pointer;transition:transform .15s;}
   .hmap .hc:hover{transform:scale(1.06);}
-  @media (max-width:900px){ .rings{grid-template-columns:minmax(0,1fr);} .rings .chartbox{height:240px!important;} }
 
   /* department tiles */
-  .depts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px;}
+  .depts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:22px;}
   .dept{position:relative;overflow:hidden;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));cursor:pointer;transition:border-color .2s,background .2s,transform .2s;min-width:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);}
   .dept::before{content:"";position:absolute;left:14px;right:45%;top:0;height:2px;border-radius:2px;background:linear-gradient(90deg, var(--c, transparent), transparent);}
   .dept > *{position:relative;} .dept:hover{transform:translateY(-1px);}
@@ -199,11 +188,12 @@
 
   /* tables */
   table.t{width:100%;border-collapse:collapse;font-size:13px;}
-  .t th{color:var(--text-3);font-size:11px;font-weight:500;text-align:left;vertical-align:bottom;padding:0 12px 10px 0;line-height:1.3;white-space:nowrap;letter-spacing:.02em;}
-  .t td{padding:10px 12px 10px 0;border-top:1px solid var(--line);white-space:nowrap;color:var(--text-2);}
+  .t th{color:var(--text-3);font-size:11.5px;font-weight:400;text-align:left;vertical-align:bottom;padding:0 18px 12px 0;line-height:1.3;white-space:nowrap;}
+  .t td{padding:14px 18px 14px 0;border-top:1px solid var(--line);white-space:nowrap;color:var(--text-2);vertical-align:middle;}
   .t tr.row{transition:background .15s;}
   .t tr.row:hover td{background:rgba(255,255,255,.03);}
   .t td.name{color:var(--text);font-weight:700;}
+  .t td.name small{display:block;font-weight:400;font-size:12px;color:var(--text-3);margin-top:3px;}
   .t .muted{color:var(--text-3);}
   .t .miss{color:var(--text);font-weight:700;}
   .t .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle;}
@@ -218,15 +208,15 @@
   .t th.on{color:var(--text);}
   .t th.on::after{content:" ↓";font-family:var(--mono);font-size:10px;} .t th.on.asc::after{content:" ↑";}
   .t tr.grp td{padding:14px 12px 8px 0;border-top:0;color:var(--text);font-weight:700;font-size:12.5px;}
-  .t tr.grp td .gm{color:var(--text-3);font-weight:500;margin-left:10px;font-family:var(--mono);font-size:11px;}
+  .t tr.grp td .gm{color:var(--text-3);font-weight:400;margin-left:10px;font-family:var(--mono);font-size:11px;}
   .t .pill .dot{margin-right:6px;}
   .t .prog{display:inline-block;width:80px;height:6px;vertical-align:middle;margin-right:8px;position:relative;overflow:visible;}
   .t .prog i{transition:none;}
   .t .prog::after{content:"";position:absolute;top:-3px;bottom:-3px;width:1px;background:rgba(255,255,255,.55);left:var(--pace,0%);}
-  .t .plat{font:600 10.5px var(--mono);padding:2px 6px;border:1px solid var(--line);border-radius:6px;color:var(--text-3);margin-right:4px;}
+  .t .plat{font:400 10.5px var(--mono);padding:2px 6px;border:1px solid var(--line);border-radius:6px;color:var(--text-3);margin-right:4px;}
 
   /* delivery list */
-  .dl{display:grid;grid-template-columns:minmax(120px,1.2fr) 3fr auto auto;gap:6px 16px;align-items:center;font-size:13px;}
+  .dl{display:grid;grid-template-columns:minmax(140px,1.2fr) 3fr auto auto;gap:12px 20px;align-items:center;font-size:13px;}
   .dl .h{font-size:11px;color:var(--text-3);padding-bottom:6px;border-bottom:1px solid var(--line);}
   .dl .n{color:var(--text);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .dl .n:hover{color:var(--accent);}
@@ -237,7 +227,7 @@
   .dl .out{color:var(--text-3);white-space:nowrap;min-width:96px;}
 
   /* runway list */
-  .rw{display:grid;grid-template-columns:minmax(120px,1.2fr) 3fr auto auto;gap:6px 16px;align-items:center;font-size:13px;}
+  .rw{display:grid;grid-template-columns:minmax(140px,1.2fr) 3fr auto auto;gap:12px 20px;align-items:center;font-size:13px;}
   .rw .h{font-size:11px;color:var(--text-3);letter-spacing:.02em;padding-bottom:6px;border-bottom:1px solid var(--line);}
   .rw .n{color:var(--text);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .rw .n:hover{color:var(--accent);}
@@ -275,26 +265,26 @@
 
   /* timelines (hiring windows, fly-out calendar) */
   .tl{min-width:720px;}
-  .tl .tlh,.tl .tlr{display:grid;grid-template-columns:150px 1fr 270px;gap:0 16px;align-items:center;}
+  .tl .tlh,.tl .tlr{display:grid;grid-template-columns:170px 1fr 290px;gap:0 22px;align-items:center;}
   .tl{min-width:860px;}
-  .tl .cap{font:500 11.5px var(--mono);color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .tl .cap{font-size:12.5px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .tl .cap b{color:var(--text);font-weight:700;}
   .tl .cap i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle;}
-  .tl .today{font:500 10px var(--mono);color:var(--accent);text-align:left;padding-left:2px;}
+  .tl .today{font:400 10px var(--mono);color:var(--accent);text-align:left;padding-left:2px;}
   .tl .tlh{margin-bottom:8px;}
   .tl .weeks{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));}
-  .tl .weeks span{font:500 9.5px var(--mono);color:var(--text-3);text-align:center;white-space:nowrap;overflow:hidden;letter-spacing:-.02em;}
-  .tl .tlr{padding:7px 0;border-top:1px solid var(--line);}
+  .tl .weeks span{font:400 9.5px var(--mono);color:var(--text-3);text-align:center;white-space:nowrap;overflow:hidden;letter-spacing:-.02em;}
+  .tl .tlr{padding:12px 0;border-top:1px solid var(--line);}
   .tl .lbl{font-size:13px;color:var(--text);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .tl .lbl small{display:block;font-size:11.5px;color:var(--text-3);font-weight:500;}
+  .tl .lbl small{display:block;font-size:11.5px;color:var(--text-3);font-weight:400;}
   .tl .lane{position:relative;height:26px;background:repeating-linear-gradient(to right, rgba(255,255,255,.04) 0, rgba(255,255,255,.04) 1px, transparent 1px, transparent calc(100%/12));border-radius:6px;}
   .tl .lane::before{content:"";position:absolute;left:0;top:-4px;bottom:-4px;width:1px;background:rgba(60,184,250,.6);}
   .tl .bar{position:absolute;top:5px;height:16px;border-radius:5px;box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 0 14px -2px var(--glow, transparent);transform-origin:left center;animation:growX .7s cubic-bezier(.2,.8,.2,1) both;}
   .tl .bar.ramp{background:linear-gradient(90deg, rgba(60,184,250,.15), rgba(60,184,250,.7));--glow:rgba(60,184,250,.5);}
-  .tl .bar.mark{display:flex;align-items:center;justify-content:center;font:600 11px var(--mono);color:var(--text);}
+  .tl .bar.mark{display:flex;align-items:center;justify-content:center;font:400 11px var(--mono);color:var(--text);}
   .tl .dot{position:absolute;top:8px;width:10px;height:10px;border-radius:50%;margin-left:-5px;box-shadow:0 0 0 3px rgba(0,0,0,.6), 0 0 12px var(--glow, transparent);}
   @keyframes growX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-  .tl .none{position:absolute;left:10px;top:4px;font-size:11.5px;color:var(--text-3);line-height:18px;}
+  .tl .none{display:none;}
 
   /* lead-time table */
   .lt td.num{font-family:var(--mono);}
@@ -317,14 +307,14 @@
   .drawer .kv div{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));box-shadow:inset 0 1px 0 rgba(255,255,255,.05);}
   .drawer .kv .k{font-size:11px;color:var(--text-3);}
   .drawer .kv .v{font-size:18px;font-weight:700;margin-top:2px;}
-  .drawer .kv .v small{font-size:11.5px;color:var(--text-3);font-family:'Montserrat',sans-serif;font-weight:500;}
+  .drawer .kv .v small{font-size:11.5px;color:var(--text-3);font-family:'Montserrat',sans-serif;font-weight:400;}
   .drawer .list{display:flex;flex-direction:column;}
   .drawer .list div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;}
   .drawer .list div span:first-child{color:var(--text);}
   .drawer .list div span:last-child{color:var(--text-3);white-space:nowrap;}
   .drawer .list div[data-editor]:hover span:first-child,.drawer .list div[data-client]:hover span:first-child,.drawer .list div[data-owner]:hover span:first-child{color:var(--accent);}
   .drawer .fmts{display:flex;flex-wrap:wrap;gap:6px;}
-  .drawer .fmts span{font:600 11px var(--mono);padding:4px 8px;border:1px solid var(--line);border-radius:7px;color:var(--text-2);}
+  .drawer .fmts span{font:400 11px var(--mono);padding:4px 8px;border:1px solid var(--line);border-radius:7px;color:var(--text-2);}
   .drawer .note{font-size:12.5px;color:var(--text-2);padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.04);border-left:2px solid var(--accent);}
   .drawer .note b{color:var(--text);}
   .drawer .bar{display:inline-block;width:64px;height:5px;border-radius:999px;background:rgba(255,255,255,.08);vertical-align:middle;margin-right:8px;overflow:hidden;}
@@ -342,7 +332,7 @@
   .pal li .g{font-size:11px;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase;}
   .pal li.sel,.pal li:hover{background:rgba(255,255,255,.07);color:var(--text);}
   .pal .hint{display:flex;gap:14px;padding:10px 20px;border-top:1px solid var(--line);font-size:11px;color:var(--text-3);}
-  .pal .hint kbd{font:500 10.5px var(--mono);padding:1px 5px;border:1px solid var(--line);border-radius:4px;margin-right:4px;}
+  .pal .hint kbd{font:400 10.5px var(--mono);padding:1px 5px;border:1px solid var(--line);border-radius:4px;margin-right:4px;}
 
   /* copilot */
   .fab{position:fixed;right:24px;bottom:24px;z-index:45;display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 16px 0 14px;border-radius:999px;border:1px solid rgba(60,184,250,.35);background:linear-gradient(135deg, rgba(60,184,250,.22), rgba(30,111,176,.28));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:var(--text);font-size:13px;font-weight:400;cursor:pointer;box-shadow:0 12px 30px -12px rgba(60,184,250,.6), inset 0 1px 0 rgba(255,255,255,.15);transition:transform .2s,box-shadow .2s;}
@@ -353,7 +343,7 @@
   .ai.on{transform:none;opacity:1;pointer-events:auto;}
   .ai .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);}
   .ai .hd .t{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:700;}
-  .ai .hd .t small{font:500 10.5px var(--mono);color:var(--text-3);padding:2px 7px;border:1px solid var(--line);border-radius:6px;}
+  .ai .hd .t small{font:400 10.5px var(--mono);color:var(--text-3);padding:2px 7px;border:1px solid var(--line);border-radius:6px;}
   .ai .hd .x{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text-2);cursor:pointer;display:flex;align-items:center;justify-content:center;}
   .ai .log{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:12px;}
   .ai .m{max-width:92%;font-size:13.5px;line-height:1.55;padding:10px 13px;border-radius:14px;animation:rise .3s cubic-bezier(.2,.8,.2,1) both;white-space:pre-wrap;}
@@ -367,7 +357,7 @@
   .ai .typing{display:inline-flex;gap:4px;padding:4px 0;} .ai .typing i{width:6px;height:6px;border-radius:50%;background:var(--text-3);animation:blink 1.2s infinite;} .ai .typing i:nth-child(2){animation-delay:.2s} .ai .typing i:nth-child(3){animation-delay:.4s}
   @keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
   .ai .chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 16px 10px;}
-  .ai .chips button{font:600 11.5px 'Montserrat',sans-serif;color:var(--text-2);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:999px;padding:6px 11px;cursor:pointer;transition:background .2s,color .2s;}
+  .ai .chips button{font:400 11.5px 'Montserrat',sans-serif;color:var(--text-2);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:999px;padding:6px 11px;cursor:pointer;transition:background .2s,color .2s;}
   .ai .chips button:hover{background:rgba(60,184,250,.14);color:var(--text);border-color:rgba(60,184,250,.35);}
   .ai form{display:flex;gap:8px;padding:12px 14px 14px;border-top:1px solid var(--line);}
   .ai input{flex:1;min-width:0;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.05);color:var(--text);font:inherit;font-size:13.5px;padding:10px 12px;outline:0;}
@@ -424,7 +414,7 @@
   .view{display:none;} .view.on{display:block;}
   .foot{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:8px 32px;flex-wrap:wrap;font-size:11.5px;line-height:1.6;color:var(--text-3);}
   .foot b{color:var(--text-2);font-weight:700;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;margin-right:8px;}
-  .foot kbd{font:500 10.5px var(--mono);padding:1px 5px;border:1px solid var(--line);border-radius:4px;}
+  .foot kbd{font:400 10.5px var(--mono);padding:1px 5px;border:1px solid var(--line);border-radius:4px;}
 
   @media (max-width:1100px){ .mast{grid-template-columns:auto 1fr auto;} .mast .seg{justify-self:center;} }
   @media (max-width:1000px){ .brand .env{display:none;} }
@@ -474,11 +464,12 @@
     <div class="grid">
       <section class="card span-12">
         <div class="ch">
-          <div><h2>Capacity Utilization <span class="i" data-tip="Share of each department's weekly capacity already committed. Ticks mark 85% and 100%. Switch the view for concentric rings or a week-by-week heatmap. Click a department for the breakdown.">i</span></h2></div>
-          <div class="controls"><label class="field">View <select class="sel" id="capView"><option value="gauges">Gauges</option><option value="rings">Rings</option><option value="heat">90-Day Heatmap</option></select></label><div class="lg" data-scale="util"></div></div>
+          <div><h2>Capacity Utilization <span class="i" data-tip="Share of each department's weekly capacity already committed. Ticks mark 85% and 100%. Switch the view: bars against capacity, runway until each department saturates, or a week-by-week heatmap. Click a department for the breakdown.">i</span></h2></div>
+          <div class="controls"><label class="field">View <select class="sel" id="capView"><option value="gauges">Gauges</option><option value="bars">Bars</option><option value="runway">Runway to Saturation</option><option value="heat">90-Day Heatmap</option></select></label><div class="lg" data-scale="util"></div></div>
         </div>
         <div class="capv" data-v="gauges"><div class="gauges" id="gauges"></div></div>
-        <div class="capv" data-v="rings" hidden><div class="rings"><div class="chartbox" style="height:300px"><canvas id="cRings"></canvas></div><div class="ringlist" id="ringList"></div></div></div>
+        <div class="capv" data-v="bars" hidden><div class="chartbox" style="height:240px"><canvas id="cDeptBars"></canvas></div><div class="lg" data-scale="util" data-extra="cap85" style="margin-top:14px"></div></div>
+        <div class="capv" data-v="runway" hidden><div class="tblwrap"><div class="tl" id="capRunway"></div></div></div>
         <div class="capv" data-v="heat" hidden><div class="tblwrap"><div class="hmap" id="capHeat"></div></div></div>
         <div class="summary">
           <div><p class="verdict" id="call"></p><p class="verdict-sub" id="callSub"></p></div>
@@ -589,7 +580,6 @@
         <div class="ch">
           <div><h2>Client Portfolio <span class="i" data-tip="One row per client. Fly-out: we shoot a batch on location. Self-Record: we send the script, the client films, we edit - these are the hardest to keep out of the red zone. Clipping: we cut existing footage. Click a header to sort, group by owner, switch column sets or export CSV.">i</span></h2><div class="sub" id="clientCount"></div></div>
           <div class="controls">
-            <label class="field">Columns <select class="sel" id="fCols"><option value="ownership">Ownership</option><option value="delivery">Delivery &amp; Quality</option></select></label>
             <label class="field">Group <select class="sel" id="fGroup"><option value="none">None</option><option value="cd">Creative Director</option><option value="smm">Social Media</option><option value="editor">Editor</option></select></label>
             <label class="field">Type <select class="sel" id="fType"><option value="all">All Types</option></select></label>
             <label class="field">Show <select class="sel" id="fRisk"><option value="all">Everything</option><option value="critical">Critical Only</option><option value="attention">Needs Attention</option><option value="runway">Runway Under 7 Days</option><option value="gap">Missing a Role</option><option value="fta">Approval Under Target</option><option value="pace">Behind Delivery Pace</option><option value="renewal">Renewing in 90 Days</option><option value="flyout">Fly-out in Next 4 Weeks</option></select></label>
@@ -795,6 +785,7 @@ const $ = id => document.getElementById(id);
 const tipEl = $("tip");
 const r0 = n => Math.round(n);
 const r1 = n => Math.round(n*10)/10;
+const tc = s => String(s).replace(/\b[a-z]/g, m=>m.toUpperCase());
 const an = w => (/^([aeiou]|8|11|18)/i.test(String(w)) ? "an " : "a ") + w;
 const esc = v => String(v).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
 const WEIGHT = { A:2, B:1, C:.5 }, TIER_RANK = { A:3, B:2, C:1 };
@@ -928,9 +919,9 @@ function renderKpis(){
   const gaps = DATA.clients.reduce((s,c)=>s+missingRoles(c),0);
   const tiles = [
     ["Bottleneck", `${r0(u*100)}%`, worst.name, loadColor(u), "The team closest to its limit. This is what decides whether you can take another client.", `data-fn="${worst.key}"`],
-    ["Capacity Runs Out", breach===-1 ? "None" : DATA.weeks[breach].start, breach===-1 ? "next 90 days" : `in ${breach} week${breach===1?"":"s"}`, breach===-1 ? LOAD.green : breach<=4 ? LOAD.red : LOAD.yellow, "First week where projected workload exceeds what the bottleneck team can deliver.", `data-go="proj"`],
-    ["Start Hiring By", breach===-1 ? "-" : hireIdx<0 ? "Now" : DATA.weeks[hireIdx].start, breach===-1 ? "no hire needed" : worst.name, breach===-1 ? LOAD.green : hireIdx<0 ? LOAD.red : LOAD.yellow, `Saturation week minus the ${leadWeeks(worst.key)} weeks it takes to source, hire and ramp that role.`, `data-go="hiring"`],
-    ["Clients Running Low", `${risk}`, risk ? `${DATA.clients.filter(c=>c.days[0]<7&&c.type==="Virtual").length} self-record · ${DATA.clients.filter(c=>c.days[0]<7&&c.type!=="Virtual").length} other` : "under 7 days of content", risk ? LOAD.red : LOAD.green, "Clients with fewer than 7 days of scheduled content right now. Self-record clients depend on the client filming, so they run dry first.", `data-filter="fRisk=runway"`]
+    ["Capacity Runs Out", breach===-1 ? "None" : DATA.weeks[breach].start, breach===-1 ? "Next 90 Days" : `In ${breach} Week${breach===1?"":"s"}`, breach===-1 ? LOAD.green : breach<=4 ? LOAD.red : LOAD.yellow, "First week where projected workload exceeds what the bottleneck team can deliver.", `data-go="proj"`],
+    ["Start Hiring By", breach===-1 ? "-" : hireIdx<0 ? "Now" : DATA.weeks[hireIdx].start, breach===-1 ? "No Hire Needed" : worst.name, breach===-1 ? LOAD.green : hireIdx<0 ? LOAD.red : LOAD.yellow, `Saturation week minus the ${leadWeeks(worst.key)} weeks it takes to source, hire and ramp that role.`, `data-go="hiring"`],
+    ["Clients Running Low", `${risk}`, risk ? `${DATA.clients.filter(c=>c.days[0]<7&&c.type==="Virtual").length} Self-Record · ${DATA.clients.filter(c=>c.days[0]<7&&c.type!=="Virtual").length} Other` : "Under 7 Days of Content", risk ? LOAD.red : LOAD.green, "Clients with fewer than 7 days of scheduled content right now. Self-record clients depend on the client filming, so they run dry first.", `data-filter="fRisk=runway"`]
   ];
   $("kpis").innerHTML = tiles.map(([k,v,s,c,t,link],i)=>`<div class="kpi" style="--i:${i};--c:${c}" data-tip="${esc(t)}" ${link} tabindex="0"><div class="k">${k}</div><div class="v"><i class="${c===LOAD.red?"alert":""}" style="background:${c};color:${c}"></i><span class="cnt num">${v}</span></div><div class="s">${s}</div></div>`).join("");
   countUp($("kpis"));
@@ -988,20 +979,32 @@ const CAPV = { get(){ try { return localStorage.getItem("bs-capview") || "gauges
 function renderCapView(){
   const v = $("capView").value; CAPV.set(v);
   document.querySelectorAll(".capv").forEach(el=>el.hidden = el.dataset.v!==v);
-  if (v==="gauges") renderGauges(); else if (v==="rings") renderRings(); else renderCapHeat();
+  if (v==="gauges") renderGauges(); else if (v==="bars") renderDeptBars(); else if (v==="runway") renderCapRunway(); else renderCapHeat();
   requestAnimationFrame(()=>Object.values(charts).forEach(c=>c.resize()));
 }
-function renderRings(){
-  const fns = orderedFns(), worst = DATA.functions.reduce((a,b)=>util(b)>util(a)?b:a);
-  upsert("rings","cRings",{ type:"doughnut",
-    data:{ labels:fns.map(f=>f.name), datasets:fns.map(f=>{ const u=Math.min(util(f),1.25), col=loadColor(util(f)); return { label:f.name, data:[u, 1.25-u], borderWidth:3, borderColor:"rgba(10,11,14,1)", borderRadius:6,
-      backgroundColor:ctx=>{ if (ctx.dataIndex===1) return "rgba(255,255,255,.06)"; const a=ctx.chart.chartArea; if (!a) return col; const g=ctx.chart.ctx.createLinearGradient(a.left,0,a.right,0); g.addColorStop(0,hexA(col,.45)); g.addColorStop(1,col); return g; } }; }) },
-    options:{ cutout:"46%", rotation:-125, circumference:250, responsive:true, maintainAspectRatio:false, events:[], plugins:{ tooltip:{ enabled:false } } },
-    plugins:[{ id:"ringCenter", afterDraw(ch){ const {ctx,chartArea:a}=ch, cx=(a.left+a.right)/2, cy=(a.top+a.bottom)/2; ctx.save(); ctx.textAlign="center"; ctx.fillStyle=loadColor(util(worst));
-      ctx.font="700 22px 'JetBrains Mono','Montserrat',sans-serif"; ctx.fillText(r0(util(worst)*100)+"%", cx, cy+4); ctx.fillStyle="rgba(245,247,250,.45)"; ctx.font="400 9.5px 'Montserrat',sans-serif"; ctx.fillText(worst.short.toUpperCase(), cx, cy+20); ctx.restore(); } }]
+let deptRows = [];
+function renderDeptBars(){
+  const rows = deptRows = orderedFns().map(f=>({ ...f, u:util(f) }));
+  upsert("deptBars","cDeptBars",{ type:"bar",
+    data:{ labels:rows.map(f=>f.name), datasets:[
+      { label:"Utilization", data:rows.map(f=>r0(f.u*100)), borderRadius:5, barThickness:16, grouped:false,
+        backgroundColor:ctx=>{ const f = deptRows[ctx.dataIndex], a = ctx.chart.chartArea; if (!f) return "transparent"; const col = loadColor(f.u); if (!a) return col; const g = ctx.chart.ctx.createLinearGradient(a.left,0,a.right,0); g.addColorStop(0, hexA(col,.55)); g.addColorStop(1, col); return g; } },
+      { label:"Capacity", data:rows.map(()=>100), backgroundColor:"rgba(255,255,255,.06)", borderColor:"rgba(255,255,255,.08)", borderWidth:1, borderRadius:7, barThickness:28, grouped:false } ]},
+    options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false, layout:{ padding:{ right:56 } }, onClick:(e,els)=>{ if (els.length) openFunction(deptRows[els[0].index].key); },
+      scales:{ x:{ min:0, max:130, ...noBorder, ticks:{ callback:v=>v+"%" }, grid:{ color:GRID } }, y:{ ...noBorder, grid:{ display:false } } },
+      plugins:{ tooltip:{ filter:i=>i.datasetIndex===0, callbacks:{ label:c=>{ const f=deptRows[c.dataIndex]; return ` ${f.assigned} of ${f.capacity} ${f.unit} · ${r0(f.u*100)}%`; } } } } },
+    plugins:[{ id:"deptMarks", afterDatasetsDraw(ch){ const {ctx,scales:{x}}=ch, bars=ch.getDatasetMeta(1).data;
+      bars.forEach((b,i)=>{ const f=deptRows[i]; if (!f) return; ctx.save(); ctx.setLineDash([2,3]); ctx.lineWidth=1.5;
+        [[85,"rgba(255,214,10,.85)"],[100,"rgba(217,45,39,.9)"]].forEach(([v,col])=>{ const px=x.getPixelForValue(v); ctx.strokeStyle=col; ctx.beginPath(); ctx.moveTo(px,b.y-b.height/2); ctx.lineTo(px,b.y+b.height/2); ctx.stroke(); });
+        ctx.setLineDash([]); ctx.font="400 11px 'Proxima Nova','Montserrat',sans-serif"; ctx.fillStyle=loadColor(f.u); ctx.textBaseline="middle"; ctx.fillText(`${r0(f.u*100)}%`, x.getPixelForValue(Math.max(100, f.u*100))+10, b.y); ctx.restore(); }); } }]
   });
-  $("ringList").innerHTML = fns.map(f=>{ const t = trigger(f.key), u = util(f);
-    return `<div class="rl" data-fn="${f.key}"><i style="background:${loadColor(u)};box-shadow:0 0 10px ${loadColor(u,.6)}"></i><div><div class="n">${f.name}</div><small class="num">${f.assigned} / ${f.capacity} ${f.unit} · ${t.breach===-1 ? "holds 90 days" : "saturates "+DATA.weeks[t.breach].start}</small></div><b class="num" style="color:${loadColor(u)}">${r0(u*100)}%</b></div>`; }).join("");
+}
+function renderCapRunway(){
+  const rows = orderedFns().map(f=>({ f, t:trigger(f.key) }));
+  $("capRunway").innerHTML = weekHeader("Weeks of Room · Saturation") + rows.map(({f,t})=>{ const ok = t.breach===-1, len = ok ? HORIZON : t.breach, col = ok ? LOAD.green : t.breach<=4 ? LOAD.red : LOAD.yellow;
+    return `<div class="tlr" data-fn="${f.key}"><div class="lbl">${f.name}<small>${r0(util(f)*100)}% Today</small></div>
+      <div class="lane">${len>0 ? `<div class="bar" style="${barStyle(0,len)};background:linear-gradient(90deg, ${hexA(col,.3)}, ${hexA(col,.8)});--glow:${hexA(col,.45)}"></div>` : ""}${ok ? "" : `<div class="dot" style="left:${(t.breach+.5)/HORIZON*100}%;background:${LOAD.red};--glow:rgba(217,45,39,.6)"></div>`}</div>
+      <div class="cap"><i style="background:${col}"></i>${ok ? `<b>Holds 90 Days</b>` : `<b>${t.breach} Week${t.breach===1?"":"s"}</b> of Room · Saturates <b>${DATA.weeks[t.breach].start}</b>`}</div></div>`; }).join("");
 }
 function renderCapHeat(){
   const fns = orderedFns();
@@ -1029,7 +1032,7 @@ function renderPeople(){
     plugins:[{ id:"marks", afterDatasetsDraw(ch){ const {ctx,scales:{x}}=ch, bars=ch.getDatasetMeta(1).data;
       bars.forEach((b,i)=>{ const p=peopleRows[i]; if (!p) return; const px=x.getPixelForValue(p.capacity*.85); ctx.save();
         ctx.strokeStyle="rgba(255,255,255,.7)"; ctx.setLineDash([2,3]); ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(px,b.y-b.height/2); ctx.lineTo(px,b.y+b.height/2); ctx.stroke();
-        ctx.setLineDash([]); ctx.font="500 10.5px 'JetBrains Mono',monospace"; ctx.fillStyle=loadColor(p.u); ctx.textBaseline="middle"; ctx.fillText(`${r0(p.u*100)}%`, x.getPixelForValue(Math.max(p.capacity, p.assigned))+10, b.y); ctx.restore(); }); } }]
+        ctx.setLineDash([]); ctx.font="400 10.5px 'Proxima Nova','Montserrat',sans-serif"; ctx.fillStyle=loadColor(p.u); ctx.textBaseline="middle"; ctx.fillText(`${r0(p.u*100)}%`, x.getPixelForValue(Math.max(p.capacity, p.assigned))+10, b.y); ctx.restore(); }); } }]
   });
 }
 function renderMix(){
@@ -1044,7 +1047,7 @@ function renderMix(){
         tooltip:{ callbacks:{ label:c=>{ const t=tiers[c.dataIndex]; return ` Tier ${t} (${names[t]}): ${c.raw} points · editors ${r0(tu(t)*100)}% full`; } } } } },
     plugins:[{ id:"mixFx", beforeDatasetDraw(ch){ ch.ctx.save(); ch.ctx.shadowColor="rgba(0,0,0,.45)"; ch.ctx.shadowBlur=14; }, afterDatasetDraw(ch){ ch.ctx.restore(); },
       afterDraw(ch){ const {ctx,chartArea:a}=ch, cx=(a.left+a.right)/2, cy=(a.top+a.bottom)/2; ctx.save(); ctx.textAlign="center"; ctx.fillStyle="#F5F7FA";
-        ctx.font="600 28px 'JetBrains Mono','Montserrat',sans-serif"; ctx.fillText(total, cx, cy+4); ctx.fillStyle="rgba(245,247,250,.4)"; ctx.font="500 10.5px 'Montserrat',sans-serif"; ctx.fillText("POINTS / WEEK", cx, cy+24); ctx.restore(); } }]
+        ctx.font="700 28px 'Proxima Nova','Montserrat',sans-serif"; ctx.fillText(total, cx, cy+4); ctx.fillStyle="rgba(245,247,250,.4)"; ctx.font="400 10.5px 'Montserrat',sans-serif"; ctx.fillText("POINTS / WEEK", cx, cy+24); ctx.restore(); } }]
   });
 }
 
@@ -1107,7 +1110,7 @@ function renderForecast(){
 function renderDepts(){
   $("depts").innerHTML = DATA.functions.map(f=>{ const s = forecastSeries(f.key, HORIZON, { flyouts:state.flyouts, hires:state.hires }), peak = Math.max(...s.u), t = trigger(f.key, { flyouts:state.flyouts, hires:state.hires });
     return `<div class="dept ${state.fn===f.key?"on":""}" data-setfn="${f.key}" style="--c:${loadColor(peak)}"><div class="n"><span>${f.name}</span><b class="num" style="color:${loadColor(peak)}">${r0(peak*100)}%</b></div>
-      <div class="m"><span><i style="background:${t.breach===-1?LOAD.green:LOAD.red}"></i>${t.breach===-1 ? "holds 90 days" : "saturates "+DATA.weeks[t.breach].start}</span><span class="num" style="color:${hireColor(t)}">${t.breach===-1 ? "" : "hire "+(t.hireIdx<0?"now":"by "+DATA.weeks[t.hireIdx].start)}</span></div></div>`; }).join("");
+      <div class="m"><span><i style="background:${t.breach===-1?LOAD.green:LOAD.red}"></i>${t.breach===-1 ? "Holds 90 Days" : "Saturates "+DATA.weeks[t.breach].start}</span><span class="num" style="color:${hireColor(t)}">${t.breach===-1 ? "" : "Hire "+(t.hireIdx<0?"Now":"by "+DATA.weeks[t.hireIdx].start)}</span></div></div>`; }).join("");
 }
 const TREND = { edit:"#3CB8FA", cd:"#FFFFFF", ppm:"#F472B6", smm:"#2ED3B7" };
 function renderTrend(){
@@ -1133,21 +1136,21 @@ function renderHiring(){
   $("hireTbl").innerHTML = `<thead><tr><th>Function</th><th>Utilization</th><th>Saturates</th><th class="num">Lead Time</th><th>Start Hiring By</th><th>Status</th><th>Role</th></tr></thead><tbody>` +
     rows.map(r=>{ const c = hireColor(r); return `<tr class="row" data-fn="${r.f.key}"><td class="name">${r.f.name}</td>
       <td><span class="bar"><i style="width:${Math.min(100,r.u*100)}%;background:${loadColor(r.u)}"></i></span><span class="num">${r0(r.u*100)}%</span></td>
-      <td class="num">${r.breach===-1 ? `<span class="muted">Holds 90 days</span>` : DATA.weeks[r.breach].start}</td>
-      <td class="num">${leadWeeks(r.f.key)} wks</td>
+      <td class="num">${r.breach===-1 ? `<span class="muted">Holds 90 Days</span>` : DATA.weeks[r.breach].start}</td>
+      <td class="num">${leadWeeks(r.f.key)} Weeks</td>
       <td class="num" style="color:${c};font-weight:700">${hireLabel(r)}</td>
-      <td><span class="pill" style="background:${loadColor(r.breach===-1?.5:r.hireIdx<0?1.25:.9,.2)}">${r.breach===-1 ? "No trigger" : r.hireIdx<0 ? `Overdue ${-r.hireIdx} wk${-r.hireIdx===1?"":"s"}` : "Scheduled"}</span></td>
-      <td>${r.f.hire}</td></tr>`; }).join("") + `</tbody>`;
+      <td><span class="pill" style="background:${loadColor(r.breach===-1?.5:r.hireIdx<0?1.25:.9,.2)}">${r.breach===-1 ? "No Trigger" : r.hireIdx<0 ? `Overdue ${-r.hireIdx} Week${-r.hireIdx===1?"":"s"}` : "Scheduled"}</span></td>
+      <td>${tc(r.f.hire)}</td></tr>`; }).join("") + `</tbody>`;
 
-  $("hireLg").innerHTML = `<span><i style="background:${LOAD.red}"></i>Search overdue</span><span><i style="background:${LOAD.yellow}"></i>Window to open the search</span><span><i style="background:${LOAD.red};box-shadow:0 0 0 2px rgba(0,0,0,.6)"></i>Saturation week</span><span><i class="blk" style="background:rgba(60,184,250,.6)"></i>Approved hire ramping</span>`;
+  $("hireLg").innerHTML = `<span><i style="background:${LOAD.red}"></i>Search Overdue</span><span><i style="background:${LOAD.yellow}"></i>Window to Open the Search</span><span><i style="background:${LOAD.red};box-shadow:0 0 0 2px rgba(0,0,0,.6)"></i>Saturation Week</span><span><i class="blk" style="background:rgba(60,184,250,.6)"></i>Approved Hire Ramping</span>`;
   const lanes = rows.filter(r=>r.breach!==-1).map(r=>{ const from = Math.max(0,r.hireIdx), len = Math.max(1, r.breach-from), late = r.hireIdx<0, col = loadColor(late?1.25:.9);
-    return `<div class="tlr" data-fn="${r.f.key}"><div class="lbl">${r.f.name}<small>${r.f.hire}</small></div>
+    return `<div class="tlr" data-fn="${r.f.key}"><div class="lbl">${r.f.name}<small>${tc(r.f.hire)}</small></div>
       <div class="lane"><div class="bar" style="${barStyle(from,len)};background:linear-gradient(90deg, ${hexA(col,.35)}, ${hexA(col,.85)});--glow:${hexA(col,.5)}"></div><div class="dot" style="left:${(r.breach+.5)/HORIZON*100}%;background:${LOAD.red};--glow:rgba(217,45,39,.6)"></div></div>
-      <div class="cap"><i style="background:${col}"></i>${late ? `<b>Open now</b>, ${-r.hireIdx} wk${-r.hireIdx===1?"":"s"} late` : `Open by <b>${DATA.weeks[r.hireIdx].start}</b>`} → full <b>${DATA.weeks[r.breach].start}</b></div></div>`; })
+      <div class="cap"><i style="background:${col}"></i>${late ? `<b>Open Now</b> · ${-r.hireIdx} Week${-r.hireIdx===1?"":"s"} Late` : `Open by <b>${DATA.weeks[r.hireIdx].start}</b>`} · Full <b>${DATA.weeks[r.breach].start}</b></div></div>`; })
     .concat(DATA.plannedHires.map(h=>{ const si = DATA.weeks.findIndex(w=>w.start===h.start);
-      return `<div class="tlr"><div class="lbl">${esc(h.label)}<small>approved hire</small></div><div class="lane"><div class="bar ramp" style="${barStyle(si,h.ramp)}"></div></div>
-      <div class="cap"><i style="background:var(--accent)"></i>Starts <b>${h.start}</b> · ${h.ramp}-wk ramp · <b>+${h.units} pts/wk</b></div></div>`; }));
-  $("hireTl").innerHTML = weekHeader("Open the search → week it saturates") + (lanes.length ? lanes.join("") : `<div class="empty">Nothing to hire in the next 90 days</div>`);
+      return `<div class="tlr"><div class="lbl">${esc(h.label)}<small>Approved Hire</small></div><div class="lane"><div class="bar ramp" style="${barStyle(si,h.ramp)}"></div></div>
+      <div class="cap"><i style="background:var(--accent)"></i>Starts <b>${h.start}</b> · ${h.ramp}-Week Ramp · <b>+${h.units} pts/wk</b></div></div>`; }));
+  $("hireTl").innerHTML = weekHeader("Open the Search → Saturation") + (lanes.length ? lanes.join("") : `<div class="empty">Nothing to hire in the next 90 days</div>`);
 
   $("leadTbl").innerHTML = `<thead><tr><th>Role</th><th class="num">Source</th><th class="num">Hire</th><th class="num">Ramp</th><th class="num">Total</th><th></th></tr></thead><tbody>` +
     DATA.functions.map(f=>{ const l = DATA.leadTime[f.key]; return `<tr><td class="name">${f.short}</td><td class="num">${l.sourcing}</td><td class="num">${l.hiring}</td><td class="num">${l.ramp}</td><td class="num" style="color:var(--text)">${leadWeeks(f.key)}</td><td><span class="pill ${l.confirmed?"ok":"tbd"}">${l.confirmed?"Confirmed":"Unconfirmed"}</span></td></tr>`; }).join("") + `</tbody>`;
@@ -1161,7 +1164,7 @@ function renderFlyouts(){
   const batches = DATA.weeks.flatMap((w,i)=>w.flyouts.map(f=>({ ...f, i, start:w.start, c:flyClient(f), u:demand(w,"edit",true)/capacityAt("edit",i,false) })));
   const unscheduled = flyClients.filter(c=>!nextFlyout(c));
   const overWith = DATA.weeks.filter((w,i)=>demand(w,"edit",true)>capacityAt("edit",i,false)).length, overWithout = DATA.weeks.filter((w,i)=>demand(w,"edit",false)>capacityAt("edit",i,false)).length;
-  $("flySub").textContent = `${flyClients.length} fly-out clients · ${batches.length} batch${batches.length===1?"":"es"} on the calendar`;
+  $("flySub").textContent = `${flyClients.length} Fly-out Clients · ${batches.length} Batch${batches.length===1?"":"es"} on the Calendar`;
   $("flyStats").innerHTML = [
     ["Batches Scheduled", `${batches.length}<small> · next 90 days</small>`, batches.length ? LOAD.yellow : LOAD.green],
     ["Editing Points Landing", `${batches.reduce((s,b)=>s+b.edit,0)}<small> points</small>`, LOAD.yellow],
@@ -1170,14 +1173,14 @@ function renderFlyouts(){
   ].map(statTile).join("");
   countUp($("flyStats"));
 
-  $("flyTl").innerHTML = weekHeader("Batch week · editing load") + flyClients.map(c=>{ const f = nextFlyout(c), eu = personLoad(c.editor), wu = f ? demand(DATA.weeks[f.i],"edit",true)/capacityAt("edit",f.i,false) : null;
-    return `<div class="tlr"><div class="lbl"><span data-client="${esc(c.name)}">${esc(c.name)}</span><small>${c.editor ? `${nameLink(c.editor,"editor")} · ${eu!=null?r0(eu*100)+"%":""}` : `<span style="color:${LOAD.red}">no editor</span>`}</small></div>
-      <div class="lane">${f ? `<div class="bar mark" data-client="${esc(c.name)}" style="${barStyle(f.i,1)};background:linear-gradient(90deg, ${loadColor(wu,.55)}, ${loadColor(wu,.95)});--glow:${loadColor(wu,.5)}">${f.edit} pts</div>` : `<span class="none">Not scheduled</span>`}</div>
-      <div class="cap">${f ? `<i style="background:${loadColor(wu)}"></i><b>${f.start}</b> · ${f.status} · editing <b>${r0(wu*100)}%</b>` : `<i style="background:${LOAD.red}"></i><b>No date</b> on the calendar`}</div></div>`; }).join("");
+  $("flyTl").innerHTML = weekHeader("Batch Week · Editing Load") + flyClients.map(c=>{ const f = nextFlyout(c), eu = personLoad(c.editor), wu = f ? demand(DATA.weeks[f.i],"edit",true)/capacityAt("edit",f.i,false) : null;
+    return `<div class="tlr"><div class="lbl"><span data-client="${esc(c.name)}">${esc(c.name)}</span><small>${c.editor ? `${nameLink(c.editor,"editor")} · ${eu!=null?r0(eu*100)+"%":""}` : `<span style="color:${LOAD.red}">No Editor</span>`}</small></div>
+      <div class="lane">${f ? `<div class="bar mark" data-client="${esc(c.name)}" style="${barStyle(f.i,1)};background:linear-gradient(90deg, ${loadColor(wu,.55)}, ${loadColor(wu,.95)});--glow:${loadColor(wu,.5)}">${f.edit} pts</div>` : ``}</div>
+      <div class="cap">${f ? `<i style="background:${loadColor(wu)}"></i><b>${f.start}</b> · ${tc(f.status)} · Editing <b>${r0(wu*100)}%</b>` : `<i style="background:${LOAD.red}"></i><b>No Date Scheduled</b>`}</div></div>`; }).join("");
 
   $("flyTbl").innerHTML = `<thead><tr><th>Week</th><th>Client</th><th>Status</th><th>Editor</th><th>Creative Director</th><th class="num">Editing</th><th class="num">CD Scripts</th><th class="num">PM Reviews</th><th>Editing Load That Week</th></tr></thead><tbody>` +
     (batches.length ? batches.map(b=>`<tr class="row"><td class="num">${b.start}</td><td class="name">${b.c ? nameLink(b.c.name,"client") : esc(b.client)}</td>
-      <td><span class="pill" style="background:${b.status==="confirmed"?"rgba(47,191,85,.18)":"rgba(255,214,10,.16)"}">${b.status==="confirmed"?"Confirmed":"Tentative"}</span></td>
+      <td><span class="pill" style="background:${b.status==="confirmed"?"rgba(47,191,85,.18)":"rgba(255,214,10,.16)"}">${tc(b.status)}</span></td>
       <td>${b.c?.editor ? `<i class="dot" style="background:${loadColor(personLoad(b.c.editor))}"></i>${nameLink(b.c.editor,"editor")}` : `<span class="miss"><i class="dot" style="background:${LOAD.red}"></i>Missing</span>`}</td>
       <td>${b.c?.cd ? `<span class="lnk" data-owner="cd:${esc(b.c.cd)}">${esc(b.c.cd)}</span>` : `<span class="muted">-</span>`}</td>
       <td class="num">${b.edit} pts</td><td class="num">${b.cd}</td><td class="num">${b.ppm}</td>
@@ -1205,12 +1208,12 @@ const dayPill = d => `<span class="dpill num" style="background:${loadColor(dayL
 const startLabel = s => s ? fmtDate(new Date(s+"T00:00:00"), true) : `<span class="muted">-</span>`;
 const deliveryCell = c => { const p = pace(c), pct = Math.min(100, c.delivered/Math.max(1,c.committed)*100), col = p==null ? "rgba(60,184,250,.8)" : loadColor(p>=.95?.5:p>=.85?.9:1.25);
   return `<span class="prog" style="--pace:${p==null?100:r0(monthFrac*100)}%"><i style="width:${pct}%;background:${col}"></i></span><span class="num">${c.delivered} / ${c.committed}</span>`; };
-const ftaCell = c => c.fta==null ? `<span class="muted">new</span>` : `<i class="dot" style="background:${ftaColor(c.fta)}"></i><span class="num">${c.fta}%</span>`;
+const ftaCell = c => c.fta==null ? `<span class="muted">New</span>` : `<i class="dot" style="background:${ftaColor(c.fta)}"></i><span class="num">${c.fta}%</span>`;
 const renewalCell = c => { const d = daysTo(c.renewal); return `<span class="num" style="color:${d<=30?LOAD.red:d<=90?LOAD.yellow:"inherit"}">${fmtDate(new Date(c.renewal+"T00:00:00"))}</span> <span class="muted num">${d}d</span>`; };
 
 // Column registry: label, header class, sort accessor, cell renderer
 const COLS = {
-  client:  { l:"Client", cls:"", s:c=>c.name.toLowerCase(), r:c=>`<td class="name">${esc(c.name)}</td>` },
+  client:  { l:"Client", cls:"", s:c=>c.name.toLowerCase(), r:c=>`<td class="name">${esc(c.name)}<small>${typeLabel(c.type)} · ${esc(cadLabel(c.cadence))}</small></td>` },
   status:  { l:"Status", cls:"", s:c=>-STATUS[clientStatus(c)][2], r:c=>`<td>${statusPill(c)}</td>` },
   type:    { l:"Type", cls:"", s:c=>c.type, r:c=>`<td>${typeLabel(c.type)}</td>` },
   tier:    { l:"Tier", cls:"num", s:c=>TIER_RANK[c.tier], r:c=>`<td class="num">${c.tier}</td>` },
@@ -1228,14 +1231,14 @@ const COLS = {
   plat:    { l:"Platforms", cls:"", s:c=>c.platforms.length, r:c=>`<td>${c.platforms.map(p=>`<span class="plat">${p}</span>`).join("")}</td>` },
   fly:     { l:"Next Fly-out", cls:"", s:c=>nextFlyout(c)?.i??99, r:c=>{ const f=nextFlyout(c); return `<td>${f ? `<span class="num">${f.start} · ${f.edit} pts</span>` : `<span class="muted">-</span>`}</td>`; } }
 };
-const PRESETS = { ownership:["client","status","cadence","cd","editor","backup","smm","runway","fly"], delivery:["client","status","type","tier","cadence","volume","units","fta","deliv","renewal","plat"] };
+const TABLE_COLS = ["client","status","cd","editor","backup","smm","runway","fta","renewal","fly"];
 const sortState = { cov:{ key:null, dir:1 }, roster:{ key:null, dir:1 } };
 function sortable(tableId, key){ const s = sortState[tableId]; if (s.key===key) s.dir = -s.dir; else { s.key = key; s.dir = 1; } }
 
 let clientRows = [];
 function renderClients(){
-  const rows = filteredClients(), cols = PRESETS[$("fCols").value].map(k=>({ k, ...COLS[k] })), group = $("fGroup").value;
-  $("clientCount").textContent = `${rows.length} of ${DATA.clients.length} clients · ${r0(rows.reduce((s,c)=>s+clientUnits(c),0))} weighted points / month · ${rows.filter(c=>clientStatus(c)!=="healthy").length} need attention`;
+  const rows = filteredClients(), cols = TABLE_COLS.map(k=>({ k, ...COLS[k] })), group = $("fGroup").value;
+  $("clientCount").textContent = `${rows.length} of ${DATA.clients.length} Clients · ${r0(rows.reduce((s,c)=>s+clientUnits(c),0))} Points / Month · ${rows.filter(c=>clientStatus(c)!=="healthy").length} Need Attention`;
 
   const s = sortState.cov, dflt = (a,b)=>STATUS[clientStatus(b)][2]-STATUS[clientStatus(a)][2] || a.days[0]-b.days[0];
   let sorted = [...rows].sort(s.key ? (a,b)=>{ const x=COLS[s.key].s(a), y=COLS[s.key].s(b); return (x<y?-1:x>y?1:0)*s.dir || dflt(a,b); } : dflt);
@@ -1258,28 +1261,28 @@ function renderClients(){
   const byRunway = [...rows].sort((a,b)=>a.days[0]-b.days[0]);
   const low = byRunway.filter(c=>c.days[0]<14), list = state.rwAll ? byRunway : low;
   const lowSelf = low.filter(c=>c.type==="Virtual").length;
-  $("rwSub").textContent = `${low.length} client${low.length===1?"":"s"} under 14 days · ${byRunway.filter(c=>c.days[0]<7).length} under 7 · ${lowSelf} of the ${low.length} are self-record`;
+  $("rwSub").textContent = `${low.length} Client${low.length===1?"":"s"} Under 14 Days · ${byRunway.filter(c=>c.days[0]<7).length} Under 7 · ${lowSelf} of ${low.length} Are Self-Record`;
   $("rwAll").textContent = state.rwAll ? "Show Urgent Only" : `Show All (${byRunway.length})`;
-  $("rwList").innerHTML = list.length ? `<div class="rw"><div class="h">Client</div><div class="h">Days of content (0–30)</div><div class="h" style="text-align:right">Days</div><div class="h">Runs out</div>` +
-    list.map(c=>{ const d=c.days[0], col=loadColor(dayLoad(d)); return `<div class="n" data-client="${esc(c.name)}">${esc(c.name)}${c.type==="Virtual"?` <span class="tag">self-record</span>`:""}</div>
+  $("rwList").innerHTML = list.length ? `<div class="rw"><div class="h">Client</div><div class="h">Days of Content (0–30)</div><div class="h" style="text-align:right">Days</div><div class="h">Runs Out</div>` +
+    list.map(c=>{ const d=c.days[0], col=loadColor(dayLoad(d)); return `<div class="n" data-client="${esc(c.name)}">${esc(c.name)}${c.type==="Virtual"?` <span class="tag">Self-Record</span>`:""}</div>
       <div class="track"><i style="width:${Math.min(100,d/30*100)}%;background:${col}"></i></div><div class="d" style="color:${col}">${d}</div>
-      <div class="out">${d<=0 ? `<b>Out now</b>` : d>=30 ? `30+ days` : `<b>${fmtDate(addDays(asOf,d))}</b> · ${d<7?"this week":d<14?"next week":"later"}`}</div>`; }).join("") + `</div>`
+      <div class="out">${d<=0 ? `<b>Out Now</b>` : d>=30 ? `30+ Days` : `<b>${fmtDate(addDays(asOf,d))}</b> · ${d<7?"This Week":d<14?"Next Week":"Later"}`}</div>`; }).join("") + `</div>`
     : `<div class="empty">Every client has 14+ days of content</div>`;
 
   // delivery this month
   const rec = rows.filter(c=>c.type!=="Flyout").sort((a,b)=>pace(a)-pace(b)), behindN = rec.filter(behind).length;
   const com = rec.reduce((s,c)=>s+c.committed,0), del = rec.reduce((s,c)=>s+c.delivered,0);
-  $("dlSub").textContent = `${del} of ${com} recurring videos delivered · ${r0(monthFrac*100)}% of the month elapsed · ${behindN} behind pace`;
-  $("dlList").innerHTML = rec.length ? `<div class="dl"><div class="h">Client</div><div class="h">Delivered vs. committed</div><div class="h" style="text-align:right">Videos</div><div class="h">Pace</div>` +
+  $("dlSub").textContent = `${del} of ${com} Recurring Videos Delivered · ${r0(monthFrac*100)}% of the Month Elapsed · ${behindN} Behind Pace`;
+  $("dlList").innerHTML = rec.length ? `<div class="dl"><div class="h">Client</div><div class="h">Delivered vs. Committed</div><div class="h" style="text-align:right">Videos</div><div class="h">Pace</div>` +
     rec.map(c=>{ const p = pace(c), pct = Math.min(100, c.delivered/Math.max(1,c.committed)*100), col = loadColor(p>=.95?.5:p>=.85?.9:1.25);
       return `<div class="n" data-client="${esc(c.name)}">${esc(c.name)}</div><div class="track" style="--pace:${r0(monthFrac*100)}%"><i style="width:${pct}%;background:${col}"></i></div>
-      <div class="d">${c.delivered} / ${c.committed}</div><div class="out" style="color:${col}">${p>=1.05?"ahead":p>=.95?"on pace":p>=.85?"slightly behind":`${r0((1-p)*100)}% behind`}</div>`; }).join("") + `</div>`
+      <div class="d">${c.delivered} / ${c.committed}</div><div class="out" style="color:${col}">${p>=1.05?"Ahead":p>=.95?"On Pace":p>=.85?"Slightly Behind":`${r0((1-p)*100)}% Behind`}</div>`; }).join("") + `</div>`
     : `<div class="empty">No recurring clients in this view</div>`;
 
   // first-time approval
   const withFta = rows.filter(c=>c.fta!=null).sort((a,b)=>a.fta-b.fta), pAvg = avgFta(withFta), under = withFta.filter(c=>c.fta<DATA.targets.fta).length;
   const byCd = [...new Set(withFta.map(c=>c.cd).filter(Boolean))].map(n=>({ n, v:avgFta(withFta.filter(c=>c.cd===n)) })).sort((a,b)=>b.v-a.v);
-  $("ftaSub").textContent = `${withFta.length} clients with 90-day data · ${rows.length-withFta.length} too new to score`;
+  $("ftaSub").textContent = `${withFta.length} Clients With 90-Day Data · ${rows.length-withFta.length} Too New to Score`;
   $("ftaStats").innerHTML = [
     ["Portfolio Average", pAvg==null ? "-" : `${r0(pAvg)}%`, ftaColor(pAvg)],
     ["Under Target", `${under}<small> of ${withFta.length}</small>`, under ? LOAD.yellow : LOAD.green],
@@ -1297,7 +1300,7 @@ function renderClients(){
 
   // renewals
   const ren = rows.filter(c=>daysTo(c.renewal)<=DATA.targets.renewalWindow && daysTo(c.renewal)>=0).sort((a,b)=>daysTo(a.renewal)-daysTo(b.renewal));
-  $("renSub").textContent = `${ren.length} contract${ren.length===1?"":"s"} in the next ${DATA.targets.renewalWindow} days · ${ren.filter(c=>c.fta!=null&&c.fta<DATA.targets.fta).length} under approval target`;
+  $("renSub").textContent = `${ren.length} Contract${ren.length===1?"":"s"} in the Next ${DATA.targets.renewalWindow} Days · ${ren.filter(c=>c.fta!=null&&c.fta<DATA.targets.fta).length} Under Approval Target`;
   $("renTbl").innerHTML = `<thead><tr><th>Client</th><th>Renews</th><th class="num">Days</th><th>Approval</th><th>Runway</th><th>Status</th></tr></thead><tbody>` +
     (ren.length ? ren.map(c=>{ const d=daysTo(c.renewal); return `<tr class="row" data-client="${esc(c.name)}"><td class="name">${esc(c.name)}</td><td class="num">${fmtDate(new Date(c.renewal+"T00:00:00"))}</td><td class="num" style="color:${d<=30?LOAD.red:d<=60?LOAD.yellow:"inherit"}">${d}</td><td>${ftaCell(c)}</td><td>${dayPill(c.days[0])}</td><td>${statusPill(c)}</td></tr>`; }).join("")
     : `<tr><td colspan="6" class="empty">No renewals in the window</td></tr>`) + `</tbody>`;
@@ -1341,7 +1344,7 @@ function rebalance(){
 function renderSuggestions(){
   const moves = rebalance();
   const hot = DATA.people.filter(p=>p.assigned/p.capacity>=.85).length;
-  $("sugSub").textContent = moves.length ? `${moves.length} move${moves.length===1?"":"s"} relieve${moves.length===1?"s":""} ${new Set(moves.map(m=>m.from.name)).size} of ${hot} editors above 85%` : `${hot} editors above 85% · nothing can move without pushing someone else past 85%`;
+  $("sugSub").textContent = moves.length ? `${moves.length} Move${moves.length===1?"":"s"} Relieve${moves.length===1?"s":""} ${new Set(moves.map(m=>m.from.name)).size} of ${hot} Editors Above 85%` : `${hot} Editors Above 85% · Nothing Can Move Without Pushing Someone Else Past 85%`;
   $("sug").innerHTML = moves.length ? moves.map(m=>`<div class="it">
       <div class="arr"><b>${nameLink(m.from.name,"editor")}</b> → <b>${nameLink(m.to.name,"editor")}</b></div>
       <div class="what">Move <b>${nameLink(m.client.name,"client")}</b> · ${r1(m.need)} pts/wk · tier ${m.client.tier}</div>
@@ -1351,7 +1354,7 @@ function renderSuggestions(){
 }
 function renderTeam(){
   const people = filteredPeople(), names = new Set(people.map(p=>p.name));
-  $("rosterCount").textContent = `${people.length} of ${DATA.people.length} editors · ${people.reduce((s,p)=>s+p.capacity,0)} points / week capacity`;
+  $("rosterCount").textContent = `${people.length} of ${DATA.people.length} Editors · ${people.reduce((s,p)=>s+p.capacity,0)} Points / Week Capacity`;
   const RS = { name:p=>p.name.toLowerCase(), tier:p=>TIER_RANK[p.tier], capacity:p=>p.capacity, assigned:p=>p.assigned, head:p=>p.capacity-p.assigned, u:p=>p.u, primary:p=>p.primary, backup:p=>p.backup, software:p=>p.software, apex:p=>+p.apex };
   const rs = sortState.roster, rows = people.map(p=>({...p, u:p.assigned/p.capacity, primary:DATA.clients.filter(c=>c.editor===p.name).length, backup:DATA.clients.filter(c=>c.backup===p.name).length}))
     .sort(rs.key ? (a,b)=>{ const x=RS[rs.key](a), y=RS[rs.key](b); return (x<y?-1:x>y?1:0)*rs.dir || b.u-a.u; } : (a,b)=>b.u-a.u);
@@ -1494,7 +1497,7 @@ function openFunction(key){
    ═══════════════════════════════════════════════════════════════════ */
 const VIEWS = { now:"Overview", proj:"Forecast", hiring:"Hiring", fly:"Fly-outs", clients:"Clients", team:"Team" };
 const inited = {};
-function moveInd(){ const b = document.querySelector("#views button.on"); if (!b) return; $("ind").style.width = b.offsetWidth+"px"; $("ind").style.transform = `translateX(${b.offsetLeft-4}px)`; }
+function moveInd(){ const b = document.querySelector("#views button.on"); if (!b) return; $("ind").style.width = b.offsetWidth+"px"; $("ind").style.transform = `translateX(${b.offsetLeft}px)`; }
 function show(view, push=true){
   tipEl.classList.remove("on"); closeDrawer();
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on", v.id==="view-"+view));
@@ -1548,7 +1551,7 @@ fillCadence();
 $("simType").addEventListener("change", fillCadence);
 ["simType","simCad","simStart"].forEach(id=>$(id).addEventListener("change",()=>{ if (state.sim){ renderForecast(); renderTrend(); } }));
 fillSelect("fType",[...new Set(DATA.clients.map(c=>c.type))]);
-["fType","fRisk","fCols","fGroup"].forEach(id=>$(id).addEventListener("change",renderClients));
+["fType","fRisk","fGroup"].forEach(id=>$(id).addEventListener("change",renderClients));
 $("csvBtn").addEventListener("click", exportCsv);
 $("rwAll").addEventListener("click",()=>{ state.rwAll=!state.rwAll; renderClients(); });
 ["tTier","tSoft"].forEach(id=>$(id).addEventListener("change",renderTeam));
