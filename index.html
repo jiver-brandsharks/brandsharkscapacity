@@ -6,9 +6,12 @@
 <meta name="color-scheme" content="dark">
 <title>Capacity — Brand Sharks</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23000'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M30 60c6-24 6-38 2-46 30 1 50 22 54 46'/%3E%3Cpath d='M14 70c8 0 8-5 16-5s8 5 16 5 8-5 16-5 8 5 16 5 8-5 10-5'/%3E%3Cpath d='M14 82c8 0 8-5 16-5s8 5 16 5 8-5 16-5 8 5 16 5 8-5 10-5'/%3E%3C/g%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
+  /* Brand font. Drop the licensed files into /fonts and Proxima Nova loads automatically; Montserrat is the fallback. */
+  @font-face{ font-family:'Proxima Nova'; font-weight:400; font-style:normal; font-display:swap; src:url("fonts/ProximaNova-Regular.woff2") format("woff2"); }
+  @font-face{ font-family:'Proxima Nova'; font-weight:700; font-style:normal; font-display:swap; src:url("fonts/ProximaNova-Bold.woff2") format("woff2"); }
   :root{
     color-scheme:dark;
     --bg:#000; --accent:#3CB8FA;
@@ -19,7 +22,7 @@
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
-  body{background:var(--bg);color:var(--text);font-family:'Proxima Nova','Montserrat',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.45;min-height:100vh;overflow-x:hidden;}
+  body{background:var(--bg);color:var(--text);font-family:'Proxima Nova','Montserrat',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;line-height:1.45;min-height:100vh;overflow-x:hidden;}
   body::before{content:"";position:fixed;inset:0;z-index:-1;background:
     radial-gradient(1100px 900px at 100% 100%, rgba(120,140,185,.75) 0%, rgba(60,80,120,.35) 35%, rgba(0,0,0,0) 70%),
     radial-gradient(700px 500px at 85% 75%, rgba(60,184,250,.10) 0%, rgba(0,0,0,0) 60%), #000;}
@@ -32,7 +35,7 @@
   [data-go],[data-fn],[data-editor],[data-client],[data-owner],[data-filter]{cursor:pointer;}
   .lnk{color:var(--text);text-decoration:underline;text-decoration-color:rgba(255,255,255,.28);text-underline-offset:3px;text-decoration-thickness:1px;transition:text-decoration-color .2s;}
   .lnk:hover{text-decoration-color:var(--accent);}
-  .more{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--text-2);transition:color .2s;}
+  .more{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:400;color:var(--text-2);transition:color .2s;}
   .more:hover{color:var(--text);}
   .more::after{content:"→";font-family:var(--mono);color:var(--text-3);}
 
@@ -45,22 +48,22 @@
   .seg{position:relative;display:inline-flex;background:rgba(255,255,255,.07);border-radius:999px;padding:4px;gap:2px;max-width:100%;overflow-x:auto;scrollbar-width:none;}
   .seg::-webkit-scrollbar{display:none;}
   .seg .ind{position:absolute;top:4px;left:0;height:calc(100% - 8px);border-radius:999px;background:rgba(255,255,255,.15);box-shadow:0 1px 6px rgba(0,0,0,.35);transition:transform .35s cubic-bezier(.2,.8,.2,1),width .35s cubic-bezier(.2,.8,.2,1);}
-  .seg button{position:relative;z-index:1;appearance:none;border:0;background:transparent;color:var(--text-2);font-weight:600;font-size:13.5px;padding:8px 16px;border-radius:999px;cursor:pointer;transition:color .2s;white-space:nowrap;}
-  .seg button:hover,.seg button.on{color:var(--text);}
+  .seg button{position:relative;z-index:1;appearance:none;border:0;background:transparent;color:var(--text-2);font-weight:400;font-size:13.5px;padding:8px 16px;border-radius:999px;cursor:pointer;transition:color .2s;white-space:nowrap;}
+  .seg button:hover,.seg button.on{color:var(--text);} .seg button.on{font-weight:700;}
   .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
   .right{display:flex;align-items:center;justify-content:flex-end;gap:10px;min-width:0;}
   .user{display:flex;align-items:center;gap:10px;min-width:0;opacity:0;transition:opacity .5s ease;}
   .user.in{opacity:1;}
-  .user .av{width:34px;height:34px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:600;color:#fff;background:linear-gradient(135deg,#3CB8FA,#1E6FB0);box-shadow:0 0 0 1px rgba(255,255,255,.12);}
+  .user .av{width:34px;height:34px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;color:#fff;background:linear-gradient(135deg,#3CB8FA,#1E6FB0);box-shadow:0 0 0 1px rgba(255,255,255,.12);}
   .user .who{min-width:0;text-align:right;}
-  .user .nm{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .user .nm{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .user .em{font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
   /* KPI strip */
   .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px;}
   .kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;min-width:0;}
   .kpi .k{font-size:10.5px;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .kpi .v{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:600;margin-top:6px;white-space:nowrap;line-height:1.2;}
+  .kpi .v{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:700;margin-top:6px;white-space:nowrap;line-height:1.2;}
   .kpi .v i{width:8px;height:8px;border-radius:50%;flex:none;box-shadow:0 0 0 3px color-mix(in srgb, currentColor 18%, transparent);}
   .kpi .s{font-size:12px;color:var(--text-3);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
@@ -69,20 +72,20 @@
   .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);min-width:0;}
   .span-12{grid-column:span 12;} .span-8{grid-column:span 8;} .span-7{grid-column:span 7;} .span-6{grid-column:span 6;} .span-5{grid-column:span 5;} .span-4{grid-column:span 4;}
   .ch{display:flex;align-items:flex-start;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin-bottom:20px;}
-  .ch h2{font-size:15px;font-weight:600;letter-spacing:-.01em;margin:0;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .ch h2{font-size:15px;font-weight:700;letter-spacing:-.01em;margin:0;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;}
   .ch h2 .i{width:15px;height:15px;border-radius:50%;border:1px solid var(--line-2);color:var(--text-3);font:600 10px var(--mono);display:inline-flex;align-items:center;justify-content:center;cursor:help;}
   .ch .sub{font-size:12.5px;color:var(--text-3);margin-top:2px;}
   .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
   .chartbox{position:relative;width:100%;}
   .tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .empty{padding:28px 0;text-align:center;color:var(--text-3);font-size:13px;}
-  .chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:rgba(60,184,250,.12);color:var(--accent);border:1px solid rgba(60,184,250,.25);}
-  .eyebrow{font-size:10.5px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;font-weight:600;}
-  .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600;color:var(--text);white-space:nowrap;}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:400;padding:4px 10px;border-radius:999px;background:rgba(60,184,250,.12);color:var(--accent);border:1px solid rgba(60,184,250,.25);}
+  .eyebrow{font-size:10.5px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;font-weight:700;}
+  .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:400;color:var(--text);white-space:nowrap;}
 
   /* inputs */
   .field{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;color:var(--text-3);}
-  .sel,.inp{appearance:none;-webkit-appearance:none;font:inherit;font-size:12.5px;font-weight:600;color:var(--text);background-color:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:10px;padding:7px 12px;cursor:pointer;max-width:180px;transition:background-color .2s,border-color .2s;}
+  .sel,.inp{appearance:none;-webkit-appearance:none;font:inherit;font-size:12.5px;font-weight:400;color:var(--text);background-color:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:10px;padding:7px 12px;cursor:pointer;max-width:180px;transition:background-color .2s,border-color .2s;}
   .sel{padding-right:30px;background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23F5F7FA' stroke-opacity='.6' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;}
   .inp{width:86px;cursor:text;font-family:var(--mono);}
   .sel:hover,.inp:hover{background-color:rgba(255,255,255,.1);}
@@ -93,7 +96,7 @@
   .toggle .sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.4);}
   .toggle.on .sw{background:var(--accent);}
   .toggle.on .sw::after{transform:translateX(14px);}
-  .lbtn{appearance:none;background:none;border:0;padding:0;color:var(--text-2);font-size:12.5px;font-weight:600;cursor:pointer;}
+  .lbtn{appearance:none;background:none;border:0;padding:0;color:var(--text-2);font-size:12.5px;font-weight:400;cursor:pointer;}
   .lbtn:hover{color:var(--text);}
 
   /* legend */
@@ -110,26 +113,25 @@
   .gauge{text-align:center;border-radius:16px;padding:6px 0 4px;transition:background .2s;}
   .gauge:hover{background:rgba(255,255,255,.03);}
   .gauge .g{position:relative;height:150px;}
-  .gauge .val{position:absolute;left:0;right:0;bottom:0;font-size:34px;font-weight:600;line-height:1;}
-  .gauge .lab{font-size:13.5px;font-weight:600;margin-top:6px;}
+  .gauge .val{position:absolute;left:0;right:0;bottom:0;font-size:34px;font-weight:700;line-height:1;}
+  .gauge .lab{font-size:13.5px;font-weight:700;margin-top:6px;}
   .gauge .meta{font-size:11.5px;color:var(--text-3);}
   .summary{display:grid;grid-template-columns:1fr 1fr;gap:24px 40px;margin-top:24px;padding-top:22px;border-top:1px solid var(--line);}
-  .verdict{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:600;letter-spacing:-.015em;margin:0;line-height:1.25;}
+  .verdict{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:700;letter-spacing:-.015em;margin:0;line-height:1.25;}
   .verdict i{width:10px;height:10px;border-radius:50%;flex:none;}
   .verdict-sub{font-size:13.5px;color:var(--text-2);margin:6px 0 0 22px;}
-  .verdict-sub b{color:var(--text);font-weight:600;}
+  .verdict-sub b{color:var(--text);font-weight:700;}
   .next p{font-size:14px;color:var(--text-2);margin:6px 0 0;max-width:52ch;line-height:1.55;}
-  .next p b{color:var(--text);font-weight:600;}
+  .next p b{color:var(--text);font-weight:700;}
   .next .more{margin-top:10px;}
 
   .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:22px;}
   .stat{position:relative;overflow:hidden;padding:12px 14px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));border:1px solid var(--line);min-width:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);}
   .stat::before{content:"";position:absolute;left:14px;right:45%;top:0;height:2px;border-radius:2px;background:linear-gradient(90deg, var(--c, transparent), transparent);}
-  .stat::after{content:"";position:absolute;top:-40px;left:-20px;width:140px;height:110px;border-radius:50%;background:radial-gradient(circle, color-mix(in srgb, var(--c, transparent) 14%, transparent), transparent 70%);pointer-events:none;}
   .stat > *{position:relative;}
   .stat .k{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--text-3);white-space:nowrap;overflow:hidden;}
   .stat .k i{width:7px;height:7px;border-radius:50%;flex:none;}
-  .stat .v{font-size:22px;font-weight:600;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .stat .v{font-size:22px;font-weight:700;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .stats3{grid-template-columns:repeat(3,minmax(0,1fr));}
   .stat .v small{font-size:12px;font-weight:500;color:var(--text-3);font-family:'Montserrat',sans-serif;}
 
@@ -137,7 +139,6 @@
   .card{background:linear-gradient(180deg, rgba(255,255,255,.065) 0%, rgba(255,255,255,.035) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 30px 60px -40px rgba(0,0,0,.9);}
   .kpi{position:relative;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));box-shadow:inset 0 1px 0 rgba(255,255,255,.06);}
   .kpi::before{content:"";position:absolute;left:16px;right:40%;top:0;height:2px;border-radius:2px;background:linear-gradient(90deg, var(--c), transparent);}
-  .kpi::after{content:"";position:absolute;top:-50px;left:-30px;width:170px;height:140px;border-radius:50%;background:radial-gradient(circle, color-mix(in srgb, var(--c) 16%, transparent), transparent 70%);pointer-events:none;}
   .kpi > *{position:relative;}
 
   /* gauges */
@@ -152,12 +153,11 @@
   .depts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px;}
   .dept{position:relative;overflow:hidden;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));cursor:pointer;transition:border-color .2s,background .2s,transform .2s;min-width:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);}
   .dept::before{content:"";position:absolute;left:14px;right:45%;top:0;height:2px;border-radius:2px;background:linear-gradient(90deg, var(--c, transparent), transparent);}
-  .dept::after{content:"";position:absolute;top:-40px;left:-20px;width:140px;height:110px;border-radius:50%;background:radial-gradient(circle, color-mix(in srgb, var(--c, transparent) 14%, transparent), transparent 70%);pointer-events:none;}
   .dept > *{position:relative;} .dept:hover{transform:translateY(-1px);}
   .dept:hover{border-color:var(--line-2);}
   .dept.on{background:rgba(60,184,250,.08);border-color:rgba(60,184,250,.45);}
-  .dept .n{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;}
-  .dept .n b{font-size:20px;font-weight:600;}
+  .dept .n{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;}
+  .dept .n b{font-size:20px;font-weight:700;}
   .dept .m{margin-top:6px;font-size:11.5px;color:var(--text-3);display:flex;justify-content:space-between;gap:8px;white-space:nowrap;overflow:hidden;}
   .dept .m span{overflow:hidden;text-overflow:ellipsis;}
   .dept .m i{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle;}
@@ -174,7 +174,7 @@
 
   /* simulator */
   .sim{display:grid;grid-template-columns:auto 1fr;gap:14px 22px;align-items:center;padding:16px 18px;border:1px dashed rgba(167,139,250,.35);border-radius:14px;margin-bottom:22px;background:rgba(167,139,250,.05);}
-  .sim .t{font-size:12.5px;font-weight:600;color:#C4B5FD;white-space:nowrap;}
+  .sim .t{font-size:12.5px;font-weight:700;color:#C4B5FD;white-space:nowrap;}
   .sim .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
   .sim .out{grid-column:1/-1;font-size:13px;color:var(--text-2);display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
   .sim .out b{color:var(--text);}
@@ -186,11 +186,11 @@
   .t td{padding:10px 12px 10px 0;border-top:1px solid var(--line);white-space:nowrap;color:var(--text-2);}
   .t tr.row{transition:background .15s;}
   .t tr.row:hover td{background:rgba(255,255,255,.03);}
-  .t td.name{color:var(--text);font-weight:600;}
+  .t td.name{color:var(--text);font-weight:700;}
   .t .muted{color:var(--text-3);}
-  .t .miss{color:var(--text);font-weight:600;}
+  .t .miss{color:var(--text);font-weight:700;}
   .t .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle;}
-  .t .dpill{display:inline-block;min-width:44px;text-align:center;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;color:var(--text);}
+  .t .dpill{display:inline-block;min-width:44px;text-align:center;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:400;color:var(--text);}
   .t .bar{display:inline-block;width:70px;height:6px;border-radius:999px;background:rgba(255,255,255,.08);vertical-align:middle;margin-right:8px;overflow:hidden;}
   .t .bar i{display:block;height:100%;border-radius:999px;}
   .cov{min-width:1060px;} .roster{min-width:820px;}
@@ -200,7 +200,7 @@
   .t th[data-sort]:hover{color:var(--text-2);}
   .t th.on{color:var(--text);}
   .t th.on::after{content:" ↓";font-family:var(--mono);font-size:10px;} .t th.on.asc::after{content:" ↑";}
-  .t tr.grp td{padding:14px 12px 8px 0;border-top:0;color:var(--text);font-weight:600;font-size:12.5px;}
+  .t tr.grp td{padding:14px 12px 8px 0;border-top:0;color:var(--text);font-weight:700;font-size:12.5px;}
   .t tr.grp td .gm{color:var(--text-3);font-weight:500;margin-left:10px;font-family:var(--mono);font-size:11px;}
   .t .pill .dot{margin-right:6px;}
   .t .prog{display:inline-block;width:80px;height:6px;vertical-align:middle;margin-right:8px;position:relative;overflow:visible;}
@@ -211,25 +211,26 @@
   /* delivery list */
   .dl{display:grid;grid-template-columns:minmax(120px,1.2fr) 3fr auto auto;gap:6px 16px;align-items:center;font-size:13px;}
   .dl .h{font-size:11px;color:var(--text-3);padding-bottom:6px;border-bottom:1px solid var(--line);}
-  .dl .n{color:var(--text);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .dl .n{color:var(--text);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .dl .n:hover{color:var(--accent);}
   .dl .track{height:8px;border-radius:999px;background:rgba(255,255,255,.06);position:relative;}
   .dl .track i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;transition:width .8s cubic-bezier(.2,.8,.2,1);}
   .dl .track::after{content:"";position:absolute;top:-3px;bottom:-3px;width:1px;background:rgba(255,255,255,.55);left:var(--pace,0%);}
-  .dl .d{font-family:var(--mono);font-weight:600;text-align:right;white-space:nowrap;}
+  .dl .d{font-family:var(--mono);font-weight:700;text-align:right;white-space:nowrap;}
   .dl .out{color:var(--text-3);white-space:nowrap;min-width:96px;}
 
   /* runway list */
   .rw{display:grid;grid-template-columns:minmax(120px,1.2fr) 3fr auto auto;gap:6px 16px;align-items:center;font-size:13px;}
   .rw .h{font-size:11px;color:var(--text-3);letter-spacing:.02em;padding-bottom:6px;border-bottom:1px solid var(--line);}
-  .rw .n{color:var(--text);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .rw .n{color:var(--text);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .rw .n:hover{color:var(--accent);}
+  .tag{font:400 10px var(--mono);color:var(--text-3);padding:2px 6px;border:1px solid var(--line);border-radius:6px;margin-left:6px;vertical-align:middle;letter-spacing:.02em;}
   .rw .track{height:8px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;position:relative;}
   .rw .track i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;transition:width .8s cubic-bezier(.2,.8,.2,1);}
   .rw .track::after{content:"";position:absolute;left:calc(7/30*100%);top:-2px;bottom:-2px;width:1px;background:rgba(255,255,255,.35);}
-  .rw .d{font-family:var(--mono);font-weight:600;text-align:right;min-width:36px;}
+  .rw .d{font-family:var(--mono);font-weight:700;text-align:right;min-width:36px;}
   .rw .out{color:var(--text-3);white-space:nowrap;min-width:110px;}
-  .rw .out b{color:var(--text);font-weight:600;}
+  .rw .out b{color:var(--text);font-weight:700;}
 
   /* suggestions */
   .sug{display:flex;flex-direction:column;gap:10px;}
@@ -237,7 +238,7 @@
   .sug .it .arr{font-family:var(--mono);font-size:11.5px;color:var(--text-3);white-space:nowrap;}
   .sug .it .arr b{color:var(--text);}
   .sug .it .what{font-size:13px;color:var(--text-2);}
-  .sug .it .what b{color:var(--text);font-weight:600;}
+  .sug .it .what b{color:var(--text);font-weight:700;}
   .sug .it .delta{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap;}
   .sug .it .delta span{display:block;}
 
@@ -260,16 +261,16 @@
   .tl .tlh,.tl .tlr{display:grid;grid-template-columns:150px 1fr 270px;gap:0 16px;align-items:center;}
   .tl{min-width:860px;}
   .tl .cap{font:500 11.5px var(--mono);color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .tl .cap b{color:var(--text);font-weight:600;}
+  .tl .cap b{color:var(--text);font-weight:700;}
   .tl .cap i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle;}
   .tl .today{font:500 10px var(--mono);color:var(--accent);text-align:left;padding-left:2px;}
   .tl .tlh{margin-bottom:8px;}
-  .tl .weeks{display:grid;grid-template-columns:repeat(13,minmax(0,1fr));}
+  .tl .weeks{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));}
   .tl .weeks span{font:500 9.5px var(--mono);color:var(--text-3);text-align:center;white-space:nowrap;overflow:hidden;letter-spacing:-.02em;}
   .tl .tlr{padding:7px 0;border-top:1px solid var(--line);}
-  .tl .lbl{font-size:13px;color:var(--text);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .tl .lbl{font-size:13px;color:var(--text);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .tl .lbl small{display:block;font-size:11.5px;color:var(--text-3);font-weight:500;}
-  .tl .lane{position:relative;height:26px;background:repeating-linear-gradient(to right, rgba(255,255,255,.04) 0, rgba(255,255,255,.04) 1px, transparent 1px, transparent calc(100%/13));border-radius:6px;}
+  .tl .lane{position:relative;height:26px;background:repeating-linear-gradient(to right, rgba(255,255,255,.04) 0, rgba(255,255,255,.04) 1px, transparent 1px, transparent calc(100%/12));border-radius:6px;}
   .tl .lane::before{content:"";position:absolute;left:0;top:-4px;bottom:-4px;width:1px;background:rgba(60,184,250,.6);}
   .tl .bar{position:absolute;top:5px;height:16px;border-radius:5px;box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 0 14px -2px var(--glow, transparent);transform-origin:left center;animation:growX .7s cubic-bezier(.2,.8,.2,1) both;}
   .tl .bar.ramp{background:linear-gradient(90deg, rgba(60,184,250,.15), rgba(60,184,250,.7));--glow:rgba(60,184,250,.5);}
@@ -289,16 +290,16 @@
   .drawer.on{transform:none;}
   .drawer .x{position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.05);cursor:pointer;color:var(--text-2);display:flex;align-items:center;justify-content:center;}
   .drawer .x:hover{background:rgba(255,255,255,.1);color:var(--text);}
-  .drawer h3{font-size:22px;font-weight:600;letter-spacing:-.02em;margin:4px 0 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .drawer h3{font-size:22px;font-weight:700;letter-spacing:-.02em;margin:4px 0 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
   .drawer h3 .pill{font-size:11px;}
   .drawer .pill .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px;vertical-align:middle;}
   .drawer .meta{font-size:13px;color:var(--text-2);}
   .drawer .sec{margin-top:24px;}
-  .drawer .sec h4{font-size:11px;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px;font-weight:600;}
+  .drawer .sec h4{font-size:11px;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px;font-weight:700;}
   .drawer .kv{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
   .drawer .kv div{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));box-shadow:inset 0 1px 0 rgba(255,255,255,.05);}
   .drawer .kv .k{font-size:11px;color:var(--text-3);}
-  .drawer .kv .v{font-size:18px;font-weight:600;margin-top:2px;}
+  .drawer .kv .v{font-size:18px;font-weight:700;margin-top:2px;}
   .drawer .kv .v small{font-size:11.5px;color:var(--text-3);font-family:'Montserrat',sans-serif;font-weight:500;}
   .drawer .list{display:flex;flex-direction:column;}
   .drawer .list div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;}
@@ -320,28 +321,28 @@
   .pal input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font:inherit;font-size:16px;padding:18px 20px;border-bottom:1px solid var(--line);}
   .pal ul{list-style:none;margin:0;padding:8px;max-height:52vh;overflow-y:auto;}
   .pal li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:10px;font-size:13.5px;cursor:pointer;color:var(--text-2);}
-  .pal li b{color:var(--text);font-weight:600;}
+  .pal li b{color:var(--text);font-weight:700;}
   .pal li .g{font-size:11px;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase;}
   .pal li.sel,.pal li:hover{background:rgba(255,255,255,.07);color:var(--text);}
   .pal .hint{display:flex;gap:14px;padding:10px 20px;border-top:1px solid var(--line);font-size:11px;color:var(--text-3);}
   .pal .hint kbd{font:500 10.5px var(--mono);padding:1px 5px;border:1px solid var(--line);border-radius:4px;margin-right:4px;}
 
   /* copilot */
-  .fab{position:fixed;right:24px;bottom:24px;z-index:45;display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 16px 0 14px;border-radius:999px;border:1px solid rgba(60,184,250,.35);background:linear-gradient(135deg, rgba(60,184,250,.22), rgba(30,111,176,.28));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:var(--text);font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 12px 30px -12px rgba(60,184,250,.6), inset 0 1px 0 rgba(255,255,255,.15);transition:transform .2s,box-shadow .2s;}
+  .fab{position:fixed;right:24px;bottom:24px;z-index:45;display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 16px 0 14px;border-radius:999px;border:1px solid rgba(60,184,250,.35);background:linear-gradient(135deg, rgba(60,184,250,.22), rgba(30,111,176,.28));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:var(--text);font-size:13px;font-weight:400;cursor:pointer;box-shadow:0 12px 30px -12px rgba(60,184,250,.6), inset 0 1px 0 rgba(255,255,255,.15);transition:transform .2s,box-shadow .2s;}
   .fab:hover{transform:translateY(-1px);box-shadow:0 16px 36px -12px rgba(60,184,250,.75), inset 0 1px 0 rgba(255,255,255,.15);}
   .fab .orb{width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 35%, #fff 0, #3CB8FA 35%, #1E6FB0 100%);box-shadow:0 0 12px rgba(60,184,250,.8);animation:orb 3s ease-in-out infinite;}
   @keyframes orb{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
   .ai{position:fixed;right:24px;bottom:80px;z-index:46;width:min(420px, calc(100vw - 32px));max-height:min(640px, calc(100vh - 110px));display:flex;flex-direction:column;border-radius:20px;border:1px solid var(--line-2);background:linear-gradient(180deg, rgba(20,22,28,.96), rgba(12,13,17,.97));backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);box-shadow:0 30px 80px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.07);transform:translateY(16px) scale(.98);opacity:0;pointer-events:none;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .25s;}
   .ai.on{transform:none;opacity:1;pointer-events:auto;}
   .ai .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);}
-  .ai .hd .t{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;}
+  .ai .hd .t{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:700;}
   .ai .hd .t small{font:500 10.5px var(--mono);color:var(--text-3);padding:2px 7px;border:1px solid var(--line);border-radius:6px;}
   .ai .hd .x{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text-2);cursor:pointer;display:flex;align-items:center;justify-content:center;}
   .ai .log{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:12px;}
   .ai .m{max-width:92%;font-size:13.5px;line-height:1.55;padding:10px 13px;border-radius:14px;animation:rise .3s cubic-bezier(.2,.8,.2,1) both;white-space:pre-wrap;}
   .ai .m.u{align-self:flex-end;background:rgba(60,184,250,.16);border:1px solid rgba(60,184,250,.28);border-bottom-right-radius:5px;}
   .ai .m.a{align-self:flex-start;background:rgba(255,255,255,.05);border:1px solid var(--line);border-bottom-left-radius:5px;color:var(--text-2);}
-  .ai .m.a b{color:var(--text);font-weight:600;}
+  .ai .m.a b{color:var(--text);font-weight:700;}
   .ai .m.a .sig{display:flex;flex-direction:column;gap:8px;margin-top:6px;}
   .ai .m.a .sig div{display:grid;grid-template-columns:8px 1fr;gap:10px;align-items:start;}
   .ai .m.a .sig i{width:8px;height:8px;border-radius:50%;margin-top:6px;}
@@ -405,7 +406,7 @@
   .drawer > *{animation:rise .4s cubic-bezier(.2,.8,.2,1) both;} .drawer .sec:nth-of-type(2){animation-delay:60ms;} .drawer .sec:nth-of-type(3){animation-delay:120ms;} .drawer .sec:nth-of-type(4){animation-delay:180ms;}
   .view{display:none;} .view.on{display:block;}
   .foot{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:8px 32px;flex-wrap:wrap;font-size:11.5px;line-height:1.6;color:var(--text-3);}
-  .foot b{color:var(--text-2);font-weight:600;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;margin-right:8px;}
+  .foot b{color:var(--text-2);font-weight:700;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;margin-right:8px;}
   .foot kbd{font:500 10.5px var(--mono);padding:1px 5px;border:1px solid var(--line);border-radius:4px;}
 
   @media (max-width:1100px){ .mast{grid-template-columns:auto 1fr auto;} .mast .seg{justify-self:center;} }
@@ -493,7 +494,7 @@
         <div class="ch">
           <div><h2>Demand Forecast <span class="i" data-tip="Pick a department. Solid bars = recurring work, lighter tops = fly-out batches, purple = a simulated client. Dashed line = capacity.">i</span> <span class="chip" id="simChip" hidden></span></h2></div>
           <div class="controls">
-            <label class="field">Horizon <select class="sel" id="selRange"><option value="4">4 Weeks</option><option value="8">8 Weeks</option><option value="13" selected>13 Weeks</option></select></label>
+            <label class="field">Horizon <select class="sel" id="selRange"><option value="4">Next 30 Days</option><option value="8">Next 60 Days</option><option value="12" selected>Next 90 Days</option></select></label>
             <label class="toggle on" id="flyToggle"><span class="sw"></span>Fly-outs</label>
             <label class="toggle" id="hireToggle"><span class="sw"></span>Planned Hires</label>
             <button class="lbtn" id="simOpen">What If We Sign a Client?</button>
@@ -516,18 +517,13 @@
         <div class="lg" data-scale="util" data-extra="forecast" style="margin-top:16px"></div>
       </section>
 
-      <section class="card span-7">
+      <section class="card span-12">
         <div class="ch">
-          <div><h2>All Departments <span class="i" data-tip="Utilization of every department on one chart. Switch between the next 13 weeks (projected) and the past 12 (actual). Yellow band = 85–100%, red = over capacity. Click a name to focus the forecast on it.">i</span></h2></div>
-          <div class="controls"><div class="seg small" id="trendSeg"><button class="on" data-mode="next">Next 13 Weeks</button><button data-mode="past">Past 12 Weeks</button></div></div>
+          <div><h2>All Departments <span class="i" data-tip="Utilization of every department on one chart. Switch between the next 90 days (projected) and the past 90 (actual). Yellow band = 85–100%, red = over capacity. Click a name to focus the forecast on it.">i</span></h2></div>
+          <div class="controls"><div class="seg small" id="trendSeg"><button class="on" data-mode="next">Next 90 Days</button><button data-mode="past">Past 90 Days</button></div></div>
         </div>
         <div class="chartbox" style="height:280px"><canvas id="cTrend"></canvas></div>
         <div class="lg" id="trendLg" style="margin-top:12px"></div>
-      </section>
-
-      <section class="card span-5">
-        <div class="ch"><div><h2>Backlog <span class="i" data-tip="Work that could not be delivered in the week it arrived and rolls into the next one, for the selected department. Zero means the team keeps up.">i</span></h2></div></div>
-        <div class="chartbox" style="height:280px"><canvas id="cBacklog"></canvas></div>
       </section>
     </div>
   </div>
@@ -573,7 +569,7 @@
     <div class="grid">
       <section class="card span-12">
         <div class="ch">
-          <div><h2>Client Portfolio <span class="i" data-tip="One row per client. Click a header to sort, group by owner for subtotals, switch column sets, or export the view as CSV. Click a client or a person for details.">i</span></h2><div class="sub" id="clientCount"></div></div>
+          <div><h2>Client Portfolio <span class="i" data-tip="One row per client. Fly-out: we shoot a batch on location. Self-Record: we send the script, the client films, we edit — these are the hardest to keep out of the red zone. Clipping: we cut existing footage. Click a header to sort, group by owner, switch column sets or export CSV.">i</span></h2><div class="sub" id="clientCount"></div></div>
           <div class="controls">
             <label class="field">Columns <select class="sel" id="fCols"><option value="ownership">Ownership</option><option value="delivery">Delivery &amp; Quality</option></select></label>
             <label class="field">Group <select class="sel" id="fGroup"><option value="none">None</option><option value="cd">Creative Director</option><option value="smm">Social Media</option><option value="editor">Editor</option></select></label>
@@ -736,8 +732,7 @@ const DATA = {
     { start:"Nov 9",  edit:126, cd:158, ppm:110, smm:84, flyouts:[] },
     { start:"Nov 16", edit:126, cd:158, ppm:110, smm:84, flyouts:[] },
     { start:"Nov 23", edit:126, cd:158, ppm:110, smm:84, flyouts:[] },
-    { start:"Nov 30", edit:134, cd:166, ppm:116, smm:88, flyouts:[] },
-    { start:"Dec 7",  edit:134, cd:166, ppm:116, smm:88, flyouts:[] }
+    { start:"Nov 30", edit:134, cd:166, ppm:116, smm:88, flyouts:[] }
   ],
 
   clients: [
@@ -804,7 +799,7 @@ const editorMonthly = name => DATA.clients.filter(c=>c.editor===name).reduce((s,
 // Weekly load a client puts on its editor: the editor's assigned units, split by each client's share of that editor's monthly units.
 const clientWeekly = c => { const p = person(c.editor); if (!p) return clientUnits(c)/WEEKS_PER_MONTH; const tot = editorMonthly(p.name); return tot ? p.assigned*clientUnits(c)/tot : 0; };
 const missingRoles = c => [c.cd,c.editor,c.backup,c.smm].filter(v=>!v).length;
-const typeLabel = t => t==="Flyout" ? "Fly-out" : t;
+const typeLabel = t => ({ Flyout:"Fly-out", Virtual:"Self-Record", Clipping:"Clipping" })[t] || t;
 const ftaLoad = f => f==null ? .5 : f>=DATA.targets.fta ? .5 : f>=65 ? .9 : 1.25;
 const ftaColor = f => f==null ? "rgba(255,255,255,.22)" : loadColor(ftaLoad(f));
 const monthFrac = (asOfD => asOfD.getDate() / new Date(asOfD.getFullYear(), asOfD.getMonth()+1, 0).getDate())(new Date(DATA.asOf+"T00:00:00"));
@@ -830,7 +825,8 @@ const capacityAt = (key, i, hires) => FN(key).capacity + (hires ? DATA.plannedHi
   const si = DATA.weeks.findIndex(w=>w.start===h.start);
   return si>=0 && i>=si ? s + h.units*Math.min(1,(i-si+1)/h.ramp) : s; },0) : 0);
 
-const state = { fn:"edit", range:13, flyouts:true, hires:false, sim:false, rwAll:false, trend:"next", sig:"runway", present:false };
+const HORIZON = 12; // weeks shown = 90 days
+const state = { fn:"edit", range:HORIZON, flyouts:true, hires:false, sim:false, rwAll:false, trend:"next", sig:"runway", present:false };
 function simDemand(key, i){
   if (!state.sim) return 0;
   const vol = Math.max(0, +$("simVol").value||0), w = WEIGHT[$("simTier").value], start = +$("simStart").value, fly = $("simType").value==="fly";
@@ -905,9 +901,9 @@ function renderKpis(){
   const gaps = DATA.clients.reduce((s,c)=>s+missingRoles(c),0);
   const tiles = [
     ["Bottleneck", `${r0(u*100)}%`, worst.name, loadColor(u), "The team closest to its limit. This is what decides whether you can take another client.", `data-fn="${worst.key}"`],
-    ["Capacity Runs Out", breach===-1 ? "None" : DATA.weeks[breach].start, breach===-1 ? "next 13 weeks" : `in ${breach} week${breach===1?"":"s"}`, breach===-1 ? LOAD.green : breach<=4 ? LOAD.red : LOAD.yellow, "First week where projected workload exceeds what the bottleneck team can deliver.", `data-go="proj"`],
+    ["Capacity Runs Out", breach===-1 ? "None" : DATA.weeks[breach].start, breach===-1 ? "next 90 days" : `in ${breach} week${breach===1?"":"s"}`, breach===-1 ? LOAD.green : breach<=4 ? LOAD.red : LOAD.yellow, "First week where projected workload exceeds what the bottleneck team can deliver.", `data-go="proj"`],
     ["Start Hiring By", breach===-1 ? "—" : hireIdx<0 ? "Now" : DATA.weeks[hireIdx].start, breach===-1 ? "no hire needed" : worst.name, breach===-1 ? LOAD.green : hireIdx<0 ? LOAD.red : LOAD.yellow, `Saturation week minus the ${leadWeeks(worst.key)} weeks it takes to source, hire and ramp that role.`, `data-go="hiring"`],
-    ["Clients Running Low", `${risk}`, "under 7 days of content", risk ? LOAD.red : LOAD.green, "Clients with fewer than 7 days of scheduled content right now.", `data-filter="fRisk=runway"`]
+    ["Clients Running Low", `${risk}`, risk ? `${DATA.clients.filter(c=>c.days[0]<7&&c.type==="Virtual").length} self-record · ${DATA.clients.filter(c=>c.days[0]<7&&c.type!=="Virtual").length} other` : "under 7 days of content", risk ? LOAD.red : LOAD.green, "Clients with fewer than 7 days of scheduled content right now. Self-record clients depend on the client filming, so they run dry first.", `data-filter="fRisk=runway"`]
   ];
   $("kpis").innerHTML = tiles.map(([k,v,s,c,t,link],i)=>`<div class="kpi" style="--i:${i};--c:${c}" data-tip="${esc(t)}" ${link} tabindex="0"><div class="k">${k}</div><div class="v"><i class="${c===LOAD.red?"alert":""}" style="background:${c};color:${c}"></i><span class="cnt num">${v}</span></div><div class="s">${s}</div></div>`).join("");
   countUp($("kpis"));
@@ -919,7 +915,7 @@ function renderSummary(){
   const call = { red:"Over Capacity", yellow:"Tight — Hire Before You Sign", green:"Room to Take a Client" }[band];
   $("call").innerHTML = `<i style="background:${LOAD[band]}"></i>${call}`;
   $("callSub").innerHTML = `${nameLink(worst.name,"fn").replace(`data-fn="${esc(worst.name)}"`,`data-fn="${worst.key}"`)} at <b>${r0(u*100)}%</b> · room for <b>${room}</b> more client${room===1?"":"s"}`;
-  if (breach===-1) $("action").innerHTML = `<b>No hire needed</b> in the next 13 weeks. Re-check when a fly-out is added to the calendar.`;
+  if (breach===-1) $("action").innerHTML = `<b>No hire needed</b> in the next 90 days. Re-check when a fly-out is added to the calendar.`;
   else { const bw = DATA.weeks[breach].start, lt = leadWeeks(worst.key);
     $("action").innerHTML = hireIdx>=0
       ? `Open ${an(worst.hire)} search by <b>${DATA.weeks[hireIdx].start}</b>. ${worst.name} saturates <span class="lnk" data-go="proj">${bw}</span> and the role takes ${lt} weeks to fill and ramp.`
@@ -1035,11 +1031,11 @@ function renderForecast(){
   if (state.sim){
     const vol = +$("simVol").value||0, tier = $("simTier").value, isFly = $("simType").value==="fly";
     chip.hidden = false; chip.textContent = `Simulating +${vol} videos · tier ${tier}${isFly?" · fly-out":""}`;
-    const lines = DATA.functions.map(f=>{ const s = forecastSeries(f.key, 13, { flyouts:true, hires:false }); return { f, b:s.u.findIndex(x=>x>1), peak:Math.max(...s.u) }; });
+    const lines = DATA.functions.map(f=>{ const s = forecastSeries(f.key, HORIZON, { flyouts:true, hires:false }); return { f, b:s.u.findIndex(x=>x>1), peak:Math.max(...s.u) }; });
     const worst = lines.reduce((a,b)=>b.peak>a.peak?b:a);
     const hire = worst.b===-1 ? null : worst.b - leadWeeks(worst.f.key);
     $("simOut").innerHTML = `<i style="background:${loadColor(worst.peak)}"></i>` + (worst.b===-1
-      ? `<span>Fits. No function exceeds capacity in 13 weeks; peak is <b>${worst.f.name} at ${r0(worst.peak*100)}%</b>.</span>`
+      ? `<span>Fits. No department exceeds capacity in the next 90 days; peak is <b>${worst.f.name} at ${r0(worst.peak*100)}%</b>.</span>`
       : `<span><span class="lnk" data-fn="${worst.f.key}">${worst.f.name}</span> saturates <b>${DATA.weeks[worst.b].start}</b> (${r0(worst.peak*100)}% peak) → open ${an(worst.f.hire)} search <b>${hire<0?"now":"by "+DATA.weeks[hire].start}</b>.</span>`);
   } else { chip.hidden = true; $("simOut").innerHTML = `<span style="color:var(--text-3)">Set the client and switch on Apply to see when each team saturates and when to open the search.</span>`; }
 
@@ -1057,19 +1053,11 @@ function renderForecast(){
         footer:it=>{ const i=it[0].dataIndex; return `${r0(u[i]*100)}% of capacity${backlog[i]?` · backlog ${r0(backlog[i])} ${fn.unit}`:""}`; } } } } },
     plugins:[glowLines]
   });
-  upsert("backlog","cBacklog",{ type:"line",
-    data:{ labels, datasets:[{ label:"Backlog", data:backlog, borderWidth:2, tension:.35, pointRadius:0, fill:"origin", backgroundColor:"rgba(217,45,39,.14)", borderColor:LOAD.red,
-      segment:{ borderColor:s=>backlog[s.p1DataIndex]>0||backlog[s.p0DataIndex]>0 ? LOAD.red : LOAD.green } }]},
-    options:{ responsive:true, maintainAspectRatio:false, interaction:{ mode:"index", intersect:false },
-      scales:{ x:{ ...noBorder, grid:{display:false} }, y:{ beginAtZero:true, suggestedMax:20, ...noBorder, grid:{ color:GRID }, ticks:{ callback:v=>v+" u" } } },
-      plugins:{ tooltip:{ callbacks:{ label:c=>` ${r0(c.raw)} ${fn.unit} carried over` } } } },
-    plugins:[glowLines]
-  });
 }
 function renderDepts(){
-  $("depts").innerHTML = DATA.functions.map(f=>{ const s = forecastSeries(f.key, 13, { flyouts:state.flyouts, hires:state.hires }), peak = Math.max(...s.u), t = trigger(f.key, { flyouts:state.flyouts, hires:state.hires });
+  $("depts").innerHTML = DATA.functions.map(f=>{ const s = forecastSeries(f.key, HORIZON, { flyouts:state.flyouts, hires:state.hires }), peak = Math.max(...s.u), t = trigger(f.key, { flyouts:state.flyouts, hires:state.hires });
     return `<div class="dept ${state.fn===f.key?"on":""}" data-setfn="${f.key}" style="--c:${loadColor(peak)}"><div class="n"><span>${f.name}</span><b class="num" style="color:${loadColor(peak)}">${r0(peak*100)}%</b></div>
-      <div class="m"><span><i style="background:${t.breach===-1?LOAD.green:LOAD.red}"></i>${t.breach===-1 ? "holds 13 wks" : "saturates "+DATA.weeks[t.breach].start}</span><span class="num" style="color:${hireColor(t)}">${t.breach===-1 ? "" : "hire "+(t.hireIdx<0?"now":"by "+DATA.weeks[t.hireIdx].start)}</span></div></div>`; }).join("");
+      <div class="m"><span><i style="background:${t.breach===-1?LOAD.green:LOAD.red}"></i>${t.breach===-1 ? "holds 90 days" : "saturates "+DATA.weeks[t.breach].start}</span><span class="num" style="color:${hireColor(t)}">${t.breach===-1 ? "" : "hire "+(t.hireIdx<0?"now":"by "+DATA.weeks[t.hireIdx].start)}</span></div></div>`; }).join("");
 }
 const TREND = { edit:"#3CB8FA", cd:"#FFFFFF", ppm:"#F472B6", smm:"#A78BFA" };
 function renderTrend(){
@@ -1089,27 +1077,27 @@ function renderTrend(){
    HIRING
    ═══════════════════════════════════════════════════════════════════ */
 const weekHeader = (cap="") => `<div class="tlh"><div class="today">TODAY →</div><div class="weeks">${DATA.weeks.map(w=>`<span>${w.start}</span>`).join("")}</div><div class="cap" style="color:var(--text-3)">${cap}</div></div>`;
-const barStyle = (from, len) => `left:${from/13*100}%;width:${Math.max(len,1)/13*100}%`;
+const barStyle = (from, len) => `left:${from/HORIZON*100}%;width:${Math.max(len,1)/HORIZON*100}%`;
 function renderHiring(){
   const rows = DATA.functions.map(f=>({ f, u:util(f), ...trigger(f.key) }));
   $("hireTbl").innerHTML = `<thead><tr><th>Function</th><th>Utilization</th><th>Saturates</th><th class="num">Lead Time</th><th>Start Hiring By</th><th>Status</th><th>Role</th></tr></thead><tbody>` +
     rows.map(r=>{ const c = hireColor(r); return `<tr class="row" data-fn="${r.f.key}"><td class="name">${r.f.name}</td>
       <td><span class="bar"><i style="width:${Math.min(100,r.u*100)}%;background:${loadColor(r.u)}"></i></span><span class="num">${r0(r.u*100)}%</span></td>
-      <td class="num">${r.breach===-1 ? `<span class="muted">Holds 13 wks</span>` : DATA.weeks[r.breach].start}</td>
+      <td class="num">${r.breach===-1 ? `<span class="muted">Holds 90 days</span>` : DATA.weeks[r.breach].start}</td>
       <td class="num">${leadWeeks(r.f.key)} wks</td>
-      <td class="num" style="color:${c};font-weight:600">${hireLabel(r)}</td>
+      <td class="num" style="color:${c};font-weight:700">${hireLabel(r)}</td>
       <td><span class="pill" style="background:${loadColor(r.breach===-1?.5:r.hireIdx<0?1.25:.9,.2)}">${r.breach===-1 ? "No trigger" : r.hireIdx<0 ? `Overdue ${-r.hireIdx} wk${-r.hireIdx===1?"":"s"}` : "Scheduled"}</span></td>
       <td>${r.f.hire}</td></tr>`; }).join("") + `</tbody>`;
 
   $("hireLg").innerHTML = `<span><i style="background:${LOAD.red}"></i>Search overdue</span><span><i style="background:${LOAD.yellow}"></i>Window to open the search</span><span><i style="background:${LOAD.red};box-shadow:0 0 0 2px rgba(0,0,0,.6)"></i>Saturation week</span><span><i class="blk" style="background:rgba(60,184,250,.6)"></i>Approved hire ramping</span>`;
   const lanes = rows.filter(r=>r.breach!==-1).map(r=>{ const from = Math.max(0,r.hireIdx), len = Math.max(1, r.breach-from), late = r.hireIdx<0, col = loadColor(late?1.25:.9);
     return `<div class="tlr" data-fn="${r.f.key}"><div class="lbl">${r.f.name}<small>${r.f.hire}</small></div>
-      <div class="lane"><div class="bar" style="${barStyle(from,len)};background:linear-gradient(90deg, ${hexA(col,.35)}, ${hexA(col,.85)});--glow:${hexA(col,.5)}"></div><div class="dot" style="left:${(r.breach+.5)/13*100}%;background:${LOAD.red};--glow:rgba(217,45,39,.6)"></div></div>
+      <div class="lane"><div class="bar" style="${barStyle(from,len)};background:linear-gradient(90deg, ${hexA(col,.35)}, ${hexA(col,.85)});--glow:${hexA(col,.5)}"></div><div class="dot" style="left:${(r.breach+.5)/HORIZON*100}%;background:${LOAD.red};--glow:rgba(217,45,39,.6)"></div></div>
       <div class="cap"><i style="background:${col}"></i>${late ? `<b>Open now</b>, ${-r.hireIdx} wk${-r.hireIdx===1?"":"s"} late` : `Open by <b>${DATA.weeks[r.hireIdx].start}</b>`} → full <b>${DATA.weeks[r.breach].start}</b></div></div>`; })
     .concat(DATA.plannedHires.map(h=>{ const si = DATA.weeks.findIndex(w=>w.start===h.start);
       return `<div class="tlr"><div class="lbl">${esc(h.label)}<small>approved hire</small></div><div class="lane"><div class="bar ramp" style="${barStyle(si,h.ramp)}"></div></div>
       <div class="cap"><i style="background:var(--accent)"></i>Starts <b>${h.start}</b> · ${h.ramp}-wk ramp · <b>+${h.units} u/wk</b></div></div>`; }));
-  $("hireTl").innerHTML = weekHeader("Open the search → week it saturates") + (lanes.length ? lanes.join("") : `<div class="empty">Nothing to hire in the next 13 weeks</div>`);
+  $("hireTl").innerHTML = weekHeader("Open the search → week it saturates") + (lanes.length ? lanes.join("") : `<div class="empty">Nothing to hire in the next 90 days</div>`);
 
   $("leadTbl").innerHTML = `<thead><tr><th>Role</th><th class="num">Source</th><th class="num">Hire</th><th class="num">Ramp</th><th class="num">Total</th><th></th></tr></thead><tbody>` +
     DATA.functions.map(f=>{ const l = DATA.leadTime[f.key]; return `<tr><td class="name">${f.short}</td><td class="num">${l.sourcing}</td><td class="num">${l.hiring}</td><td class="num">${l.ramp}</td><td class="num" style="color:var(--text)">${leadWeeks(f.key)}</td><td><span class="pill ${l.confirmed?"ok":"tbd"}">${l.confirmed?"Confirmed":"Unconfirmed"}</span></td></tr>`; }).join("") + `</tbody>`;
@@ -1125,7 +1113,7 @@ function renderFlyouts(){
   const overWith = DATA.weeks.filter((w,i)=>demand(w,"edit",true)>capacityAt("edit",i,false)).length, overWithout = DATA.weeks.filter((w,i)=>demand(w,"edit",false)>capacityAt("edit",i,false)).length;
   $("flySub").textContent = `${flyClients.length} fly-out clients · ${batches.length} batch${batches.length===1?"":"es"} on the calendar`;
   $("flyStats").innerHTML = [
-    ["Batches Scheduled", `${batches.length}<small> / 13 wks</small>`, batches.length ? LOAD.yellow : LOAD.green],
+    ["Batches Scheduled", `${batches.length}<small> · next 90 days</small>`, batches.length ? LOAD.yellow : LOAD.green],
     ["Editing Units Landing", `${batches.reduce((s,b)=>s+b.edit,0)}<small> units</small>`, LOAD.yellow],
     ["Weeks Pushed Over Capacity", `${overWith-overWithout}<small> by fly-outs</small>`, overWith-overWithout ? LOAD.red : LOAD.green],
     ["No Shoot Scheduled", `${unscheduled.length}<small> clients</small>`, unscheduled.length ? LOAD.red : LOAD.green]
@@ -1144,7 +1132,7 @@ function renderFlyouts(){
       <td>${b.c?.cd ? `<span class="lnk" data-owner="cd:${esc(b.c.cd)}">${esc(b.c.cd)}</span>` : `<span class="muted">—</span>`}</td>
       <td class="num">${b.edit} u</td><td class="num">${b.cd}</td><td class="num">${b.ppm}</td>
       <td><span class="bar"><i style="width:${Math.min(100,b.u*100)}%;background:${loadColor(b.u)}"></i></span><span class="num" style="color:${loadColor(b.u)}">${r0(b.u*100)}%</span></td></tr>`).join("")
-    : `<tr><td colspan="9" class="empty">No fly-outs scheduled in the next 13 weeks</td></tr>`) + `</tbody>`;
+    : `<tr><td colspan="9" class="empty">No fly-outs scheduled in the next 90 days</td></tr>`) + `</tbody>`;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -1219,10 +1207,11 @@ function renderClients(){
   // runway
   const byRunway = [...rows].sort((a,b)=>a.days[0]-b.days[0]);
   const low = byRunway.filter(c=>c.days[0]<14), list = state.rwAll ? byRunway : low;
-  $("rwSub").textContent = `${low.length} client${low.length===1?"":"s"} under 14 days · ${byRunway.filter(c=>c.days[0]<7).length} under 7`;
+  const lowSelf = low.filter(c=>c.type==="Virtual").length;
+  $("rwSub").textContent = `${low.length} client${low.length===1?"":"s"} under 14 days · ${byRunway.filter(c=>c.days[0]<7).length} under 7 · ${lowSelf} of the ${low.length} are self-record`;
   $("rwAll").textContent = state.rwAll ? "Show Urgent Only" : `Show All (${byRunway.length})`;
   $("rwList").innerHTML = list.length ? `<div class="rw"><div class="h">Client</div><div class="h">Days of content (0–30)</div><div class="h" style="text-align:right">Days</div><div class="h">Runs out</div>` +
-    list.map(c=>{ const d=c.days[0], col=loadColor(dayLoad(d)); return `<div class="n" data-client="${esc(c.name)}">${esc(c.name)}</div>
+    list.map(c=>{ const d=c.days[0], col=loadColor(dayLoad(d)); return `<div class="n" data-client="${esc(c.name)}">${esc(c.name)}${c.type==="Virtual"?` <span class="tag">self-record</span>`:""}</div>
       <div class="track"><i style="width:${Math.min(100,d/30*100)}%;background:${col}"></i></div><div class="d" style="color:${col}">${d}</div>
       <div class="out">${d<=0 ? `<b>Out now</b>` : d>=30 ? `30+ days` : `<b>${fmtDate(addDays(asOf,d))}</b> · ${d<7?"this week":d<14?"next week":"later"}`}</div>`; }).join("") + `</div>`
     : `<div class="empty">Every client has 14+ days of content</div>`;
@@ -1367,7 +1356,7 @@ function openClient(name){
   const c = DATA.clients.find(c=>c.name===name); if (!c) return;
   const f = nextFlyout(c), d = c.days[0], eu = personLoad(c.editor), bu = personLoad(c.backup);
   const role = (label, who, kind) => { const u = kind==="editor" ? personLoad(who) : null;
-    return `<div ${who ? (kind==="editor" ? `data-editor="${esc(who)}"` : `data-owner="${kind}:${esc(who)}"`) : ""}><span style="color:var(--text-3)">${label}</span><span>${who ? `${u!=null?`<i class="dot" style="display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;background:${loadColor(u)}"></i>`:""}<span style="color:var(--text)">${esc(who)}</span>${u!=null?` <span class="num">${r0(u*100)}%</span>`:""}` : `<span style="color:${LOAD.red};font-weight:600">Missing</span>`}</span></div>`; };
+    return `<div ${who ? (kind==="editor" ? `data-editor="${esc(who)}"` : `data-owner="${kind}:${esc(who)}"`) : ""}><span style="color:var(--text-3)">${label}</span><span>${who ? `${u!=null?`<i class="dot" style="display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;background:${loadColor(u)}"></i>`:""}<span style="color:var(--text)">${esc(who)}</span>${u!=null?` <span class="num">${r0(u*100)}%</span>`:""}` : `<span style="color:${LOAD.red};font-weight:700">Missing</span>`}</span></div>`; };
   let note;
   if (!c.editor) note = `<b>No editor assigned.</b> ${c.type==="Flyout" && f ? `A ${f.edit}-unit batch lands ${f.start}.` : "Nothing can be delivered until someone owns this account."}`;
   else if (d < 7) note = `<b>Runs out ${d<=0?"now":fmtDate(addDays(asOf,d))}.</b> ${esc(c.editor)} is at ${r0(eu*100)}%${eu>=.85?" — no catch-up without moving work":""}.`;
@@ -1444,7 +1433,7 @@ function openFunction(key){
   openDrawer(`
     <div class="eyebrow">Function · ${f.people} ${f.people===1?"person":"people"}</div><h3>${f.name}</h3>
     <div class="meta">${f.assigned} of ${f.capacity} ${f.unit} / week committed</div>
-    <div class="sec"><div class="note">${t.breach===-1 ? `<b>Holds for 13 weeks.</b> No hire trigger.` : `<b>Saturates ${DATA.weeks[t.breach].start}.</b> With ${an(leadWeeks(key))}-week lead time, open ${an(f.hire)} search <b>${t.hireIdx<0?"now":"by "+DATA.weeks[t.hireIdx].start}</b>.`}</div></div>
+    <div class="sec"><div class="note">${t.breach===-1 ? `<b>Holds for 90 days.</b> No hire trigger.` : `<b>Saturates ${DATA.weeks[t.breach].start}.</b> With ${an(leadWeeks(key))}-week lead time, open ${an(f.hire)} search <b>${t.hireIdx<0?"now":"by "+DATA.weeks[t.hireIdx].start}</b>.`}</div></div>
     <div class="sec"><div class="kv"><div><div class="k">Utilization</div><div class="v num" style="color:${loadColor(u)}">${r0(u*100)}%</div></div>${kv("Headroom", `${head}<small> ${f.unit} / wk</small>`)}${kv("Saturates", t.breach===-1?"—":DATA.weeks[t.breach].start)}<div><div class="k">Start hiring by</div><div class="v num" style="color:${hireColor(t)}">${hireLabel(t)}</div></div></div></div>
     <div class="sec"><h4>${key==="edit" ? "Editors by Load" : ROLE[key] ? "Owners by Load" : "Heaviest Review Demand"}</h4><div class="list">${members}</div></div>
     <div class="sec" style="display:flex;gap:18px;flex-wrap:wrap"><span class="more" data-go="proj" data-setfn="${key}">Forecast</span><span class="more" data-go="hiring">Hiring Plan</span></div>`);
@@ -1532,7 +1521,7 @@ function briefing(){
     `Capacity briefing — ${fmtDate(asOf,true)}`,
     `Bottleneck: ${worst.name} at ${r0(u*100)}%`,
     ...DATA.functions.map(f=>`  ${f.name}: ${f.assigned}/${f.capacity} ${f.unit} (${r0(util(f)*100)}%)`),
-    breach===-1 ? "Capacity holds for 13 weeks." : `${worst.name} saturates ${DATA.weeks[breach].start} → open ${an(worst.hire)} search ${hireIdx<0?"now":"by "+DATA.weeks[hireIdx].start}.`,
+    breach===-1 ? "Capacity holds for 90 days." : `${worst.name} saturates ${DATA.weeks[breach].start} → open ${an(worst.hire)} search ${hireIdx<0?"now":"by "+DATA.weeks[hireIdx].start}.`,
     risk.length ? `Under 7 days of content: ${risk.join(", ")}` : "No client under 7 days of content.",
     noEditor.length ? `No editor assigned: ${noEditor.join(", ")}` : ""
   ].filter(Boolean).join("\n");
