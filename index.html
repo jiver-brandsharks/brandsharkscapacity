@@ -1694,6 +1694,10 @@ renderScales();
 renderKpis();
 renderUser();
 show(VIEWS[location.hash.slice(1)] ? location.hash.slice(1) : "now", false);
+// deep links: ?client=Name · ?editor=Name · ?fn=cd · ?owner=cd:Name · ?copilot=1 · ?present=1
+{ const q = new URLSearchParams(location.search);
+  requestAnimationFrame(()=>{ if (q.get("client")) openClient(q.get("client")); else if (q.get("editor")) openEditor(q.get("editor")); else if (q.get("fn")) openFunction(q.get("fn")); else if (q.get("owner")) openOwner(...q.get("owner").split(":"));
+    if (q.get("copilot")) aiOpen(); if (q.get("present")) setPresent(true); }); }
 </script>
 </body>
 </html>
