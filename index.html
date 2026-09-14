@@ -140,14 +140,17 @@
   .legend span{display:inline-flex;align-items:center;gap:7px;}
   .legend i{width:14px;height:14px;border-radius:4px;display:inline-block;}
 
-  /* coverage matrix */
-  .cov{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:4px 6px;font-size:13px;}
-  .cov .h{color:var(--text-3);font-size:11.5px;text-align:center;padding-bottom:6px;}
-  .cov .n{color:var(--text-2);padding:7px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .cov .d{display:flex;justify-content:center;align-items:center;padding:7px 0;}
-  .cov .d i{width:10px;height:10px;border-radius:50%;display:inline-block;}
-  .cov .d.ok i{background:var(--green);}
-  .cov .d.no i{background:var(--red);}
+  /* coverage table */
+  .tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .cov{width:100%;min-width:960px;border-collapse:collapse;font-size:13px;}
+  .cov th{color:var(--text-3);font-size:11.5px;font-weight:600;text-align:left;vertical-align:bottom;padding:0 12px 10px 0;line-height:1.3;}
+  .cov td{padding:9px 12px 9px 0;border-top:1px solid var(--line);white-space:nowrap;color:var(--text-2);}
+  .cov td.client{color:var(--text);font-weight:600;}
+  .cov .num{text-align:right;font-variant-numeric:tabular-nums;}
+  .cov .muted{color:var(--text-3);}
+  .cov .miss{color:var(--text);font-weight:600;}
+  .cov .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:middle;}
+  .cov .pill{display:inline-block;min-width:36px;text-align:center;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;}
 
   /* progress */
   .prog{height:12px;border-radius:999px;background:rgba(255,255,255,.10);overflow:hidden;}
@@ -299,17 +302,18 @@
         <div class="scale" data-scale="days"></div>
       </div>
 
-      <div class="card span-7" style="grid-column:span 7">
+      <div class="card span-12">
         <h2>Monthly volume by client</h2>
         <p class="hint">Who generates the weight. Fly-out clients show their batch size. Color shows how full that client's editor is; gray means no editor assigned.</p>
         <div class="chartbox" style="height:520px"><canvas id="cVolume"></canvas></div>
         <div class="scale" data-scale="util"></div>
       </div>
 
-      <div class="card" style="grid-column:span 5">
+      <div class="card span-12">
         <h2>Coverage</h2>
-        <p class="hint">Every client should have all four. A missing backup is a single point of failure.</p>
-        <div class="cov" id="cov"></div>
+        <p class="hint">Who owns each client and where it's heading. Every client should have all four roles; a missing backup is a single point of failure. Percentages show how full that editor is.</p>
+        <div class="tblwrap"><table class="cov" id="cov"></table></div>
+        <div class="scale" data-scale="days"></div>
       </div>
 
     </div>
@@ -678,13 +682,38 @@ function renderVolume(){
 }
 
 function renderCoverage(){
-  const rows=[...DATA.clients].sort((a,b)=>(!!a.backup)-(!!b.backup));
-  let html = `<div class="h"></div><div class="h">CD</div><div class="h">Editor</div><div class="h">Backup</div><div class="h">SMM</div>`;
-  rows.forEach(c=>{
-    const d = v => `<div class="d ${v?"ok":"no"}"><i></i></div>`;
-    html += `<div class="n" title="${c.name}">${c.name}</div>${d(c.cd)}${d(c.editor)}${d(c.backup)}${d(c.smm)}`;
-  });
-  $("cov").innerHTML = html;
+  const esc = v => String(v).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+  const load = name => { const p = DATA.people.find(p=>p.name===name); return p ? p.assigned/p.capacity : null; };
+  const missing = c => [c.cd, c.editor, c.backup, c.smm].filter(v=>!v).length;
+  const nextFlyout = c => {
+    for (const w of DATA.weeks){ const f = w.flyouts.find(f=>c.name.startsWith(f.client)); if (f) return `${w.start} · ${f.units} videos`; }
+    return "";
+  };
+  const dash = `<span class="muted">—</span>`;
+  const person = (name, withLoad) => {
+    if (!name) return `<span class="miss"><i class="dot" style="background:${LOAD.red}"></i>Missing</span>`;
+    const u = withLoad ? load(name) : null;
+    return u==null ? esc(name) : `<i class="dot" style="background:${loadColor(u)}"></i>${esc(name)} <span class="muted">${r0(u*100)}%</span>`;
+  };
+  const days = d => `<span class="pill" style="background:${loadColor(dayLoad(d))};color:${inkOn(dayLoad(d))}" title="${d} days of content">${d}d</span>`;
+  const rows = [...DATA.clients].sort((a,b)=>missing(b)-missing(a) || a.days[0]-b.days[0]);
+  $("cov").innerHTML = `<thead><tr>
+      <th>Client</th><th>Type</th><th class="num">Videos / mo</th><th>Start date</th>
+      <th>Creative director</th><th>Editor</th><th>Backup editor</th><th>Social media</th>
+      <th>Content left<br>now → 4 wks</th><th>Next fly-out</th>
+    </tr></thead><tbody>` +
+    rows.map(c=>`<tr>
+      <td class="client">${esc(c.name)}</td>
+      <td>${esc(c.type)}</td>
+      <td class="num">${c.volume}</td>
+      <td>${c.start ? esc(c.start) : dash}</td>
+      <td>${person(c.cd)}</td>
+      <td>${person(c.editor, true)}</td>
+      <td>${person(c.backup, true)}</td>
+      <td>${person(c.smm)}</td>
+      <td>${days(c.days[0])} <span class="muted">→</span> ${days(c.days[4])}</td>
+      <td>${nextFlyout(c) || dash}</td>
+    </tr>`).join("") + `</tbody>`;
 }
 
 /* ===================================================================
