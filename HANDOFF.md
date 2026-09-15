@@ -37,6 +37,16 @@ Everything is a link: KPIs, gauges, names and dates open drawers (client, editor
 
 Black background, brand blue `#3CB8FA`, three status colours only (`#2FBF55`, `#FFD60A`, `#D92D27`), Proxima Nova Bold for titles / Regular for text (Montserrat fallback, weights 700/400), thin status line on tiles (no interior glow), minimal copy (tooltips on the "i" instead of subtitles), no native black text (`color-scheme: dark`), no purple anywhere, no PDFs.
 
+## Stakeholder feedback (Sept 14, 2026 calls with Randall and Danny)
+
+- **Danny (founder): simplicity over completeness.** Every number on the page must be used and understood; he wants to launch with **one trusted metric first** and add the next one only once that one is proven, not start with 100 and take some away. He will review the link and pick the **3-4 things that must be on it**; the Google Sheet gets built only after that list exists. He also wants to see **where each number is pulled from and why it matters** (provenance on hover or in the drawer), otherwise he will not trust it.
+- **Lead time was misread.** "Lead time 8 weeks" on a tile was unclear until explained as source → hire → ramp; and an editor row showing "lead time 4 weeks" next to "start hiring now" at 84% looked contradictory. Label it as time-to-ramp / hiring lead time and make the trigger math visible.
+- **The question Danny actually asks: "do we need more editors?"** Jiver's priority is real editing data first (full-time editors are maxed; paid-per-video editors are lower tier). Pipeline landing now: Laban (~200 videos), Root Financial (100), LatchLink (100), Alex (100), Andrea, Ian, plus new self-record clients.
+- **PM Review queue ("the pie") is a live pain point.** Danny wants it cleared daily; weekly "PPM Pie Rambo" with him starts Sept 15. A queue-size / oldest-item metric for PPM would map to something he already cares about. Danny is currently the only CD doing CD review.
+- **Randall:** wants a short **points legend** (how points are awarded per tier), sees the dashboard integrating with his ClickUp client calendar rock (Capacity Runs Out / Start Hiring By dates), and will send bullet points. Access via One-time PIN worked for him on the call.
+- **Editor tiers:** keep for now (Apex training in progress; some clients need little editing), even though the long-term intent is one editing standard.
+- Copilot: Danny said yes to trying it, aware it consumes API tokens.
+
 ## Open items
 
 1. **Google Sheet feed** — replace the `DATA` object with a fetch. Plan: one sheet, one tab per table (`Clients`, `People`, `Flyouts`, `LeadTime`, `Formats`, `Config`, `_Readme`), row 1 headers, Apps Script web app returning JSON; later a Pages Function in front so the sheet stays behind Access. Language of the sheet (English vs Spanish) not decided.

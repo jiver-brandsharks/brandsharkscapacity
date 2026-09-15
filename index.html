@@ -67,6 +67,7 @@
   .kpi .v{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:700;margin-top:6px;white-space:nowrap;line-height:1.2;}
   .kpi .v i{width:8px;height:8px;border-radius:50%;flex:none;box-shadow:0 0 0 3px color-mix(in srgb, currentColor 18%, transparent);}
   .kpi .s{font-size:12px;color:var(--text-3);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .t td .how{display:block;font-size:11px;font-weight:400;color:var(--text-3);margin-top:2px;}
 
   /* cards */
   .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;}
@@ -74,7 +75,7 @@
   .span-12{grid-column:span 12;} .span-8{grid-column:span 8;} .span-7{grid-column:span 7;} .span-6{grid-column:span 6;} .span-5{grid-column:span 5;} .span-4{grid-column:span 4;}
   .ch{display:flex;align-items:flex-start;justify-content:space-between;gap:14px 24px;flex-wrap:wrap;margin-bottom:24px;}
   .ch h2{font-size:15px;font-weight:700;letter-spacing:-.01em;margin:0;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;}
-  .ch h2 .i{width:15px;height:15px;border-radius:50%;border:1px solid var(--line-2);color:var(--text-3);font:400 10px var(--mono);display:inline-flex;align-items:center;justify-content:center;cursor:help;}
+  .t th .i,.ch h2 .i{width:15px;height:15px;border-radius:50%;border:1px solid var(--line-2);color:var(--text-3);font:400 10px var(--mono);display:inline-flex;align-items:center;justify-content:center;cursor:help;}
   .ch .sub{font-size:12.5px;color:var(--text-3);margin-top:2px;}
   .controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
   .chartbox{position:relative;width:100%;}
@@ -117,7 +118,7 @@
   .gauge .val{position:absolute;left:0;right:0;bottom:0;font-size:34px;font-weight:700;line-height:1;}
   .gauge .lab{font-size:13.5px;font-weight:700;margin-top:6px;}
   .gauge .meta{font-size:11.5px;color:var(--text-3);}
-  .summary{display:grid;grid-template-columns:1fr 1fr;gap:24px 40px;margin-top:24px;padding-top:22px;border-top:1px solid var(--line);}
+  .summary{display:flex;align-items:flex-start;justify-content:space-between;gap:16px 40px;flex-wrap:wrap;margin-top:24px;padding-top:22px;border-top:1px solid var(--line);}
   .verdict{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:700;letter-spacing:-.015em;margin:0;line-height:1.25;}
   .verdict i{width:10px;height:10px;border-radius:50%;flex:none;}
   .verdict-sub{font-size:13.5px;color:var(--text-2);margin:6px 0 0 22px;}
@@ -134,7 +135,7 @@
   .stat .k i{width:7px;height:7px;border-radius:50%;flex:none;}
   .stat .v{font-size:22px;font-weight:700;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .stats3{grid-template-columns:repeat(3,minmax(0,1fr));}
-  .stat .v small{font-size:12px;font-weight:400;color:var(--text-3);font-family:'Montserrat',sans-serif;}
+  .stat .v small{font-size:12px;font-weight:400;color:var(--text-3);}
 
   /* premium surfaces */
   .card{background:linear-gradient(180deg, rgba(255,255,255,.065) 0%, rgba(255,255,255,.035) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 30px 60px -40px rgba(0,0,0,.9);}
@@ -464,7 +465,7 @@
     <div class="grid">
       <section class="card span-12">
         <div class="ch">
-          <div><h2>Capacity Utilization <span class="i" data-tip="Share of each department's weekly capacity already committed. Ticks mark 85% and 100%. Switch the view: bars against capacity, runway until each department saturates, or a week-by-week heatmap. Click a department for the breakdown.">i</span></h2></div>
+          <div><h2>Capacity Utilization <span class="i" data-tip="How much of each department's weekly capacity is already committed. Ticks mark 85% and 100%. Click a department for the breakdown. Source: assigned work from ClickUp ÷ weekly capacity per person from the Capacity Sheet.">i</span></h2></div>
           <div class="controls"><label class="field">View <select class="sel" id="capView"><option value="gauges">Gauges</option><option value="bars">Bars</option><option value="runway">Runway to Saturation</option><option value="heat">90-Day Heatmap</option></select></label><div class="lg" data-scale="util"></div></div>
         </div>
         <div class="capv" data-v="gauges"><div class="gauges" id="gauges"></div></div>
@@ -472,14 +473,14 @@
         <div class="capv" data-v="runway" hidden><div class="tblwrap"><div class="tl" id="capRunway"></div></div></div>
         <div class="capv" data-v="heat" hidden><div class="tblwrap"><div class="hmap" id="capHeat"></div></div></div>
         <div class="summary">
-          <div><p class="verdict" id="call"></p><p class="verdict-sub" id="callSub"></p></div>
-          <div class="next"><div class="eyebrow">Next Action</div><p id="action"></p><span class="more" data-go="hiring">Hiring Plan</span></div>
+          <div class="next"><div class="eyebrow">Next Action</div><p id="action"></p></div>
+          <span class="more" data-go="hiring">Hiring Plan</span>
         </div>
       </section>
 
-      <section class="card span-8">
+      <section class="card span-12">
         <div class="ch">
-          <div><h2>Editor Workload <span class="i" data-tip="Colored bar = assigned points. Gray track = that editor's capacity. Dotted mark = 85%. Click a bar to open the editor.">i</span></h2></div>
+          <div><h2>Editor Workload <span class="i" data-tip="Colored bar = points assigned this week. Gray track = that editor's weekly capacity. Dotted mark = 85%. Click a bar to open the editor. Source: ClickUp assignments, weighted by tier.">i</span></h2><div class="sub">Points per video: Tier A = 2 · Tier B = 1 · Tier C = 0.5</div></div>
           <div class="controls">
             <label class="field">Tier <select class="sel" id="selTier"><option value="all">All Tiers</option><option value="A">Tier A</option><option value="B">Tier B</option><option value="C">Tier C</option></select></label>
             <label class="field">Sort <select class="sel" id="selSort"><option value="util">Utilization</option><option value="headroom">Headroom</option><option value="name">Name</option></select></label>
@@ -489,11 +490,6 @@
         <div class="ch" style="margin:14px 0 0"><div class="lg" data-scale="util" data-extra="cap85"></div><span class="more" data-go="team">Editor Roster</span></div>
       </section>
 
-      <section class="card span-4">
-        <div class="ch"><div><h2>Demand Mix <span class="i" data-tip="Share of total workload by complexity. Each segment is colored by how full the editors of that tier are. Click a segment to filter the workload chart.">i</span></h2></div></div>
-        <div class="chartbox" style="height:300px"><canvas id="cMix"></canvas></div>
-        <div class="lg" data-scale="util" style="margin-top:10px;justify-content:center"></div>
-      </section>
     </div>
   </div>
 
@@ -502,7 +498,7 @@
     <div class="grid">
       <section class="card span-12">
         <div class="ch">
-          <div><h2>Demand Forecast <span class="i" data-tip="Pick a department. Solid bars = recurring work, lighter tops = fly-out batches, blue = a simulated client. Dashed line = capacity.">i</span> <span class="chip" id="simChip" hidden></span></h2></div>
+          <div><h2>Demand Forecast <span class="i" data-tip="Pick a department. Solid bars = recurring work, lighter tops = fly-out batches, blue = a simulated client. Dashed line = capacity. Source: client cadences and fly-out dates from the Capacity Sheet.">i</span> <span class="chip" id="simChip" hidden></span></h2></div>
           <div class="controls">
             <label class="field">Horizon <select class="sel" id="selRange"><option value="4">Next 30 Days</option><option value="8">Next 60 Days</option><option value="12" selected>Next 90 Days</option></select></label>
             <label class="toggle on" id="flyToggle"><span class="sw"></span>Fly-outs</label>
@@ -521,19 +517,11 @@
           </div>
           <div class="out" id="simOut"></div>
         </div>
-        <div class="stats" id="wkStats"></div>
+        <div class="stats stats3" id="wkStats"></div>
         <div class="chartbox" style="height:340px"><canvas id="cWeekly"></canvas></div>
         <div class="lg" data-scale="util" data-extra="forecast" style="margin-top:16px"></div>
       </section>
 
-      <section class="card span-12">
-        <div class="ch">
-          <div><h2>All Departments <span class="i" data-tip="Utilization of every department on one chart. Switch between the next 90 days (projected) and the past 90 (actual). Yellow band = 85–100%, red = over capacity. Click a name to focus the forecast on it.">i</span></h2></div>
-          <div class="controls"><div class="seg small" id="trendSeg"><button class="on" data-mode="next">Next 90 Days</button><button data-mode="past">Past 90 Days</button></div></div>
-        </div>
-        <div class="chartbox" style="height:280px"><canvas id="cTrend"></canvas></div>
-        <div class="lg" id="trendLg" style="margin-top:12px"></div>
-      </section>
     </div>
   </div>
 
@@ -541,12 +529,12 @@
   <div class="view" id="view-hiring">
     <div class="grid">
       <section class="card span-7">
-        <div class="ch"><div><h2>Hiring Triggers <span class="i" data-tip="For each department: when projected demand crosses capacity, how long that role takes to source, hire and ramp, and therefore the latest week to open the search.">i</span></h2></div></div>
+        <div class="ch"><div><h2>Hiring Triggers <span class="i" data-tip="Start Hiring By = the week a department runs out of capacity minus the weeks it takes to source, hire and ramp that role. If that week is already past, the search is late. Source: forecast above plus the Time to Ramp table.">i</span></h2></div></div>
         <div class="tblwrap"><table class="t" id="hireTbl"></table></div>
       </section>
 
       <section class="card span-5">
-        <div class="ch"><div><h2>Lead Time Assumptions <span class="i" data-tip="Weeks from opening a role to that person delivering at full capacity. Unconfirmed rows are placeholders until leadership validates them.">i</span></h2></div></div>
+        <div class="ch"><div><h2>Time to Ramp by Role <span class="i" data-tip="Weeks from opening the search until the new hire delivers at full capacity: sourcing + hiring + ramp. Unconfirmed rows are placeholders until Danny validates them. Source: Capacity Sheet, Hiring Lead Time tab.">i</span></h2></div></div>
         <div class="tblwrap"><table class="t lt" id="leadTbl"></table></div>
       </section>
 
@@ -578,11 +566,11 @@
     <div class="grid">
       <section class="card span-12">
         <div class="ch">
-          <div><h2>Client Portfolio <span class="i" data-tip="One row per client. Fly-out: we shoot a batch on location. Self-Record: we send the script, the client films, we edit - these are the hardest to keep out of the red zone. Clipping: we cut existing footage. Click a header to sort, group by owner, switch column sets or export CSV.">i</span></h2><div class="sub" id="clientCount"></div></div>
+          <div><h2>Client Portfolio <span class="i" data-tip="One row per client. Fly-out: we shoot a batch on location. Self-Record: we send the script, the client films, we edit - these are the hardest to keep out of the red zone. Clipping: we cut existing footage. Click a header to sort, group by owner or export CSV. Source: Capacity Sheet (owners, cadence, dates) and ClickUp (delivered videos, approvals).">i</span></h2><div class="sub" id="clientCount"></div></div>
           <div class="controls">
             <label class="field">Group <select class="sel" id="fGroup"><option value="none">None</option><option value="cd">Creative Director</option><option value="smm">Social Media</option><option value="editor">Editor</option></select></label>
             <label class="field">Type <select class="sel" id="fType"><option value="all">All Types</option></select></label>
-            <label class="field">Show <select class="sel" id="fRisk"><option value="all">Everything</option><option value="critical">Critical Only</option><option value="attention">Needs Attention</option><option value="runway">Runway Under 7 Days</option><option value="gap">Missing a Role</option><option value="fta">Approval Under Target</option><option value="pace">Behind Delivery Pace</option><option value="renewal">Renewing in 90 Days</option><option value="flyout">Fly-out in Next 4 Weeks</option></select></label>
+            <label class="field">Show <select class="sel" id="fRisk"><option value="all">Everything</option><option value="critical">Critical Only</option><option value="attention">Needs Attention</option><option value="runway">Runway Under 7 Days</option><option value="gap">Missing a Role</option><option value="fta">Approval Under Target</option><option value="pace">Behind Delivery Pace</option><option value="flyout">Fly-out in Next 4 Weeks</option></select></label>
             <button class="lbtn" id="csvBtn">Export CSV</button>
           </div>
         </div>
@@ -591,7 +579,7 @@
 
       <section class="card span-12">
         <div class="ch">
-          <div class="seg small" id="sigSeg"><button class="on" data-sig="runway">Runway</button><button data-sig="delivery">Delivery</button><button data-sig="approval">Approval</button><button data-sig="renewals">Renewals</button></div>
+          <div class="seg small" id="sigSeg"><button class="on" data-sig="runway">Runway</button><button data-sig="delivery">Delivery</button><button data-sig="approval">Approval</button></div>
           <div class="controls" id="sigCtl"></div>
         </div>
         <div class="sig on" id="sig-runway">
@@ -607,10 +595,6 @@
           <div class="stats stats3" id="ftaStats"></div>
           <div class="chartbox" style="height:440px"><canvas id="cFta"></canvas></div>
         </div>
-        <div class="sig" id="sig-renewals">
-          <div class="ch" style="margin-bottom:12px"><div class="sub" id="renSub"></div></div>
-          <div class="tblwrap"><table class="t" id="renTbl"></table></div>
-        </div>
       </section>
     </div>
   </div>
@@ -620,7 +604,7 @@
     <div class="grid">
       <section class="card span-12">
         <div class="ch">
-          <div><h2>Editor Roster <span class="i" data-tip="Capacity, assigned load, headroom and how many clients depend on each editor. Click a row for details.">i</span></h2><div class="sub" id="rosterCount"></div></div>
+          <div><h2>Editor Roster <span class="i" data-tip="Capacity, assigned load, headroom and how many clients depend on each editor. Click a row for details. Source: capacity per editor from the Capacity Sheet, assignments from ClickUp.">i</span></h2><div class="sub" id="rosterCount"></div></div>
           <div class="controls">
             <label class="field">Tier <select class="sel" id="tTier"><option value="all">All Tiers</option><option value="A">Tier A</option><option value="B">Tier B</option><option value="C">Tier C</option></select></label>
             <label class="field">Software <select class="sel" id="tSoft"><option value="all">All</option><option value="Premiere">Premiere</option><option value="CapCut">CapCut</option></select></label>
@@ -690,15 +674,6 @@ const DATA = {
     }
   },
   targets: { fta: 80, renewalWindow: 90 },   // first-time approval target (%), renewal look-ahead (days)
-
-  // Utilization over the last 12 weeks, per function (%). Sample.
-  history: {
-    labels: ["Jun 22","Jun 29","Jul 6","Jul 13","Jul 20","Jul 27","Aug 3","Aug 10","Aug 17","Aug 24","Aug 31","Sep 7"],
-    edit: [74,76,79,80,83,101,86,84,85,88,83,84],
-    cd:   [80,83,86,89,90,108,94,93,95,97,96,96],
-    ppm:  [70,72,75,78,80,140,82,80,83,85,82,82],
-    smm:  [60,62,65,68,70,72,70,71,72,74,73,73]
-  },
 
   functions: [
     { key:"edit", name:"Editing",           short:"Editing", unit:"points",   capacity:152, assigned:128, people:13, hire:"editor",                hireUnits:12 },
@@ -844,7 +819,7 @@ const capacityAt = (key, i, hires) => FN(key).capacity + (hires ? DATA.plannedHi
   return si>=0 && i>=si ? s + h.units*Math.min(1,(i-si+1)/h.ramp) : s; },0) : 0);
 
 const HORIZON = 12; // weeks shown = 90 days
-const state = { fn:"edit", range:HORIZON, flyouts:true, hires:false, sim:false, rwAll:false, trend:"next", sig:"runway", present:false };
+const state = { fn:"edit", range:HORIZON, flyouts:true, hires:false, sim:false, rwAll:false, sig:"runway", present:false };
 function simDemand(key, i){
   if (!state.sim) return 0;
   const type = $("simType").value, T = DATA.sim.types[type], vol = +$("simCad").value||0, start = +$("simStart").value;
@@ -909,35 +884,31 @@ const glowLines = { id:"glowLines", beforeDatasetDraw(ch, args){ const ds = ch.d
    KPI STRIP + OVERVIEW
    ═══════════════════════════════════════════════════════════════════ */
 function constraint(){
-  const worst = DATA.functions.reduce((a,b)=>util(b)>util(a)?b:a);
-  return { worst, u:util(worst), ...trigger(worst.key) };
+  const worst = DATA.functions.reduce((a,b)=>util(b)>util(a)?b:a), edit = FN("edit");
+  const room = Math.max(0, Math.floor((edit.capacity-edit.assigned)/DATA.avgClientUnits));
+  return { worst, u:util(worst), room, ...trigger(worst.key) };
 }
+const VERDICT = { green:["Yes","Room to Take a Client"], yellow:["Tight","Hire Before You Sign"], red:["No","Over Capacity"] };
 function renderKpis(){
-  const { worst, u, breach, hireIdx } = constraint();
-  const edit = FN("edit"), head = edit.capacity - edit.assigned;
+  const { worst, u, room, breach, hireIdx } = constraint(), band = loadBand(u);
   const risk = DATA.clients.filter(c=>c.days[0]<7).length;
-  const gaps = DATA.clients.reduce((s,c)=>s+missingRoles(c),0);
+  const lt = leadWeeks(worst.key);
   const tiles = [
-    ["Bottleneck", `${r0(u*100)}%`, worst.name, loadColor(u), "The team closest to its limit. This is what decides whether you can take another client.", `data-fn="${worst.key}"`],
-    ["Capacity Runs Out", breach===-1 ? "None" : DATA.weeks[breach].start, breach===-1 ? "Next 90 Days" : `In ${breach} Week${breach===1?"":"s"}`, breach===-1 ? LOAD.green : breach<=4 ? LOAD.red : LOAD.yellow, "First week where projected workload exceeds what the bottleneck team can deliver.", `data-go="proj"`],
-    ["Start Hiring By", breach===-1 ? "-" : hireIdx<0 ? "Now" : DATA.weeks[hireIdx].start, breach===-1 ? "No Hire Needed" : worst.name, breach===-1 ? LOAD.green : hireIdx<0 ? LOAD.red : LOAD.yellow, `Saturation week minus the ${leadWeeks(worst.key)} weeks it takes to source, hire and ramp that role.`, `data-go="hiring"`],
+    ["Can We Take a Client?", VERDICT[band][0], `${VERDICT[band][1]} · Room for ${room}`, LOAD[band], "The answer for the next sales call. Green = yes. Yellow = only if the hire below is opened first. Red = no. Based on the bottleneck department.", `data-fn="${worst.key}"`],
+    ["Bottleneck", `${r0(u*100)}%`, worst.name, loadColor(u), "The department closest to its limit. Source: assigned work from ClickUp ÷ weekly capacity from the Capacity Sheet.", `data-fn="${worst.key}"`],
+    ["Start Hiring By", breach===-1 ? "-" : hireIdx<0 ? "Now" : DATA.weeks[hireIdx].start, breach===-1 ? "No Hire Needed" : `${DATA.weeks[breach].start} − ${lt} Wks · ${tc(worst.hire)}`, breach===-1 ? LOAD.green : hireIdx<0 ? LOAD.red : LOAD.yellow, breach===-1 ? "No department runs out of capacity in the next 90 days." : `${worst.name} runs out of capacity ${DATA.weeks[breach].start}. Minus the ${lt} weeks to source, hire and ramp ${an(worst.hire)} = the latest week to open the search.${hireIdx<0?" That week is already past.":""}`, `data-go="hiring"`],
     ["Clients Running Low", `${risk}`, risk ? `${DATA.clients.filter(c=>c.days[0]<7&&c.type==="Virtual").length} Self-Record · ${DATA.clients.filter(c=>c.days[0]<7&&c.type!=="Virtual").length} Other` : "Under 7 Days of Content", risk ? LOAD.red : LOAD.green, "Clients with fewer than 7 days of scheduled content right now. Self-record clients depend on the client filming, so they run dry first.", `data-filter="fRisk=runway"`]
   ];
   $("kpis").innerHTML = tiles.map(([k,v,s,c,t,link],i)=>`<div class="kpi" style="--i:${i};--c:${c}" data-tip="${esc(t)}" ${link} tabindex="0"><div class="k">${k}</div><div class="v"><i class="${c===LOAD.red?"alert":""}" style="background:${c};color:${c}"></i><span class="cnt num">${v}</span></div><div class="s">${s}</div></div>`).join("");
   countUp($("kpis"));
 }
 function renderSummary(){
-  const { worst, u, breach, hireIdx } = constraint();
-  const band = loadBand(u), edit = FN("edit");
-  const room = Math.max(0, Math.floor((edit.capacity-edit.assigned)/DATA.avgClientUnits));
-  const call = { red:"Over Capacity", yellow:"Tight - Hire Before You Sign", green:"Room to Take a Client" }[band];
-  $("call").innerHTML = `<i style="background:${LOAD[band]}"></i>${call}`;
-  $("callSub").innerHTML = `${nameLink(worst.name,"fn").replace(`data-fn="${esc(worst.name)}"`,`data-fn="${worst.key}"`)} at <b>${r0(u*100)}%</b> · room for <b>${room}</b> more client${room===1?"":"s"}`;
+  const { worst, breach, hireIdx } = constraint();
   if (breach===-1) $("action").innerHTML = `<b>No hire needed</b> in the next 90 days. Re-check when a fly-out is added to the calendar.`;
   else { const bw = DATA.weeks[breach].start, lt = leadWeeks(worst.key);
     $("action").innerHTML = hireIdx>=0
       ? `Open ${an(worst.hire)} search by <b>${DATA.weeks[hireIdx].start}</b>. ${worst.name} saturates <span class="lnk" data-go="proj">${bw}</span> and the role takes ${lt} weeks to fill and ramp.`
-      : `Open ${an(worst.hire)} search <b>now</b>. ${worst.name} saturates <span class="lnk" data-go="proj">${bw}</span>; with ${an(lt)}-week lead time the search is already ${-hireIdx} week${-hireIdx===1?"":"s"} late.`; }
+      : `Open ${an(worst.hire)} search <b>now</b>. ${worst.name} saturates <span class="lnk" data-go="proj">${bw}</span> and the role takes ${lt} weeks to fill and ramp, so the search is already ${-hireIdx} week${-hireIdx===1?"":"s"} late.`; }
 }
 const GAUGE_ORDER = ["cd","edit","ppm","smm"];
 const orderedFns = () => [...DATA.functions].sort((a,b)=>GAUGE_ORDER.indexOf(a.key)-GAUGE_ORDER.indexOf(b.key));
@@ -1035,22 +1006,6 @@ function renderPeople(){
         ctx.setLineDash([]); ctx.font="400 10.5px 'Proxima Nova','Montserrat',sans-serif"; ctx.fillStyle=loadColor(p.u); ctx.textBaseline="middle"; ctx.fillText(`${r0(p.u*100)}%`, x.getPixelForValue(Math.max(p.capacity, p.assigned))+10, b.y); ctx.restore(); }); } }]
   });
 }
-function renderMix(){
-  const tiers = ["A","B","C"], names = {A:"complex",B:"standard",C:"simple"};
-  const tot = {A:0,B:0,C:0}, cap = {A:0,B:0,C:0};
-  DATA.people.forEach(p=>{ tot[p.tier]+=p.assigned; cap[p.tier]+=p.capacity; });
-  const tu = t => cap[t] ? tot[t]/cap[t] : 0, total = tot.A+tot.B+tot.C;
-  charts.mix = new Chart($("cMix"),{ type:"doughnut",
-    data:{ labels:tiers.map(t=>`Tier ${t}`), datasets:[{ data:tiers.map(t=>tot[t]), backgroundColor:tiers.map(t=>loadColor(tu(t))), hoverBackgroundColor:tiers.map(t=>loadColor(tu(t))), borderWidth:0, borderRadius:8, spacing:5, hoverOffset:6 }]},
-    options:{ cutout:"76%", responsive:true, maintainAspectRatio:false, layout:{ padding:8 }, onClick:(e,els)=>{ if (els.length){ $("selTier").value=tiers[els[0].index]; renderPeople(); toast(`Editor workload filtered to tier ${tiers[els[0].index]}`); } },
-      plugins:{ legend:{ display:true, position:"bottom", labels:{ usePointStyle:true, boxWidth:8, boxHeight:8, padding:14, color:"#F5F7FA", generateLabels:ch=>tiers.map((t,i)=>({ text:`Tier ${t} · ${r0(tot[t]/total*100)}%`, fillStyle:ch.data.datasets[0].backgroundColor[i], strokeStyle:"transparent", fontColor:"#F5F7FA", pointStyle:"circle", index:i })) } },
-        tooltip:{ callbacks:{ label:c=>{ const t=tiers[c.dataIndex]; return ` Tier ${t} (${names[t]}): ${c.raw} points · editors ${r0(tu(t)*100)}% full`; } } } } },
-    plugins:[{ id:"mixFx", beforeDatasetDraw(ch){ ch.ctx.save(); ch.ctx.shadowColor="rgba(0,0,0,.45)"; ch.ctx.shadowBlur=14; }, afterDatasetDraw(ch){ ch.ctx.restore(); },
-      afterDraw(ch){ const {ctx,chartArea:a}=ch, cx=(a.left+a.right)/2, cy=(a.top+a.bottom)/2; ctx.save(); ctx.textAlign="center"; ctx.fillStyle="#F5F7FA";
-        ctx.font="700 28px 'Proxima Nova','Montserrat',sans-serif"; ctx.fillText(total, cx, cy+4); ctx.fillStyle="rgba(245,247,250,.4)"; ctx.font="400 10.5px 'Montserrat',sans-serif"; ctx.fillText("POINTS / WEEK", cx, cy+24); ctx.restore(); } }]
-  });
-}
-
 /* ═══════════════════════════════════════════════════════════════════
    FORECAST + SIMULATOR
    ═══════════════════════════════════════════════════════════════════ */
@@ -1069,10 +1024,9 @@ function renderForecast(){
   const key = state.fn, fn = FN(key);
   const { wk, base, fly, sim, cap, u, backlog } = forecastSeries(key, state.range, { flyouts:state.flyouts, hires:state.hires });
   const cap0 = wk.map(()=>fn.capacity);
-  const over = u.filter(x=>x>1).length, peak = u.indexOf(Math.max(...u)), first = u.findIndex(x=>x>1), peakB = Math.max(...backlog);
+  const peak = u.indexOf(Math.max(...u)), first = u.findIndex(x=>x>1), peakB = Math.max(...backlog);
   const gap = Math.max(0, ...wk.map((w,i)=>base[i]+fly[i]+sim[i]-cap[i])), hires = gap>0 ? Math.ceil(gap/fn.hireUnits) : 0;
   $("wkStats").innerHTML = [
-    ["Weeks Over Capacity", `${over}<small> / ${wk.length}</small>`, over ? LOAD.red : LOAD.green],
     ["Peak Week", `${r0(u[peak]*100)}%<small> · ${wk[peak].start}</small>`, loadColor(u[peak])],
     ["First Overload", first===-1 ? "None" : wk[first].start, first===-1 ? LOAD.green : LOAD.red],
     ["Gap at Peak", gap>0 ? `${r0(gap)}<small> ${fn.unit} ≈ ${hires} ${hires===1?fn.hire:fn.hire+"s"}</small>` : `0<small> ${fn.unit}</small>`, gap>0 ? LOAD.red : LOAD.green]
@@ -1112,20 +1066,6 @@ function renderDepts(){
     return `<div class="dept ${state.fn===f.key?"on":""}" data-setfn="${f.key}" style="--c:${loadColor(peak)}"><div class="n"><span>${f.name}</span><b class="num" style="color:${loadColor(peak)}">${r0(peak*100)}%</b></div>
       <div class="m"><span><i style="background:${t.breach===-1?LOAD.green:LOAD.red}"></i>${t.breach===-1 ? "Holds 90 Days" : "Saturates "+DATA.weeks[t.breach].start}</span><span class="num" style="color:${hireColor(t)}">${t.breach===-1 ? "" : "Hire "+(t.hireIdx<0?"Now":"by "+DATA.weeks[t.hireIdx].start)}</span></div></div>`; }).join("");
 }
-const TREND = { edit:"#3CB8FA", cd:"#FFFFFF", ppm:"#F472B6", smm:"#2ED3B7" };
-function renderTrend(){
-  const past = state.trend==="past", H = DATA.history, wk = DATA.weeks, labels = past ? H.labels : wk.map(w=>w.start);
-  $("trendLg").innerHTML = DATA.functions.map(f=>`<span data-setfn="${f.key}" class="lnk" style="text-decoration:none;${state.fn===f.key?"color:var(--text)":""}"><i style="background:${TREND[f.key]}"></i>${f.name}</span>`).join("");
-  upsert("trend","cTrend",{ type:"line",
-    data:{ labels, datasets:DATA.functions.map(f=>({ label:f.name, data:past ? H[f.key] : wk.map((w,i)=>r0((demand(w,f.key,true)+simDemand(f.key,i))/capacityAt(f.key,i,false)*100)), borderColor:TREND[f.key], borderWidth:state.fn===f.key?2.5:1.25, pointRadius:0, pointHoverRadius:4, tension:.3 })) },
-    options:{ responsive:true, maintainAspectRatio:false, interaction:{ mode:"index", intersect:false },
-      scales:{ x:{ ...noBorder, grid:{display:false} }, y:{ min:40, suggestedMax:130, ...noBorder, grid:{ color:GRID }, ticks:{ callback:v=>v+"%" } } },
-      plugins:{ tooltip:{ callbacks:{ label:c=>` ${c.dataset.label}: ${c.raw}%` } } } },
-    plugins:[glowLines, { id:"bands", beforeDatasetsDraw(ch){ const {ctx,chartArea:a,scales:{y}}=ch; const y85=y.getPixelForValue(85), y100=y.getPixelForValue(100);
-      ctx.save(); ctx.fillStyle="rgba(255,214,10,.07)"; ctx.fillRect(a.left,y100,a.right-a.left,y85-y100); ctx.fillStyle="rgba(217,45,39,.08)"; ctx.fillRect(a.left,a.top,a.right-a.left,Math.max(0,y100-a.top)); ctx.restore(); } }]
-  });
-}
-
 /* ═══════════════════════════════════════════════════════════════════
    HIRING
    ═══════════════════════════════════════════════════════════════════ */
@@ -1133,12 +1073,12 @@ const weekHeader = (cap="") => `<div class="tlh"><div class="today">TODAY →</d
 const barStyle = (from, len) => `left:${from/HORIZON*100}%;width:${Math.max(len,1)/HORIZON*100}%`;
 function renderHiring(){
   const rows = DATA.functions.map(f=>({ f, u:util(f), ...trigger(f.key) }));
-  $("hireTbl").innerHTML = `<thead><tr><th>Function</th><th>Utilization</th><th>Saturates</th><th class="num">Lead Time</th><th>Start Hiring By</th><th>Status</th><th>Role</th></tr></thead><tbody>` +
+  $("hireTbl").innerHTML = `<thead><tr><th>Function</th><th>Utilization</th><th>Runs Out</th><th class="num">Time to Ramp <span class="i" data-tip="Weeks to source, hire and ramp this role. Edit it in the table on the right.">i</span></th><th>Start Hiring By <span class="i" data-tip="Runs Out minus Time to Ramp.">i</span></th><th>Status</th><th>Role</th></tr></thead><tbody>` +
     rows.map(r=>{ const c = hireColor(r); return `<tr class="row" data-fn="${r.f.key}"><td class="name">${r.f.name}</td>
       <td><span class="bar"><i style="width:${Math.min(100,r.u*100)}%;background:${loadColor(r.u)}"></i></span><span class="num">${r0(r.u*100)}%</span></td>
       <td class="num">${r.breach===-1 ? `<span class="muted">Holds 90 Days</span>` : DATA.weeks[r.breach].start}</td>
       <td class="num">${leadWeeks(r.f.key)} Weeks</td>
-      <td class="num" style="color:${c};font-weight:700">${hireLabel(r)}</td>
+      <td class="num" style="color:${c};font-weight:700">${hireLabel(r)}${r.breach===-1 ? "" : `<span class="how">${DATA.weeks[r.breach].start} − ${leadWeeks(r.f.key)} Wks</span>`}</td>
       <td><span class="pill" style="background:${loadColor(r.breach===-1?.5:r.hireIdx<0?1.25:.9,.2)}">${r.breach===-1 ? "No Trigger" : r.hireIdx<0 ? `Overdue ${-r.hireIdx} Week${-r.hireIdx===1?"":"s"}` : "Scheduled"}</span></td>
       <td>${tc(r.f.hire)}</td></tr>`; }).join("") + `</tbody>`;
 
@@ -1152,7 +1092,7 @@ function renderHiring(){
       <div class="cap"><i style="background:var(--accent)"></i>Starts <b>${h.start}</b> · ${h.ramp}-Week Ramp · <b>+${h.units} pts/wk</b></div></div>`; }));
   $("hireTl").innerHTML = weekHeader("Open the Search → Saturation") + (lanes.length ? lanes.join("") : `<div class="empty">Nothing to hire in the next 90 days</div>`);
 
-  $("leadTbl").innerHTML = `<thead><tr><th>Role</th><th class="num">Source</th><th class="num">Hire</th><th class="num">Ramp</th><th class="num">Total</th><th></th></tr></thead><tbody>` +
+  $("leadTbl").innerHTML = `<thead><tr><th>Role</th><th class="num">Sourcing</th><th class="num">Hiring</th><th class="num">Ramp</th><th class="num">Total Weeks</th><th></th></tr></thead><tbody>` +
     DATA.functions.map(f=>{ const l = DATA.leadTime[f.key]; return `<tr><td class="name">${f.short}</td><td class="num">${l.sourcing}</td><td class="num">${l.hiring}</td><td class="num">${l.ramp}</td><td class="num" style="color:var(--text)">${leadWeeks(f.key)}</td><td><span class="pill ${l.confirmed?"ok":"tbd"}">${l.confirmed?"Confirmed":"Unconfirmed"}</span></td></tr>`; }).join("") + `</tbody>`;
 }
 
@@ -1298,12 +1238,6 @@ function renderClients(){
     plugins:[{ id:"target", afterDatasetsDraw(ch){ const {ctx,chartArea:a,scales:{x}}=ch, px=x.getPixelForValue(DATA.targets.fta); ctx.save(); ctx.strokeStyle="rgba(255,255,255,.7)"; ctx.setLineDash([4,4]); ctx.lineWidth=1.2; ctx.beginPath(); ctx.moveTo(px,a.top); ctx.lineTo(px,a.bottom); ctx.stroke(); ctx.restore(); } }]
   });
 
-  // renewals
-  const ren = rows.filter(c=>daysTo(c.renewal)<=DATA.targets.renewalWindow && daysTo(c.renewal)>=0).sort((a,b)=>daysTo(a.renewal)-daysTo(b.renewal));
-  $("renSub").textContent = `${ren.length} Contract${ren.length===1?"":"s"} in the Next ${DATA.targets.renewalWindow} Days · ${ren.filter(c=>c.fta!=null&&c.fta<DATA.targets.fta).length} Under Approval Target`;
-  $("renTbl").innerHTML = `<thead><tr><th>Client</th><th>Renews</th><th class="num">Days</th><th>Approval</th><th>Runway</th><th>Status</th></tr></thead><tbody>` +
-    (ren.length ? ren.map(c=>{ const d=daysTo(c.renewal); return `<tr class="row" data-client="${esc(c.name)}"><td class="name">${esc(c.name)}</td><td class="num">${fmtDate(new Date(c.renewal+"T00:00:00"))}</td><td class="num" style="color:${d<=30?LOAD.red:d<=60?LOAD.yellow:"inherit"}">${d}</td><td>${ftaCell(c)}</td><td>${dayPill(c.days[0])}</td><td>${statusPill(c)}</td></tr>`; }).join("")
-    : `<tr><td colspan="6" class="empty">No renewals in the window</td></tr>`) + `</tbody>`;
 
 }
 function exportCsv(){
@@ -1486,7 +1420,7 @@ function openFunction(key){
   openDrawer(`
     <div class="eyebrow">Function · ${f.people} ${f.people===1?"person":"people"}</div><h3>${f.name}</h3>
     <div class="meta">${f.assigned} of ${f.capacity} ${f.unit} / week committed</div>
-    <div class="sec"><div class="note">${t.breach===-1 ? `<b>Holds for 90 days.</b> No hire trigger.` : `<b>Saturates ${DATA.weeks[t.breach].start}.</b> With ${an(leadWeeks(key))}-week lead time, open ${an(f.hire)} search <b>${t.hireIdx<0?"now":"by "+DATA.weeks[t.hireIdx].start}</b>.`}</div></div>
+    <div class="sec"><div class="note">${t.breach===-1 ? `<b>Holds for 90 days.</b> No hire trigger.` : `<b>Saturates ${DATA.weeks[t.breach].start}.</b> The role takes ${leadWeeks(key)} weeks to fill and ramp, so open ${an(f.hire)} search <b>${t.hireIdx<0?"now":"by "+DATA.weeks[t.hireIdx].start}</b>.`}</div></div>
     <div class="sec"><div class="kv"><div><div class="k">Utilization</div><div class="v num" style="color:${loadColor(u)}">${r0(u*100)}%</div></div>${kv("Headroom", `${head}<small> ${f.unit} / wk</small>`)}${kv("Saturates", t.breach===-1?"-":DATA.weeks[t.breach].start)}<div><div class="k">Start hiring by</div><div class="v num" style="color:${hireColor(t)}">${hireLabel(t)}</div></div></div></div>
     <div class="sec"><h4>${key==="edit" ? "Editors by Load" : ROLE[key] ? "Owners by Load" : "Heaviest Review Demand"}</h4><div class="list">${members}</div></div>
     <div class="sec" style="display:flex;gap:18px;flex-wrap:wrap"><span class="more" data-go="proj" data-setfn="${key}">Forecast</span><span class="more" data-go="hiring">Hiring Plan</span></div>`);
@@ -1506,8 +1440,8 @@ function show(view, push=true){
   document.querySelectorAll("#view-"+view+" .card").forEach((c,i)=>{ c.style.setProperty("--i", i); c.style.animation="none"; void c.offsetWidth; c.style.animation=""; });
   if (!inited[view]){
     inited[view]=true;
-    if (view==="now"){ $("capView").value = CAPV.get(); renderCapView(); renderSummary(); renderPeople(); renderMix(); }
-    if (view==="proj"){ renderForecast(); renderTrend(); }
+    if (view==="now"){ $("capView").value = CAPV.get(); renderCapView(); renderSummary(); renderPeople(); }
+    if (view==="proj"){ renderForecast(); }
     if (view==="hiring"){ renderHiring(); }
     if (view==="fly"){ renderFlyouts(); }
     if (view==="clients"){ renderClients(); }
@@ -1527,8 +1461,8 @@ document.addEventListener("click", e=>{
   e.stopPropagation();
   const d = t.dataset;
   if (d.filter){ const [id,val]=d.filter.split("="); show("clients"); $(id).value=val; renderClients(); return; }
-  if (d.go){ show(d.go); if (d.setfn){ state.fn=d.setfn; renderForecast(); renderTrend(); } return; }
-  if (d.setfn){ state.fn=d.setfn; renderForecast(); renderTrend(); return; }
+  if (d.go){ show(d.go); if (d.setfn){ state.fn=d.setfn; renderForecast(); } return; }
+  if (d.setfn){ state.fn=d.setfn; renderForecast(); return; }
   if (d.fn) openFunction(d.fn);
   else if (d.editor) openEditor(d.editor);
   else if (d.client) openClient(d.client);
@@ -1538,18 +1472,17 @@ document.addEventListener("click", e=>{
 // filters
 ["selTier","selSort"].forEach(id=>$(id).addEventListener("change",renderPeople));
 $("capView").addEventListener("change", renderCapView);
-document.querySelectorAll("#trendSeg button").forEach(b=>b.addEventListener("click",()=>{ state.trend=b.dataset.mode; document.querySelectorAll("#trendSeg button").forEach(x=>x.classList.toggle("on",x===b)); renderTrend(); }));
 $("simOpen").addEventListener("click",()=>{ const box=$("simBox"); box.hidden=!box.hidden; $("simOpen").textContent = box.hidden ? "+ Simulate a New Client" : "− Hide Simulator"; if (box.hidden && state.sim) $("simToggle").click(); if (!box.hidden){ box.scrollIntoView({ block:"center", behavior:"smooth" }); $("simType").focus(); } });
 document.querySelectorAll("#sigSeg button").forEach(b=>b.addEventListener("click",()=>{ state.sig=b.dataset.sig; document.querySelectorAll("#sigSeg button").forEach(x=>x.classList.toggle("on",x===b)); document.querySelectorAll(".sig").forEach(s=>s.classList.toggle("on", s.id==="sig-"+state.sig)); if (state.sig==="approval" && charts.fta) charts.fta.resize(); }));
 $("selRange").addEventListener("change",e=>{ state.range=+e.target.value; renderForecast(); });
-$("flyToggle").addEventListener("click",()=>{ state.flyouts=!state.flyouts; $("flyToggle").classList.toggle("on",state.flyouts); renderForecast(); renderTrend(); });
-$("hireToggle").addEventListener("click",()=>{ state.hires=!state.hires; $("hireToggle").classList.toggle("on",state.hires); renderForecast(); renderTrend(); });
+$("flyToggle").addEventListener("click",()=>{ state.flyouts=!state.flyouts; $("flyToggle").classList.toggle("on",state.flyouts); renderForecast(); });
+$("hireToggle").addEventListener("click",()=>{ state.hires=!state.hires; $("hireToggle").classList.toggle("on",state.hires); renderForecast(); });
 fillSelect("simStart", DATA.weeks.map(w=>w.start), s=>s);
-$("simToggle").addEventListener("click",()=>{ state.sim=!state.sim; $("simToggle").classList.toggle("on",state.sim); renderForecast(); renderTrend(); });
+$("simToggle").addEventListener("click",()=>{ state.sim=!state.sim; $("simToggle").classList.toggle("on",state.sim); renderForecast(); });
 function fillCadence(){ const T = DATA.sim.types[$("simType").value]; $("simCad").innerHTML = T.cadences.map(([l,v])=>`<option value="${v}">${l}</option>`).join(""); }
 fillCadence();
 $("simType").addEventListener("change", fillCadence);
-["simType","simCad","simStart"].forEach(id=>$(id).addEventListener("change",()=>{ if (state.sim){ renderForecast(); renderTrend(); } }));
+["simType","simCad","simStart"].forEach(id=>$(id).addEventListener("change",()=>{ if (state.sim){ renderForecast(); } }));
 fillSelect("fType",[...new Set(DATA.clients.map(c=>c.type))]);
 ["fType","fRisk","fGroup"].forEach(id=>$(id).addEventListener("change",renderClients));
 $("csvBtn").addEventListener("click", exportCsv);
@@ -1639,7 +1572,7 @@ function setPresent(on){
 function signals(){
   const out = [], { worst, u, breach, hireIdx } = constraint();
   if (breach!==-1) out.push([hireIdx<0?LOAD.red:LOAD.yellow, `<b>${worst.name}</b> saturates ${DATA.weeks[breach].start} · open ${an(worst.hire)} search ${hireIdx<0?`now (${-hireIdx} wk${-hireIdx===1?"":"s"} late)`:"by "+DATA.weeks[hireIdx].start}.`]);
-  DATA.functions.filter(f=>f.key!==worst.key).forEach(f=>{ const t = trigger(f.key); if (t.breach!==-1 && t.hireIdx<0) out.push([LOAD.red, `<b>${f.name}</b> is also late: saturates ${DATA.weeks[t.breach].start}, ${-t.hireIdx}-week lead-time gap.`]); });
+  DATA.functions.filter(f=>f.key!==worst.key).forEach(f=>{ const t = trigger(f.key); if (t.breach!==-1 && t.hireIdx<0) out.push([LOAD.red, `<b>${f.name}</b> is also late: saturates ${DATA.weeks[t.breach].start}, the search is ${-t.hireIdx} week${-t.hireIdx===1?"":"s"} late.`]); });
   const low = DATA.clients.filter(c=>c.days[0]<7).sort((a,b)=>a.days[0]-b.days[0]);
   if (low.length) out.push([LOAD.red, `<b>${low.map(c=>c.name).join(" and ")}</b> run out of content within 7 days.`]);
   const noEd = DATA.clients.filter(c=>!c.editor); if (noEd.length) out.push([LOAD.red, `<b>${noEd.map(c=>c.name).join(", ")}</b> ${noEd.length===1?"has":"have"} no editor${noEd.some(c=>nextFlyout(c))?" and a fly-out batch on the calendar":""}.`]);
@@ -1650,7 +1583,7 @@ function signals(){
   return out.slice(0,6);
 }
 function aiContext(){
-  const fn = DATA.functions.map(f=>{ const t = trigger(f.key); return { name:f.name, unit:f.unit, assigned:f.assigned, capacity:f.capacity, utilization:r0(util(f)*100)+"%", people:f.people, saturates:t.breach===-1?null:DATA.weeks[t.breach].start, openSearchBy:hireLabel(t), leadTimeWeeks:leadWeeks(f.key), hire:f.hire, weeklyDemand:DATA.weeks.map(w=>demand(w,f.key,true)) }; });
+  const fn = DATA.functions.map(f=>{ const t = trigger(f.key); return { name:f.name, unit:f.unit, assigned:f.assigned, capacity:f.capacity, utilization:r0(util(f)*100)+"%", people:f.people, saturates:t.breach===-1?null:DATA.weeks[t.breach].start, openSearchBy:hireLabel(t), weeksToHireAndRamp:leadWeeks(f.key), hire:f.hire, weeklyDemand:DATA.weeks.map(w=>demand(w,f.key,true)) }; });
   return { asOf:DATA.asOf, weeks:DATA.weeks.map(w=>w.start), departments:fn, plannedHires:DATA.plannedHires, avgClientUnits:DATA.avgClientUnits, tierWeights:WEIGHT, pointRule:"tier A video = 2 points, B = 1, C = 0.5",
     clients:DATA.clients.map(c=>({ name:c.name, type:typeLabel(c.type), tier:c.tier, cadence:c.cadence, videosPerMonth:c.volume, loadPointsPerMonth:clientUnits(c), cd:c.cd||null, editor:c.editor||null, backup:c.backup||null, smm:c.smm||null, runwayDaysNow:c.days[0], runwayDaysIn4Weeks:c.days[4], firstTimeApproval:c.fta, delivered:c.delivered, committed:c.committed, renewal:c.renewal, status:STATUS[clientStatus(c)][0], nextFlyout:nextFlyout(c)?.start||null })),
     editors:DATA.people.map(p=>({ name:p.name, tier:p.tier, capacity:p.capacity, assigned:p.assigned, utilization:r0(p.assigned/p.capacity*100)+"%", software:p.software, clients:DATA.clients.filter(c=>c.editor===p.name).map(c=>c.name) })),
