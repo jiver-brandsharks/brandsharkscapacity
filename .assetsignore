@@ -1,0 +1,12 @@
+.git
+.assetsignore
+wrangler.toml
+README.md
+HANDOFF.md
+functions
+capacity-dashboard.html
+capacity-handoff.md
+master-capacity-sheet.xlsx
+*.xlsx
+*.md
+.wrangler

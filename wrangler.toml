@@ -1,4 +1,8 @@
-[build]
-command = ""
-# If configuring via wrangler, use a null/noop or let it handle via your setup, 
-# but for wrangler config files setting an empty or dummy command works:
+# Cloudflare Worker serving the dashboard as static assets.
+# Deploy: npx wrangler deploy   (or connect the GitHub repo in the Worker's Settings → Build)
+name = "brandsharkscapacity"
+compatibility_date = "2026-09-01"
+
+[assets]
+directory = "."
+not_found_handling = "single-page-application"
